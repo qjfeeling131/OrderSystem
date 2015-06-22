@@ -9,6 +9,7 @@ namespace OrderManager.Model.Models
         public string Guid { get; set; }
         public Nullable<decimal> Price { get; set; }
         public string Product_ItemCode { get; set; }
-        public string Department_Guid { get; set; }
+        public string User_Guid { get; set; }
+        public string Area_Guid { get; set; }
     }
 }

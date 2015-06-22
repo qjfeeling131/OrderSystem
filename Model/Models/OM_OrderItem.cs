@@ -7,6 +7,7 @@ namespace OrderManager.Model.Models
     {
         public int DocEntry { get; set; }
         public string Guid { get; set; }
+        public string Order_Guid { get; set; }
         public int LineNum { get; set; }
         public int VisualOrder { get; set; }
         public string ItemCode { get; set; }

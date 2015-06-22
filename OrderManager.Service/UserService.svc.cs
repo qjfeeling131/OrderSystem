@@ -136,7 +136,7 @@ namespace OrderManager.Service
                     Guid = Guid.NewGuid().ToString(),
                     Operation = "留言",
                     User_Guid = cipher,
-                    Message = string.Format("用户[{0}] : '{1}' 修改了密码.", user.Name, DateTime.Now)
+                    Message = string.Format("用户[{0}] : '{1}' 留了一条信息.", user.Name, DateTime.Now)
                 };
                 LogManager.WriteLog(log);
             }

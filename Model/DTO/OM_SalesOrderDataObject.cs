@@ -1,10 +1,13 @@
-using OrderManager.Model.DTO;
+﻿using OrderManager.Model.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace OrderManager.Model.Models
+namespace OrderManager.Model.DTO
 {
-    public partial class OM_Order
+    public class OM_SalesOrderDataObject
     {
         public int DocEntry { get; set; }
         public string Guid { get; set; }
@@ -22,9 +25,11 @@ namespace OrderManager.Model.Models
         public string NoteNotice { get; set; }
         public string Remarks { get; set; }
 
-        public OM_SalesOrderDataObject ToDTO()
+        List<OM_OrderItem> _SalesOrderLine;
+
+        public OM_Order ToDTO()
         {
-            OM_SalesOrderDataObject salesOrderDataObejct = new OM_SalesOrderDataObject()
+            OM_Order salesOrderDataObejct = new OM_Order()
             {
                 DocEntry = this.DocEntry,
                 Guid = this.Guid,
@@ -46,5 +51,19 @@ namespace OrderManager.Model.Models
             return salesOrderDataObejct;
 
         }
+        public List<OM_OrderItem> SalesOrderLine
+        {
+            get
+            {
+                if (_SalesOrderLine == null)
+                {
+                    _SalesOrderLine = new List<OM_OrderItem>();
+
+                }
+                return _SalesOrderLine;
+            }
+            set { _SalesOrderLine = value; }
+        }
+
     }
 }
