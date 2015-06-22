@@ -125,7 +125,22 @@ namespace OrderManager.Service
 
         public bool SaveMessageBoard(string cipher, OM_MessageBoard msgBoard)
         {
-            return UserManager.SaveMessageBoard(msgBoard);
+            var result= UserManager.SaveMessageBoard(msgBoard);
+            if (result)
+            {
+                var user = UserManager.GetUser(s => s.Guid == cipher);
+                var log = new OM_Log
+                {
+                    CreateDatetime = DateTime.Now,
+                    Doc_View = "Log/MessageBoard",
+                    Guid = Guid.NewGuid().ToString(),
+                    Operation = "留言",
+                    User_Guid = cipher,
+                    Message = string.Format("用户[{0}] : '{1}' 修改了密码.", user.Name, DateTime.Now)
+                };
+                LogManager.WriteLog(log);
+            }
+            return result;
         }
 
         public OM_MessageBoard GetMessageBoardModel(string cipher, string guid)

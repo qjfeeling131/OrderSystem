@@ -11,6 +11,7 @@ using OrderManager.Model.Models;
 using System.Web.Script.Serialization;
 using OrderManager.Model.DTO;
 using System.Net;
+using OrderManager.Common;
 
 
 namespace OrderManager.Web
@@ -135,10 +136,14 @@ namespace OrderManager.Web
             {
                 errormodel.Message = GetWcfExceptionDetail(wcfException.Detail);
                 errormodel.Type = wcfException.Detail.HelpLink;
+                string notepad = FormmatException(wcfException.StackTrace, wcfException.Message, wcfException.Source);
+                ExceptionLog.Write(notepad);
             }
             else
             {
                 errormodel.Message = GetExceptionDetail(filterContext.Exception);
+                string notepad = FormmatException(filterContext.Exception.StackTrace, filterContext.Exception.Message, filterContext.Exception.Source);
+                ExceptionLog.Write(notepad);
             }
 
             if (HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
@@ -171,6 +176,17 @@ namespace OrderManager.Web
                 str = string.Concat(str, this.GetExceptionDetail(ex.InnerException));
             }
             return str;
+        }
+
+        private string FormmatException(string StackTrace, string Message, string Source)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(string.Format("------------------【{0}】------------------", DateTime.Now));
+            sb.Append("\r\n");
+            sb.Append("【Source】：" + Source); sb.Append("\r\n");
+            sb.Append("【Message】：" + Message); sb.Append("\r\n");
+            sb.Append("【StackTrace】：" + Message); sb.Append("\r\n");
+            return sb.ToString();
         }
 
 
