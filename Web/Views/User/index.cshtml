@@ -1,0 +1,120 @@
+﻿@{
+    Layout = "~/views/template/content.cshtml";
+}
+
+
+@section title{ 经销商平台 | 个人设置 }
+
+
+@section content_header{
+
+    <h1>
+      用户管理
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="glyphicon glyphicon-home"></i> 主页</a></li>
+        <li class="active">个人设置</li>
+    </ol>
+}
+
+
+@section content{
+
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"><label>  个人设置</label></h3>            
+                </div>
+                <!-- form start -->
+                <form role="form" id="form_modifyPwd">
+                    <input  hidden="hidden" value="@ViewBag.UserGuid" name="UserGuid"/>
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label for="userName">账户</label>
+                            <input type="text" class="form-control" name="userName" id="userName" value="@ViewBag.Account" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userName">用户名</label>
+                            <input type="text" class="form-control" name="userName" id="userName" value="@ViewBag.UserName" disabled>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="oldPwd">旧密码</label>
+                            <input type="password" class="form-control" name="oldPwd" id="oldPwd" placeholder="旧密码" required>
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label for="newPwd">新密码</label>
+                            <input type="password" class="form-control" name="newPwd" id="newPwd" placeholder="新密码" required>
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label for="confirmPwd">再次输入新密码</label>
+                            <input type="password" class="form-control" name="confirmPwd" id="confirmPwd" placeholder="确认密码" required>
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>                     
+                    </div><!-- /.box-body -->
+
+                    <div class="box-footer">
+
+                        <button type="button" id="clear" class="btn btn-success">
+                            <i class="glyphicon glyphicon-trash"></i>
+                            清空
+                        </button>
+
+                        <button type="button" id="submit" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-check"></i>
+                            修改
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+   
+}
+
+
+@section script{
+    <script>
+        $(function () {
+            $("#userManager").addClass("active");
+            $("#userManager .treeview-menu").attr("display", "block");
+            $("#userManager .treeview-menu>li").eq(0).addClass("active");
+
+            $("#clear").click(function () {
+                clear();
+            });
+        
+            $('#submit').click(function () {
+
+                if ($("#confirmPwd").val() == '' ||
+                $("#newPwd").val() == '' ||
+                $("#oldPwd").val() == '') {
+                    alertInfo("验证失败", "密码不能为空");
+                    return;
+                }
+
+                if ($("#confirmPwd").val() != $("#newPwd").val())
+                {
+                    alertInfo("验证失败","两次输入密码不一致");
+                    return;
+                }
+
+                $(this).addClass("disabled");
+                getAsynData("changePassword", $("#form_modifyPwd").serialize(), function (json) {
+                    alertInfo("提示","修改成功");
+                    clear();
+                });
+            });
+            
+        })
+
+        function clear()
+        {
+            $("#confirmPwd").val('');
+            $("#newPwd").val('');
+            $("#oldPwd").val('');
+        }
+    </script>
+}

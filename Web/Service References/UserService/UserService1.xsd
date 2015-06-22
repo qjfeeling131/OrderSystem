@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="OM_Role">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDatetiime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Department_Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsDel" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDateTime" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_Role" nillable="true" type="tns:OM_Role" />
+  <xs:complexType name="OM_User">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Account" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Area_Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateDatetime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Img" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDel" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Post" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Pwd" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDatetime" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_User" nillable="true" type="tns:OM_User" />
+  <xs:complexType name="ArrayOfOM_User">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_User" nillable="true" type="tns:OM_User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOM_User" nillable="true" type="tns:ArrayOfOM_User" />
+  <xs:complexType name="OM_MessageBoard">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDatetime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="User_Guid" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_MessageBoard" nillable="true" type="tns:OM_MessageBoard" />
+  <xs:complexType name="ArrayOfOM_MessageBoard">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_MessageBoard" nillable="true" type="tns:OM_MessageBoard" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOM_MessageBoard" nillable="true" type="tns:ArrayOfOM_MessageBoard" />
+</xs:schema>

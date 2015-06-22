@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManager.Model", "Model\OrderManager.Model.csproj", "{01171FC6-341B-4F62-A172-DDCF95585681}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManager.Repository", "Repository\OrderManager.Repository.csproj", "{8C1BD3B1-6C97-4643-9F97-B891227CC86F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManager.Manager", "OrderManager.Manager\OrderManager.Manager.csproj", "{B620C208-6B14-4DC0-957B-18840B39EA1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManager.Common", "OrderManager.Common\OrderManager.Common.csproj", "{E105E25B-5E2A-4724-9B98-5C61033E2722}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManager.Service", "OrderManager.Service\OrderManager.Service.csproj", "{D6028A76-B222-4B42-81E0-CF8101809F46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManager.Web", "Web\OrderManager.Web.csproj", "{F8592216-7BA2-4240-B701-71AD05FABC4B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D6028A76-B222-4B42-81E0-CF8101809F46} = {D6028A76-B222-4B42-81E0-CF8101809F46}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01171FC6-341B-4F62-A172-DDCF95585681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01171FC6-341B-4F62-A172-DDCF95585681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01171FC6-341B-4F62-A172-DDCF95585681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01171FC6-341B-4F62-A172-DDCF95585681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C1BD3B1-6C97-4643-9F97-B891227CC86F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C1BD3B1-6C97-4643-9F97-B891227CC86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C1BD3B1-6C97-4643-9F97-B891227CC86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C1BD3B1-6C97-4643-9F97-B891227CC86F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B620C208-6B14-4DC0-957B-18840B39EA1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B620C208-6B14-4DC0-957B-18840B39EA1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B620C208-6B14-4DC0-957B-18840B39EA1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B620C208-6B14-4DC0-957B-18840B39EA1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E105E25B-5E2A-4724-9B98-5C61033E2722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E105E25B-5E2A-4724-9B98-5C61033E2722}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E105E25B-5E2A-4724-9B98-5C61033E2722}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E105E25B-5E2A-4724-9B98-5C61033E2722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6028A76-B222-4B42-81E0-CF8101809F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6028A76-B222-4B42-81E0-CF8101809F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6028A76-B222-4B42-81E0-CF8101809F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6028A76-B222-4B42-81E0-CF8101809F46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8592216-7BA2-4240-B701-71AD05FABC4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8592216-7BA2-4240-B701-71AD05FABC4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8592216-7BA2-4240-B701-71AD05FABC4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8592216-7BA2-4240-B701-71AD05FABC4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+EndGlobal

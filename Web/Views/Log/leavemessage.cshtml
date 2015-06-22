@@ -1,0 +1,60 @@
+﻿@{
+    Layout = "~/Views/Template/dialog.cshtml";
+}
+
+
+@section title {
+    <h4 style="font-weight:bold"><label>一些建议</label></h4>
+}
+
+@section Message{
+
+    <!-- form start -->
+    <form role="form" id="om-messageBoard-fm">
+        <input hidden="hidden" value="guid" name="UserGuid" />
+        <div class="box-body">
+            <div style="margin-bottom:15px;">
+                <label>用户名</label>
+                <p>@ViewBag.UserName</p>
+            </div>
+            <div class="form-group">
+                <label for="om-messageBoard-fm-email">邮箱</label>
+                <input type="email" id="email" name="om-messageBoard-fm-email" id="om-messageBoard-fm-email" data-validation-matches-match="email" data-validation-matches-message="邮箱地址输入不正确" class="form-control" placeholder="你的邮箱" required>
+            </div>
+            <div class="form-group">
+                <label for="om-messageBoard-fm-phoneNumer">联系电话</label>
+                <input type="text" class="form-control" name="om-messageBoard-fm-phoneNumer" id="om-messageBoard-fm-phoneNumer" placeholder="电话号码" required>
+            </div>
+            <div class="form-group">
+                <label for="om-messageBoard-fm-title">标题</label>
+                <input type="text" class="form-control" name="om-messageBoard-fm-title" id="om-messageBoard-fm-title" placeholder="留言主题" required>
+            </div>
+
+            <div class="form-group">
+                <label for="om-messageBoard-fm-message">留言</label>
+                <textarea class="form-control" rows="3" placeholder="输入留言 ..." id="om-messageBoard-fm-message" name="om-messageBoard-fm-message"></textarea>
+            </div>
+        </div>
+    </form>
+
+}
+
+@section buttons{
+    <button id="confirm" type="button" class="btn btn-primary" data-dismiss="modal" onclick="">确定</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    <script>
+    $(function () {
+
+        $('#confirm').click(function () {
+            $(this).addClass("disabled");
+            getAsynData("SubmitMessageBoard", $("#om-messageBoard-fm").serialize(), function (json) {
+                alertInfo("提示", "留言成功");
+                setInterval(function () { location.reload(); }, 2000);
+                
+            });
+        });
+    })
+
+   </script>
+}
+

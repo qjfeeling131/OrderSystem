@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Exception";
+    Layout = "~/Views/Template/dialog.cshtml";
+}
+
+@model OrderManager.Web.Models.InfoModel
+
+@section title {
+    <h4 style="font-weight:bold">@Model.Title</h4>
+}
+
+@section Message{
+    <h5 style="margin-top:20px;">  @Model.Message</h5>
+}
+
+@section buttons{
+    <button id="info_confirm" type="button" class="btn btn-primary" data-dismiss="modal" onclick="">&nbsp; 确定 &nbsp; </button>
+
+    <script>
+        $(function () {
+            $("#modal_dialog").on('hidden.bs.modal', function (e) {
+                $(this).remove();
+                $('button').removeClass("disabled");
+                var action='@(Model.Type)';
+                if( action=="REDIRECT_LOGIN")
+                {
+                    window.top.location = '@Url.Content("~/home/login")';
+                }
+
+            })
+        })
+    </script>
+}
+

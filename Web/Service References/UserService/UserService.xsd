@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" />
+  <xs:import schemaLocation="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" />
+  <xs:element name="Login">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userAccount" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="LoginResult" nillable="true" type="q1:OM_UserDetail" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserLogs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserLogsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="GetCurrentUserLogsResult" nillable="true" type="q2:ArrayOfOM_LogDataObject" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResetPassword">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newPwd" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResetPasswordResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePassword">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="oldPwd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newPwd" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePasswordResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetCurrentUserListResult" nillable="true" type="q3:ArrayOfOM_User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetUserResult" nillable="true" type="q4:OM_User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveMessageBoard">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="msgBoard" nillable="true" type="q5:OM_MessageBoard" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveMessageBoardResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveMessageBoardResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserMessageBoard">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserMessageBoardResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetCurrentUserMessageBoardResult" nillable="true" type="q6:ArrayOfOM_MessageBoard" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMessageBoardModel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMessageBoardModelResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetMessageBoardModelResult" nillable="true" type="q7:OM_MessageBoard" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

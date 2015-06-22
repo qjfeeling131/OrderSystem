@@ -1,0 +1,111 @@
+﻿@{
+    Layout = "~/views/template/content.cshtml";
+}
+
+
+@section title{ 经销商平台 | 下订单  }
+
+
+@section content_header{
+
+    <h1>
+        订单管理
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="~/home/home"><i class="glyphicon glyphicon-home"></i> 主页</a></li>
+        <li>订单管理</li>
+        <li class="active">下订单</li>
+
+    </ol>
+}
+
+
+@section content{
+
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title"><label>订单下达</label></h3>
+        </div>
+        <div class="box-body">
+            <div>
+                <div class="btn-group" style="margin:2%;">
+                    <button class="btn btn-default btn-sm disabled"><i class="glyphicon glyphicon-user"></i>&nbsp;客户代码</button>
+                    <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 200px;" placeholder="搜索">
+                </div><!-- /.btn-group -->
+
+
+                <div class="btn-group pull-right" style="margin:2%;">
+                    <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;状态</button>
+                    <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 200px;" placeholder="搜索">
+                </div><!-- /.btn-group -->
+
+
+                <div class="row" style="border-top:1px solid #ff6a00;margin:2%;">
+                    <div class="col-sm-12">
+                        <table  class="table table-bordered table-hover dataTable" role="grid" >
+                            <thead>
+                                <tr role="row">
+                                    <th tabindex="0">物料编号</th>
+                                    <th tabindex="0">物料名称</th>
+                                    <th tabindex="0">价格</th>
+                                    <th tabindex="0">数量</th>
+                                    <th tabindex="0">地址</th>
+                                    <th tabindex="0">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr role="row">
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>
+                                        <input type="hidden" name="userGuid" value="6" />
+                                    2
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+
+                <div style="border-top:1px solid #ff6a00;margin:2%;">
+
+                    <div class="btn-group" style="padding-top:2%;">
+                        <button class="btn btn-default btn-sm disabled"><i class="glyphicon glyphicon-edit"></i>&nbsp;备注</button>
+                        <textarea class="form-control input-sm pull-righ" rows="4" style="width:400px;" placeholder="输入备注 ..."></textarea>
+                    </div><!-- /.btn-group -->
+
+                    <div class="btn-group pull-right" style="padding-top:2%;">
+                        <button class="btn btn-info " style="margin-right:10px;"><i class="glyphicon glyphicon-plus"></i>&nbsp;添加行</button>
+                        <button class="btn btn-warning "><i class="glyphicon glyphicon-remove"></i>&nbsp;删除行</button>
+                    </div><!-- /.btn-group -->
+                </div>
+
+
+                <div style="border-top:1px solid #ff6a00;margin:2%;">
+
+                    <div class="btn-group" style="padding-top:2%;">
+                        <button class="btn btn-primary " style="margin-right:10px;width:100px;"><i class="glyphicon glyphicon-edit"></i>&nbsp;保存草稿</button>
+                        <button class="btn btn-primary" style="margin-right:10px;width:100px;"><i class="glyphicon glyphicon-ok"></i>&nbsp;提交</button>
+                        <button class="btn btn-primary" style="margin-right:10px;width:100px;"><i class="glyphicon glyphicon-link"></i>&nbsp;对接SAP</button>
+                    </div><!-- /.btn-group -->
+                </div>
+    </div>
+}
+
+
+@section script{
+    @*<script src="~/Js/utility/jquery.min.js"></script>*@
+    <script>
+        $(function () {
+            $("#orderManager").addClass("active");
+            $("#orderManager .treeview-menu").attr("display", "block");
+            $("#orderManager .treeview-menu>li").eq(1).addClass("active");
+        })
+    </script>
+}

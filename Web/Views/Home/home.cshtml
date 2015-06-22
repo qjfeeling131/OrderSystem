@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "~/views/template/content.cshtml";
+}
+
+
+@section title{ 经销商平台 | 主页 }
+
+
+@section content_header{
+
+    <h1>
+        主页
+        <small>a set of beautiful products</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="glyphicon glyphicon-home"></i> Home</a></li>
+        <li class="active">Product</li>
+    </ol>
+}
+
+
+@section content{
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#fa-icons" data-toggle="tab">Font Awesome</a></li>
+        <li><a href="#glyphicons" data-toggle="tab">Glyphicons</a></li>
+    </ul>
+
+
+    <div class="tab-content">
+        <!-- Font Awesome icons -->
+        <div class="tab-pane active" id="fa-icons">
+            <section id="new">
+                <h4 class="page-header">40 New Icons in 4.3</h4>
+                <div class="row fontawesome-icon-list"></div>
+            </section>
+
+            <section id="transportation">
+                <h4 class="page-header">Transportation Icons</h4>
+                <div class="row fontawesome-icon-list">
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-ambulance"></i> fa-ambulance</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-automobile"></i> fa-automobile <span class="text-muted">(alias)</span></div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-bicycle"></i> fa-bicycle</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-bus"></i> fa-bus</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-cab"></i> fa-cab <span class="text-muted">(alias)</span></div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-car"></i> fa-car</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-fighter-jet"></i> fa-fighter-jet</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-motorcycle"></i> fa-motorcycle</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-plane"></i> fa-plane</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-rocket"></i> fa-rocket</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-ship"></i> fa-ship</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-space-shuttle"></i> fa-space-shuttle</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-subway"></i> fa-subway</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-taxi"></i> fa-taxi</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-train"></i> fa-train</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-truck"></i> fa-truck</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-wheelchair"></i> fa-wheelchair</div>
+                </div>
+            </section>
+
+            <section id="gender">
+                <h4 class="page-header">Gender Icons</h4>
+                <div class="row fontawesome-icon-list">
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-circle-thin"></i> fa-circle-thin</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-genderless"></i> fa-genderless <span class="text-muted">(alias)</span></div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-mars"></i> fa-mars</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-mars-double"></i> fa-mars-double</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-mars-stroke"></i> fa-mars-stroke</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-mars-stroke-h"></i> fa-mars-stroke-h</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-mars-stroke-v"></i> fa-mars-stroke-v</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-mercury"></i> fa-mercury</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-neuter"></i> fa-neuter</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-transgender"></i> fa-transgender</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-transgender-alt"></i> fa-transgender-alt</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-venus"></i> fa-venus</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-venus-double"></i> fa-venus-double</div>
+                    <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-venus-mars"></i> fa-venus-mars</div>
+                </div>
+            </section>
+
+
+        </div>
+        @*<div class="tab-pane" id="glyphicons">
+
+            </div>*@
+
+    </div>
+}
+
+
+@section script{
+    @*<script src="~/Js/utility/jquery.min.js"></script>*@
+    <script>
+        $(function () {
+            $("#productManager").addClass("active");
+            $("#productManager .treeview-menu").attr("display", "block");
+        })
+    </script>
+}
