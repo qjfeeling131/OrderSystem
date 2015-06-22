@@ -78,11 +78,14 @@
     <Compile Include="Models\OM_MessageBoard.cs" />
     <Compile Include="Models\OM_Order.cs" />
     <Compile Include="Models\OM_OrderItem.cs" />
+    <Compile Include="Models\OM_OrderItemMap.cs" />
     <Compile Include="Models\OM_Permission.cs" />
     <Compile Include="Models\OM_Product.cs" />
     <Compile Include="Models\OM_ProductPrice.cs" />
+    <Compile Include="Models\OM_ProductPriceMap.cs" />
     <Compile Include="Models\OM_Role.cs" />
     <Compile Include="Models\OM_RolePermission.cs" />
+    <Compile Include="DTO\OM_SalesOrderDataObject.cs" />
     <Compile Include="Models\OM_User.cs" />
     <Compile Include="Models\OM_UserRole.cs" />
     <Compile Include="Models\OrderManagementContext.cs" />
