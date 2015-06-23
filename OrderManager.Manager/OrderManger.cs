@@ -102,7 +102,7 @@ namespace OrderManager.Manager
 
         public IList<OM_Product> GetProductList(int PageIndex, int PageSize, Expression<Func<OM_Product, bool>> fuc, Expression<Func<OM_Product, bool>> orderFuc)
         {
-            return DbRepository.GetPagedList(PageIndex, PageSize, fuc, orderFuc);
+            return DbRepository.GetList(fuc);//GetPagedList(PageIndex, PageSize, fuc, orderFuc);
 
         }
 
