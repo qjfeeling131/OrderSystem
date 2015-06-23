@@ -19,6 +19,7 @@
     </ol>
 }
 
+@model List<OrderManager.Model.Models.OM_Order>
 
 @section content{
 
@@ -27,7 +28,7 @@
         <h3 class="box-title"><label>订单列表</label></h3>
         <div class="box-tools">
             <div class="input-group">
-                <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="搜索">
+                <input type="text" name="key" class="form-control input-sm pull-right" style="width: 150px;" placeholder="搜索" value="@ViewBag.Key ">
                 <div class="input-group-btn">
                     <button class="btn btn-sm btn-default" id="search"><i class="glyphicon glyphicon-search"></i></button>
                 </div>
@@ -44,23 +45,36 @@
                     <table  class="table table-bordered table-hover dataTable" role="grid" >
                         <thead>
                             <tr role="row">
-                                <th tabindex="0">用户</th>
-                                <th tabindex="0">单据名称</th>
-                                <th tabindex="0">页面</th>
-                                <th tabindex="0">操作</th>
-                                <th tabindex="0">日期</th>
-                                <th tabindex="0">消息</th>
+                                <th tabindex="0">CardCode</th>
+                                <th tabindex="0">CardName</th>
+                                <th tabindex="0">DocEntry</th>
+                                <th tabindex="0">DocStatus</th>
+                                <th tabindex="0">DocDate</th>
+                                <th tabindex="0">DocDueDate</th>
+                                <th tabindex="0">TPLCompany</th>
+                                <th tabindex="0">TPLOrder</th>
+                                <th tabindex="0">TPLContact</th>
+                                <th tabindex="0">NumCard</th>
+                                <th tabindex="0">NoteNotice</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr role="row">
-                                    <td>@item.Account</td>
-                                    <td>@item.Name</td>
-                                    <td>@(item.Gender == true ? "男" : "女")</td>
-                                    <td>@item.Email</td>
-                                    <td>@item.Address</td>
+
+                                    <td>@item.CardCode</td>
+                                    <td>@item.CardName</td>
+                                    <td>@item.DocEntry</td>
+                                    <td>@item.DocStatus</td>
+                                    <td>@item.DocDate.Value.ToShortDateString()</td>
+                                    <td>@item.DocDueDate.Value.ToShortDateString()</td>
+                                    <td>@item.TPLCompany</td>
+                                    <td>@item.TPLOrder</td>
+                                    <td>@item.TPLContact</td>
+                                    <td>@item.NumCard</td>
+                                    <td>@item.NoteNotice</td>
+                              
                                 </tr>
                             }
 
@@ -91,18 +105,18 @@
                                 }
 
                                 <li class="paginate_button  @(ViewBag.PageIndex==0?"disabled":"") ">
-                                    <a href="@(ViewBag.PageIndex==0?"#": Url.Content("~/user/userlist?&&pageIndex=" + (currentPage - 2)))">上一页</a>
+                                    <a href="@(ViewBag.PageIndex == 0 ? "#" : Url.Content("~/order/index?key=" + ViewBag.Key + "&&pageIndex=" + (currentPage - 2)))">上一页</a>
                                 </li>
 
                                 @for (int i = beginIndex; i <= count; i++)
                                 {
                                     <li class="paginate_button @(i == currentPage ? "active" : "") ">
-                                        <a href="@Url.Content("~/user/userlist?&&pageIndex=" + (i - 1))">@i</a>
+                                        <a href="@Url.Content("~/order/index?key=" + ViewBag.Key + "&&pageIndex=" + (i - 1))">@i</a>
                                     </li>
                                 }
 
                                 <li class="paginate_button @(ViewBag.TotalPages == (ViewBag.PageIndex+1) ? "disabled" : "") ">
-                                    <a href="@(ViewBag.TotalPages == (ViewBag.PageIndex+1) ?"#":Url.Content("~/user/userlist?&&pageIndex=" + currentPage))">下一页</a>
+                                    <a href="@(ViewBag.TotalPages == (ViewBag.PageIndex + 1) ? "#" : Url.Content("~/order/index?key=" + ViewBag.Key + "&&pageIndex=" + currentPage))">下一页</a>
                                 </li>
                             </ul>
                         </div>
@@ -124,6 +138,10 @@
             $("#orderManager").addClass("active");
             $("#orderManager .treeview-menu").attr("display", "block");
             $("#orderManager .treeview-menu>li").eq(0).addClass("active");
+
+
+
+
         })
     </script>
 }
