@@ -26,12 +26,12 @@ namespace OrderManager.Service
 
         public IList<OM_Order> GetOrderList(string cipher, string userGuid)
         {
- 
+            return OrderManger.GetOrderList(userGuid);
         }
 
         public IList<OM_OrderItem> GetOrderItemList(string cipher, string orderGuid)
         {
- OrderManger.GetSalesOrderItem()
+            return OrderManger.GetOrderItemList(orderGuid);
         }
     }
 }

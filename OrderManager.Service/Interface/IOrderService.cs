@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrderManager.Model.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,6 +13,9 @@ namespace OrderManager.Service
     public interface IOrderService
     {
         [OperationContract]
-        void DoWork();
+        IList<OM_Order> GetOrderList(string cipher, string userGuid);
+
+        [OperationContract]
+        IList<OM_OrderItem> GetOrderItemList(string cipher, string orderGuid);
     }
 }

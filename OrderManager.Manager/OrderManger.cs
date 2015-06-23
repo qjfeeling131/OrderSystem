@@ -14,6 +14,9 @@ namespace OrderManager.Manager
     public class OrderManger : BaseManger, IOrderManger
     {
 
+        [Dependency]
+        public IUserManager UserManager{get;set;}
+
         #region Save Method
         public bool SaveProduct(OM_Product product)
         {
@@ -102,7 +105,7 @@ namespace OrderManager.Manager
 
         public IList<OM_Product> GetProductList(int PageIndex, int PageSize, Expression<Func<OM_Product, bool>> fuc, Expression<Func<OM_Product, bool>> orderFuc)
         {
-            return DbRepository.GetList(fuc);//GetPagedList(PageIndex, PageSize, fuc, orderFuc);
+            return DbRepository.GetPagedList(PageIndex, PageSize, fuc, orderFuc);
 
         }
 
@@ -135,11 +138,32 @@ namespace OrderManager.Manager
             return DbRepository.GetModel(fuc);
 
         } 
+      
+
         #endregion
 
         #region Function
 
         public IList<OM_Order> GetOrderList(string userGuid)
+        {
+            //DbRepository.GetList<OM_Order>();
+            List<OM_User> listUsers = UserManager.GetAreaRoles(userGuid);
+
+            List<OM_Order> result = new List<OM_Order>();
+            foreach (var item in listUsers)
+            {
+                var re = DbRepository.GetList<OM_Order>(o => o.User_Guid == item.Guid);
+                result.AddRange(re);
+            }
+
+            return result.OrderByDescending(m => m.DocDate).ToList();
+        }
+
+        public IList<OM_OrderItem> GetOrderItemList(string orderGuid)
+        {
+            var result = DbRepository.GetList<OM_OrderItem>(o => o.Order_Guid == orderGuid);
+            return result;
+        }
 
         #endregion
     }

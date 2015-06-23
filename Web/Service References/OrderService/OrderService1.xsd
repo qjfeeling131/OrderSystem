@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfOM_Order">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_Order" nillable="true" type="tns:OM_Order" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOM_Order" nillable="true" type="tns:ArrayOfOM_Order" />
+  <xs:complexType name="OM_Order">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DocDueDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DocEntry" type="xs:int" />
+      <xs:element minOccurs="0" name="DocStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NoteNotice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumCard" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remarks" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TPLCompany" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TPLContact" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TPLOrder" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TPLPhone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="User_Guid" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_Order" nillable="true" type="tns:OM_Order" />
+  <xs:complexType name="ArrayOfOM_OrderItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_OrderItem" nillable="true" type="tns:OM_OrderItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOM_OrderItem" nillable="true" type="tns:ArrayOfOM_OrderItem" />
+  <xs:complexType name="OM_OrderItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CloseQty" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocEntry" type="xs:int" />
+      <xs:element minOccurs="0" name="Flag" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Img" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemFName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LineNum" type="xs:int" />
+      <xs:element minOccurs="0" name="OpenQty" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Order_Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Remarks" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalPrice" type="xs:decimal" />
+      <xs:element minOccurs="0" name="VisualOrder" type="xs:int" />
+      <xs:element minOccurs="0" name="WhsCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_OrderItem" nillable="true" type="tns:OM_OrderItem" />
+</xs:schema>

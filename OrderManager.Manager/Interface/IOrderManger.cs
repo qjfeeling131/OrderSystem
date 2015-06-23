@@ -46,5 +46,7 @@ namespace OrderManager.Manager
         #endregion
 
          IList<OM_Order> GetOrderList(string userGuid);
+
+         IList<OM_OrderItem> GetOrderItemList(string orderGuid);
     }
 }
