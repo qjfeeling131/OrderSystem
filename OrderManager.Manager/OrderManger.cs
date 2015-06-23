@@ -136,5 +136,11 @@ namespace OrderManager.Manager
 
         } 
         #endregion
+
+        #region Function
+
+        public IList<OM_Order> GetOrderList(string userGuid)
+
+        #endregion
     }
 }

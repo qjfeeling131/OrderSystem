@@ -44,5 +44,7 @@ namespace OrderManager.Manager
          IList<OM_OrderItem> GetSalesOrderItemList(int PageIndex, int PageSize, Expression<Func<OM_OrderItem, bool>> fuc, Expression<Func<OM_OrderItem, bool>> orderFuc);
          OM_OrderItem GetSalesOrderItem(Expression<Func<OM_OrderItem, bool>> fuc);
         #endregion
+
+         IList<OM_Order> GetOrderList(string userGuid);
     }
 }

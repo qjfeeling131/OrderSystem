@@ -1,18 +1,37 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity;
+using OrderManager.Manager;
+using OrderManager.Model.Models;
+using OrderManager.Model.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.ServiceModel.Activation;
 using System.Text;
 
 namespace OrderManager.Service
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "OrderService" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select OrderService.svc or OrderService.svc.cs at the Solution Explorer and start debugging.
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    [Aop.VerifyAuthority]
+    [Aop.CatchWcfException]
+    [Aop.WCFTransaction]
     public class OrderService : IOrderService
     {
-        public void DoWork()
+        [Dependency]
+        public IOrderManger OrderManger { get; set; }
+
+        [Dependency]
+        public ILogManager LogManager { get; set; }
+
+        public IList<OM_Order> GetOrderList(string cipher, string userGuid)
         {
+ 
+        }
+
+        public IList<OM_OrderItem> GetOrderItemList(string cipher, string orderGuid)
+        {
+ OrderManger.GetSalesOrderItem()
         }
     }
 }

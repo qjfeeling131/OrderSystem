@@ -15,6 +15,9 @@ namespace OrderManager.Model.Models.Mapping
                 .IsRequired()
                 .HasMaxLength(50);
 
+            this.Property(t => t.Order_Guid)
+                .IsRequired()
+                .HasMaxLength(50);
             this.Property(t => t.LineNum)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
@@ -43,6 +46,7 @@ namespace OrderManager.Model.Models.Mapping
             this.ToTable("OM_OrderItem");
             this.Property(t => t.DocEntry).HasColumnName("DocEntry");
             this.Property(t => t.Guid).HasColumnName("Guid");
+            this.Property(t => t.Order_Guid).HasColumnName("Order_Guid");
             this.Property(t => t.LineNum).HasColumnName("LineNum");
             this.Property(t => t.VisualOrder).HasColumnName("VisualOrder");
             this.Property(t => t.ItemCode).HasColumnName("ItemCode");
