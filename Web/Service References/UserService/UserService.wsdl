@@ -62,6 +62,18 @@
   <wsdl:message name="IUserService_GetMessageBoardModel_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetMessageBoardModelResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_GetOrderList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderList" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetOrderList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetOrderItemList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderItemList" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetOrderItemList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderItemListResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUserService">
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Login" message="tns:IUserService_Login_InputMessage" />
@@ -98,6 +110,14 @@
     <wsdl:operation name="GetMessageBoardModel">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetMessageBoardModel" message="tns:IUserService_GetMessageBoardModel_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetMessageBoardModelResponse" message="tns:IUserService_GetMessageBoardModel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetOrderList" message="tns:IUserService_GetOrderList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetOrderListResponse" message="tns:IUserService_GetOrderList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderItemList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetOrderItemList" message="tns:IUserService_GetOrderItemList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetOrderItemListResponse" message="tns:IUserService_GetOrderItemList_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserService" type="tns:IUserService">
@@ -176,6 +196,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetMessageBoardModel">
       <soap:operation soapAction="http://tempuri.org/IUserService/GetMessageBoardModel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderList">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetOrderList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderItemList">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetOrderItemList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

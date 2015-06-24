@@ -42,6 +42,9 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.Key)
                 .HasMaxLength(128);
 
+            this.Property(t => t.ParentCode)
+             .HasMaxLength(36);
+
             // Table & Column Mappings
             this.ToTable("OM_User");
             this.Property(t => t.ID).HasColumnName("ID");
@@ -58,6 +61,7 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.UpdateDatetime).HasColumnName("UpdateDatetime");
             this.Property(t => t.Account).HasColumnName("Account");
             this.Property(t => t.Key).HasColumnName("Key");
+            this.Property(t => t.ParentCode).HasColumnName("ParentCode");
         }
     }
 }

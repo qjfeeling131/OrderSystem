@@ -11,31 +11,36 @@
 
     <!-- form start -->
     <form role="form" id="om-messageBoard-fm">
-        <input hidden="hidden" value="guid" name="UserGuid" />
-        <div class="box-body">
-            <div style="margin-bottom:15px;">
-                <label>用户名</label>
-                <p>@ViewBag.UserName</p>
-            </div>
-            <div class="form-group">
-                <label for="om-messageBoard-fm-email">邮箱</label>
-                <input type="email" id="email" name="om-messageBoard-fm-email" id="om-messageBoard-fm-email" data-validation-matches-match="email" data-validation-matches-message="邮箱地址输入不正确" class="form-control" placeholder="你的邮箱" required>
-            </div>
-            <div class="form-group">
-                <label for="om-messageBoard-fm-phoneNumer">联系电话</label>
-                <input type="text" class="form-control" name="om-messageBoard-fm-phoneNumer" id="om-messageBoard-fm-phoneNumer" placeholder="电话号码" required>
-            </div>
-            <div class="form-group">
-                <label for="om-messageBoard-fm-title">标题</label>
-                <input type="text" class="form-control" name="om-messageBoard-fm-title" id="om-messageBoard-fm-title" placeholder="留言主题" required>
-            </div>
-
-            <div class="form-group">
-                <label for="om-messageBoard-fm-message">留言</label>
-                <textarea class="form-control" rows="3" placeholder="输入留言 ..." id="om-messageBoard-fm-message" name="om-messageBoard-fm-message"></textarea>
-            </div>
+    <input hidden="hidden" value="guid" name="UserGuid" />
+    <div class="box-body">
+        <div style="margin-bottom:15px;">
+            <label>用户名</label>
+            <p>@ViewBag.UserName</p>
         </div>
-    </form>
+
+        <div class="form-group has-feedback">
+            <label for="om-messageBoard-fm-email">邮箱</label>
+            <input type="email" name="om-messageBoard-fm-email" id="om-messageBoard-fm-email" data-validation-matches-match="email" data-validation-matches-message="邮箱地址输入不正确" class="form-control" placeholder="你的邮箱" required>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        </div>
+
+        <div class="form-group has-feedback">
+            <label for="om-messageBoard-fm-phoneNumer">联系电话</label>
+            <input type="text" class="form-control" name="om-messageBoard-fm-phoneNumer" id="om-messageBoard-fm-phoneNumer" placeholder="电话号码" required>
+            <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="om-messageBoard-fm-title">标题</label>
+            <input type="text" class="form-control" name="om-messageBoard-fm-title" id="om-messageBoard-fm-title" placeholder="留言主题" required>
+            <span class="glyphicon glyphicon-paperclip form-control-feedback"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="om-messageBoard-fm-message">留言</label>
+            <textarea class="form-control" rows="3" placeholder="输入留言 ..." id="om-messageBoard-fm-message" name="om-messageBoard-fm-message"></textarea>
+        </div>
+    </div>
+</form>
 
 }
 

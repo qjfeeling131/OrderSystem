@@ -136,4 +136,34 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetOrderList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetOrderListResult" nillable="true" type="q8:ArrayOfOM_Order" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderItemList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="orderGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderItemListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetOrderItemListResult" nillable="true" type="q9:ArrayOfOM_OrderItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

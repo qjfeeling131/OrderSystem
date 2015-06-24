@@ -39,6 +39,12 @@ namespace OrderManager.Service
 
         [OperationContract]
         OM_MessageBoard GetMessageBoardModel(string cipher, string guid);
+
+        [OperationContract]
+        IList<OM_Order> GetOrderList(string cipher, string userGuid);
+
+        [OperationContract]
+        IList<OM_OrderItem> GetOrderItemList(string cipher, string orderGuid);
     }
 }
 

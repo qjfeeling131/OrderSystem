@@ -10,7 +10,8 @@ using System.Net.NetworkInformation;
 using System.Net;
 using System.Web;
 using OrderManager.Model.Models;
-using Web.OrderService;
+using Web.UserService;
+
 
 
 
@@ -19,16 +20,16 @@ namespace OrderManager.Web
     public class OrderController : BaseController
     {
 
-        private IOrderService OrderService;
+        private IUserService UserService;
 
         public OrderController()
         {
-            OrderService = new OrderServiceClient();
+            UserService = new UserServiceClient();
         }
 
         public ViewResult Index(string key, int? pageIndex = 0, int? pageSize = 10)
         {
-            List<OM_Order> list = OrderService.GetOrderList(Cipher, CurrentUser.User.Guid);          
+            List<OM_Order> list = UserService.GetOrderList(Cipher, CurrentUser.User.Guid);          
 
             if (!string.IsNullOrWhiteSpace(key))
             {
@@ -46,9 +47,17 @@ namespace OrderManager.Web
 
         public ViewResult OrderItem(string orderItemGuid)
         {
-            var result = OrderService.GetOrderItemList(Cipher, orderItemGuid);
+            var result = UserService.GetOrderItemList(Cipher, orderItemGuid);
+            ViewBag.OrderNum = orderItemGuid;
             return View("~/views/order/orderitem.cshtml", result);
  
+        }
+
+        public ViewResult UserCodeList()
+        {
+            var result = UserService.GetCurrentUserList(Cipher, CurrentUser.User.Guid);
+            return View("~/views/order/orderitem.cshtml", result);
+
         }
 
         public ViewResult Order()

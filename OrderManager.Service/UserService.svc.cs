@@ -26,6 +26,9 @@ namespace OrderManager.Service
         [Dependency]
         public ILogManager LogManager { get; set; }
 
+        [Dependency]
+        public IOrderManger OrderManger { get; set; }
+
 
         public OM_UserDetail Login(string userAccount, string password)
         {
@@ -116,7 +119,6 @@ namespace OrderManager.Service
         }
 
 
-
         public List<OM_MessageBoard> GetCurrentUserMessageBoard(string cipher, string userId)
         {
             return UserManager.GetCurrentUserMessageBoard(userId);
@@ -146,6 +148,16 @@ namespace OrderManager.Service
         public OM_MessageBoard GetMessageBoardModel(string cipher, string guid)
         {
             return UserManager.GetMessageBoard(m => m.Guid == guid);
+        }
+
+        public IList<OM_Order> GetOrderList(string cipher, string userGuid)
+        {
+            return OrderManger.GetOrderList(userGuid);
+        }
+
+        public IList<OM_OrderItem> GetOrderItemList(string cipher, string orderGuid)
+        {
+            return OrderManger.GetOrderItemList(orderGuid);
         }
     }
 }

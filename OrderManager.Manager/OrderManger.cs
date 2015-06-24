@@ -14,8 +14,8 @@ namespace OrderManager.Manager
     public class OrderManger : BaseManger, IOrderManger
     {
 
-        [Dependency]
-        public IUserManager UserManager{get;set;}
+        //[Dependency]
+        public IUserManager UserManager { get { return new UserManager(); } }
 
         #region Save Method
         public bool SaveProduct(OM_Product product)
