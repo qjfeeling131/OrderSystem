@@ -13,7 +13,6 @@ namespace OrderManager.Service
             RegistNSetInterceptor<IOrderManger, OrderManger>(); 
             RegistNSetInterceptor<IUserManager, UserManager>();
             RegistNSetInterceptor<ILogManager, LogManager>(); 
-            RegistNSetInterceptor<IOrderService, OrderService>();
             RegistNSetInterceptor<IUserService, UserService>();
             
 
