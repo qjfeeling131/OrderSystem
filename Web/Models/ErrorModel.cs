@@ -15,6 +15,6 @@ namespace OrderManager.Web.Models
 
         public string Target { get; set; }
 
-        public string Code { get; set; }
+        public int Code { get; set; } //-1 : error  , 0  : normal
     }
 }

@@ -8,7 +8,7 @@ namespace OrderManager.Web.Models
     public class JsonModel
     {
 
-        public int Code { get; set; }  //0 : error  ,1 : normal
+        public int Code { get; set; }  
 
         public string Type { get; set; }
 

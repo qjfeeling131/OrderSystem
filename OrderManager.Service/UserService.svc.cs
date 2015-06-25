@@ -61,8 +61,7 @@ namespace OrderManager.Service
         public List<OM_User> GetCurrentUserList(string cipher,string userGuid)
         {
             var result = UserManager.GetAreaRoles(userGuid);
-            //把自己移除
-            result.Remove(result.Where(s => s.Guid == userGuid).FirstOrDefault());
+
             return result;
         }
 

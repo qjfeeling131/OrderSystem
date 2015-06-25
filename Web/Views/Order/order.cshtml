@@ -35,7 +35,7 @@
 
                 <div class="btn-group pull-right" style="margin:2%;">
                     <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;状态</button>
-                    <select class="form-control  input-sm pull-right" style="width: 200px;">
+                    <select class="form-control  input-sm pull-right" style="width: 200px;" id="status">
                         <option>option 1</option>
                         <option>option 2</option>
                         <option>option 3</option>
@@ -54,18 +54,18 @@
                                 <th tabindex="0">物料名称</th>
                                 <th tabindex="0">价格</th>
                                 <th tabindex="0">数量</th>
-                                <th tabindex="0">地址</th>
-                                <th tabindex="0">操作</th>
+                                <th tabindex="0">货币</th>
+                                <th tabindex="0">总价</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr role="row">
-                                <td><input type="text"/></td>
+                                <td>0</td>
                                 <td>2</td>
                                 <td>3</td>
                                 <td>4</td>
                                 <td>5</td>
-                                <td>2/</td>
+                                <td>2</td>
                             </tr>
                             <tr role="row">
                                 <td>1</td>
@@ -73,19 +73,15 @@
                                 <td>3</td>
                                 <td>4</td>
                                 <td>5</td>
-                                <td>                                   
-                                    2
-                                </td>
+                                <td>2</td>
                             </tr>
                             <tr role="row">
-                                <td>1</td>
+                                <td>2</td>
                                 <td>2</td>
                                 <td>3</td>
                                 <td>4</td>
                                 <td>5</td>
-                                <td>                                 
-                                    2
-                                </td>
+                                <td>2</td>
                             </tr>
 
                         </tbody>
@@ -99,7 +95,7 @@
 
                 <div class="btn-group" style="padding-top:2%;">
                     <button class="btn btn-default btn-sm disabled"><i class="glyphicon glyphicon-edit"></i>&nbsp;备注</button>
-                    <textarea class="form-control input-sm pull-righ" rows="4" style="width:400px;" placeholder="输入备注 ..."></textarea>
+                    <textarea id="remark" class="form-control input-sm pull-righ" rows="4" style="width:400px;" placeholder="输入备注 ..."></textarea>
                 </div><!-- /.btn-group -->
 
                 <div class="btn-group pull-right" style="padding-top:2%;">
@@ -124,50 +120,94 @@
 
 
 @section script{
-    <script src="~/Js/utility/jquery.min.js"></script>
+    @*<script src="~/Js/utility/jquery.min.js"></script>*@
     <script>
         var currentRow;
+        var isEdit = false;
 
         $(function () {
             $("#orderManager").addClass("active");
             $("#orderManager .treeview-menu").attr("display", "block");
             $("#orderManager .treeview-menu>li").eq(1).addClass("active");
 
+            //客户代码dialog
             $("#UserCode").dblclick(function () {
-                alertInfo("UserCode", "dbclik");
+                createDialog('@(Url.Content("~/order/usercodelist"))');
             })
 
-
+            //添加行
             $("#addRow").click(function () {
-                
+                //$('#addRow').removeClass("disabled");
+                if (isEdit == true)
+                    return;
+
+                isEdit = true;
                 var row = "    <tr role='row'> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td>    </tr>   ";
                 $("#order_table tbody").append(row);
-                var newrow= $("#order_table tr").last("tr");
-                console.log($(newrow));
+                var newrow = $("#order_table tr").last("tr");
                 RowClickEvent($(newrow));
-         
 
             })
-
+            //删除行
             $("#removeRow").click(function () {
                 $(currentRow).remove();
             })
-
+            //行事件
             $("#order_table tr").each(function () {
 
                 RowClickEvent($(this));
-         
 
+
+            });
+
+            //保存草稿
+            $("#saveDraft").click(function () {
+                var data = GetCurrentPageDate();
             });
 
         })
 
-        function RowClickEvent(tr)
-        {          
-            $(tr).click(function () {
-                 //是否当前行
-                if ($(currentRow).html() == $(tr).html()) {
+        function GetCurrentPageDate() {
+            var result = {
+                UserCode: "",
+                Status: "",
+                OrderItems: new Array(),//{ [],[],[] }
+                Remark: ""
 
+            };
+            result.UserCode = $("#UserCode").val();
+            result.Remark = $("#remark").val();
+            result.Status = $("#status").val();
+            $("#order_table tr").each(function () {
+                var tdArr = $('td', $(this));
+                if (tdArr.length == 0)
+                    return;
+                var row = {
+                    ItemCode: $(tdArr[0]).html(),
+                    ItemName: $(tdArr[1]).html(),
+                    Price: $(tdArr[2]).html(),
+                    Quantity: $(tdArr[3]).html(),
+                    Currency: $(tdArr[4]).html(),
+                    TotalPrice: $(tdArr[5]).html(),
+                };
+
+                result.OrderItems[result.OrderItems.length] = row;
+            })
+
+            var data = JSON.stringify(result);
+            console.log(data);
+            return data;
+
+        }
+
+        function RowClickEvent(tr) {
+            $(tr).click(function () {
+                //是否当前行  currentrow ==old
+                if ($(currentRow).html() != $(tr).html()) {
+                    var editInput = $("td input", $(currentRow)).length; //$(currentRow).children("td").children("input");
+                    if (editInput > 0) {
+                        RemoveEditInput(currentRow);
+                    }
                 }
 
                 currentRow = $(tr);
@@ -176,6 +216,24 @@
             }).dblclick(function () {
 
             });
+        }
+
+        function RemoveEditInput(tr) {
+            var arrInput = $("td input", $(tr));
+            for (var i = 0; i < arrInput.length; i++) {
+                if ($(arrInput[i]) == null || isNullorEmptyString($(arrInput[i]).val())) {
+                    $(tr).remove();
+                    alertInfo("提示", "订单项填写有误");
+                    break;
+                }
+
+                var inputValue = $(arrInput[i]).val();
+                var parent = $(arrInput[i]).parent();  //td
+                $(parent).html(inputValue);
+
+            }
+
+            isEdit = false;
         }
 
 

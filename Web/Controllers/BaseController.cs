@@ -65,7 +65,7 @@ namespace OrderManager.Web
 
             var array = acccount.Split(CookieSplitStr);
             var result = array[0] + CookieSplitStr + array[1];
-            SetCookie(key, " " ,DateTime.Now.AddDays(7));
+            SetCookie(key, " ", DateTime.Now.AddDays(7));
 
         }
 
@@ -118,8 +118,14 @@ namespace OrderManager.Web
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            if (CurrentUser != null)
+            {
+                ViewBag.UserName = CurrentUser.User.Name;
+                ViewBag.LoginDate = CurrentUser.User.UpdateDatetime;
+            }
             base.OnActionExecuting(filterContext);
         }
+
 
         protected override void OnResultExecuted(ResultExecutedContext filterContext)
         {
@@ -129,8 +135,8 @@ namespace OrderManager.Web
         protected override void OnException(ExceptionContext filterContext)
         {
             filterContext.ExceptionHandled = true;
-            InfoModel errormodel = new InfoModel() { Title = "错误" };
-            JsonModel resultModel = new JsonModel() { Code = 0 };
+            InfoModel errormodel = new InfoModel() { Title = "错误", Code = -1 };
+            JsonModel resultModel = new JsonModel() { Code = -1 };
             var wcfException = filterContext.Exception as FaultException<ExceptionDetail>;
             if (wcfException != null)
             {

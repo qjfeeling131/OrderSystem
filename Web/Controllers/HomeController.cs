@@ -49,7 +49,6 @@ namespace OrderManager.Web
         [HttpPost]
         public JsonResult Login(string UserCode, string Password, bool? IsRememeber)  //json 不能传null
         {
-           
            var detail = UserService.Login(UserCode, Encryptor.MD5Encrypt(Password));
             CurrentUser = detail;
 

@@ -55,7 +55,9 @@ namespace OrderManager.Web
         {
 
             List<OM_User> list = UserService.GetCurrentUserList(Cipher,CurrentUser.User.Guid);
-      
+            //把自己移除
+            list.Remove(list.Where(s => s.Guid == CurrentUser.User.Guid).FirstOrDefault());
+
             if (!string.IsNullOrWhiteSpace(key))
             {
                 list = list.Where(s => s.Name.Contains(key)).ToList();

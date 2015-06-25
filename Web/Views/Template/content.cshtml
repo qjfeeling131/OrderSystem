@@ -22,16 +22,16 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="glyphicon glyphicon-user"></i>
-                            <span class="hidden-xs">User Name</span>
+                            <i class="glyphicon glyphicon-cog"></i>
+                            <span class="hidden-xs">@ViewBag.UserName</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
                                 <img src="~/img/me.svg" width="90" height="90" class="img-circle" alt="User Image" />
                                 <p>
-                                    User Name
-                                    <small>Member since Nov. 2012</small>
+                                    @ViewBag.UserName
+                                    <small>上次登录：@ViewBag.LoginDate</small>
                                 </p>
                             </li>
                             <!-- Menu Footer-->
@@ -60,7 +60,7 @@
                     <img src="~/img/me.svg" width="45" height="45" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Randy</p>
+                    <p>@ViewBag.UserName</p>
                     <a href="#"><i class="glyphicon glyphicon-ok-circle"></i> 在线</a>
                 </div>
             </div>
