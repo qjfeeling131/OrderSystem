@@ -142,7 +142,7 @@
                     return;
 
                 isEdit = true;
-                var row = "    <tr role='row'> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td>    </tr>   ";
+                var row = "    <tr role='row'> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td> <td>RMB</td> <td><input type='text'/></td>    </tr>   ";
                 $("#order_table tbody").append(row);
                 var newrow = $("#order_table tr").last("tr");
                 RowClickEvent($(newrow));
@@ -169,15 +169,15 @@
 
         function GetCurrentPageDate() {
             var result = {
-                UserCode: "",
-                Status: "",
+                CardCode: "",
+                DocStatus: "",
                 OrderItems: new Array(),//{ [],[],[] }
-                Remark: ""
+                Remarks: ""
 
             };
-            result.UserCode = $("#UserCode").val();
-            result.Remark = $("#remark").val();
-            result.Status = $("#status").val();
+            result.CardCode = $("#UserCode").val();
+            result.Remarks = $("#remark").val();
+            result.DocStatus = $("#status").val();
             $("#order_table tr").each(function () {
                 var tdArr = $('td', $(this));
                 if (tdArr.length == 0)

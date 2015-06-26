@@ -151,12 +151,13 @@ namespace OrderManager.Service
 
         public IList<OM_Order> GetOrderList(string cipher, string userGuid)
         {
-            return OrderManger.GetOrderList(userGuid);
+            var result= OrderManger.GetSalesOrderList(0, int.MaxValue, o => o.User_Guid == userGuid, d=>d.DocEntry); //GetOrderList(userGuid);
+            return result;
         }
 
         public IList<OM_OrderItem> GetOrderItemList(string cipher, string orderGuid)
         {
-            return OrderManger.GetOrderItemList(orderGuid);
+            return OrderManger.GetSalesOrderItemList(0, int.MaxValue, o => o.Order_Guid == orderGuid, d => d.DocEntry);
         }
     }
 }

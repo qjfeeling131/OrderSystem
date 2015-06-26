@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OrderManager.Repository
 {
-    public  class DatabaseRepository : IDatabaseRepository
+    public class DatabaseRepository : IDatabaseRepository
     {
         private DbContext _dbContext;
 
@@ -22,11 +22,31 @@ namespace OrderManager.Repository
         public virtual int Add<T>(T model)
             where T : class
         {
+
             _dbContext.Set<T>().Add(model);
             var result = _dbContext.SaveChanges();
             return result;
         }
 
+        public virtual int AddRange<T>(List<T> listModel) where T : class
+        {
+            _dbContext.Set<T>().AddRange(listModel);
+            var result = _dbContext.SaveChanges();
+            return result;
+
+        }
+
+
+        public virtual int UpdateRange<T>(List<T> listModel)
+           where T : class
+        {
+            foreach (var item in listModel)
+            {
+                DbEntityEntry entry = _dbContext.Entry<T>(item);
+                entry.State = System.Data.Entity.EntityState.Modified;
+            }
+            return _dbContext.SaveChanges();
+        }
         public virtual int Delete<T>(Expression<Func<T, bool>> whereLambda = null, string activeProperty = "IsDel") where T : class
         {
             var model = GetModel(whereLambda);
@@ -55,10 +75,11 @@ namespace OrderManager.Repository
         }
 
 
-        public virtual List<T> GetPagedList<T, TKey>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLambda = null, Expression<Func<T, TKey>> orderBy = null)
+        public virtual List<T> GetPagedList<T>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLambda = null,  Expression<Func<T, object>> orderBy = null)
                  where T : class
         {
-            return _dbContext.Set<T>().Where(whereLambda).OrderBy(orderBy).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            //orderBy= orderBy?new Expression();
+            return _dbContext.Set<T>().Where(whereLambda).OrderBy(orderBy).Skip((pageIndex + 1) * pageSize).Take(pageSize).ToList();
         }
 
 

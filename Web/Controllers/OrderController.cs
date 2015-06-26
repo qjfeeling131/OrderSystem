@@ -12,6 +12,7 @@ using System.Web;
 using OrderManager.Model.Models;
 using Web.UserService;
 using OrderManager.Web.Models;
+using OrderManager.Model.DTO;
 
 
 
@@ -81,8 +82,10 @@ namespace OrderManager.Web
         }
 
         [HttpPost]
-        public JsonResult SaveDraft(string userCode, string status, string remark, List<OM_OrderItem> orderItems)
+        public JsonResult SaveDraft(OM_SalesOrderDataObject data)//(string userCode, string status, string remark, List<OM_OrderItem> orderItems)
         {
+              //OM_SalesOrderDataObject
+
             return Json(new JsonModel { });
  
         }

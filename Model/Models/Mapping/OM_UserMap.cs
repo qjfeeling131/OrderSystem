@@ -38,12 +38,11 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.Account)
                 .IsRequired()
                 .HasMaxLength(36);
-
+            this.Property(t => t.ParentCode)
+                .IsRequired()
+                .HasMaxLength(36);
             this.Property(t => t.Key)
                 .HasMaxLength(128);
-
-            this.Property(t => t.ParentCode)
-             .HasMaxLength(36);
 
             // Table & Column Mappings
             this.ToTable("OM_User");
@@ -60,8 +59,8 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.CreateDatetime).HasColumnName("CreateDatetime");
             this.Property(t => t.UpdateDatetime).HasColumnName("UpdateDatetime");
             this.Property(t => t.Account).HasColumnName("Account");
-            this.Property(t => t.Key).HasColumnName("Key");
             this.Property(t => t.ParentCode).HasColumnName("ParentCode");
+            this.Property(t => t.Key).HasColumnName("Key");
         }
     }
 }
