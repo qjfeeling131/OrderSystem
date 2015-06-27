@@ -1,4 +1,5 @@
 ﻿using OrderManager.Model;
+using OrderManager.Model.Models;
 using OrderManager.Repository;
 using System;
 using System.Collections.Generic;
@@ -21,5 +22,6 @@ namespace OrderManager.Manager
                 return _dbRepository;
             }
         }
+
     }
 }

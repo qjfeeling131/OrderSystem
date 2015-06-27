@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -22,9 +23,17 @@ namespace OrderManager.Repository
         public virtual int Add<T>(T model)
             where T : class
         {
-
-            _dbContext.Set<T>().Add(model);
-            var result = _dbContext.SaveChanges();
+            var result = 0;
+            try
+            {
+                _dbContext.Set<T>().Add(model);
+                 result = _dbContext.SaveChanges();
+            
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+             
+            }
             return result;
         }
 
@@ -74,13 +83,23 @@ namespace OrderManager.Repository
             return _dbContext.SaveChanges();
         }
 
-
-        public virtual List<T> GetPagedList<T>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLambda = null,  Expression<Func<T, object>> orderBy = null)
-                 where T : class
+        public virtual List<T> GetPagedList<T, TKey>(PageListParameter<T, TKey> parameter, out int count)
+         where T : class
         {
-            //orderBy= orderBy?new Expression();
-            return _dbContext.Set<T>().Where(whereLambda).OrderBy(orderBy).Skip((pageIndex + 1) * pageSize).Take(pageSize).ToList();
+            count = _dbContext.Set<T>().Where(parameter.whereLambda).Count();
+            var list = _dbContext.Set<T>().Where<T>(parameter.whereLambda);
+            if (parameter.isAsc)
+            {
+                list = list.OrderBy(parameter.orderByLambda);
+            }
+            else
+            {
+                list = list.OrderByDescending(parameter.orderByLambda);
+            }
+            var result = list.Skip((parameter.pageIndex) * parameter.pageSize).Take(parameter.pageSize).ToList();
+            return result;
         }
+
 
 
         public virtual int ExcuteSql(string strSql, params object[] paras)

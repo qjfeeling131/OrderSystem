@@ -52,8 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\OM_Log_Partial.cs" />
     <Compile Include="DTO\OM_LogDataObject.cs" />
     <Compile Include="DTO\OM_AreaRoles.cs" />
+    <Compile Include="DTO\OM_Orde_Partial.cs" />
     <Compile Include="DTO\OM_UserDetail.cs" />
     <Compile Include="DTO\OM_DepartmentDto.cs" />
     <Compile Include="Enum\OM_ExceptionCodeEnum.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Models\OM_User.cs" />
     <Compile Include="Models\OM_UserRole.cs" />
     <Compile Include="Models\OrderManagementContext.cs" />
+    <Compile Include="PageListParameter.cs" />
     <Compile Include="OM_ExceptionMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

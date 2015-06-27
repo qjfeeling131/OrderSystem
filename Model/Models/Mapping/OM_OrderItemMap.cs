@@ -18,6 +18,7 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.Order_Guid)
                 .IsRequired()
                 .HasMaxLength(50);
+
             this.Property(t => t.LineNum)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 

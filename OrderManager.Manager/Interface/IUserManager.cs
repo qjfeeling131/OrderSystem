@@ -46,22 +46,12 @@ namespace OrderManager.Manager
         #region Get Objects
 
         OM_User GetUser(Expression<Func<OM_User, bool>> fuc);
-        IList<OM_Log> GetLogList(int PageIndex, int PageSize, Expression<Func<OM_Log, bool>> fuc, Expression<Func<OM_Log, object>> orderFuc);
-        OM_Log GetLog(Expression<Func<OM_Log, bool>> fuc);
-        IList<OM_Permission> GetPermissionList(int PageIndex, int PageSize, Expression<Func<OM_Permission, bool>> fuc, Expression<Func<OM_Permission, object>> orderFuc);
 
         OM_Permission GetPermission(Expression<Func<OM_Permission, bool>> fuc);
 
-        IList<OM_Department> GetDepartmentList(int PageIndex, int PageSize, Expression<Func<OM_Department, bool>> fuc, Expression<Func<OM_Department, object>> orderFuc);
         OM_Department GetDepartment(Expression<Func<OM_Department, bool>> fuc);
 
-        IList<OM_Role> GetRoleList(int PageIndex, int PageSize, Expression<Func<OM_Role, bool>> fuc, Expression<Func<OM_Role, object>> orderFuc);
-        OM_Role GetRole(Expression<Func<OM_Role, bool>> fuc);
-
-        IList<OM_RolePermission> GetRolePermissionList(int PageIndex, int PageSize, Expression<Func<OM_RolePermission, bool>> fuc, Expression<Func<OM_RolePermission, object>> orderFuc);
         OM_RolePermission GetRolePermission(Expression<Func<OM_RolePermission, bool>> fuc);
-
-        IList<OM_UserRole> GetUserRoleList(int PageIndex, int PageSize, Expression<Func<OM_UserRole, bool>> fuc, Expression<Func<OM_UserRole, object>> orderFuc);
 
         OM_UserRole GetUserRole(Expression<Func<OM_UserRole, bool>> fuc);
         #endregion

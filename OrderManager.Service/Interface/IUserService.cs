@@ -3,6 +3,7 @@ using OrderManager.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
@@ -44,7 +45,26 @@ namespace OrderManager.Service
         IList<OM_Order> GetOrderList(string cipher, string userGuid);
 
         [OperationContract]
-        IList<OM_OrderItem> GetOrderItemList(string cipher, string orderGuid);
+        void SaveSalesOrder(string cipher, OM_SalesOrderDataObject obj);
+
+        [OperationContract]
+        void UpdateSalesOrder(string cipher, OM_SalesOrderDataObject obj);
+
+        [OperationContract]
+        OM_SalesOrderDataObject GetSalesOrderAndDetail(string cipher, string salesOrder_Guid);
+
+        [OperationContract]
+        List<OM_Order> GetCurrentSalesOrderList(string cipher, string userGuid);
+
+        [OperationContract]
+        List<OM_ProductPrice> GetCurrentProducePriceList(string cipher, string itemCode, string userGuid);
+
+        [OperationContract]
+        List<OM_User> GetCurrentUserByCardCode(string cipher, string userGuid);
+
+        [OperationContract]
+        IList<OM_Product> GetProductList(string cipher);
+
     }
 }
 

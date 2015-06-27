@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrderManager.Model.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -20,8 +21,8 @@ namespace OrderManager.Repository
         int UpdateRange<T>(List<T> listModel) where T : class;
         T GetModel<T>(Expression<Func<T, bool>> lambda) where T : class;
 
-        List<T> GetPagedList<T>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLambda = null, Expression<Func<T, object>> orderBy = null) where T : class;
-
+        List<T> GetPagedList<T, TKey>(PageListParameter<T, TKey> parameter, out int count) where T : class;
+ 
         List<T> GetList<T>(Expression<Func<T, bool>> whereLambda) where T : class;
 
         int ExcuteSql(string strSql, params object[] paras);

@@ -30,17 +30,18 @@
                 <div class="btn-group" style="margin:2%;">
                     <button class="btn btn-default btn-sm disabled"><i class="glyphicon glyphicon-user"></i>&nbsp;客户代码</button>
                     <input type="text" name="UserCode" id="UserCode" class="form-control input-sm pull-right" style="width: 200px;">
+                    <input type="hidden" id="CardName" value="" />
                 </div><!-- /.btn-group -->
 
 
                 <div class="btn-group pull-right" style="margin:2%;">
                     <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;状态</button>
-                    <select class="form-control  input-sm pull-right" style="width: 200px;" id="status">
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                        <option>option 5</option>
+                    <select class="form-control  input-sm pull-right" style="width: 200px;" id="status" disabled>
+                        <option>未提交</option>
+                        <option>已提交</option>
+                        <option>已对接</option>
+                        <option>审核中</option>
+                        <option>已发货</option>
                     </select>
                 </div><!-- /.btn-group -->
 
@@ -142,7 +143,7 @@
                     return;
 
                 isEdit = true;
-                var row = "    <tr role='row'> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td> <td>RMB</td> <td><input type='text'/></td>    </tr>   ";
+                var row = "    <tr role='row'> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td> <td><input type='text'/></td> <td>RMB</td> <td>--</td>    </tr>   ";
                 $("#order_table tbody").append(row);
                 var newrow = $("#order_table tr").last("tr");
                 RowClickEvent($(newrow));
@@ -162,7 +163,12 @@
 
             //保存草稿
             $("#saveDraft").click(function () {
+
                 var data = GetCurrentPageDate();
+                $(this).addClass("disabled");
+                getAsynData("saveDraft", "obj=" + data, function (json) {
+                    alertInfo("提示", "保持草稿成功");
+                });
             });
 
         })
@@ -171,27 +177,29 @@
             var result = {
                 CardCode: "",
                 DocStatus: "",
-                OrderItems: new Array(),//{ [],[],[] }
+                CardName:"",
+                SalesOrderLine: new Array(),//{ [],[],[] }
                 Remarks: ""
 
             };
-            result.CardCode = $("#UserCode").val();
-            result.Remarks = $("#remark").val();
-            result.DocStatus = $("#status").val();
+            result.CardCode =  $("#UserCode").val() ;
+            result.Remarks = $("#remark").val() ;
+            result.DocStatus =  $("#status").val() ;
+            result.CardName = $("#CardName").val() ;
             $("#order_table tr").each(function () {
                 var tdArr = $('td', $(this));
                 if (tdArr.length == 0)
                     return;
                 var row = {
-                    ItemCode: $(tdArr[0]).html(),
-                    ItemName: $(tdArr[1]).html(),
+                    ItemCode: $(tdArr[0]).html() ,
+                    ItemName:  $(tdArr[1]).html() ,
                     Price: $(tdArr[2]).html(),
                     Quantity: $(tdArr[3]).html(),
-                    Currency: $(tdArr[4]).html(),
+                    Currency: $(tdArr[4]).html() ,
                     TotalPrice: $(tdArr[5]).html(),
                 };
 
-                result.OrderItems[result.OrderItems.length] = row;
+                result.SalesOrderLine[result.SalesOrderLine.length] = row;
             })
 
             var data = JSON.stringify(result);
@@ -220,10 +228,20 @@
 
         function RemoveEditInput(tr) {
             var arrInput = $("td input", $(tr));
+            console.log(arrInput);
+
+            if (isNaN($(arrInput[2]).val())
+                || isNaN($(arrInput[3]).val())) {
+                $(tr).remove();
+                alertInfo("提示", "订单数据填写有误");
+                isEdit = false;
+                return;
+            }
+
             for (var i = 0; i < arrInput.length; i++) {
                 if ($(arrInput[i]) == null || isNullorEmptyString($(arrInput[i]).val())) {
                     $(tr).remove();
-                    alertInfo("提示", "订单项填写有误");
+                    alertInfo("提示", "订单数据填写有误");
                     break;
                 }
 
@@ -233,6 +251,8 @@
 
             }
 
+            var total = parseFloat($(arrInput[2]).val()) * parseFloat($(arrInput[3]).val());
+            $("td", $(tr)).last().html(total);
             isEdit = false;
         }
 

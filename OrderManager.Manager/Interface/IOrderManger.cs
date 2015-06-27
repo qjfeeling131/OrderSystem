@@ -35,14 +35,12 @@ namespace OrderManager.Manager
 
         #region Get ont or manay object
 
-        IList<OM_Product> GetProductList(int PageIndex, int PageSize, Expression<Func<OM_Product, bool>> fuc, Expression<Func<OM_Product, object>> orderFuc);
 
         OM_Product GetProduct(Expression<Func<OM_Product, bool>> fuc);
-        IList<OM_Order> GetSalesOrderList(int PageIndex, int PageSize, Expression<Func<OM_Order, bool>> fuc, Expression<Func<OM_Order, object>> orderFuc);
-
+ 
         OM_Order GetSalesOrder(Expression<Func<OM_Order, bool>> fuc);
+        IList<OM_Order> GetSalesOrderList<Tkey>(PageListParameter<OM_Order, Tkey> parameter, out int count);
 
-        IList<OM_OrderItem> GetSalesOrderItemList(int PageIndex, int PageSize, Expression<Func<OM_OrderItem, bool>> fuc, Expression<Func<OM_OrderItem, object>> orderFuc);
         OM_OrderItem GetSalesOrderItem(Expression<Func<OM_OrderItem, bool>> fuc);
         #endregion
 

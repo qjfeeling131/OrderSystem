@@ -208,20 +208,10 @@ namespace OrderManager.Manager
 
         }
 
-        public IList<OM_Log> GetLogList(int PageIndex, int PageSize, Expression<Func<OM_Log, bool>> fuc, Expression<Func<OM_Log, object>> orderFuc)
-        {
-            return DbRepository.GetPagedList(PageIndex, PageSize, fuc, orderFuc);
-
-        }
 
         public OM_Log GetLog(Expression<Func<OM_Log, bool>> fuc)
         {
             return DbRepository.GetModel(fuc);
-
-        }
-        public IList<OM_Permission> GetPermissionList(int PageIndex, int PageSize, Expression<Func<OM_Permission, bool>> fuc, Expression<Func<OM_Permission, object>> orderFuc)
-        {
-            return DbRepository.GetPagedList(PageIndex, PageSize, fuc, orderFuc);
 
         }
 
@@ -231,11 +221,6 @@ namespace OrderManager.Manager
 
         }
 
-        public IList<OM_Department> GetDepartmentList(int PageIndex, int PageSize, Expression<Func<OM_Department, bool>> fuc, Expression<Func<OM_Department, object>> orderFuc)
-        {
-            return DbRepository.GetPagedList(PageIndex, PageSize, fuc, orderFuc);
-
-        }
 
         public OM_Department GetDepartment(Expression<Func<OM_Department, bool>> fuc)
         {
@@ -243,21 +228,10 @@ namespace OrderManager.Manager
 
         }
 
-        public IList<OM_Role> GetRoleList(int PageIndex, int PageSize, Expression<Func<OM_Role, bool>> fuc, Expression<Func<OM_Role, object>> orderFuc)
-        {
-            return DbRepository.GetPagedList(PageIndex, PageSize, fuc, orderFuc);
-
-        }
 
         public OM_Role GetRole(Expression<Func<OM_Role, bool>> fuc)
         {
             return DbRepository.GetModel(fuc);
-
-        }
-
-        public IList<OM_RolePermission> GetRolePermissionList(int PageIndex, int PageSize, Expression<Func<OM_RolePermission, bool>> fuc, Expression<Func<OM_RolePermission, object>> orderFuc)
-        {
-            return DbRepository.GetPagedList(PageIndex, PageSize, fuc, orderFuc);
 
         }
 
@@ -268,11 +242,7 @@ namespace OrderManager.Manager
         }
 
 
-        public IList<OM_UserRole> GetUserRoleList(int PageIndex, int PageSize, Expression<Func<OM_UserRole, bool>> fuc, Expression<Func<OM_UserRole, object>> orderFuc)
-        {
-            return DbRepository.GetPagedList(PageIndex, PageSize, fuc, orderFuc);
 
-        }
         /// <summary>
         /// 获取用户角色
         /// </summary>
@@ -302,7 +272,7 @@ namespace OrderManager.Manager
         public bool Login(string userAccount, string password)
         {
             bool result = false;
-            var user = GetUser(f => f.Account == userAccount && f.Pwd == password);
+            var user = GetUser(f => f.Account == userAccount && f.Pwd == password &&f.IsDel==false);
             if(user != null)
             {
                 result = true;
@@ -550,10 +520,6 @@ namespace OrderManager.Manager
         /// <summary>
         /// 获取区域用户的日记集合-分页
         /// </summary>          
-        /// <param name="userId"></param>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
         public List<OM_MessageBoard> GetCurrentUserMessageBoard(string userId)
         {
             List<OM_User> listUsers = this.GetAreaRoles(userId);
@@ -573,7 +539,7 @@ namespace OrderManager.Manager
 
         private IList<OM_MessageBoard> GetMessageBoardList(Expression<Func<OM_MessageBoard, bool>> whereLambda)
         {
-            return DbRepository.GetList<OM_MessageBoard>(whereLambda);  //.GetPagedList(pageIndex, pageSize, whereLambda, orderBy);
+            return DbRepository.GetList<OM_MessageBoard>(whereLambda);  
         }
 
         /// <summary>

@@ -8,7 +8,7 @@ namespace OrderManager.Model.Models.Mapping
         public OM_AreaDepatmentMap()
         {
             // Primary Key
-            this.HasKey(t => t.Guid);
+            this.HasKey(t => new { t.ID, t.Guid, t.Department_Guid, t.Area_Guid });
 
             // Properties
             this.Property(t => t.ID)

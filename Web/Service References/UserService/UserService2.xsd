@@ -28,4 +28,25 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OM_LogDataObject" nillable="true" type="tns:OM_LogDataObject" />
+  <xs:complexType name="OM_SalesOrderDataObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DocDueDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DocEntry" type="xs:int" />
+      <xs:element minOccurs="0" name="DocStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NoteNotice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumCard" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remarks" nillable="true" type="xs:string" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="SalesOrderLine" nillable="true" type="q3:ArrayOfOM_OrderItem" />
+      <xs:element minOccurs="0" name="TPLCompany" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TPLContact" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TPLOrder" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TPLPhone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="User_Guid" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_SalesOrderDataObject" nillable="true" type="tns:OM_SalesOrderDataObject" />
 </xs:schema>

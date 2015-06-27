@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Practices.Unity;
+using OrderManager.Common;
 using OrderManager.Model.DTO;
 using OrderManager.Model.Models;
 using OrderManager.Repository;
@@ -20,7 +21,7 @@ namespace OrderManager.Manager
         #region Save Method
         public bool SaveProduct(OM_Product product)
         {
-            if(DbRepository.Add(product) > 0)
+            if (DbRepository.Add(product) > 0)
             {
                 return true;
             }
@@ -29,7 +30,7 @@ namespace OrderManager.Manager
 
         public bool SaveSalesOrder(OM_Order saleOrder)
         {
-            if(DbRepository.Add(saleOrder) > 0)
+            if (DbRepository.Add(saleOrder) > 0)
             {
                 return true;
             }
@@ -37,7 +38,7 @@ namespace OrderManager.Manager
         }
         public bool SaveSalesOrderItem(OM_OrderItem saleOrderItem)
         {
-            if(DbRepository.Add(saleOrderItem) > 0)
+            if (DbRepository.Add(saleOrderItem) > 0)
             {
                 return true;
             }
@@ -48,7 +49,7 @@ namespace OrderManager.Manager
         #region Update Method
         public bool UpdateProduct(OM_Product product)
         {
-            if(DbRepository.Update(product) > 0)
+            if (DbRepository.Update(product) > 0)
             {
                 return true;
             }
@@ -57,7 +58,7 @@ namespace OrderManager.Manager
 
         public bool UpdateSalesOrder(OM_Order saleOrder)
         {
-            if(DbRepository.Update(saleOrder) > 0)
+            if (DbRepository.Update(saleOrder) > 0)
             {
                 return true;
             }
@@ -65,7 +66,7 @@ namespace OrderManager.Manager
         }
         public bool UpdateSalesOrderItem(OM_OrderItem saleOrderItem)
         {
-            if(DbRepository.Update(saleOrderItem) > 0)
+            if (DbRepository.Update(saleOrderItem) > 0)
             {
                 return true;
             }
@@ -76,7 +77,7 @@ namespace OrderManager.Manager
         #region Update Method
         public bool DeleteProduct(Expression<Func<OM_Product, bool>> product)
         {
-            if(DbRepository.Delete(product) > 0)
+            if (DbRepository.Delete(product) > 0)
             {
                 return true;
             }
@@ -85,7 +86,7 @@ namespace OrderManager.Manager
 
         public bool UpdateSalesOrder(Expression<Func<OM_Order, bool>> saleOrder)
         {
-            if(DbRepository.Delete(saleOrder) > 0)
+            if (DbRepository.Delete(saleOrder) > 0)
             {
                 return true;
             }
@@ -93,7 +94,7 @@ namespace OrderManager.Manager
         }
         public bool DeleteSalesOrderItem(Expression<Func<OM_OrderItem, bool>> saleOrderItem)
         {
-            if(DbRepository.Delete(saleOrderItem) > 0)
+            if (DbRepository.Delete(saleOrderItem) > 0)
             {
                 return true;
             }
@@ -103,21 +104,10 @@ namespace OrderManager.Manager
 
         #region  Get one or manay Object
 
-        public IList<OM_Product> GetProductList(int PageIndex, int PageSize, Expression<Func<OM_Product, bool>> fuc, Expression<Func<OM_Product, object>> orderFuc)
-        {
-            return DbRepository.GetPagedList(PageIndex, PageSize, fuc, orderFuc);
-
-        }
 
         public OM_Product GetProduct(Expression<Func<OM_Product, bool>> fuc)
         {
             return DbRepository.GetModel(fuc);
-
-        }
-
-        public IList<OM_Order> GetSalesOrderList(int PageIndex, int PageSize, Expression<Func<OM_Order, bool>> fuc, Expression<Func<OM_Order, object>> orderFuc)
-        {
-            return DbRepository.GetPagedList(PageIndex, PageSize, fuc, orderFuc);
 
         }
 
@@ -127,13 +117,13 @@ namespace OrderManager.Manager
 
         }
 
-        public IList<OM_OrderItem> GetSalesOrderItemList(int pageIndex, int pageSize, Expression<Func<OM_OrderItem, bool>> whereLambda = null, Expression<Func<OM_OrderItem, object>> orderBy = null)
+
+        public IList<OM_Order> GetSalesOrderList<Tkey>(PageListParameter<OM_Order, Tkey> parameter, out int count)
         {
-
-
-            return DbRepository.GetPagedList(pageIndex, pageSize, whereLambda, orderBy).ToList();
-
+            var result = DbRepository.GetPagedList<OM_Order, Tkey>(parameter, out count);
+            return result;
         }
+
         public IList<OM_OrderItem> GetSalesOrderItemList(Expression<Func<OM_OrderItem, bool>> fuc)
         {
             return DbRepository.GetList(fuc);
@@ -162,13 +152,46 @@ namespace OrderManager.Manager
         {
             OM_Order order = salesOrder.ToDTO();
 
+            var user = DbRepository.GetModel<OM_User>(s => s.Account.ToUpper() == salesOrder.CardCode.ToUpper() && s.IsDel == false);
+            if (user == null)
+                throw new GenericException("客户代码不存在，保持草稿失败");
+
+            order.Guid = Guid.NewGuid().ToString();
+            order.CardName = user.Name;
+
             var salesOrderHead = DbRepository.Add(order);
-            var salesOrderLine = DbRepository.AddRange(salesOrder.SalesOrderLine);
-            if(salesOrderHead == 0 && salesOrderLine == 0)
+            if (salesOrderHead <= 0)
+                throw new GenericException("保持草稿失败");
+
+
+            var orderResult = DbRepository.GetModel<OM_Order>(s => s.Guid == order.Guid);
+
+            List<OM_OrderItem> items = new List<OM_OrderItem>();
+            foreach (var item in salesOrder.SalesOrderLine)
             {
-                return true;
+                OM_OrderItem oi = new OM_OrderItem()
+                {
+                    Guid = Guid.NewGuid().ToString(),
+                    Currency = item.Currency,
+                    ItemCode = item.ItemCode,
+                    ItemName = item.ItemName,
+                    Price = item.Price,
+                    Quantity = item.Quantity,
+                    TotalPrice = item.Price * item.Quantity,
+                    Remarks = item.Remarks,
+                    Order_Guid = orderResult.Guid,
+                    DocEntry = orderResult.DocEntry
+
+                };
+                items.Add(oi);
             }
-            return false;
+
+            var salesOrderLine = DbRepository.AddRange(items);
+
+            if (salesOrderLine <= 0)
+                throw new GenericException("保持草稿失败");
+
+            return true;
         }
         public bool SaveForSAP(OM_SalesOrderDataObject salesOrder)
         {
@@ -179,7 +202,7 @@ namespace OrderManager.Manager
 
         public bool UpdateSalesOrderStatus(OM_Order order)
         {
-            if(DbRepository.Update(order) == 0)
+            if (DbRepository.Update(order) == 0)
             {
                 return true;
             }
@@ -195,7 +218,7 @@ namespace OrderManager.Manager
             OM_Order order = salesOrder.ToDTO();
             var salesOrderHead = DbRepository.Update(order);
             var salesOrderLine = DbRepository.UpdateRange(salesOrder.SalesOrderLine);
-            if(salesOrderHead == 0 && salesOrderLine == 0)
+            if (salesOrderHead == 0 && salesOrderLine == 0)
             {
                 return true;
             }
@@ -227,7 +250,7 @@ namespace OrderManager.Manager
         {
             List<OM_User> listUser = userManager.GetAreaRoles(userGuid);
             List<OM_Order> listSalesOrder = new List<OM_Order>();
-            foreach(var user in listUser)
+            foreach (var user in listUser)
             {
                 listSalesOrder.AddRange(this.GetSalesOrderList(s => s.User_Guid == user.Guid));
             }

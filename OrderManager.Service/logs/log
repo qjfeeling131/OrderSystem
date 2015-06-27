@@ -1,0 +1,221 @@
+
+记录时间：2015-06-27 10:31:15,397   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 10:31:15 AM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 10:36:30,123   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 10:36:29 AM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 10:48:52,200   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 10:48:52 AM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 11:12:14,517   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 11:12:14 AM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 14:17:47,037   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 2:17:38 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 14:18:10,155   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-27 14:18:33,898   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-27 14:20:32,260   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 2:20:29 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 14:21:25,267   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-27 14:50:34,952   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 2:50:34 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 15:12:42,100   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:12:41 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 15:13:40,827   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:13:40 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 15:14:06,878   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-27 15:17:57,183   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:17:57 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 15:20:42,812   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:20:42 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 15:23:52,176   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:23:52 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 15:25:13,467   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:25:13 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 15:26:04,147   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:26:04 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 15:26:56,055   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:26:55 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 15:29:00,913   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:29:00 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 15:30:22,158   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:30:22 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 15:32:14,962   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:32:11 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 15:39:19,113   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:39:18 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-27 15:43:38,729   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:43:38 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 

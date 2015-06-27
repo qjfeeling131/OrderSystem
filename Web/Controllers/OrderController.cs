@@ -13,6 +13,7 @@ using OrderManager.Model.Models;
 using Web.UserService;
 using OrderManager.Web.Models;
 using OrderManager.Model.DTO;
+using System.Web.Script.Serialization;
 
 
 
@@ -49,9 +50,8 @@ namespace OrderManager.Web
 
         public ViewResult OrderItem(string orderItemGuid)
         {
-            var result = UserService.GetOrderItemList(Cipher, orderItemGuid);
-            ViewBag.OrderNum = orderItemGuid;
-            return View("~/views/order/orderitem.cshtml", result);
+                //订单详细 
+            return View("~/views/order/order.cshtml", null);
 
         }
 
@@ -69,7 +69,7 @@ namespace OrderManager.Web
             {
                 list.AddRange(list);
             }
-
+             // post  get 分页数据
             return View("~/views/order/UserCodeList.cshtml", list.Take(10));
 
         }
@@ -82,14 +82,32 @@ namespace OrderManager.Web
         }
 
         [HttpPost]
-        public JsonResult SaveDraft(OM_SalesOrderDataObject data)//(string userCode, string status, string remark, List<OM_OrderItem> orderItems)
+        public JsonResult SaveDraft(string  obj)
         {
-              //OM_SalesOrderDataObject
+            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+            var orderDetail= jsonSerializer.Deserialize<OM_SalesOrderDataObject>(obj);
+            orderDetail.Guid = Guid.NewGuid().ToString();
+            orderDetail.User_Guid = CurrentUser.User.Guid;
 
+            UserService.SaveSalesOrder(Cipher,orderDetail);
             return Json(new JsonModel { });
  
         }
 
+
+        [HttpPost]
+        public JsonResult SubmitOrder(OM_SalesOrderDataObject data)
+        {
+
+            return Json(new JsonModel { });
+        }
+
+        [HttpPost]
+        public JsonResult SubmitOrder2SAp(string orderGuid)
+        {
+
+            return Json(new JsonModel { });
+        }
 
     }
 }

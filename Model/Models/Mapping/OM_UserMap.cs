@@ -18,6 +18,10 @@ namespace OrderManager.Model.Models.Mapping
                 .IsRequired()
                 .HasMaxLength(50);
 
+            this.Property(t => t.Area_Guid)
+                .IsRequired()
+                .HasMaxLength(50);
+
             this.Property(t => t.Name)
                 .IsRequired()
                 .HasMaxLength(50);
@@ -38,9 +42,10 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.Account)
                 .IsRequired()
                 .HasMaxLength(36);
+
             this.Property(t => t.ParentCode)
-                .IsRequired()
                 .HasMaxLength(36);
+
             this.Property(t => t.Key)
                 .HasMaxLength(128);
 
@@ -48,6 +53,7 @@ namespace OrderManager.Model.Models.Mapping
             this.ToTable("OM_User");
             this.Property(t => t.ID).HasColumnName("ID");
             this.Property(t => t.Guid).HasColumnName("Guid");
+            this.Property(t => t.Area_Guid).HasColumnName("Area_Guid");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Pwd).HasColumnName("Pwd");
             this.Property(t => t.Gender).HasColumnName("Gender");

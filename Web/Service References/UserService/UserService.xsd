@@ -151,18 +151,104 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetOrderItemList">
+  <xs:element name="SaveSalesOrder">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="orderGuid" nillable="true" type="xs:string" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="obj" nillable="true" type="q9:OM_SalesOrderDataObject" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetOrderItemListResponse">
+  <xs:element name="SaveSalesOrderResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSalesOrder">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetOrderItemListResult" nillable="true" type="q9:ArrayOfOM_OrderItem" />
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="obj" nillable="true" type="q10:OM_SalesOrderDataObject" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSalesOrderResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSalesOrderAndDetail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="salesOrder_Guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSalesOrderAndDetailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="GetSalesOrderAndDetailResult" nillable="true" type="q11:OM_SalesOrderDataObject" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentSalesOrderList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentSalesOrderListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetCurrentSalesOrderListResult" nillable="true" type="q12:ArrayOfOM_Order" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentProducePriceList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="itemCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentProducePriceListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetCurrentProducePriceListResult" nillable="true" type="q13:ArrayOfOM_ProductPrice" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserByCardCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserByCardCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetCurrentUserByCardCodeResult" nillable="true" type="q14:ArrayOfOM_User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetProductListResult" nillable="true" type="q15:ArrayOfOM_Product" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

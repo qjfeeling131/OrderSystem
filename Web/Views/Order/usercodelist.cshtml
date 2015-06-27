@@ -95,24 +95,28 @@
             //tr click
             $("#userlistCode_table tr").each(function () {
                 var usercode;
+                var cardname;
                 $(this).click(function () {
-
+            
                     if (usercode == $(this).children('td').html()) {
                         $(this).css("background", "");
                     }
-                    usercode = $(this).children('td').html();
+                    usercode = $(this).children('td').first().html();
+                    cardname= $(this).children('td').last().html();
                     $(this).css("background", "#f4f4f4");
                     $(this).siblings("tr").css("background", "");
                     $("#UserCode").val(usercode);
+                    $("#CardName").val(cardname);
 
                 }).dblclick(function () {
                     usercode = $(this).children('td').html();
                     $("#UserCode").val(usercode);
+                    $("#CardName").val(cardname);
                     $("#comfirm_code").click();
                 });
             });
             //取消
-            $("#cancel_code").click(function () { $("#UserCode").val(''); });
+            $("#cancel_code").click(function () { $("#UserCode").val(''); $("#CardName").val(''); });
 
 
 

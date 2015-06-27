@@ -50,6 +50,7 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.Email).HasColumnName("Email");
             this.Property(t => t.Title).HasColumnName("Title");
             this.Property(t => t.Message).HasColumnName("Message");
+            this.Property(t => t.CreateDatetime).HasColumnName("CreateDatetime");
             this.Property(t => t.User_Guid).HasColumnName("User_Guid");
         }
     }

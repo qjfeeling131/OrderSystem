@@ -8,9 +8,12 @@ namespace OrderManager.Model.Models.Mapping
         public OM_AreaMap()
         {
             // Primary Key
-            this.HasKey(t => t.Guid);
+            this.HasKey(t => new { t.ID, t.Guid, t.AreaCode });
 
             // Properties
+            this.Property(t => t.ID)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
             this.Property(t => t.Guid)
                 .IsRequired()
                 .HasMaxLength(36);
