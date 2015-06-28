@@ -80,7 +80,9 @@ namespace OrderManager.Web
             set
             {
                 var address = GetLocationComputer();
+                Session.Timeout = 120;
                 Session[address] = value;
+
             }
         }
 

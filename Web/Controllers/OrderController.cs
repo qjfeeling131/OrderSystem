@@ -50,8 +50,12 @@ namespace OrderManager.Web
 
         public ViewResult OrderItem(string orderItemGuid)
         {
-                //订单详细 
-            return View("~/views/order/order.cshtml", null);
+            var detail = UserService.GetSalesOrderAndDetail(Cipher, orderItemGuid);
+             var status = Enum.Parse(typeof(OM_DocStatusEnum), detail.DocStatus);
+
+            ViewBag.Status = status;
+
+            return View("~/views/order/order.cshtml", detail);
 
         }
 
@@ -69,44 +73,76 @@ namespace OrderManager.Web
             {
                 list.AddRange(list);
             }
-             // post  get 分页数据
+            // post  get 分页数据
             return View("~/views/order/UserCodeList.cshtml", list.Take(10));
 
         }
 
-        public JsonResult GetProductInfo(string productCode, string productName)
+        [HttpPost]
+        public JsonResult UserCodeList(int? pageindex)
         {
-
 
             return Json(new JsonModel { });
         }
 
+
+
+        public ViewResult ProductList()
+        {
+            var list = UserService.GetProductList(Cipher);
+            return View("~/views/order/ProductList.cshtml", list);
+
+        }
+
         [HttpPost]
-        public JsonResult SaveDraft(string  obj)
+        public JsonResult ProductList(int? pageindex)
+        {
+            return Json(new JsonModel { });
+        }
+
+
+        public ViewResult ProductPrice(string productItemCode)
+        {
+            var list = UserService.GetCurrentProducePriceList(Cipher, productItemCode, CurrentUser.User.Guid);
+            return View("~/views/order/productPrice.cshtml", list);
+
+        }
+
+
+        [HttpPost]
+        public JsonResult SaveDraft(string obj)
         {
             JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            var orderDetail= jsonSerializer.Deserialize<OM_SalesOrderDataObject>(obj);
-            orderDetail.Guid = Guid.NewGuid().ToString();
+            var orderDetail = jsonSerializer.Deserialize<OM_SalesOrderDataObject>(obj);
             orderDetail.User_Guid = CurrentUser.User.Guid;
 
-            UserService.SaveSalesOrder(Cipher,orderDetail);
-            return Json(new JsonModel { });
- 
+            if (!string.IsNullOrWhiteSpace(orderDetail.Guid))
+            {
+                UserService.UpdateSalesOrder(Cipher, orderDetail);
+            }
+            else
+            {
+
+                UserService.SaveSalesOrder(Cipher, orderDetail);  // return order guid
+            }
+
+            return Json(new JsonModel { Data="Order_Guid"});
+
         }
 
 
         [HttpPost]
-        public JsonResult SubmitOrder(OM_SalesOrderDataObject data)
+        public JsonResult SubmitOrder(string orderGuid)
         {
-
-            return Json(new JsonModel { });
+            UserService.UpdateSalesOrderStatusByCommit(Cipher, orderGuid);
+            return Json(new JsonModel { Data="已提交" });
         }
 
         [HttpPost]
         public JsonResult SubmitOrder2SAp(string orderGuid)
         {
-
-            return Json(new JsonModel { });
+            UserService.UpdateSalesOrderStatusByToSAP(Cipher, orderGuid);
+            return Json(new JsonModel { Data="已对接"});
         }
 
     }

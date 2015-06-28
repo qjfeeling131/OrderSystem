@@ -198,6 +198,8 @@
     </None>
     <Content Include="Views\Log\messageBoardShow.cshtml" />
     <Content Include="Views\Order\usercodelist.cshtml" />
+    <Content Include="Views\Order\productlist.cshtml" />
+    <Content Include="Views\Order\productPrice.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

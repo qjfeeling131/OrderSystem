@@ -116,6 +116,18 @@ namespace Web.UserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetProductList", ReplyAction="http://tempuri.org/IUserService/GetProductListResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<OrderManager.Model.Models.OM_Product>> GetProductListAsync(string cipher);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByCommit", ReplyAction="http://tempuri.org/IUserService/UpdateSalesOrderStatusByCommitResponse")]
+        void UpdateSalesOrderStatusByCommit(string cipher, string orderGuid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByCommit", ReplyAction="http://tempuri.org/IUserService/UpdateSalesOrderStatusByCommitResponse")]
+        System.Threading.Tasks.Task UpdateSalesOrderStatusByCommitAsync(string cipher, string orderGuid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAP", ReplyAction="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAPResponse")]
+        void UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAP", ReplyAction="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAPResponse")]
+        System.Threading.Tasks.Task UpdateSalesOrderStatusByToSAPAsync(string cipher, string orderGuid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -279,6 +291,22 @@ namespace Web.UserService {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<OrderManager.Model.Models.OM_Product>> GetProductListAsync(string cipher) {
             return base.Channel.GetProductListAsync(cipher);
+        }
+        
+        public void UpdateSalesOrderStatusByCommit(string cipher, string orderGuid) {
+            base.Channel.UpdateSalesOrderStatusByCommit(cipher, orderGuid);
+        }
+        
+        public System.Threading.Tasks.Task UpdateSalesOrderStatusByCommitAsync(string cipher, string orderGuid) {
+            return base.Channel.UpdateSalesOrderStatusByCommitAsync(cipher, orderGuid);
+        }
+        
+        public void UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid) {
+            base.Channel.UpdateSalesOrderStatusByToSAP(cipher, orderGuid);
+        }
+        
+        public System.Threading.Tasks.Task UpdateSalesOrderStatusByToSAPAsync(string cipher, string orderGuid) {
+            return base.Channel.UpdateSalesOrderStatusByToSAPAsync(cipher, orderGuid);
         }
     }
 }

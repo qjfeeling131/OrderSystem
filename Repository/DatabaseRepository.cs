@@ -70,7 +70,8 @@ namespace OrderManager.Repository
            where T : class
         {
             var model = GetModel(whereLambda);
-            //DbEntityEntry entry = _dbContext.Entry<T>(model);
+            _dbContext.Set<T>().Attach(model);
+            //_dbContext.Entry(model).State = EntityState.Deleted;
             _dbContext.Set<T>().Remove(model);
             return _dbContext.SaveChanges();
         }

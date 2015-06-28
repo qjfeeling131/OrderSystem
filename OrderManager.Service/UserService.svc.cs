@@ -176,7 +176,7 @@ namespace OrderManager.Service
 
         public void UpdateSalesOrder(string cipher, OM_SalesOrderDataObject obj)
         {
-            OrderManger.SaveSalesOrder(obj);
+            OrderManger.UpdateSalesOrder(obj);
         }
 
         public OM_SalesOrderDataObject GetSalesOrderAndDetail(string cipher, string salesOrder_Guid)
@@ -199,13 +199,25 @@ namespace OrderManager.Service
 
         public List<OM_User> GetCurrentUserByCardCode(string cipher, string userGuid)
         {
-            return OrderManger.GetCurrentUserByCardCode( userGuid);
+            return UserManager.GetCurrentUserByCardCode( userGuid);
         }
 
 
         public IList<OM_Product> GetProductList(string cipher)
         {
             return OrderManger.GetProductList(s=>s.IsDel==false);
+        }
+
+
+        public void UpdateSalesOrderStatusByCommit(string cipher, string orderGuid)
+        {
+            OrderManger.UpdateSalesOrderStatusByCommit(orderGuid);
+        }
+
+
+        public void UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid)
+        {
+            OrderManger.UpdateSalesOrderStatusByToSAP(orderGuid);
         }
 
         #endregion

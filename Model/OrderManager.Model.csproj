@@ -58,6 +58,7 @@
     <Compile Include="DTO\OM_Orde_Partial.cs" />
     <Compile Include="DTO\OM_UserDetail.cs" />
     <Compile Include="DTO\OM_DepartmentDto.cs" />
+    <Compile Include="Enum\OM_DocStatusEnum.cs" />
     <Compile Include="Enum\OM_ExceptionCodeEnum.cs" />
     <Compile Include="Models\Mapping\OM_AreaDepatmentMap.cs" />
     <Compile Include="Models\Mapping\OM_AreaMap.cs" />

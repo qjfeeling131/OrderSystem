@@ -31,10 +31,6 @@ namespace OrderManager.Model.Models
 
         }
 
-        public string ConvertDocStatus(string chineseStatus)
-        {
-            return null;
-        }
-       
+
     }
 }

@@ -65,6 +65,13 @@ namespace OrderManager.Service
         [OperationContract]
         IList<OM_Product> GetProductList(string cipher);
 
+
+
+        [OperationContract]
+        void UpdateSalesOrderStatusByCommit(string cipher,string orderGuid);
+
+        [OperationContract]
+        void UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid);
     }
 }
 

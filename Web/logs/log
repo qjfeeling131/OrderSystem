@@ -1,342 +1,246 @@
 
-记录时间：2015-06-27 10:31:15,439   
+记录时间：2015-06-28 00:55:26,984   
  日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 10:31:15 AM】------------------
-【Source】：mscorlib
-【Message】：Bad Request
-【StackTrace】：Bad Request
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 12:55:26 AM】------------------
+【Source】：Web
+【Message】：Object reference not set to an instance of an object.
+【StackTrace】：Object reference not set to an instance of an object.
 
  
-记录时间：2015-06-27 10:36:30,172   
+记录时间：2015-06-28 00:58:39,624   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-28 00:58:45,205   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-28 01:00:36,632   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-28 01:54:01,821   
  日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 10:36:29 AM】------------------
-【Source】：mscorlib
-【Message】：Bad Request
-【StackTrace】：Bad Request
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 1:54:01 AM】------------------
+【Source】：Web
+【Message】：Object reference not set to an instance of an object.
+【StackTrace】：Object reference not set to an instance of an object.
 
  
-记录时间：2015-06-27 10:48:52,242   
+记录时间：2015-06-28 01:56:36,182   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-28 01:57:12,299   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-28 01:57:35,538   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-28 01:57:36,675   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-28 01:57:39,354   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-28 10:41:03,047   
  日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 10:48:52 AM】------------------
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 10:41:02 AM】------------------
 【Source】：mscorlib
 【Message】：The request channel timed out while waiting for a reply after 00:01:00. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
 【StackTrace】：The request channel timed out while waiting for a reply after 00:01:00. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
 
  
-记录时间：2015-06-27 11:12:14,505   
+记录时间：2015-06-28 10:44:55,632   
  日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 11:12:14 AM】------------------
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 10:44:55 AM】------------------
 【Source】：mscorlib
-【Message】：The request channel timed out while waiting for a reply after 00:01:00. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
-【StackTrace】：The request channel timed out while waiting for a reply after 00:01:00. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
+【Message】：Bad Request
+【StackTrace】：Bad Request
 
  
-记录时间：2015-06-27 12:52:35,621   
+记录时间：2015-06-28 11:39:56,793   
  日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 12:52:35 PM】------------------
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 11:39:56 AM】------------------
+【Source】：mscorlib
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-28 11:41:20,388   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-28 11:43:15,389   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-28 11:52:31,498   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 11:52:31 AM】------------------
+【Source】：mscorlib
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-28 11:53:18,283   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-06-28 11:55:57,524   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 11:55:57 AM】------------------
+【Source】：mscorlib
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-28 11:58:36,925   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 11:58:36 AM】------------------
+【Source】：mscorlib
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-28 12:04:38,950   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 12:04:38 PM】------------------
+【Source】：mscorlib
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-06-28 12:26:30,081   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 12:26:29 PM】------------------
 【Source】：Web
 【Message】：Object reference not set to an instance of an object.
 【StackTrace】：Object reference not set to an instance of an object.
-
- 
-记录时间：2015-06-27 12:52:36,796   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-06-27 12:52:42,922   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-06-27 12:53:52,783   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-06-27 14:11:29,709   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 2:11:29 PM】------------------
-【Source】：mscorlib
-【Message】：The requested service, 'http://localhost/OrderManager.Service/UserService.svc' could not be activated. See the server's diagnostic trace logs for more information.
-【StackTrace】：The requested service, 'http://localhost/OrderManager.Service/UserService.svc' could not be activated. See the server's diagnostic trace logs for more information.
-
- 
-记录时间：2015-06-27 14:11:38,736   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-06-27 14:17:47,056   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 2:17:46 PM】------------------
-【Source】：mscorlib
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-27 14:18:10,953   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-06-27 14:18:33,902   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-06-27 14:20:32,299   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 2:20:32 PM】------------------
-【Source】：mscorlib
-【Message】：The request channel timed out while waiting for a reply after 00:00:59.9228904. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
-【StackTrace】：The request channel timed out while waiting for a reply after 00:00:59.9228904. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
-
- 
-记录时间：2015-06-27 14:21:25,275   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-06-27 14:42:40,093   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 2:42:39 PM】------------------
-【Source】：Web
-【Message】：Object reference not set to an instance of an object.
-【StackTrace】：Object reference not set to an instance of an object.
-
- 
-记录时间：2015-06-27 14:43:03,017   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 2:43:02 PM】------------------
-【Source】：Web
-【Message】：Object reference not set to an instance of an object.
-【StackTrace】：Object reference not set to an instance of an object.
-
- 
-记录时间：2015-06-27 14:50:34,859   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-06-27 15:12:42,124   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:12:42 PM】------------------
-【Source】：mscorlib
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-27 15:13:40,726   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-06-27 15:14:06,882   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-06-27 15:17:57,222   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:17:57 PM】------------------
-【Source】：mscorlib
-【Message】：The request channel timed out while waiting for a reply after 00:00:59.9859867. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
-【StackTrace】：The request channel timed out while waiting for a reply after 00:00:59.9859867. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
-
- 
-记录时间：2015-06-27 15:20:42,829   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:20:42 PM】------------------
-【Source】：mscorlib
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-27 15:23:52,217   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:23:52 PM】------------------
-【Source】：mscorlib
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-27 15:25:13,497   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:25:13 PM】------------------
-【Source】：mscorlib
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-27 15:26:04,177   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:26:04 PM】------------------
-【Source】：mscorlib
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-27 15:26:56,087   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:26:55 PM】------------------
-【Source】：mscorlib
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-27 15:28:18,980   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:28:18 PM】------------------
-【Source】：Web
-【Message】：Object reference not set to an instance of an object.
-【StackTrace】：Object reference not set to an instance of an object.
-
- 
-记录时间：2015-06-27 15:29:00,814   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-06-27 15:30:22,188   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:30:22 PM】------------------
-【Source】：mscorlib
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-27 15:32:14,998   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:32:14 PM】------------------
-【Source】：mscorlib
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-27 15:39:19,130   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:39:18 PM】------------------
-【Source】：mscorlib
-【Message】：The request channel timed out while waiting for a reply after 00:00:59.9849857. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
-【StackTrace】：The request channel timed out while waiting for a reply after 00:00:59.9849857. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
-
- 
-记录时间：2015-06-27 15:43:38,746   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/27/2015 3:43:38 PM】------------------
-【Source】：mscorlib
-【Message】：The request channel timed out while waiting for a reply after 00:00:59.9839921. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
-【StackTrace】：The request channel timed out while waiting for a reply after 00:00:59.9839921. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
 
  

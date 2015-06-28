@@ -67,8 +67,8 @@
                                         <td>@item.CardName</td>
                                         <td>@item.DocEntry</td>
                                         <td>@item.DocStatus</td>
-                                        <td>@item.DocDate.Value.ToShortDateString()</td>
-                                        <td>@item.DocDueDate.Value.ToShortDateString()</td>
+                                        <td>@(item.DocDate==null?"":item.DocDate.Value.ToShortDateString())</td>
+                                        <td>@(item.DocDueDate == null ? "" : item.DocDueDate.Value.ToShortDateString())</td>
                                         <td>@item.TPLCompany</td>
                                         <td>@item.TPLOrder</td>
                                         <td>@item.TPLContact</td>

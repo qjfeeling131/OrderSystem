@@ -22,14 +22,12 @@ namespace OrderManager.Manager
         #region Update Method
         bool UpdateProduct(OM_Product product);
 
-        bool UpdateSalesOrder(OM_Order saleOrder);
         bool UpdateSalesOrderItem(OM_OrderItem saleOrderItem);
         #endregion
 
         #region Update Method
         bool DeleteProduct(Expression<Func<OM_Product, bool>> product);
 
-        bool UpdateSalesOrder(Expression<Func<OM_Order, bool>> saleOrder);
         bool DeleteSalesOrderItem(Expression<Func<OM_OrderItem, bool>> saleOrderItem);
         #endregion
 
@@ -81,26 +79,19 @@ namespace OrderManager.Manager
         /// <returns></returns>
         List<OM_ProductPrice> GetCurrentProducePriceList(string itemCode, string userGuid);
 
-        /// <summary>
-        /// Save To SAP
-        /// </summary>
-        /// <param name="salesOrder"></param>
-        /// <returns></returns>
-        bool SaveForSAP(OM_SalesOrderDataObject salesOrder);
 
         /// <summary>
-        /// Update SalesOrderStatus
+        /// 提交状态
         /// </summary>
-        /// <param name="order"></param>
+        /// <param name="orderGuid"></param>
         /// <returns></returns>
-        bool UpdateSalesOrderStatus(OM_Order order);
-
+        bool UpdateSalesOrderStatusByCommit(string orderGuid);
         /// <summary>
-        /// Get CurrentUserByCardCode
+        /// 对接SAP状态
         /// </summary>
-        /// <param name="userGuid"></param>
+        /// <param name="orderGuid"></param>
         /// <returns></returns>
-        List<OM_User> GetCurrentUserByCardCode(string userGuid);
+        bool UpdateSalesOrderStatusByToSAP(string orderGuid);
         #endregion
 
     }

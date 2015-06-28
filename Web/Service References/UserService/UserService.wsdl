@@ -110,6 +110,18 @@
   <wsdl:message name="IUserService_GetProductList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetProductListResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_UpdateSalesOrderStatusByCommit_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSalesOrderStatusByCommit" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateSalesOrderStatusByCommit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSalesOrderStatusByCommitResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateSalesOrderStatusByToSAP_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSalesOrderStatusByToSAP" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateSalesOrderStatusByToSAP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSalesOrderStatusByToSAPResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUserService">
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Login" message="tns:IUserService_Login_InputMessage" />
@@ -178,6 +190,14 @@
     <wsdl:operation name="GetProductList">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetProductList" message="tns:IUserService_GetProductList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetProductListResponse" message="tns:IUserService_GetProductList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSalesOrderStatusByCommit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByCommit" message="tns:IUserService_UpdateSalesOrderStatusByCommit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByCommitResponse" message="tns:IUserService_UpdateSalesOrderStatusByCommit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSalesOrderStatusByToSAP">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAP" message="tns:IUserService_UpdateSalesOrderStatusByToSAP_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAPResponse" message="tns:IUserService_UpdateSalesOrderStatusByToSAP_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserService" type="tns:IUserService">
@@ -328,6 +348,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetProductList">
       <soap:operation soapAction="http://tempuri.org/IUserService/GetProductList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSalesOrderStatusByCommit">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdateSalesOrderStatusByCommit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSalesOrderStatusByToSAP">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAP" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

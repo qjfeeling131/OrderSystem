@@ -56,14 +56,7 @@ namespace OrderManager.Manager
             return false;
         }
 
-        public bool UpdateSalesOrder(OM_Order saleOrder)
-        {
-            if (DbRepository.Update(saleOrder) > 0)
-            {
-                return true;
-            }
-            return false;
-        }
+
         public bool UpdateSalesOrderItem(OM_OrderItem saleOrderItem)
         {
             if (DbRepository.Update(saleOrderItem) > 0)
@@ -84,14 +77,7 @@ namespace OrderManager.Manager
             return false;
         }
 
-        public bool UpdateSalesOrder(Expression<Func<OM_Order, bool>> saleOrder)
-        {
-            if (DbRepository.Delete(saleOrder) > 0)
-            {
-                return true;
-            }
-            return false;
-        }
+
         public bool DeleteSalesOrderItem(Expression<Func<OM_OrderItem, bool>> saleOrderItem)
         {
             if (DbRepository.Delete(saleOrderItem) > 0)
@@ -158,10 +144,11 @@ namespace OrderManager.Manager
 
             order.Guid = Guid.NewGuid().ToString();
             order.CardName = user.Name;
+            order.DocStatus = ((int)OM_DocStatusEnum.未提交).ToString();
 
             var salesOrderHead = DbRepository.Add(order);
             if (salesOrderHead <= 0)
-                throw new GenericException("保持草稿失败");
+                throw new GenericException("保存草稿失败");
 
 
             var orderResult = DbRepository.GetModel<OM_Order>(s => s.Guid == order.Guid);
@@ -189,25 +176,12 @@ namespace OrderManager.Manager
             var salesOrderLine = DbRepository.AddRange(items);
 
             if (salesOrderLine <= 0)
-                throw new GenericException("保持草稿失败");
+                throw new GenericException("保存草稿失败");
 
             return true;
         }
-        public bool SaveForSAP(OM_SalesOrderDataObject salesOrder)
-        {
-
-            return false;
-        }
 
 
-        public bool UpdateSalesOrderStatus(OM_Order order)
-        {
-            if (DbRepository.Update(order) == 0)
-            {
-                return true;
-            }
-            return false;
-        }
         /// <summary>
         /// 更新
         /// </summary>
@@ -215,13 +189,112 @@ namespace OrderManager.Manager
         /// <returns></returns>
         public bool UpdateSalesOrder(OM_SalesOrderDataObject salesOrder)
         {
-            OM_Order order = salesOrder.ToDTO();
+            OM_Order temp = salesOrder.ToDTO();
+
+            var order = DbRepository.GetModel<OM_Order>(s => s.Guid == salesOrder.Guid);
+            if (order == null)
+                throw new GenericException("订单号不存在，修改草稿失败");
+
+            var user = DbRepository.GetModel<OM_User>(s => s.Account.ToUpper() == salesOrder.CardCode.ToUpper() && s.IsDel == false);
+            if (user == null)
+                throw new GenericException("客户代码不存在，修改草稿失败");
+
+            order.CardCode = salesOrder.CardCode;
+            order.CardName = user.Name;
+            order.Remarks = salesOrder.Remarks;
+
             var salesOrderHead = DbRepository.Update(order);
-            var salesOrderLine = DbRepository.UpdateRange(salesOrder.SalesOrderLine);
-            if (salesOrderHead == 0 && salesOrderLine == 0)
+            if (salesOrderHead <= 0)
+                throw new GenericException("修改草稿失败");
+
+            List<OM_OrderItem> items = DbRepository.GetList<OM_OrderItem>(s => s.Order_Guid == salesOrder.Guid);
+            List<OM_OrderItem> removeItem = new List<OM_OrderItem>();
+            foreach (var item in salesOrder.SalesOrderLine)  //temp
+            {
+                foreach (var i in items)  //数据库
+                {
+                    if (string.IsNullOrWhiteSpace(item.Guid))
+                    {
+                        item.Guid = Guid.NewGuid().ToString();
+                        item.DocEntry = salesOrder.DocEntry;
+                        item.Order_Guid = salesOrder.Guid;
+                        DbRepository.Add(item);
+                    }
+                    else
+                    {  //不为空并且在数据库中找不到对应
+                        var exist = salesOrder.SalesOrderLine.Where(s => s.Guid == i.Guid);
+                        if ((exist == null || exist.Count() == 0) && !removeItem.Contains(i))
+                        {
+                            removeItem.Add(i);
+                        }
+                    }
+                    
+                    if (i.Guid == item.Guid)
+                    {
+                        i.ItemCode = item.ItemCode;
+                        i.ItemName = item.ItemName;
+                        i.Remarks = item.Remarks;
+                        i.Price = item.Price;
+                        i.Quantity = item.Quantity;
+                        i.TotalPrice = item.Price * item.Quantity;
+                    }
+                }
+            }
+
+            var salesOrderLine = DbRepository.UpdateRange(items);
+
+
+            foreach (var delItem in removeItem)
+            {
+                DbRepository.RealDelete<OM_OrderItem>(s => s.Guid == delItem.Guid);
+            }
+
+
+
+            if (salesOrderLine <= 0)
+                throw new GenericException("修改草稿失败");
+
+            return true;
+        }
+
+        public bool UpdateSalesOrderStatusByCommit(string orderGuid)
+        {
+            var salesOrder = this.GetSalesOrder(s => s.Guid == orderGuid);
+
+            if (salesOrder == null)
+            {
+                throw new GenericException("当前订单不存在,请检查数据");
+            }
+
+            salesOrder.DocStatus = ((int)OM_DocStatusEnum.已提交).ToString();
+            if (DbRepository.Update(salesOrder) > 0)
+            {
+                return true;
+
+            }
+
+            throw new GenericException("更新失败,请联系系统管理员");
+        }
+        public bool UpdateSalesOrderStatusByToSAP(string orderGuid)
+        {
+            var salesOrder = this.GetSalesOrder(s => s.Guid == orderGuid);
+            if (salesOrder == null)
+            {
+                throw new GenericException("当前订单不存在,请检查数据");
+            }
+
+            salesOrder.DocStatus = ((int)OM_DocStatusEnum.已对接).ToString();
+            if (DbRepository.Update(salesOrder) > 0)
             {
                 return true;
             }
+            //SaveForSAP();   //对接SAP实现
+            throw new GenericException("更新失败,请联系系统管理员");
+        }
+
+        private bool SaveForSAP(OM_SalesOrderDataObject salesOrder)
+        {
+
             return false;
         }
         /// <summary>
@@ -277,19 +350,9 @@ namespace OrderManager.Manager
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="userGuid"></param>
-        /// <returns></returns>
-        public List<OM_User> GetCurrentUserByCardCode(string userGuid)
-        {
-
-            List<OM_User> listUsers = userManager.GetCurrentUserByCardCode(userGuid);
-
-            return null;
-        }
 
         #endregion
+
+
     }
 }
