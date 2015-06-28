@@ -45,7 +45,7 @@ namespace OrderManager.Service
         IList<OM_Order> GetOrderList(string cipher, string userGuid);
 
         [OperationContract]
-        void SaveSalesOrder(string cipher, OM_SalesOrderDataObject obj);
+        string SaveSalesOrder(string cipher, OM_SalesOrderDataObject obj);
 
         [OperationContract]
         void UpdateSalesOrder(string cipher, OM_SalesOrderDataObject obj);

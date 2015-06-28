@@ -166,17 +166,45 @@ namespace OrderManager.Service
             return result;
         }
 
-        public void SaveSalesOrder(string cipher, OM_SalesOrderDataObject obj)
+        public string SaveSalesOrder(string cipher, OM_SalesOrderDataObject obj)
         {
             var result = OrderManger.SaveSalesOrder(obj);
             if (!result)
                 throw new GenericException("保存草稿失败。");
+
+            var user = UserManager.GetUser(s => s.Guid == cipher);
+            var order = OrderManger.GetSalesOrder(s => s.Guid == obj.Guid);
+            var log = new OM_Log
+            {
+                CreateDatetime = DateTime.Now,
+                Doc_View = "Order/UpdateStatus",
+                Guid = Guid.NewGuid().ToString(),
+                Operation = "保存草稿",
+                User_Guid = user.Guid,
+                Message = string.Format("用户[{0}] : '{1}' 保存草稿【{2}】.", user.Name, DateTime.Now, order.DocEntry)
+            };
+            LogManager.WriteLog(log);
+            return order.Guid;
         }
 
 
         public void UpdateSalesOrder(string cipher, OM_SalesOrderDataObject obj)
         {
             OrderManger.UpdateSalesOrder(obj);
+
+            var user = UserManager.GetUser(s => s.Guid == cipher);
+            var order = OrderManger.GetSalesOrder(s => s.Guid == obj.Guid);
+            var log = new OM_Log
+            {
+                CreateDatetime = DateTime.Now,
+                Doc_View = "Order/UpdateStatus",
+                Guid = Guid.NewGuid().ToString(),
+                Operation = "修改草稿",
+                User_Guid = user.Guid,
+                Message = string.Format("用户[{0}] : '{1}' 修改草稿【{2}】.", user.Name, DateTime.Now, order.DocEntry)
+            };
+            LogManager.WriteLog(log);
+
         }
 
         public OM_SalesOrderDataObject GetSalesOrderAndDetail(string cipher, string salesOrder_Guid)
@@ -212,12 +240,39 @@ namespace OrderManager.Service
         public void UpdateSalesOrderStatusByCommit(string cipher, string orderGuid)
         {
             OrderManger.UpdateSalesOrderStatusByCommit(orderGuid);
+
+            var user = UserManager.GetUser(s => s.Guid == cipher);
+            var order = OrderManger.GetSalesOrder(s => s.Guid == orderGuid);
+            var log = new OM_Log
+            {
+                CreateDatetime = DateTime.Now,
+                Doc_View = "Order/UpdateStatus",
+                Guid = Guid.NewGuid().ToString(),
+                Operation = "提交订单",
+                User_Guid = user.Guid,
+                Message = string.Format("用户[{0}] : '{1}' 提交订单【{2}】.", user.Name, DateTime.Now, order.DocEntry)
+            };
+            LogManager.WriteLog(log);
+
         }
 
 
         public void UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid)
         {
             OrderManger.UpdateSalesOrderStatusByToSAP(orderGuid);
+
+            var user = UserManager.GetUser(s => s.Guid == cipher);
+             var order =OrderManger.GetSalesOrder(s=>s.Guid==orderGuid);
+            var log = new OM_Log
+            {
+                CreateDatetime = DateTime.Now,
+                Doc_View = "Order/UpdateStatus",
+                Guid = Guid.NewGuid().ToString(),
+                Operation = "对接订单到SAP",
+                User_Guid = user.Guid,
+                Message = string.Format("用户[{0}] : '{1}' 对接订单【{2}】到SAP.", user.Name, DateTime.Now, order.DocEntry)
+            };
+            LogManager.WriteLog(log);
         }
 
         #endregion

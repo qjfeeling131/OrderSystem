@@ -122,11 +122,10 @@ namespace OrderManager.Web
             }
             else
             {
-
-                UserService.SaveSalesOrder(Cipher, orderDetail);  // return order guid
+                orderDetail.Guid = UserService.SaveSalesOrder(Cipher, orderDetail);  // return order guid
             }
 
-            return Json(new JsonModel { Data="Order_Guid"});
+            return Json(new JsonModel { Data = orderDetail.Guid });
 
         }
 

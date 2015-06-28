@@ -183,7 +183,7 @@
                     alertInfo("提示", "当前处于编辑状态");
                     return;
                 }
-                if ($("#status").val() != "未提交" || $("#status").val() != "") {
+                if ($("#status").val() != "未提交") {
                     alertInfo("提示", "当前状态不允许此操作");
                     return;
                 }
@@ -191,6 +191,7 @@
                 $(this).addClass("disabled");
                 getAsynData("saveDraft", "obj=" + data, function (json) {
                     $("#status").val("未提交");
+                    $("#OrderGuid").val(json.Data);
                     alertInfo("提示", "保持草稿成功");
                 });
             });

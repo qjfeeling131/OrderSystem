@@ -76,10 +76,10 @@ namespace Web.UserService {
         System.Threading.Tasks.Task<System.Collections.Generic.List<OrderManager.Model.Models.OM_Order>> GetOrderListAsync(string cipher, string userGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/SaveSalesOrder", ReplyAction="http://tempuri.org/IUserService/SaveSalesOrderResponse")]
-        void SaveSalesOrder(string cipher, OrderManager.Model.DTO.OM_SalesOrderDataObject obj);
+        string SaveSalesOrder(string cipher, OrderManager.Model.DTO.OM_SalesOrderDataObject obj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/SaveSalesOrder", ReplyAction="http://tempuri.org/IUserService/SaveSalesOrderResponse")]
-        System.Threading.Tasks.Task SaveSalesOrderAsync(string cipher, OrderManager.Model.DTO.OM_SalesOrderDataObject obj);
+        System.Threading.Tasks.Task<string> SaveSalesOrderAsync(string cipher, OrderManager.Model.DTO.OM_SalesOrderDataObject obj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateSalesOrder", ReplyAction="http://tempuri.org/IUserService/UpdateSalesOrderResponse")]
         void UpdateSalesOrder(string cipher, OrderManager.Model.DTO.OM_SalesOrderDataObject obj);
@@ -237,11 +237,11 @@ namespace Web.UserService {
             return base.Channel.GetOrderListAsync(cipher, userGuid);
         }
         
-        public void SaveSalesOrder(string cipher, OrderManager.Model.DTO.OM_SalesOrderDataObject obj) {
-            base.Channel.SaveSalesOrder(cipher, obj);
+        public string SaveSalesOrder(string cipher, OrderManager.Model.DTO.OM_SalesOrderDataObject obj) {
+            return base.Channel.SaveSalesOrder(cipher, obj);
         }
         
-        public System.Threading.Tasks.Task SaveSalesOrderAsync(string cipher, OrderManager.Model.DTO.OM_SalesOrderDataObject obj) {
+        public System.Threading.Tasks.Task<string> SaveSalesOrderAsync(string cipher, OrderManager.Model.DTO.OM_SalesOrderDataObject obj) {
             return base.Channel.SaveSalesOrderAsync(cipher, obj);
         }
         
