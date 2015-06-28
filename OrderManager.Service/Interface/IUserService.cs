@@ -63,12 +63,13 @@ namespace OrderManager.Service
         List<OM_User> GetCurrentUserByCardCode(string cipher, string userGuid);
 
         [OperationContract]
-        IList<OM_Product> GetProductList(string cipher);
-
+        IList<OM_Product> GetProductList(string cipher, string searchKey, int pageIndex);
+        [OperationContract]
+        int GetProductListCount(string cipher, string searchKey);
 
 
         [OperationContract]
-        void UpdateSalesOrderStatusByCommit(string cipher,string orderGuid);
+        void UpdateSalesOrderStatusByCommit(string cipher, string orderGuid);
 
         [OperationContract]
         void UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid);

@@ -51,7 +51,7 @@ namespace OrderManager.Web
         public ViewResult OrderItem(string orderItemGuid)
         {
             var detail = UserService.GetSalesOrderAndDetail(Cipher, orderItemGuid);
-             var status = Enum.Parse(typeof(OM_DocStatusEnum), detail.DocStatus);
+            var status = Enum.Parse(typeof(OM_DocStatusEnum), detail.DocStatus);
 
             ViewBag.Status = status;
 
@@ -68,36 +68,54 @@ namespace OrderManager.Web
         public ViewResult UserCodeList()
         {
 
-            var list = UserService.GetCurrentUserList(Cipher, CurrentUser.User.Guid);
-            for (var i = 0; i < 10; i++)
-            {
-                list.AddRange(list);
-            }
-            // post  get 分页数据
-            return View("~/views/order/UserCodeList.cshtml", list.Take(10));
+            var list = UserService.GetCurrentUserByCardCode(Cipher, CurrentUser.User.Guid);
+
+            ViewBag.PageSize = 10;
+            ViewBag.PageIndex = 0;
+            ViewBag.TotalPages = Math.Ceiling(Convert.ToDouble(list.Count) / Convert.ToDouble(10));
+            var result = list.Skip(Convert.ToInt32(0)).Take(10).ToList();
+
+            return View("~/views/order/UserCodeList.cshtml", result);
 
         }
 
         [HttpPost]
-        public JsonResult UserCodeList(int? pageindex)
+        public JsonResult UserCodeList(string key, int? pageindex)
         {
+            var list = UserService.GetCurrentUserByCardCode(Cipher, CurrentUser.User.Guid);
 
-            return Json(new JsonModel { });
+
+            if (!string.IsNullOrWhiteSpace(key))
+            {
+                list = list.Where(s => s.Name.Contains(key) || s.Account.Contains(key.ToUpper())).ToList();
+                ViewBag.Key = key;
+            }
+
+              var result = list.Skip(Convert.ToInt32(pageindex)).Take(10).ToList();
+              return Json(new JsonModel { Data = result });
         }
 
 
 
         public ViewResult ProductList()
         {
-            var list = UserService.GetProductList(Cipher);
+            var list = UserService.GetProductList(Cipher, "", 0);
+            var count = UserService.GetProductListCount(Cipher, "");
+
+            ViewBag.PageSize = 10;
+            ViewBag.PageIndex = 0;
+            ViewBag.TotalPages = Math.Ceiling(Convert.ToDouble(count) / Convert.ToDouble(10));
             return View("~/views/order/ProductList.cshtml", list);
 
         }
 
         [HttpPost]
-        public JsonResult ProductList(int? pageindex)
+        public JsonResult ProductList(string key, int? pageindex)
         {
-            return Json(new JsonModel { });
+            var list = UserService.GetProductList(Cipher, key, (int)pageindex);
+            var count = UserService.GetProductListCount(Cipher, key);
+
+            return Json(new JsonModel { Data = list });
         }
 
 
@@ -134,14 +152,14 @@ namespace OrderManager.Web
         public JsonResult SubmitOrder(string orderGuid)
         {
             UserService.UpdateSalesOrderStatusByCommit(Cipher, orderGuid);
-            return Json(new JsonModel { Data="已提交" });
+            return Json(new JsonModel { Data = "已提交" });
         }
 
         [HttpPost]
         public JsonResult SubmitOrder2SAp(string orderGuid)
         {
             UserService.UpdateSalesOrderStatusByToSAP(Cipher, orderGuid);
-            return Json(new JsonModel { Data="已对接"});
+            return Json(new JsonModel { Data = "已对接" });
         }
 
     }

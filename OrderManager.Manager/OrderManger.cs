@@ -124,9 +124,10 @@ namespace OrderManager.Manager
 
         #region Function
 
-        public IList<OM_Product> GetProductList(Expression<Func<OM_Product, bool>> fuc)
+        public IList<OM_Product> GetProductList<Tkey>(PageListParameter<OM_Product,Tkey> parameter ,out int count)
         {
-            return DbRepository.GetList(fuc);
+            //return DbRepository.GetList(fuc);
+            return DbRepository.GetPagedList(parameter, out count);
 
         }
         /// <summary>

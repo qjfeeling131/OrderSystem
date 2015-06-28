@@ -21,8 +21,7 @@ namespace OrderManager.Web
 {
     public class LogController : BaseController
     {
-        //日记
-
+        //日记  Randy want to modify
         public ViewResult Index(string key, int? pageIndex = 0, int? pageSize = 10)
         {
             string userId = CurrentUser.User.Guid;

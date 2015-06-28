@@ -8,78 +8,80 @@
 }
 
 @section Message{
-
-    <div class="box-body" >
-    <div class="dataTables_wrapper form-inline dt-bootstrap">
-        <div class="row">
-            <div class="col-sm-6"></div><div class="col-sm-6"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <table class="table table-bordered table-hover dataTable" role="grid" id="userlistCode_table">
-                    <thead>
-                        <tr role="row">
-                            <th tabindex="0">客户代码</th>
-                            <th tabindex="0">用户名</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr role="row">
-                                <td>@item.Account</td>
-                                <td>@item.Name</td>
-                            </tr>
-                        }
-                    </tbody>
-
-                </table>
-
+    <div class="box-header">
+        <div class="input-group">
+            <input type="text" name="key" id="searchKey" class="form-control input-sm pull-right" style="width: 150px;" placeholder="搜索客户" value="@ViewBag.Key ">
+            <div class="input-group-btn">
+                <button class="btn btn-sm btn-default" id="search"><i class="glyphicon glyphicon-search"></i></button>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-sm-5"><div class="dataTables_info">当前第 @(ViewBag.PageIndex + 1) 页（共 @ViewBag.TotalPages 页）</div></div>
-            @if (ViewBag.TotalPages != null && ViewBag.TotalPages > 1)
-            {
-                <div class="col-sm-7">
-                    <div class="dataTables_paginate" id="paginate">
-                        <ul class="pagination">
-
-                            @{
-                var currentPage = (int)ViewBag.PageIndex + 1;
-                var beginIndex = 1;
-                if (currentPage < 4)
-                { beginIndex = 1; }
-                else if (currentPage >= (ViewBag.TotalPages - 4))
-                { beginIndex = (int)ViewBag.TotalPages - 4; }
-                else
-                { beginIndex = currentPage - 2; }
-                var count = ViewBag.TotalPages < (beginIndex + 4) ? ViewBag.TotalPages : (beginIndex + 4);
-                            }
-
-                            <li class="paginate_button  @(ViewBag.PageIndex==0?"disabled":"") ">
-                                <a href="@(ViewBag.PageIndex == 0 ? "#" : Url.Content("~/order/index?key=" + ViewBag.Key + "&&pageIndex=" + (currentPage - 2)))">上一页</a>
-                            </li>
-
-                            @for (int i = beginIndex; i <= count; i++)
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        <div class="dataTables_wrapper form-inline dt-bootstrap">
+            <div class="row">
+                <div class="col-sm-6"></div><div class="col-sm-6"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered table-hover dataTable" role="grid" id="userlistCode_table">
+                        <thead>
+                            <tr role="row">
+                                <th tabindex="0">客户代码</th>
+                                <th tabindex="0">用户名</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
                             {
-                                <li class="paginate_button @(i == currentPage ? "active" : "") ">
-                                    <a href="@Url.Content("~/order/index?key=" + ViewBag.Key + "&&pageIndex=" + (i - 1))">@i</a>
-                                </li>
+                                <tr role="row">
+                                    <td>@item.Account</td>
+                                    <td>@item.Name</td>
+                                </tr>
                             }
+                        </tbody>
 
-                            <li class="paginate_button @(ViewBag.TotalPages == (ViewBag.PageIndex+1) ? "disabled" : "") ">
-                                <a href="@(ViewBag.TotalPages == (ViewBag.PageIndex + 1) ? "#" : Url.Content("~/order/index?key=" + ViewBag.Key + "&&pageIndex=" + currentPage))">下一页</a>
-                            </li>
-                        </ul>
-                    </div>
+                    </table>
+
                 </div>
-            }
-        </div>
+            </div>
 
+            <div class="row">
+                <div class="col-sm-5"><div class="dataTables_info">当前第 @(ViewBag.PageIndex + 1) 页（共 @ViewBag.TotalPages 页）</div></div>
+                @if (ViewBag.TotalPages != null && ViewBag.TotalPages > 1)
+                {
+                    <div class="col-sm-7">
+                        <div class="dataTables_paginate" id="paginate">
+                            <ul class="pagination">
+
+                                @{
+                    var currentPage = (int)ViewBag.PageIndex + 1;
+                    var beginIndex = 1;
+                    if (currentPage < 4)
+                    { beginIndex = 1; }
+                    else if (currentPage >= (ViewBag.TotalPages - 4))
+                    { beginIndex = (int)ViewBag.TotalPages - 4; }
+                    else
+                    { beginIndex = currentPage - 2; }
+                    var count = ViewBag.TotalPages < (beginIndex + 4) ? ViewBag.TotalPages : (beginIndex + 4);
+                                }
+
+                                <li class="paginate_button " id="prePage">
+                                    <a href="#">上一页</a>
+                                </li>
+
+                                <li class="paginate_button " id="nextPage">
+                                    <a href="#">下一页</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+            </div>
+
+
+
+        </div>
     </div>
-</div>
 
 
 
@@ -91,38 +93,98 @@
     <button type="button" class="btn btn-primary" data-dismiss="modal" id="comfirm_code">确定</button>
     <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel_code">取消</button>
     <script>
+        var usercode;
+        var cardname;
+        var currentPage;
         $(function () {
             //tr click
             $("#userlistCode_table tr").each(function () {
-                var usercode;
-                var cardname;
-                $(this).click(function () {
-            
-                    if (usercode == $(this).children('td').html()) {
-                        $(this).css("background", "");
-                    }
-                    usercode = $(this).children('td').first().html();
-                    cardname= $(this).children('td').last().html();
-                    $(this).css("background", "#f4f4f4");
-                    $(this).siblings("tr").css("background", "");
-                    $("#UserCode").val(usercode);
-                    $("#CardName").val(cardname);
 
-                }).dblclick(function () {
-                    usercode = $(this).children('td').html();
-                    $("#UserCode").val(usercode);
-                    $("#CardName").val(cardname);
-                    $("#comfirm_code").click();
-                });
+                userCodeListTrEvent($(this));
+                currentPage = parseInt('@ViewBag.PageIndex');
             });
             //取消
             $("#cancel_code").click(function () { $("#UserCode").val(''); $("#CardName").val(''); });
 
+            $("#search").click(function () {
+                getdata(0);
+            });
+
+            $("#prePage").click(function () {
+                var pre = currentPage - 1;
+                if (pre < 0) { return; }
+                getdata(pre);
+                currentPage = pre;
+            });
+
+            $("#nextPage").click(function () {
+                var next = currentPage + 1;
+                if (next > parseInt('@ViewBag.TotalPages')) { return; }
+                getdata(next);
+                currentPage = next;
+            });
+        })
+
+        function getdata(pageIndex) {
+            var key = "key=" + $("#searchKey").val();
+            var pageindex = "pageIndex=" + pageIndex;
+            getAsynData("usercodelist", key + "&" + pageindex, function (json) {
+                clearTableTr();
+
+                addProductRow(json.Data);
+            });
+        }
+
+        function addProductRow(data) {
+            var row = "  <tr role='row'>没有找到匹配数据</tr>";
+            if (data.length == 0) {
+                $("#userlistCode_table tbody").append(row);
+            } else {
+
+                for (var i = 0; i < data.length; i++) {
+                    row = "<tr role='row'>";
+                    row += "<td>" + data[i].Account + "</td><td>" + data[i].Name + "</td>";
+                    row += "</tr>";
+                    $("#userlistCode_table tbody").append(row);
+                }
+
+            }
+
+            $("#userlistCode_table tbody tr").each(function () {
+               userCodeListTrEvent($(this));
+            });
+        }
+
+        function clearTableTr() {
+            $("#userlistCode_table tbody tr").each(function () {
+                $(this).remove();
+            })
+        }
+
+        function userCodeListTrEvent(tr) {
+            $(tr).click(function () {
+
+                if (usercode == $(this).children('td').html()) {
+                    $(this).css("background", "");
+                }
+                usercode = $(this).children('td').first().html();
+                cardname = $(this).children('td').last().html();
+                $(this).css("background", "#f4f4f4");
+                $(this).siblings("tr").css("background", "");
+                $("#UserCode").val(usercode);
+                $("#CardName").val(cardname);
+
+            }).dblclick(function () {
+                usercode = $(this).children('td').html();
+                $("#UserCode").val(usercode);
+                $("#CardName").val(cardname);
+                $("#comfirm_code").click();
+            });
+
+        }
 
 
 
-    })
-
-   </script>
+    </script>
 }
 

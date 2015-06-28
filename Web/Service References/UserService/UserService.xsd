@@ -244,6 +244,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="searchKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -251,6 +253,21 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetProductListResult" nillable="true" type="q15:ArrayOfOM_Product" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductListCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="searchKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductListCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetProductListCountResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

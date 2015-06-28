@@ -110,6 +110,12 @@
   <wsdl:message name="IUserService_GetProductList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetProductListResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_GetProductListCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductListCount" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetProductListCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductListCountResponse" />
+  </wsdl:message>
   <wsdl:message name="IUserService_UpdateSalesOrderStatusByCommit_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateSalesOrderStatusByCommit" />
   </wsdl:message>
@@ -190,6 +196,10 @@
     <wsdl:operation name="GetProductList">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetProductList" message="tns:IUserService_GetProductList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetProductListResponse" message="tns:IUserService_GetProductList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductListCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetProductListCount" message="tns:IUserService_GetProductListCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetProductListCountResponse" message="tns:IUserService_GetProductListCount_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateSalesOrderStatusByCommit">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByCommit" message="tns:IUserService_UpdateSalesOrderStatusByCommit_InputMessage" />
@@ -348,6 +358,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetProductList">
       <soap:operation soapAction="http://tempuri.org/IUserService/GetProductList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductListCount">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetProductListCount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -22,28 +22,28 @@ namespace OrderManager.Service
     public class UserService : IUserService
     {
         [Dependency]
-        public IUserManager UserManager { get; set; }
+        public IUserManager userManager { get; set; }
 
         [Dependency]
-        public ILogManager LogManager { get; set; }
+        public ILogManager logManager { get; set; }
 
         [Dependency]
-        public IOrderManger OrderManger { get; set; }
+        public IOrderManger orderManger { get; set; }
 
 
         public OM_UserDetail Login(string userAccount, string password)
         {
-            var result = UserManager.Login(userAccount, password);
+            var result = userManager.Login(userAccount, password);
             if (result == false)
                 throw new GenericException("账户或密码错误，请再次检查输入", OM_ExceptionCodeEnum.LOGIN.ToString());
 
-            var user = UserManager.GetUser(f => f.Account == userAccount && f.Pwd == password);
+            var user = userManager.GetUser(f => f.Account == userAccount && f.Pwd == password);
 
             user.UpdateDatetime = DateTime.Now;
             user.Key = Encryptor.MD5Encrypt(user.ID + user.Account + user.Pwd + user.CreateDatetime + user.Area_Guid + user.UpdateDatetime);
-            UserManager.UpdateUer(user);
+            userManager.UpdateUer(user);
 
-            var re = UserManager.GetUserDetail(user.Guid);
+            var re = userManager.GetUserDetail(user.Guid);
 
             var log = new OM_Log
             {
@@ -54,30 +54,30 @@ namespace OrderManager.Service
                 User_Guid = user.Guid,
                 Message = string.Format("用户[{0}] : '{1}' 登陆了系统.", user.Name, DateTime.Now)
             };
-            LogManager.WriteLog(log);
+            logManager.WriteLog(log);
 
             return re;
         }
 
         public List<OM_User> GetCurrentUserList(string cipher, string userGuid)
         {
-            var result = UserManager.GetAreaRoles(userGuid);
+            var result = userManager.GetAreaRoles(userGuid);
 
             return result;
         }
 
         public List<OM_LogDataObject> GetCurrentUserLogs(string cipher, string userId)
         {
-            return UserManager.GetCurrentUserLogs(userId);
+            return userManager.GetCurrentUserLogs(userId);
         }
 
         public void ResetPassword(string cipher, string userGuid, string newPwd)
         {
-            var result = UserManager.ResetPassword(userGuid, newPwd);
+            var result = userManager.ResetPassword(userGuid, newPwd);
             if (result == false)
                 throw new GenericException("重设用户密码失败");
 
-            var user = UserManager.GetUser(s => s.Guid == userGuid);
+            var user = userManager.GetUser(s => s.Guid == userGuid);
             var log = new OM_Log
             {
                 CreateDatetime = DateTime.Now,
@@ -87,16 +87,16 @@ namespace OrderManager.Service
                 User_Guid = cipher,
                 Message = string.Format("'{0}' 重设用户 [{1}] 密码.", DateTime.Now, user.Name)
             };
-            LogManager.WriteLog(log);
+            logManager.WriteLog(log);
         }
 
         public void UpdatePassword(string cipher, string userGuid, string oldPwd, string newPwd)
         {
-            var result = UserManager.UpdatePassword(userGuid, oldPwd, newPwd);
+            var result = userManager.UpdatePassword(userGuid, oldPwd, newPwd);
             if (result == false)
                 throw new GenericException("更新用户密码失败");
 
-            var user = UserManager.GetUser(s => s.Guid == userGuid);
+            var user = userManager.GetUser(s => s.Guid == userGuid);
             var log = new OM_Log
             {
                 CreateDatetime = DateTime.Now,
@@ -106,13 +106,13 @@ namespace OrderManager.Service
                 User_Guid = cipher,
                 Message = string.Format("用户[{0}] : '{1}' 修改了密码.", user.Name, DateTime.Now)
             };
-            LogManager.WriteLog(log);
+            logManager.WriteLog(log);
 
         }
 
         public OM_User GetUser(string cipher, string userGuid)
         {
-            var user = UserManager.GetUser(a => a.Guid == userGuid);
+            var user = userManager.GetUser(a => a.Guid == userGuid);
             if (user == null)
                 throw new GenericException("用户不存在");
             return user;
@@ -121,16 +121,16 @@ namespace OrderManager.Service
 
         public List<OM_MessageBoard> GetCurrentUserMessageBoard(string cipher, string userId)
         {
-            return UserManager.GetCurrentUserMessageBoard(userId);
+            return userManager.GetCurrentUserMessageBoard(userId);
         }
 
 
         public bool SaveMessageBoard(string cipher, OM_MessageBoard msgBoard)
         {
-            var result = UserManager.SaveMessageBoard(msgBoard);
+            var result = userManager.SaveMessageBoard(msgBoard);
             if (result)
             {
-                var user = UserManager.GetUser(s => s.Guid == cipher);
+                var user = userManager.GetUser(s => s.Guid == cipher);
                 var log = new OM_Log
                 {
                     CreateDatetime = DateTime.Now,
@@ -140,14 +140,14 @@ namespace OrderManager.Service
                     User_Guid = cipher,
                     Message = string.Format("用户[{0}] : '{1}' 留了一条信息.", user.Name, DateTime.Now)
                 };
-                LogManager.WriteLog(log);
+                logManager.WriteLog(log);
             }
             return result;
         }
 
         public OM_MessageBoard GetMessageBoardModel(string cipher, string guid)
         {
-            return UserManager.GetMessageBoard(m => m.Guid == guid);
+            return userManager.GetMessageBoard(m => m.Guid == guid);
         }
 
         #region Order
@@ -155,7 +155,7 @@ namespace OrderManager.Service
         public IList<OM_Order> GetOrderList(string cipher, string userGuid)
         {
             int count = 0;
-            var result = OrderManger.GetSalesOrderList(new PageListParameter<OM_Order, int>
+            var result = orderManger.GetSalesOrderList(new PageListParameter<OM_Order, int>
             {
                 isAsc = true,
                 orderByLambda = s => s.DocEntry,
@@ -168,12 +168,12 @@ namespace OrderManager.Service
 
         public string SaveSalesOrder(string cipher, OM_SalesOrderDataObject obj)
         {
-            var result = OrderManger.SaveSalesOrder(obj);
+            var result = orderManger.SaveSalesOrder(obj);
             if (!result)
                 throw new GenericException("保存草稿失败。");
 
-            var user = UserManager.GetUser(s => s.Guid == cipher);
-            var order = OrderManger.GetSalesOrder(s => s.Guid == obj.Guid);
+            var user = userManager.GetUser(s => s.Guid == cipher);
+            var order = orderManger.GetSalesOrder(s => s.Guid == obj.Guid);
             var log = new OM_Log
             {
                 CreateDatetime = DateTime.Now,
@@ -183,17 +183,17 @@ namespace OrderManager.Service
                 User_Guid = user.Guid,
                 Message = string.Format("用户[{0}] : '{1}' 保存草稿【{2}】.", user.Name, DateTime.Now, order.DocEntry)
             };
-            LogManager.WriteLog(log);
+            logManager.WriteLog(log);
             return order.Guid;
         }
 
 
         public void UpdateSalesOrder(string cipher, OM_SalesOrderDataObject obj)
         {
-            OrderManger.UpdateSalesOrder(obj);
+            orderManger.UpdateSalesOrder(obj);
 
-            var user = UserManager.GetUser(s => s.Guid == cipher);
-            var order = OrderManger.GetSalesOrder(s => s.Guid == obj.Guid);
+            var user = userManager.GetUser(s => s.Guid == cipher);
+            var order = orderManger.GetSalesOrder(s => s.Guid == obj.Guid);
             var log = new OM_Log
             {
                 CreateDatetime = DateTime.Now,
@@ -203,46 +203,66 @@ namespace OrderManager.Service
                 User_Guid = user.Guid,
                 Message = string.Format("用户[{0}] : '{1}' 修改草稿【{2}】.", user.Name, DateTime.Now, order.DocEntry)
             };
-            LogManager.WriteLog(log);
+            logManager.WriteLog(log);
 
         }
 
         public OM_SalesOrderDataObject GetSalesOrderAndDetail(string cipher, string salesOrder_Guid)
         {
-            return OrderManger.GetSalesOrderAndDetail(salesOrder_Guid);
+            return orderManger.GetSalesOrderAndDetail(salesOrder_Guid);
         }
 
 
         public List<OM_Order> GetCurrentSalesOrderList(string cipher, string userGuid)
         {
-            return OrderManger.GetCurrentSalesOrderList(userGuid);
+            return orderManger.GetCurrentSalesOrderList(userGuid);
         }
 
 
         public List<OM_ProductPrice> GetCurrentProducePriceList(string cipher, string itemCode, string userGuid)
         {
-            return OrderManger.GetCurrentProducePriceList(itemCode, userGuid);
+            return orderManger.GetCurrentProducePriceList(itemCode, userGuid);
         }
 
 
         public List<OM_User> GetCurrentUserByCardCode(string cipher, string userGuid)
         {
-            return UserManager.GetCurrentUserByCardCode( userGuid);
+            return userManager.GetCurrentUserByCardCode(userGuid);
         }
 
 
-        public IList<OM_Product> GetProductList(string cipher)
+        public IList<OM_Product> GetProductList(string cipher, string searchKey, int pageIndex)
         {
-            return OrderManger.GetProductList(s=>s.IsDel==false);
+            int count = 0;
+            PageListParameter<OM_Product, string> parameter = new PageListParameter<OM_Product, string>();
+            parameter.whereLambda = s => s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey) ;
+            parameter.pageIndex = pageIndex;
+            parameter.orderByLambda = s => s.ItemCode;
+            parameter.pageSize = 10;
+
+            return orderManger.GetProductList(parameter, out count);
+
+        }
+
+
+        public int GetProductListCount(string cipher, string searchKey)
+        {
+            int count = 0;
+            PageListParameter<OM_Product, string> parameter = new PageListParameter<OM_Product, string>();
+            parameter.whereLambda = s => s.ItemCode.Contains(searchKey) || s.ItemName.Contains(searchKey);
+            parameter.orderByLambda = s => s.ItemCode;
+            orderManger.GetProductList(parameter, out count);
+
+            return count;
         }
 
 
         public void UpdateSalesOrderStatusByCommit(string cipher, string orderGuid)
         {
-            OrderManger.UpdateSalesOrderStatusByCommit(orderGuid);
+            orderManger.UpdateSalesOrderStatusByCommit(orderGuid);
 
-            var user = UserManager.GetUser(s => s.Guid == cipher);
-            var order = OrderManger.GetSalesOrder(s => s.Guid == orderGuid);
+            var user = userManager.GetUser(s => s.Guid == cipher);
+            var order = orderManger.GetSalesOrder(s => s.Guid == orderGuid);
             var log = new OM_Log
             {
                 CreateDatetime = DateTime.Now,
@@ -252,17 +272,17 @@ namespace OrderManager.Service
                 User_Guid = user.Guid,
                 Message = string.Format("用户[{0}] : '{1}' 提交订单【{2}】.", user.Name, DateTime.Now, order.DocEntry)
             };
-            LogManager.WriteLog(log);
+            logManager.WriteLog(log);
 
         }
 
 
         public void UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid)
         {
-            OrderManger.UpdateSalesOrderStatusByToSAP(orderGuid);
+            orderManger.UpdateSalesOrderStatusByToSAP(orderGuid);
 
-            var user = UserManager.GetUser(s => s.Guid == cipher);
-             var order =OrderManger.GetSalesOrder(s=>s.Guid==orderGuid);
+            var user = userManager.GetUser(s => s.Guid == cipher);
+            var order = orderManger.GetSalesOrder(s => s.Guid == orderGuid);
             var log = new OM_Log
             {
                 CreateDatetime = DateTime.Now,
@@ -272,7 +292,7 @@ namespace OrderManager.Service
                 User_Guid = user.Guid,
                 Message = string.Format("用户[{0}] : '{1}' 对接订单【{2}】到SAP.", user.Name, DateTime.Now, order.DocEntry)
             };
-            LogManager.WriteLog(log);
+            logManager.WriteLog(log);
         }
 
         #endregion

@@ -112,10 +112,16 @@ namespace Web.UserService {
         System.Threading.Tasks.Task<System.Collections.Generic.List<OrderManager.Model.Models.OM_User>> GetCurrentUserByCardCodeAsync(string cipher, string userGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetProductList", ReplyAction="http://tempuri.org/IUserService/GetProductListResponse")]
-        System.Collections.Generic.List<OrderManager.Model.Models.OM_Product> GetProductList(string cipher);
+        System.Collections.Generic.List<OrderManager.Model.Models.OM_Product> GetProductList(string cipher, string searchKey, int pageIndex);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetProductList", ReplyAction="http://tempuri.org/IUserService/GetProductListResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<OrderManager.Model.Models.OM_Product>> GetProductListAsync(string cipher);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<OrderManager.Model.Models.OM_Product>> GetProductListAsync(string cipher, string searchKey, int pageIndex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetProductListCount", ReplyAction="http://tempuri.org/IUserService/GetProductListCountResponse")]
+        int GetProductListCount(string cipher, string searchKey);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetProductListCount", ReplyAction="http://tempuri.org/IUserService/GetProductListCountResponse")]
+        System.Threading.Tasks.Task<int> GetProductListCountAsync(string cipher, string searchKey);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByCommit", ReplyAction="http://tempuri.org/IUserService/UpdateSalesOrderStatusByCommitResponse")]
         void UpdateSalesOrderStatusByCommit(string cipher, string orderGuid);
@@ -285,12 +291,20 @@ namespace Web.UserService {
             return base.Channel.GetCurrentUserByCardCodeAsync(cipher, userGuid);
         }
         
-        public System.Collections.Generic.List<OrderManager.Model.Models.OM_Product> GetProductList(string cipher) {
-            return base.Channel.GetProductList(cipher);
+        public System.Collections.Generic.List<OrderManager.Model.Models.OM_Product> GetProductList(string cipher, string searchKey, int pageIndex) {
+            return base.Channel.GetProductList(cipher, searchKey, pageIndex);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<OrderManager.Model.Models.OM_Product>> GetProductListAsync(string cipher) {
-            return base.Channel.GetProductListAsync(cipher);
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<OrderManager.Model.Models.OM_Product>> GetProductListAsync(string cipher, string searchKey, int pageIndex) {
+            return base.Channel.GetProductListAsync(cipher, searchKey, pageIndex);
+        }
+        
+        public int GetProductListCount(string cipher, string searchKey) {
+            return base.Channel.GetProductListCount(cipher, searchKey);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetProductListCountAsync(string cipher, string searchKey) {
+            return base.Channel.GetProductListCountAsync(cipher, searchKey);
         }
         
         public void UpdateSalesOrderStatusByCommit(string cipher, string orderGuid) {

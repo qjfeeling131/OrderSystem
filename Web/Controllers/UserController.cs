@@ -60,7 +60,7 @@ namespace OrderManager.Web
 
             if (!string.IsNullOrWhiteSpace(key))
             {
-                list = list.Where(s => s.Name.Contains(key)).ToList();
+                list = list.Where(s => s.Name.Contains(key) || s.Account.Contains(key)).ToList();
                 ViewBag.Key = key;
             }
 
