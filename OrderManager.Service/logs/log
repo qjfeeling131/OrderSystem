@@ -1,110 +1,44 @@
 
-记录时间：2015-06-28 10:44:47,041   
+记录时间：2015-06-29 22:27:57,318   
  日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 10:44:45 AM】------------------
+ 出错类：Logger property:[(null)]  错误描述：------------------【2015/6/29 22:27:52】------------------
 【Source】：
 【Message】：Bad Request
 【StackTrace】：Bad Request
 
  
-记录时间：2015-06-28 11:39:56,762   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 11:39:55 AM】------------------
-【Source】：
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-28 11:40:46,053   
+记录时间：2015-06-29 22:28:55,402   
  日志级别：ERROR 
  出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+ System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
+   在 System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   在 System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   在 System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   在 System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   在 System.Xml.XmlTextReaderImpl.Read()
+   在 System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   在 System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
+   在 System.Xml.XmlDocument.Load(XmlReader reader)
+   在 System.Xml.XmlDocument.LoadXml(String xml)
+   在 CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   在 CommonHelper.FileLogger..ctor()
+   在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
 
-记录时间：2015-06-28 11:43:15,383   
+记录时间：2015-06-29 22:37:19,722   
  日志级别：ERROR 
  出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-06-28 11:52:31,450   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 11:52:29 AM】------------------
-【Source】：
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-28 11:53:18,279   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-06-28 11:55:57,485   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 11:55:52 AM】------------------
-【Source】：
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-28 11:58:36,817   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 11:58:34 AM】------------------
-【Source】：
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-28 12:04:38,787   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 12:04:36 PM】------------------
-【Source】：
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-28 13:53:11,847   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 1:53:10 PM】------------------
-【Source】：
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
-记录时间：2015-06-28 15:10:14,052   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【6/28/2015 3:10:13 PM】------------------
-【Source】：
-【Message】：Bad Request
-【StackTrace】：Bad Request
-
- 
+ System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
+   在 System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   在 System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   在 System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   在 System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   在 System.Xml.XmlTextReaderImpl.Read()
+   在 System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   在 System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
+   在 System.Xml.XmlDocument.Load(XmlReader reader)
+   在 System.Xml.XmlDocument.LoadXml(String xml)
+   在 CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   在 CommonHelper.FileLogger..ctor()
+   在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)

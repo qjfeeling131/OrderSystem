@@ -219,9 +219,9 @@ namespace OrderManager.Service
         }
 
 
-        public List<OM_ProductPrice> GetCurrentProducePriceList(string cipher, string itemCode, string userGuid)
+        public List<OM_ProductPrice> GetCurrentProducePriceList(string cipher, string itemCode, string cardCode)
         {
-            return orderManger.GetCurrentProducePriceList(itemCode, userGuid);
+            return orderManger.GetCurrentProducePriceList(itemCode, cardCode);
         }
 
 
@@ -235,7 +235,7 @@ namespace OrderManager.Service
         {
             int count = 0;
             PageListParameter<OM_Product, string> parameter = new PageListParameter<OM_Product, string>();
-            parameter.whereLambda = s => s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey) ;
+            parameter.whereLambda = s => s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey);
             parameter.pageIndex = pageIndex;
             parameter.orderByLambda = s => s.ItemCode;
             parameter.pageSize = 10;

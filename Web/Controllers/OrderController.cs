@@ -32,8 +32,8 @@ namespace OrderManager.Web
 
         public ViewResult Index(string key, int? pageIndex = 0, int? pageSize = 10)
         {
-            List<OM_Order> list = UserService.GetOrderList(Cipher, CurrentUser.User.Guid);
-
+            //List<OM_Order> list = UserService.GetOrderList(Cipher, CurrentUser.User.Guid);
+            List<OM_Order> list = UserService.GetCurrentSalesOrderList(Cipher, CurrentUser.User.Guid);
             if (!string.IsNullOrWhiteSpace(key))
             {
                 list = list.Where(s => s.CardName.Contains(key)).ToList();
@@ -91,8 +91,8 @@ namespace OrderManager.Web
                 ViewBag.Key = key;
             }
 
-              var result = list.Skip(Convert.ToInt32(pageindex)).Take(10).ToList();
-              return Json(new JsonModel { Data = result });
+            var result = list.Skip(Convert.ToInt32(pageindex)).Take(10).ToList();
+            return Json(new JsonModel { Data = result });
         }
 
 
@@ -119,9 +119,9 @@ namespace OrderManager.Web
         }
 
 
-        public ViewResult ProductPrice(string productItemCode)
+        public ViewResult ProductPrice(string productItemCode, string cardCode)
         {
-            var list = UserService.GetCurrentProducePriceList(Cipher, productItemCode, CurrentUser.User.Guid);
+            var list = UserService.GetCurrentProducePriceList(Cipher, productItemCode, cardCode);
             return View("~/views/order/productPrice.cshtml", list);
 
         }
@@ -140,7 +140,9 @@ namespace OrderManager.Web
             }
             else
             {
-                orderDetail.Guid = UserService.SaveSalesOrder(Cipher, orderDetail);  // return order guid
+                orderDetail.Guid = Guid.NewGuid().ToString().ToUpper();
+                //orderDetail.Guid = UserService.SaveSalesOrder(Cipher, orderDetail);  // return order guid
+                UserService.SaveSalesOrder(Cipher, orderDetail);
             }
 
             return Json(new JsonModel { Data = orderDetail.Guid });

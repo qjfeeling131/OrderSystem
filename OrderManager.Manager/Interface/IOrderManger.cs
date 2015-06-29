@@ -35,7 +35,7 @@ namespace OrderManager.Manager
 
 
         OM_Product GetProduct(Expression<Func<OM_Product, bool>> fuc);
- 
+
         OM_Order GetSalesOrder(Expression<Func<OM_Order, bool>> fuc);
         IList<OM_Order> GetSalesOrderList<Tkey>(PageListParameter<OM_Order, Tkey> parameter, out int count);
 
@@ -77,7 +77,7 @@ namespace OrderManager.Manager
         /// <param name="itemCode"></param>
         /// <param name="userGuid"></param>
         /// <returns></returns>
-        List<OM_ProductPrice> GetCurrentProducePriceList(string itemCode, string userGuid);
+        List<OM_ProductPrice> GetCurrentProducePriceList(string itemCode, string cardCode);
 
 
         /// <summary>

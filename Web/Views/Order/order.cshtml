@@ -25,23 +25,26 @@
         <div class="box-header">
             <h3 class="box-title">
                 <label>订单下达</label>
-                @if (Model != null) { 
-               <small>&nbsp;【订单号：  @Model.DocEntry】</small>
+                @if (Model != null)
+                {
+                    <small>&nbsp;【订单号：  @Model.DocEntry】</small>
                 }
-            
+
             </h3>
         </div>
         <div class="box-body">
             <div>
                 <div class="btn-group" style="margin:2%;">
                     <button class="btn btn-default btn-sm disabled"><i class="glyphicon glyphicon-user"></i>&nbsp;客户代码</button>
-                    <input type="text" name="UserCode" id="UserCode" class="form-control input-sm pull-right" style="width: 200px;" value="@(Model==null ?"": Model.CardCode)">
+                    <input type="text" name="CardName" id="CardName" class="form-control input-sm pull-right" style="width: 200px;" value="@(Model==null ?"": Model.CardName)" /> &nbsp;
+                    <input type="text" name="UserCode" id="UserCode" class="form-control input-sm pull-right" style="width: 200px;" value="@(Model==null ?"": Model.CardCode)" /> &nbsp;
+
                     <input type="hidden" id="OrderGuid" value="@(Model==null ?"": Model.Guid)" />
                 </div><!-- /.btn-group -->
 
                 <div class="btn-group pull-right" style="margin:2%;">
                     <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;状态</button>
-                    <input id="status" value="未提交"  disabled type="text"  name="status" class="form-control  input-sm pull-right"  style="width:180px;"  />
+                    <input id="status" value="未提交" disabled type="text" name="status" class="form-control  input-sm pull-right" style="width:180px;" />
 
                 </div><!-- /.btn-group -->
 
@@ -57,23 +60,30 @@
                                 <th tabindex="0">数量</th>
                                 <th tabindex="0">货币</th>
                                 <th tabindex="0">总价</th>
+                                <th tabindex="0">操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (Model != null)
                             {
+
                                 foreach (var item in Model.SalesOrderLine)
                                 {
+
+
                                     <tr role="row">
-                                        <input type='hidden' name='item_guid'  value="@item.Guid"/> 
+                                        <input type='hidden' name='item_guid' value="@item.Guid" />
                                         <td>@item.ItemCode</td>
                                         <td>@item.ItemName</td>
                                         <td>@item.Price</td>
                                         <td>@item.Quantity</td>
                                         <td>@item.Currency</td>
                                         <td>@item.TotalPrice</td>
+                                        <td>
+                                            <button id="om-OrderLine-Save" name="om-OrderLine-Save" class="btn btn-info "><i class="glyphicon  fa-save "></i>保存</button>
+                                            <button id="om-OrderLine-Edit" name="om-OrderLine-Edit" class="btn btn-info "><i class="glyphicon  fa-save "></i>修改</button>
+                                        </td>
                                     </tr>
-
                                 }
                             }
 
@@ -117,7 +127,8 @@
     <script>
         var currentRow;
         var isEdit = false;
-
+        var saveClick = false;
+        var rowNum = 0;
         $(function () {
             $("#orderManager").addClass("active");
             $("#orderManager .treeview-menu").attr("display", "block");
@@ -135,14 +146,16 @@
                     return;
 
                 isEdit = true;
-             
-                var row = "  <tr role='row'>   <input type='hidden' name='item_guid'/> <td><input id='itemcode' type='text'/></td> <td><input id='itemname' type='text'/></td> <td><input id='itemprice' type='text'/></td> <td><input id='itemquantity' type='text'/></td> <td>RMB</td> <td>--</td>    </tr>   ";
+                var row = "  <tr role='row'>   <input type='hidden' name='item_guid'/> <td><input id='itemcode' type='text'/></td> <td><input id='itemname' type='text'/></td> <td><input id='itemprice' type='text'/></td> <td><input id='itemquantity' type='text'/></td> <td>RMB</td> <td>--</td><td><button id='om-OrderLine-Save" + rowNum + "' name='om-OrderLine-Save" + rowNum + "' class='btn btn-info '><i class='glyphicon  fa-save '></i>保存</button> &nbsp;  <button id='om-OrderLine-Edit" + rowNum + "' name='om-OrderLine-Edit" + rowNum + "' class='btn btn-info '><i class='glyphicon  fa-save '></i>修改</button></td>   </tr>  ";
                 $("#order_table tbody").append(row);
                 var newrow = $("#order_table tr").last("tr");
                 RowClickEvent($(newrow));
                 itemProductEvent("itemcode");
                 itemProductEvent("itemname");
                 ItemPriceEvent("itemprice");
+                itemSave("om-OrderLine-Save" + rowNum);
+                itemEdit("om-OrderLine-Edit" + rowNum);
+                rowNum++;
             })
             //删除行
             $("#removeRow").click(function () {
@@ -151,6 +164,37 @@
                 }
                 $(currentRow).remove();
             })
+            //行保存事件
+            function itemSave(id) {
+
+                $("#" + id).click(function () {
+                    saveClick = true;
+                })
+            }
+            //行编辑事件
+            function itemEdit(id) {
+                $("#" + id).click(function () {
+
+                    if (isEdit) {
+                        return;
+                    }
+                    isEdit = true;
+                    //Change tr  row to edit row
+                    var arrTds = $("td", $(this).parent().parent());
+
+                    $(arrTds[0]).html("<input id='itemcode' type='text' value='" + $(arrTds[0]).html() + "'/> ")
+                    $(arrTds[1]).html("<input id='itemname' type='text' value='" + $(arrTds[1]).html() + "'/> ")
+                    $(arrTds[2]).html("<input id='itemprice' type='text' value='" + $(arrTds[2]).html() + "'/> ")
+                    $(arrTds[3]).html("<input id='itemquantity' type='text' value='" + $(arrTds[3]).html() + "'/> ")
+
+                    RowClickEvent($(this).parent().parent());
+                    itemProductEvent("itemcode");
+                    itemProductEvent("itemname");
+                    ItemPriceEvent("itemprice");
+
+                });
+            }
+
             //行事件
             $("#order_table tr").each(function () {
                 RowClickEvent($(this));
@@ -195,14 +239,14 @@
                 });
             });
 
-           //提交
+            //提交
             $("#sumbit").click(function () {
                 if (isEdit) {
                     alertInfo("提示", "当前处于编辑状态");
                     return;
                 }
 
-                if ($("#status").val() != "未提交" ) {
+                if ($("#status").val() != "未提交") {
                     alertInfo("提示", "当前状态不允许此操作");
                     return;
                 }
@@ -234,7 +278,7 @@
                 }
 
                 var data = $("#OrderGuid").val();
-                
+
                 if (isNullorEmptyString(data)) {
                     alertInfo("提示", "无效订单号");
                     return;
@@ -252,29 +296,29 @@
 
         function GetCurrentPageDate() {
             var result = {
-                Guid:$("#OrderGuid").val(),
+                Guid: $("#OrderGuid").val(),
                 CardCode: "",
                 DocStatus: "",
-                CardName:"",
+                CardName: "",
                 SalesOrderLine: new Array(),//{ [],[],[] }
                 Remarks: ""
 
             };
-            result.CardCode =  $("#UserCode").val() ;
-            result.Remarks = $("#remark").val() ;
-            result.DocStatus =  $("#status").val() ;
-            result.CardName = $("#CardName").val() ;
+            result.CardCode = $("#UserCode").val();
+            result.Remarks = $("#remark").val();
+            result.DocStatus = $("#status").val();
+            result.CardName = $("#CardName").val();
             $("#order_table tr").each(function () {
                 var tdArr = $('td', $(this));
                 if (tdArr.length == 0)
                     return;
                 var row = {
-                    Guid:  $('input', $(this)).val() ,
-                    ItemCode: $(tdArr[0]).html() ,
-                    ItemName:  $(tdArr[1]).html() ,
+                    Guid: $('input', $(this)).val(),
+                    ItemCode: $(tdArr[0]).html(),
+                    ItemName: $(tdArr[1]).html(),
                     Price: $(tdArr[2]).html(),
                     Quantity: $(tdArr[3]).html(),
-                    Currency: $(tdArr[4]).html() ,
+                    Currency: $(tdArr[4]).html(),
                     TotalPrice: $(tdArr[5]).html(),
                 };
 
@@ -290,10 +334,13 @@
         function RowClickEvent(tr) {
             $(tr).click(function () {
                 //是否当前行  currentrow ==old
-                if ($(currentRow).html() != $(tr).html()) {
+                if ($(currentRow).html() == $(tr).html()) {
                     var editInput = $("td input", $(currentRow)).length; //$(currentRow).children("td").children("input");
                     if (editInput > 0) {
-                        RemoveEditInput(currentRow);
+                        if (saveClick) {
+                            RemoveEditInput(currentRow);
+                        }
+
                     }
                 }
 
@@ -312,6 +359,7 @@
                 || isNaN($(arrInput[3]).val())) {
                 $(tr).remove();
                 alertInfo("提示", "订单数据填写有误");
+                saveClick = false;
                 isEdit = false;
                 return;
             }
@@ -330,8 +378,9 @@
             }
 
             var total = parseFloat($(arrInput[2]).val()) * parseFloat($(arrInput[3]).val());
-            $("td", $(tr)).last().html(total);
+            $("td", $(tr)).eq(-2).html(total);
             isEdit = false;
+            saveClick = false;
         }
 
         function itemProductEvent(id) {
@@ -346,7 +395,7 @@
                     alertInfo("提示", "请先选择物料");
                     return;
                 }
-                createDialog('@(Url.Content("~/order/productprice"))', "productItemCode=" + $("#itemcode").val());
+                createDialog('@(Url.Content("~/order/productprice"))', "productItemCode=" + $("#itemcode").val() + "&cardCode=" + $("#UserCode").val());
             });
         }
 

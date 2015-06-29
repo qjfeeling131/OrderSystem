@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UserService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:4697/UserService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:4697/UserService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:4697/UserService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" />
+      <xsd:import schemaLocation="http://localhost:4697/UserService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IUserService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetCurrentUserLogs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentUserLogs" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetCurrentUserLogs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentUserLogsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_ResetPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResetPassword" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_ResetPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResetPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdatePassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePassword" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdatePassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetCurrentUserList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentUserList" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetCurrentUserList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentUserListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_SaveMessageBoard_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMessageBoard" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_SaveMessageBoard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMessageBoardResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetCurrentUserMessageBoard_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentUserMessageBoard" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetCurrentUserMessageBoard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentUserMessageBoardResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetMessageBoardModel_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMessageBoardModel" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetMessageBoardModel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMessageBoardModelResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetOrderList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderList" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetOrderList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_SaveSalesOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSalesOrder" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_SaveSalesOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSalesOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateSalesOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSalesOrder" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateSalesOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSalesOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetSalesOrderAndDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSalesOrderAndDetail" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetSalesOrderAndDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSalesOrderAndDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetCurrentSalesOrderList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentSalesOrderList" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetCurrentSalesOrderList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentSalesOrderListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetCurrentProducePriceList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentProducePriceList" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetCurrentProducePriceList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentProducePriceListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetCurrentUserByCardCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentUserByCardCode" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetCurrentUserByCardCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentUserByCardCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetProductList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductList" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetProductList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetProductListCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductListCount" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetProductListCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductListCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateSalesOrderStatusByCommit_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSalesOrderStatusByCommit" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateSalesOrderStatusByCommit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSalesOrderStatusByCommitResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateSalesOrderStatusByToSAP_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSalesOrderStatusByToSAP" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateSalesOrderStatusByToSAP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSalesOrderStatusByToSAPResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IUserService">
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Login" message="tns:IUserService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/LoginResponse" message="tns:IUserService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentUserLogs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetCurrentUserLogs" message="tns:IUserService_GetCurrentUserLogs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetCurrentUserLogsResponse" message="tns:IUserService_GetCurrentUserLogs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/ResetPassword" message="tns:IUserService_ResetPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/ResetPasswordResponse" message="tns:IUserService_ResetPassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdatePassword" message="tns:IUserService_UpdatePassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdatePasswordResponse" message="tns:IUserService_UpdatePassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentUserList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetCurrentUserList" message="tns:IUserService_GetCurrentUserList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetCurrentUserListResponse" message="tns:IUserService_GetCurrentUserList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUser" message="tns:IUserService_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUserResponse" message="tns:IUserService_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveMessageBoard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/SaveMessageBoard" message="tns:IUserService_SaveMessageBoard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/SaveMessageBoardResponse" message="tns:IUserService_SaveMessageBoard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentUserMessageBoard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetCurrentUserMessageBoard" message="tns:IUserService_GetCurrentUserMessageBoard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetCurrentUserMessageBoardResponse" message="tns:IUserService_GetCurrentUserMessageBoard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessageBoardModel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetMessageBoardModel" message="tns:IUserService_GetMessageBoardModel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetMessageBoardModelResponse" message="tns:IUserService_GetMessageBoardModel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetOrderList" message="tns:IUserService_GetOrderList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetOrderListResponse" message="tns:IUserService_GetOrderList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveSalesOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/SaveSalesOrder" message="tns:IUserService_SaveSalesOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/SaveSalesOrderResponse" message="tns:IUserService_SaveSalesOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSalesOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateSalesOrder" message="tns:IUserService_UpdateSalesOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateSalesOrderResponse" message="tns:IUserService_UpdateSalesOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSalesOrderAndDetail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetSalesOrderAndDetail" message="tns:IUserService_GetSalesOrderAndDetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetSalesOrderAndDetailResponse" message="tns:IUserService_GetSalesOrderAndDetail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentSalesOrderList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetCurrentSalesOrderList" message="tns:IUserService_GetCurrentSalesOrderList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetCurrentSalesOrderListResponse" message="tns:IUserService_GetCurrentSalesOrderList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentProducePriceList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetCurrentProducePriceList" message="tns:IUserService_GetCurrentProducePriceList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetCurrentProducePriceListResponse" message="tns:IUserService_GetCurrentProducePriceList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentUserByCardCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetCurrentUserByCardCode" message="tns:IUserService_GetCurrentUserByCardCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetCurrentUserByCardCodeResponse" message="tns:IUserService_GetCurrentUserByCardCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetProductList" message="tns:IUserService_GetProductList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetProductListResponse" message="tns:IUserService_GetProductList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductListCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetProductListCount" message="tns:IUserService_GetProductListCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetProductListCountResponse" message="tns:IUserService_GetProductListCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSalesOrderStatusByCommit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByCommit" message="tns:IUserService_UpdateSalesOrderStatusByCommit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByCommitResponse" message="tns:IUserService_UpdateSalesOrderStatusByCommit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSalesOrderStatusByToSAP">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAP" message="tns:IUserService_UpdateSalesOrderStatusByToSAP_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAPResponse" message="tns:IUserService_UpdateSalesOrderStatusByToSAP_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IUserService" type="tns:IUserService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IUserService/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentUserLogs">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetCurrentUserLogs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <soap:operation soapAction="http://tempuri.org/IUserService/ResetPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePassword">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdatePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentUserList">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetCurrentUserList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveMessageBoard">
+      <soap:operation soapAction="http://tempuri.org/IUserService/SaveMessageBoard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentUserMessageBoard">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetCurrentUserMessageBoard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessageBoardModel">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetMessageBoardModel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderList">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetOrderList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveSalesOrder">
+      <soap:operation soapAction="http://tempuri.org/IUserService/SaveSalesOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSalesOrder">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdateSalesOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSalesOrderAndDetail">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetSalesOrderAndDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentSalesOrderList">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetCurrentSalesOrderList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentProducePriceList">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetCurrentProducePriceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentUserByCardCode">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetCurrentUserByCardCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductList">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetProductList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductListCount">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetProductListCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSalesOrderStatusByCommit">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdateSalesOrderStatusByCommit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSalesOrderStatusByToSAP">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserService">
+    <wsdl:port name="BasicHttpBinding_IUserService" binding="tns:BasicHttpBinding_IUserService">
+      <soap:address location="http://localhost:4697/UserService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -124,7 +124,7 @@ namespace OrderManager.Manager
 
         #region Function
 
-        public IList<OM_Product> GetProductList<Tkey>(PageListParameter<OM_Product,Tkey> parameter ,out int count)
+        public IList<OM_Product> GetProductList<Tkey>(PageListParameter<OM_Product, Tkey> parameter, out int count)
         {
             //return DbRepository.GetList(fuc);
             return DbRepository.GetPagedList(parameter, out count);
@@ -143,8 +143,8 @@ namespace OrderManager.Manager
             if (user == null)
                 throw new GenericException("客户代码不存在，保持草稿失败");
 
-            order.Guid = Guid.NewGuid().ToString();
-            order.CardName = user.Name;
+            //order.Guid = Guid.NewGuid().ToString();
+            //order.CardName = user.Name;
             order.DocStatus = ((int)OM_DocStatusEnum.未提交).ToString();
 
             var salesOrderHead = DbRepository.Add(order);
@@ -159,7 +159,7 @@ namespace OrderManager.Manager
             {
                 OM_OrderItem oi = new OM_OrderItem()
                 {
-                    Guid = Guid.NewGuid().ToString(),
+                    Guid = Guid.NewGuid().ToString().ToUpper(),
                     Currency = item.Currency,
                     ItemCode = item.ItemCode,
                     ItemName = item.ItemName,
@@ -229,7 +229,7 @@ namespace OrderManager.Manager
                             removeItem.Add(i);
                         }
                     }
-                    
+
                     if (i.Guid == item.Guid)
                     {
                         i.ItemCode = item.ItemCode;
@@ -332,6 +332,7 @@ namespace OrderManager.Manager
             return listSalesOrder;
         }
 
+
         private IList<OM_ProductPrice> GetProducePriceList(Expression<Func<OM_ProductPrice, bool>> fuc)
         {
             return DbRepository.GetList(fuc);
@@ -343,11 +344,26 @@ namespace OrderManager.Manager
         /// <param name="itemCode"></param>
         /// <param name="userGuid"></param>
         /// <returns></returns>
-        public List<OM_ProductPrice> GetCurrentProducePriceList(string itemCode, string userGuid)
+        public List<OM_ProductPrice> GetCurrentProducePriceList(string itemCode, string cardCode)
         {
             //List<OM_ProductPrice> listProductPrice = new List<OM_ProductPrice>();
 
-            return this.GetProducePriceList(p => p.Product_ItemCode == itemCode && userGuid == p.User_Guid).ToList();
+            if (string.IsNullOrEmpty(cardCode) || cardCode == null)
+            {
+                throw new GenericException("客户代码不能为空");
+            }
+            //if (string.IsNullOrEmpty(itemCode) || itemCode == null)
+            //{
+            //    throw new GenericException("物料代码不能为空");
+            //}
+
+            var user = userManager.GetUser(u => u.Account == cardCode);
+
+            if (user == null)
+            {
+                throw new GenericException("当前客户不存在");
+            }
+            return this.GetProducePriceList(p => p.Product_ItemCode == itemCode && user.Guid == p.User_Guid).ToList();
         }
 
 
