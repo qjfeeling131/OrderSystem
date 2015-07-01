@@ -24,3 +24,149 @@
    在 CommonHelper.FileLogger..ctor()
    在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
    在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 20:14:23,228   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【7/1/2015 8:14:23 PM】------------------
+【Source】：mscorlib
+【Message】：There was no endpoint listening at http://localhost:4697/UserService.svc that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+【StackTrace】：There was no endpoint listening at http://localhost:4697/UserService.svc that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+
+ 
+记录时间：2015-07-01 20:17:49,821   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【7/1/2015 8:17:49 PM】------------------
+【Source】：mscorlib
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-07-01 20:20:39,374   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【7/1/2015 8:20:39 PM】------------------
+【Source】：mscorlib
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-07-01 20:20:40,690   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 20:20:41,725   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 20:20:43,343   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 20:20:44,260   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 20:20:45,243   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 20:20:47,442   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 20:44:17,132   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【7/1/2015 8:44:17 PM】------------------
+【Source】：Web
+【Message】：Object reference not set to an instance of an object.
+【StackTrace】：Object reference not set to an instance of an object.
+
+ 
+记录时间：2015-07-01 20:51:35,215   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 23:16:46,007   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【7/1/2015 11:16:45 PM】------------------
+【Source】：Web
+【Message】：Object reference not set to an instance of an object.
+【StackTrace】：Object reference not set to an instance of an object.
+
+ 

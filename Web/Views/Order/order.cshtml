@@ -35,12 +35,19 @@
         <div class="box-body">
             <div>
                 <div class="btn-group" style="margin:2%;">
-                    <button class="btn btn-default btn-sm disabled"><i class="glyphicon glyphicon-user"></i>&nbsp;客户代码</button>
-                    <input type="text" name="CardName" id="CardName" class="form-control input-sm pull-right" style="width: 200px;" value="@(Model==null ?"": Model.CardName)" /> &nbsp;
-                    <input type="text" name="UserCode" id="UserCode" class="form-control input-sm pull-right" style="width: 200px;" value="@(Model==null ?"": Model.CardCode)" /> &nbsp;
 
-                    <input type="hidden" id="OrderGuid" value="@(Model==null ?"": Model.Guid)" />
-                </div><!-- /.btn-group -->
+                    <div>
+                        <button class="btn btn-default btn-sm disabled">&nbsp;客户代码</button>
+                        <input type="text" name="UserCode" id="UserCode" class="form-control input-sm pull-right" style="width: 200px;" value="@(Model==null ?"": Model.CardCode)" /> &nbsp;
+                    </div>
+                    <div>
+                        <br />
+                        <button class="btn btn-default btn-sm disabled">&nbsp;客户名称</button>
+                        <label  id="CardName" class="form-control input-sm pull-right " style="width: 200px;" >@(Model == null ? "" : Model.CardName) </label>
+                    </div>
+
+                        <input type="hidden" id="OrderGuid" value="@(Model==null ?"": Model.Guid)" />
+                    </div><!-- /.btn-group -->
 
                 <div class="btn-group pull-right" style="margin:2%;">
                     <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;状态</button>
@@ -75,10 +82,10 @@
                                         <input type='hidden' name='item_guid' value="@item.Guid" />
                                         <td>@item.ItemCode</td>
                                         <td>@item.ItemName</td>
-                                        <td>@item.Price</td>
-                                        <td>@item.Quantity</td>
+                                        <td>@item.Price.ToString("0.00")</td>
+                                        <td>@item.Quantity.ToString("0")</td>
                                         <td>@item.Currency</td>
-                                        <td>@item.TotalPrice</td>
+                                        <td>@item.TotalPrice.ToString("0.00")</td>
                                         <td>
                                             <button id="om-OrderLine-Save" name="om-OrderLine-Save" class="btn btn-info "><i class="glyphicon  fa-save "></i>保存</button>
                                             <button id="om-OrderLine-Edit" name="om-OrderLine-Edit" class="btn btn-info "><i class="glyphicon  fa-save "></i>修改</button>
@@ -166,9 +173,9 @@
             })
             //行保存事件
             function itemSave(id) {
-
                 $("#" + id).click(function () {
                     saveClick = true;
+                    console.log($(this))
                 })
             }
             //行编辑事件
@@ -199,25 +206,48 @@
             $("#order_table tr").each(function () {
                 RowClickEvent($(this));
 
-                $(this).dblclick(function () {
-                    if (isEdit) {
-                        return;
-                    }
-                    isEdit = true;
-                    //Change tr  row to edit row
-                    var arrTds = $("td", $(this));
+                $("button[name='om-OrderLine-Save']", $(this)).click(function () {
+                    saveClick = true;
+                })
 
-                    $(arrTds[0]).html("<input id='itemcode' type='text' value='" + $(arrTds[0]).html() + "'/> ")
-                    $(arrTds[1]).html("<input id='itemname' type='text' value='" + $(arrTds[1]).html() + "'/> ")
-                    $(arrTds[2]).html("<input id='itemprice' type='text' value='" + $(arrTds[2]).html() + "'/> ")
-                    $(arrTds[3]).html("<input id='itemquantity' type='text' value='" + $(arrTds[3]).html() + "'/> ")
+                $("button[name='om-OrderLine-Edit']", $(this)).click(function () {
+                        if (isEdit) {
+                            return;
+                        }
+                        isEdit = true;
+                        //Change tr  row to edit row
+                        var arrTds = $(this).parent().siblings('td');
+                    
+                        $(arrTds[0]).html("<input id='itemcode' type='text' value='" + $(arrTds[0]).html() + "'/> ")
+                        $(arrTds[1]).html("<input id='itemname' type='text' value='" + $(arrTds[1]).html() + "'/> ")
+                        $(arrTds[2]).html("<input id='itemprice' type='text' value='" + $(arrTds[2]).html() + "'/> ")
+                        $(arrTds[3]).html("<input id='itemquantity' type='text' value='" + $(arrTds[3]).html() + "'/> ")
 
-                    RowClickEvent($(this));
-                    itemProductEvent("itemcode");
-                    itemProductEvent("itemname");
-                    ItemPriceEvent("itemprice");
+                        itemProductEvent("itemcode");
+                        itemProductEvent("itemname");
+                        ItemPriceEvent("itemprice");
 
-                });
+                })
+
+                //$(this).dblclick(function () {
+                //    if (isEdit) {
+                //        return;
+                //    }
+                //    isEdit = true;
+                //    //Change tr  row to edit row
+                //    var arrTds = $("td", $(this));
+
+                //    $(arrTds[0]).html("<input id='itemcode' type='text' value='" + $(arrTds[0]).html() + "'/> ")
+                //    $(arrTds[1]).html("<input id='itemname' type='text' value='" + $(arrTds[1]).html() + "'/> ")
+                //    $(arrTds[2]).html("<input id='itemprice' type='text' value='" + $(arrTds[2]).html() + "'/> ")
+                //    $(arrTds[3]).html("<input id='itemquantity' type='text' value='" + $(arrTds[3]).html() + "'/> ")
+
+                //    RowClickEvent($(this));
+                //    itemProductEvent("itemcode");
+                //    itemProductEvent("itemname");
+                //    ItemPriceEvent("itemprice");
+
+                //});
             });
 
             //保存草稿
@@ -307,7 +337,7 @@
             result.CardCode = $("#UserCode").val();
             result.Remarks = $("#remark").val();
             result.DocStatus = $("#status").val();
-            result.CardName = $("#CardName").val();
+            result.CardName = $("#CardName").html();
             $("#order_table tr").each(function () {
                 var tdArr = $('td', $(this));
                 if (tdArr.length == 0)
@@ -335,9 +365,9 @@
             $(tr).click(function () {
                 //是否当前行  currentrow ==old
                 if ($(currentRow).html() == $(tr).html()) {
-                    var editInput = $("td input", $(currentRow)).length; //$(currentRow).children("td").children("input");
+                    var editInput = $("td input", $(currentRow)).length; 
                     if (editInput > 0) {
-                        if (saveClick) {
+                        if (saveClick) {  //b保存按钮，移除input框
                             RemoveEditInput(currentRow);
                         }
 
@@ -347,9 +377,7 @@
                 currentRow = $(tr);
                 $(this).css("background", "#f4f4f4");
                 $(this).siblings("tr").css("background", "");
-            }).dblclick(function () {
-
-            });
+            })
         }
 
         function RemoveEditInput(tr) {

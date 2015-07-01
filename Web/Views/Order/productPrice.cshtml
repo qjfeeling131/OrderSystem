@@ -28,7 +28,7 @@
                             {
                                 <tr role="row">
                                     <td>@item.Product_ItemCode</td>
-                                    <td>@item.Price</td>
+                                    <td>@item.Price.ToString("0.00")</td>
                                 </tr>
                             }
                             @if (Model.Count == 0)

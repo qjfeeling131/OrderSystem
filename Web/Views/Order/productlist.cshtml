@@ -46,7 +46,7 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-5"><div class="dataTables_info">当前第 @(ViewBag.PageIndex + 1) 页（共 @ViewBag.TotalPages 页）</div></div>
+                <div class="col-sm-5"><div class="dataTables_info">当前第 <label id="curentPage">@(ViewBag.PageIndex + 1)</label> 页（共 @ViewBag.TotalPages 页）</div></div>
                 @if (ViewBag.TotalPages != null && ViewBag.TotalPages > 1)
                 {
                     <div class="col-sm-7">
@@ -111,13 +111,15 @@
                 if (pre < 0) { return; }
                 getdata(pre);
                 currentPage = pre;
+                $("#curentPage").html(currentPage + 1);
             });
 
             $("#nextPage").click(function () {
                 var next = currentPage + 1;
-                if (next > parseInt('@ViewBag.TotalPages')) { return; }
+                if (next >= parseInt('@ViewBag.TotalPages')) { return; }
                 getdata(next);
                 currentPage = next;
+                $("#curentPage").html(currentPage + 1);
             });
         })
 

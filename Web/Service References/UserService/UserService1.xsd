@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="OM_Role">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDatetiime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Department_Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsDel" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDateTime" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_Role" nillable="true" type="tns:OM_Role" />
+  <xs:complexType name="OM_User">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Account" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Area_Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateDatetime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Img" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDel" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Post" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Pwd" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDatetime" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_User" nillable="true" type="tns:OM_User" />
+  <xs:complexType name="ArrayOfOM_User">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_User" nillable="true" type="tns:OM_User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOM_User" nillable="true" type="tns:ArrayOfOM_User" />
+  <xs:complexType name="OM_MessageBoard">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDatetime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="User_Guid" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_MessageBoard" nillable="true" type="tns:OM_MessageBoard" />
+  <xs:complexType name="ArrayOfOM_MessageBoard">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_MessageBoard" nillable="true" type="tns:OM_MessageBoard" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOM_MessageBoard" nillable="true" type="tns:ArrayOfOM_MessageBoard" />
+  <xs:complexType name="ArrayOfOM_Order">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_Order" nillable="true" type="tns:OM_Order" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOM_Order" nillable="true" type="tns:ArrayOfOM_Order" />
+  <xs:complexType name="OM_Order">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CardName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DocDueDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DocEntry" type="xs:int" />
+      <xs:element minOccurs="0" name="DocStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NoteNotice" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumCard" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remarks" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TPLCompany" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TPLContact" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TPLOrder" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TPLPhone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="User_Guid" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_Order" nillable="true" type="tns:OM_Order" />
+  <xs:complexType name="ArrayOfOM_OrderItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_OrderItem" nillable="true" type="tns:OM_OrderItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOM_OrderItem" nillable="true" type="tns:ArrayOfOM_OrderItem" />
+  <xs:complexType name="OM_OrderItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CloseQty" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocEntry" type="xs:int" />
+      <xs:element minOccurs="0" name="Flag" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Img" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemFName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LineNum" type="xs:int" />
+      <xs:element minOccurs="0" name="OpenQty" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Order_Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Remarks" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalPrice" type="xs:decimal" />
+      <xs:element minOccurs="0" name="VisualOrder" type="xs:int" />
+      <xs:element minOccurs="0" name="WhsCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_OrderItem" nillable="true" type="tns:OM_OrderItem" />
+  <xs:complexType name="ArrayOfOM_ProductPrice">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_ProductPrice" nillable="true" type="tns:OM_ProductPrice" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOM_ProductPrice" nillable="true" type="tns:ArrayOfOM_ProductPrice" />
+  <xs:complexType name="OM_ProductPrice">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Area_Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Product_ItemCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="User_Guid" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_ProductPrice" nillable="true" type="tns:OM_ProductPrice" />
+  <xs:complexType name="ArrayOfOM_Product">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_Product" nillable="true" type="tns:OM_Product" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOM_Product" nillable="true" type="tns:ArrayOfOM_Product" />
+  <xs:complexType name="OM_Product">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CardCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateDatetime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FrgnName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GroupAPrice" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GroupBPrice" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GroupCPrice" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GroupType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Img" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDel" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ItemCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OnHand" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Remarks" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDateTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="WhsCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_Product" nillable="true" type="tns:OM_Product" />
+</xs:schema>

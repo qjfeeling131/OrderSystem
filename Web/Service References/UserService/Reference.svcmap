@@ -21,15 +21,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:4697/UserService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/OrderManager.Service/UserService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="UserService1.wsdl" MetadataType="Wsdl" ID="ee2cd3b2-4961-4ba2-9c1e-7178983a511e" SourceId="1" SourceUrl="http://localhost:4697/UserService.svc?wsdl" />
-    <MetadataFile FileName="UserService4.xsd" MetadataType="Schema" ID="60d87be2-04a3-4975-9033-9b9750f8eb9b" SourceId="1" SourceUrl="http://localhost:4697/UserService.svc?xsd=xsd0" />
-    <MetadataFile FileName="UserService41.xsd" MetadataType="Schema" ID="5036a465-b5a4-4754-a24b-48d2ddcf45ee" SourceId="1" SourceUrl="http://localhost:4697/UserService.svc?xsd=xsd1" />
-    <MetadataFile FileName="UserService42.xsd" MetadataType="Schema" ID="4665ee83-11b9-4403-ad88-c398116d98f2" SourceId="1" SourceUrl="http://localhost:4697/UserService.svc?xsd=xsd2" />
-    <MetadataFile FileName="UserService43.xsd" MetadataType="Schema" ID="bde3dce8-3179-4fe6-89f7-a8e70e9ab348" SourceId="1" SourceUrl="http://localhost:4697/UserService.svc?xsd=xsd3" />
-    <MetadataFile FileName="UserService1.disco" MetadataType="Disco" ID="fc7e53af-2f9f-479d-84fe-770631b7e05e" SourceId="1" SourceUrl="http://localhost:4697/UserService.svc?disco" />
+    <MetadataFile FileName="UserService.xsd" MetadataType="Schema" ID="61976a6f-f6bd-415a-8d7e-afa951c83737" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd0" />
+    <MetadataFile FileName="UserService1.xsd" MetadataType="Schema" ID="37579435-da34-4bb4-bb30-0c5ed37b405a" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd3" />
+    <MetadataFile FileName="UserService2.xsd" MetadataType="Schema" ID="381fce5d-216c-4519-8c8e-6d47c993743b" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd2" />
+    <MetadataFile FileName="UserService.disco" MetadataType="Disco" ID="31d9bb05-ba4c-4e20-b300-797abee5a88c" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?disco" />
+    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="136b904a-2979-40fe-b653-5e8a157c6b96" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?wsdl" />
+    <MetadataFile FileName="UserService3.xsd" MetadataType="Schema" ID="0903cf8a-d3e1-46d8-89e3-24963a943a54" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

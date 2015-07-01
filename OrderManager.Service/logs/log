@@ -42,3 +42,109 @@
    在 CommonHelper.FileLogger..ctor()
    在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
    在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 20:17:49,702   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【7/1/2015 8:17:47 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-07-01 20:20:39,358   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【7/1/2015 8:20:39 PM】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-07-01 20:20:40,690   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 20:20:41,725   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 20:20:43,343   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 20:20:44,260   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 20:20:45,243   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-07-01 20:20:47,442   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
