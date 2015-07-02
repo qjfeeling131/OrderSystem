@@ -49,4 +49,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OM_SalesOrderDataObject" nillable="true" type="tns:OM_SalesOrderDataObject" />
+  <xs:complexType name="ArrayOfOM_ProductInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_ProductInfo" nillable="true" type="tns:OM_ProductInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOM_ProductInfo" nillable="true" type="tns:ArrayOfOM_ProductInfo" />
+  <xs:complexType name="OM_ProductInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ItemCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OM_ProductInfo" nillable="true" type="tns:OM_ProductInfo" />
 </xs:schema>

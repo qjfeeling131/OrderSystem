@@ -56,6 +56,7 @@
     <Compile Include="DTO\OM_LogDataObject.cs" />
     <Compile Include="DTO\OM_AreaRoles.cs" />
     <Compile Include="DTO\OM_Orde_Partial.cs" />
+    <Compile Include="DTO\OM_ProductInfo.cs" />
     <Compile Include="DTO\OM_UserDetail.cs" />
     <Compile Include="DTO\OM_DepartmentDto.cs" />
     <Compile Include="Enum\OM_DocStatusEnum.cs" />

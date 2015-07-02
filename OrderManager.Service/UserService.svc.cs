@@ -231,7 +231,7 @@ namespace OrderManager.Service
         }
 
 
-        public IList<OM_Product> GetProductList(string cipher, string searchKey, int pageIndex)
+        public IList<OM_ProductInfo> GetProductList(string cipher, string searchKey, int pageIndex)
         {
             int count = 0;
             PageListParameter<OM_Product, string> parameter = new PageListParameter<OM_Product, string>();
@@ -240,8 +240,22 @@ namespace OrderManager.Service
             parameter.orderByLambda = s => s.ItemCode;
             parameter.pageSize = 10;
 
-            return orderManger.GetProductList(parameter, out count);
+            IList<OM_ProductInfo> result = new List<OM_ProductInfo>();
+            var productList = orderManger.GetProductList(parameter, out count);
+            var user = userManager.GetUser(s => s.Guid == cipher);
+            foreach (var item in productList)
+            {
+                var price = orderManger.GetCurrentProducePriceList(item.ItemCode, user.Account).FirstOrDefault();
+                OM_ProductInfo product = new OM_ProductInfo()
+                {
+                    ItemCode = item.ItemCode,
+                    ItemName = item.ItemName,
+                    Price = (price == null) ? "--" : price.Price.ToString("0.00")
+                };
+                result.Add(product);
 
+            }
+            return result;
         }
 
 

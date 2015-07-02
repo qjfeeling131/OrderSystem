@@ -159,7 +159,7 @@
                 RowClickEvent($(newrow));
                 itemProductEvent("itemcode");
                 itemProductEvent("itemname");
-                ItemPriceEvent("itemprice");
+                itemProductEvent("itemprice");
                 itemSave("om-OrderLine-Save" + rowNum);
                 itemEdit("om-OrderLine-Edit" + rowNum);
                 rowNum++;
@@ -197,7 +197,7 @@
                     RowClickEvent($(this).parent().parent());
                     itemProductEvent("itemcode");
                     itemProductEvent("itemname");
-                    ItemPriceEvent("itemprice");
+                    itemProductEvent("itemprice");
 
                 });
             }
@@ -215,7 +215,6 @@
                             return;
                         }
                         isEdit = true;
-                        //Change tr  row to edit row
                         var arrTds = $(this).parent().siblings('td');
                     
                         $(arrTds[0]).html("<input id='itemcode' type='text' value='" + $(arrTds[0]).html() + "'/> ")
@@ -225,29 +224,10 @@
 
                         itemProductEvent("itemcode");
                         itemProductEvent("itemname");
-                        ItemPriceEvent("itemprice");
+                        itemProductEvent("itemprice");
 
                 })
 
-                //$(this).dblclick(function () {
-                //    if (isEdit) {
-                //        return;
-                //    }
-                //    isEdit = true;
-                //    //Change tr  row to edit row
-                //    var arrTds = $("td", $(this));
-
-                //    $(arrTds[0]).html("<input id='itemcode' type='text' value='" + $(arrTds[0]).html() + "'/> ")
-                //    $(arrTds[1]).html("<input id='itemname' type='text' value='" + $(arrTds[1]).html() + "'/> ")
-                //    $(arrTds[2]).html("<input id='itemprice' type='text' value='" + $(arrTds[2]).html() + "'/> ")
-                //    $(arrTds[3]).html("<input id='itemquantity' type='text' value='" + $(arrTds[3]).html() + "'/> ")
-
-                //    RowClickEvent($(this));
-                //    itemProductEvent("itemcode");
-                //    itemProductEvent("itemname");
-                //    ItemPriceEvent("itemprice");
-
-                //});
             });
 
             //保存草稿

@@ -168,6 +168,7 @@
     <Content Include="Properties\DataSources\OrderManager.Model.DTO.OM_SalesOrderDataObject.datasource" />
     <Content Include="Properties\DataSources\OrderManager.Model.Models.OM_Product.datasource" />
     <Content Include="Properties\DataSources\OrderManager.Model.Models.OM_ProductPrice.datasource" />
+    <Content Include="Properties\DataSources\OrderManager.Model.DTO.OM_ProductInfo.datasource" />
     <None Include="Service References\UserService\configuration91.svcinfo" />
     <None Include="Service References\UserService\configuration.svcinfo" />
     <None Include="Service References\UserService\Reference.svcmap">

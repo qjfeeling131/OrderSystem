@@ -28,6 +28,7 @@
                             <tr role="row">
                                 <th tabindex="0">物料编号</th>
                                 <th tabindex="0">物料名称</th>
+                                <th tabindex="0">价格</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,6 +37,7 @@
                                 <tr role="row">
                                     <td>@item.ItemCode</td>
                                     <td>@item.ItemName</td>
+                                    <td>@item.Price</td>
                                 </tr>
                             }
                         </tbody>
@@ -90,9 +92,11 @@
 @section buttons{
     <button type="button" class="btn btn-primary" data-dismiss="modal" id="comfirm_code">确定</button>
     <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel_code">取消</button>
+@*<script src="~/Js/utility/jquery.min.js"></script>*@
     <script>
         var itemcode;
         var itemname;
+        var itemprice;
         var currentPage;
         $(function () {
             //tr click
@@ -101,7 +105,7 @@
                 currentPage = parseInt('@ViewBag.PageIndex');
             });
             //取消
-            $("#cancel_code").click(function () { $("#itemcode").val(''); $("#itemname").val(''); });
+            $("#cancel_code").click(function () { $("#itemprice").val(''); $("#itemcode").val(''); $("#itemname").val(''); });
             $("#search").click(function () {
                 getdata(0);
             });
@@ -141,7 +145,7 @@
       
                 for (var i = 0; i < data.length; i++) {
                     row = "<tr role='row'>";
-                    row += "<td>" + data[i].ItemCode + "</td><td>" + data[i].ItemName + "</td>";
+                    row += "<td>" + data[i].ItemCode + "</td><td>" + data[i].ItemName + "</td><td>" + data[i].Price + "</td>";
                     row += "</tr>";
                     $("#productlist_table tbody").append(row);
                 }
@@ -166,17 +170,24 @@
                     $(this).css("background", "");
                 }
                 itemcode = $(this).children('td').first().html();
-                itemname = $(this).children('td').last().html();
+                itemname = $($(this).children('td')[1]).html();
+                itemprice = $(this).children('td').last().html();
+                console.log(itemcode);
+                console.log(itemname);
+                console.log(itemprice);
+
                 console.log(itemcode + "," + itemname);
                 $(this).css("background", "#f4f4f4");
                 $(this).siblings("tr").css("background", "");
-                $("#itemcode").val(itemcode);
+                $("#itemcode").val(itemcode); 
                 $("#itemname").val(itemname);
+                $("#itemprice").val(itemprice);
 
             }).dblclick(function () {
                 usercode = $(this).children('td').html();
                 $("#itemcode").val(itemcode);
                 $("#itemname").val(itemname);
+                $("#itemprice").val(itemprice);
                 $("#comfirm_code").click();
             });
 

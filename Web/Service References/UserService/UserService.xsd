@@ -252,7 +252,7 @@
   <xs:element name="GetProductListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetProductListResult" nillable="true" type="q15:ArrayOfOM_Product" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="GetProductListResult" nillable="true" type="q15:ArrayOfOM_ProductInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
