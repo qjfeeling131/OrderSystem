@@ -1,8 +1,9 @@
 ﻿/// <reference path="jquery.min.js" />
 
 function createDialog(url, parameters) {
-
+    fakeLoading();
     $.get(url, parameters, function (data) {
+        closeLoading();
         for (i = 0; i < $(data).length; i++) {
             var item = $(data)[i];
             if ($(item).hasClass("modal")) {
@@ -31,7 +32,9 @@ function alertInfo(title,msg) {
 
 //exception wrapper
 function getAsynData(path, data, func) {
+    fakeLoading();
     $.post(path, data, function (json) {
+        closeLoading();
         if (json.Code == -1)
             eval('(' + json.Data + ')');
         else
@@ -43,6 +46,22 @@ function isNullorEmptyString(str){
     return str.replace(/(^s*)|(s*$)/g, "").length == 0;
 }
 
+
+function fakeLoading() {
+    $("#fakeloader").fakeLoader({
+        timeToHide: 6000000,
+        bgColor: "#595959",
+        spinner: "spinner2"
+    });
+}
+
+function closeLoading() {
+    $("#fakeloader").fakeLoader({
+        timeToHide: 0,
+        bgColor: "#595959",
+        spinner: "spinner2"
+    });
+}
 
 
 

@@ -8,6 +8,7 @@
 }
 
 @section head{
+
     <style>
         .bg {
             background: url('@Url.Content("~/img/photo2.png")') no-repeat top center scroll;
@@ -16,51 +17,54 @@
             height: 100%;
             margin: 0 auto;
         }
+
     </style>
 }
 
 
 @section body{
-    <section>
-        <div class="login-box ">
-            <div class="login-logo">
-                <a href="#"><b>高山药业经销商平台</b></a>
-            </div><!-- /.login-logo -->
-            <div class="login-box-body">
-                <p class="login-box-msg">
-                    <span class="glyphicon glyphicon-home"></span>
-                    <b>&nbsp;欢迎使用</b>
-                </p>
-                <form method="post" id="form_login">
-                    <div class="form-group has-feedback">
-                        <input type="text" name="UserCode" class="form-control" required placeholder="账户名" id="account" value="@ViewBag.Account" required />
-                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="password" name="Password" class="form-control" required placeholder="密码" id="password" value="@ViewBag.Pwd" required />
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8">
-                            <div class="checkbox icheck">
-                                <label>
-                                    <input name="IsRememeber" id="IsRememeber" type="checkbox">&nbsp;&nbsp;记住我
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-xs-4">
-                            <button type="button" id="submit" class="btn btn-primary btn-block btn-flat">登陆</button>
-                        </div>
-                    </div>
-                </form>
 
-            </div>
-        </div>
-    </section>
+          <section>
+              <div class="login-box ">
+                  <div class="login-logo">
+                      <a href="#"><b>高山药业经销商平台</b></a>
+                  </div><!-- /.login-logo -->
+                  <div class="login-box-body">
+                      <p class="login-box-msg">
+                          <span class="glyphicon glyphicon-home"></span>
+                          <b>&nbsp;欢迎使用</b>
+                      </p>
+                      <form method="post" id="form_login">
+                          <div class="form-group has-feedback">
+                              <input type="text" name="UserCode" class="form-control" required placeholder="账户名" id="account" value="@ViewBag.Account" required />
+                              <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                          </div>
+                          <div class="form-group has-feedback">
+                              <input type="password" name="Password" class="form-control" required placeholder="密码" id="password" value="@ViewBag.Pwd" required />
+                              <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                          </div>
+                          <div class="row">
+                              <div class="col-xs-8">
+                                  <div class="checkbox icheck">
+                                      <label>
+                                          <input name="IsRememeber" id="IsRememeber" type="checkbox">&nbsp;&nbsp;记住我
+                                      </label>
+                                  </div>
+                              </div>
+                              <div class="col-xs-4">
+                                  <button type="button" id="submit" class="btn btn-primary btn-block btn-flat">登陆</button>
+                              </div>
+                          </div>
+                      </form>
+
+                  </div>
+              </div>
+        </section>
 
 }
 
 @section script{
+
     <script>
         $(function () {
             $('#IsRememeber').iCheck({
@@ -71,16 +75,14 @@
 
             $('body').addClass('bg');
 
+
             $('#IsRememeber').on('ifChecked', function (event) {
                 $('#IsRememeber').val(true);
             });
 
-
-
             $('#submit').click(function () {
 
-                if ($("#account").val() == '' || $("#password").val() == '')
-                {
+                if ($("#account").val() == '' || $("#password").val() == '') {
                     var model = { 'Title': '提示', 'Message': '账户或密码不能为空' };
                     createDialog('base/exception', model);
                     return;

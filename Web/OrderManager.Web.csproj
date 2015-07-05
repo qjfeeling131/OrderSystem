@@ -135,6 +135,7 @@
     <Content Include="Css\bootstrap\css\bootstrap.css" />
     <Content Include="Css\bootstrap\css\bootstrap.min.css" />
     <Content Include="Css\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Css\fakeloader.css" />
     <Content Include="Css\skin-blue.min.css" />
     <Content Include="Global.asax" />
     <Content Include="img\boxed-bg.jpg" />
@@ -155,6 +156,7 @@
     <Content Include="Js\plugins\iCheck\square\blue%402x.png" />
     <Content Include="Js\plugins\iCheck\square\blue.css" />
     <Content Include="Js\plugins\iCheck\square\blue.png" />
+    <Content Include="Js\utility\fakeloader.min.js" />
     <Content Include="Js\utility\jqBootstrapValidation.js" />
     <Content Include="Js\utility\jquery.min.js" />
     <Content Include="Js\utility\master.js" />
