@@ -48,19 +48,11 @@ function isNullorEmptyString(str){
 
 
 function fakeLoading() {
-    $("#fakeloader").fakeLoader({
-        timeToHide: 6000000,
-        bgColor: "#595959",
-        spinner: "spinner2"
-    });
+    $("#fakeloader").css("display", "block");
 }
 
 function closeLoading() {
-    $("#fakeloader").fakeLoader({
-        timeToHide: 0,
-        bgColor: "#595959",
-        spinner: "spinner2"
-    });
+    $("#fakeloader").css("display", "none");
 }
 
 

@@ -30,6 +30,13 @@
     <script src="~/Js/utility/fakeloader.min.js"></script>
     <script src="~/Js/utility/master.js"></script>
     @RenderSection("script", false)
-
+    <script>
+        $("#fakeloader").fakeLoader({
+            timeToHide: 6000000,
+            bgColor: "#595959",
+            spinner: "spinner2"
+        });
+        $("#fakeloader").css("display", "none");
+    </script>
 </body>
 </html>
