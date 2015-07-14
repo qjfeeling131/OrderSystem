@@ -242,17 +242,35 @@ namespace OrderManager.Service
 
             IList<OM_ProductInfo> result = new List<OM_ProductInfo>();
             var productList = orderManger.GetProductList(parameter, out count);
-            var user = userManager.GetUser(s => s.Guid == cipher);
+            var user = userManager.GetUser(s => s.Account == cipher);
             foreach (var item in productList)
             {
-                var price = orderManger.GetCurrentProducePriceList(item.ItemCode, user.Account).FirstOrDefault();
-                OM_ProductInfo product = new OM_ProductInfo()
+                var listPrice = orderManger.GetCurrentProducePriceList(item.ItemCode, user.Guid);
+                if (listPrice.Count <= 0)
                 {
-                    ItemCode = item.ItemCode,
-                    ItemName = item.ItemName,
-                    Price = (price == null) ? "--" : price.Price.ToString("0.00")
-                };
-                result.Add(product);
+                    var price = orderManger.GetCurrentProducePriceList(item.ItemCode, user.Guid).FirstOrDefault();
+                    OM_ProductInfo product = new OM_ProductInfo()
+                    {
+                        ItemCode = item.ItemCode,
+                        ItemName = item.ItemName,
+                        Price = (price == null) ? "--" : price.Price.ToString("0.00")
+                    };
+                    result.Add(product);
+                }
+                else
+                {
+                    foreach (var priceItem in listPrice)
+                    {
+                        OM_ProductInfo product = new OM_ProductInfo()
+                        {
+                            ItemCode = item.ItemCode,
+                            ItemName = item.ItemName,
+                            Price = (priceItem == null) ? "--" : priceItem.Price.ToString("0.00")
+                        };
+                        result.Add(product);
+                    }
+                }
+
 
             }
             return result;

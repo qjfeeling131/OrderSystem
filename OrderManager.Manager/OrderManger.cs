@@ -333,7 +333,7 @@ namespace OrderManager.Manager
         }
 
 
-        private IList<OM_ProductPrice> GetProducePriceList(Expression<Func<OM_ProductPrice, bool>> fuc)
+        private List<OM_ProductPrice> GetProducePriceList(Expression<Func<OM_ProductPrice, bool>> fuc)
         {
             return DbRepository.GetList(fuc);
 
@@ -357,13 +357,17 @@ namespace OrderManager.Manager
             //    throw new GenericException("物料代码不能为空");
             //}
 
-            var user = userManager.GetUser(u => u.Account == cardCode);
+            var user = userManager.GetUser(u => u.Guid == cardCode);
 
             if (user == null)
             {
                 throw new GenericException("当前客户不存在");
             }
-            return this.GetProducePriceList(p => p.Product_ItemCode == itemCode && user.Guid == p.User_Guid).ToList();
+            //List<string> listUserGuids = new List<string>();
+
+            //var temp1 = GetProducePriceList(p => p.Product_ItemCode == "PI00012" & p.User_Guid == "317122F3-0C0E-4626-883C-4F0D4669A89D");
+            //var temp = GetProducePriceList(p => p.Product_ItemCode == itemCode & p.User_Guid == user.Guid);
+            return this.GetProducePriceList(p => p.Product_ItemCode.Trim() == itemCode.Trim() & user.Guid.Trim().ToLower() == p.User_Guid.Trim().ToLower()).ToList();
         }
 
 

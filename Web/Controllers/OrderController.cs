@@ -24,7 +24,7 @@ namespace OrderManager.Web
     {
 
         private IUserService UserService;
-
+        static string CardCode = string.Empty;
         public OrderController()
         {
             UserService = new UserServiceClient();
@@ -97,11 +97,13 @@ namespace OrderManager.Web
 
 
 
-        public ViewResult ProductList()
+        public ViewResult ProductList(string cardCode)
         {
-            var list = UserService.GetProductList(Cipher, "", 0);
+            //var list = UserService.GetProductList(Cipher, "", 0);
+            //var count = UserService.GetProductListCount(Cipher, "");
+            var list = UserService.GetProductList(cardCode, "", 0);
             var count = UserService.GetProductListCount(Cipher, "");
-
+            CardCode = cardCode;
             ViewBag.PageSize = 10;
             ViewBag.PageIndex = 0;
             ViewBag.TotalPages = Math.Ceiling(Convert.ToDouble(count) / Convert.ToDouble(10));
@@ -112,7 +114,7 @@ namespace OrderManager.Web
         [HttpPost]
         public JsonResult ProductList(string key, int? pageindex)
         {
-            var list = UserService.GetProductList(Cipher, key, (int)pageindex);
+            var list = UserService.GetProductList(CardCode, key, (int)pageindex);
             var count = UserService.GetProductListCount(Cipher, key);
 
             return Json(new JsonModel { Data = list });

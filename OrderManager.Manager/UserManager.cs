@@ -18,7 +18,7 @@ namespace OrderManager.Manager
         #region Save Method
         public bool SaveUer(OM_User user)
         {
-            if(DbRepository.Add(user) > 0)
+            if (DbRepository.Add(user) > 0)
             {
                 return true;
             }
@@ -26,7 +26,7 @@ namespace OrderManager.Manager
         }
         public bool SaveLog(OM_Log log)
         {
-            if(DbRepository.Add(log) > 0)
+            if (DbRepository.Add(log) > 0)
             {
                 return true;
             }
@@ -34,7 +34,7 @@ namespace OrderManager.Manager
         }
         public bool SaveDepartment(OM_Department dep)
         {
-            if(DbRepository.Add(dep) > 0)
+            if (DbRepository.Add(dep) > 0)
             {
                 return true;
             }
@@ -43,7 +43,7 @@ namespace OrderManager.Manager
 
         public bool SaveRole(OM_Role role)
         {
-            if(DbRepository.Add(role) > 0)
+            if (DbRepository.Add(role) > 0)
             {
                 return true;
             }
@@ -51,7 +51,7 @@ namespace OrderManager.Manager
         }
         public bool SaveRolePermission(OM_RolePermission rolePermission)
         {
-            if(DbRepository.Add(rolePermission) > 0)
+            if (DbRepository.Add(rolePermission) > 0)
             {
                 return true;
             }
@@ -59,7 +59,7 @@ namespace OrderManager.Manager
         }
         public bool SaveUserRole(OM_UserRole userRole)
         {
-            if(DbRepository.Add(userRole) > 0)
+            if (DbRepository.Add(userRole) > 0)
             {
                 return true;
             }
@@ -68,7 +68,7 @@ namespace OrderManager.Manager
 
         public bool SavePermission(OM_Permission permission)
         {
-            if(DbRepository.Add(permission) > 0)
+            if (DbRepository.Add(permission) > 0)
             {
                 return true;
             }
@@ -79,9 +79,9 @@ namespace OrderManager.Manager
         #region Update Method
         public bool UpdateUer(OM_User user)
         {
-            if(user != null)
+            if (user != null)
                 user.UpdateDatetime = DateTime.Now;
-            if(DbRepository.Update(user) > 0)
+            if (DbRepository.Update(user) > 0)
             {
                 return true;
             }
@@ -89,7 +89,7 @@ namespace OrderManager.Manager
         }
         public bool UpdateLog(OM_Log log)
         {
-            if(DbRepository.Update(log) > 0)
+            if (DbRepository.Update(log) > 0)
             {
                 return true;
             }
@@ -97,7 +97,7 @@ namespace OrderManager.Manager
         }
         public bool UpdateDepartment(OM_Department dep)
         {
-            if(DbRepository.Update(dep) > 0)
+            if (DbRepository.Update(dep) > 0)
             {
                 return true;
             }
@@ -106,7 +106,7 @@ namespace OrderManager.Manager
 
         public bool UpdateRole(OM_Role role)
         {
-            if(DbRepository.Update(role) > 0)
+            if (DbRepository.Update(role) > 0)
             {
                 return true;
             }
@@ -114,7 +114,7 @@ namespace OrderManager.Manager
         }
         public bool UpdateRolePermission(OM_RolePermission rolePermission)
         {
-            if(DbRepository.Update(rolePermission) > 0)
+            if (DbRepository.Update(rolePermission) > 0)
             {
                 return true;
             }
@@ -122,7 +122,7 @@ namespace OrderManager.Manager
         }
         public bool UpdateUserRole(OM_UserRole userRole)
         {
-            if(DbRepository.Update(userRole) > 0)
+            if (DbRepository.Update(userRole) > 0)
             {
                 return true;
             }
@@ -131,7 +131,7 @@ namespace OrderManager.Manager
 
         public bool UpdatePermission(OM_Permission permission)
         {
-            if(DbRepository.Update(permission) > 0)
+            if (DbRepository.Update(permission) > 0)
             {
                 return true;
             }
@@ -142,7 +142,7 @@ namespace OrderManager.Manager
         #region Delete Method
         public bool DeleteUer(Expression<Func<OM_User, bool>> func)
         {
-            if(DbRepository.Delete(func) > 0)
+            if (DbRepository.Delete(func) > 0)
             {
                 return true;
             }
@@ -150,7 +150,7 @@ namespace OrderManager.Manager
         }
         public bool DeleteLog(Expression<Func<OM_Log, bool>> log)
         {
-            if(DbRepository.Update(log) > 0)
+            if (DbRepository.Update(log) > 0)
             {
                 return true;
             }
@@ -158,7 +158,7 @@ namespace OrderManager.Manager
         }
         public bool DeleteDepartment(Expression<Func<OM_Department, bool>> dep)
         {
-            if(DbRepository.Update(dep) > 0)
+            if (DbRepository.Update(dep) > 0)
             {
                 return true;
             }
@@ -167,7 +167,7 @@ namespace OrderManager.Manager
 
         public bool DeleteRole(Expression<Func<OM_Role, bool>> role)
         {
-            if(DbRepository.Update(role) > 0)
+            if (DbRepository.Update(role) > 0)
             {
                 return true;
             }
@@ -175,7 +175,7 @@ namespace OrderManager.Manager
         }
         public bool DeleteRolePermission(Expression<Func<OM_RolePermission, bool>> rolePermission)
         {
-            if(DbRepository.Update(rolePermission) > 0)
+            if (DbRepository.Update(rolePermission) > 0)
             {
                 return true;
             }
@@ -183,7 +183,7 @@ namespace OrderManager.Manager
         }
         public bool DeleteUserRole(Expression<Func<OM_UserRole, bool>> userRole)
         {
-            if(DbRepository.Update(userRole) > 0)
+            if (DbRepository.Update(userRole) > 0)
             {
                 return true;
             }
@@ -192,7 +192,7 @@ namespace OrderManager.Manager
 
         public bool DeletePermission(Expression<Func<OM_Permission, bool>> permission)
         {
-            if(DbRepository.Update(permission) > 0)
+            if (DbRepository.Update(permission) > 0)
             {
                 return true;
             }
@@ -272,8 +272,8 @@ namespace OrderManager.Manager
         public bool Login(string userAccount, string password)
         {
             bool result = false;
-            var user = GetUser(f => f.Account == userAccount && f.Pwd == password &&f.IsDel==false);
-            if(user != null)
+            var user = GetUser(f => f.Account == userAccount && f.Pwd == password && f.IsDel == false);
+            if (user != null)
             {
                 result = true;
             }
@@ -284,7 +284,7 @@ namespace OrderManager.Manager
         public bool ResetPassword(string userGuid, string newPwd)
         {
             var user = GetUser(o => o.Guid == userGuid);
-            if(user == null)
+            if (user == null)
                 throw new GenericException("当前用户不存在");
 
             user.Pwd = newPwd;
@@ -297,10 +297,10 @@ namespace OrderManager.Manager
         public bool UpdatePassword(string userGuid, string oldPwd, string newPwd)
         {
             var user = GetUser(o => o.Guid == userGuid);
-            if(user == null)
+            if (user == null)
                 throw new GenericException("当前用户不存在", OM_ExceptionCodeEnum.REDIRECT_LOGIN.ToString());
 
-            if(user.Pwd != oldPwd)
+            if (user.Pwd != oldPwd)
                 throw new GenericException("旧密码错误，更新密码失败。");
 
             user.Pwd = newPwd;
@@ -350,13 +350,13 @@ namespace OrderManager.Manager
         {
             List<OM_User> listUsers = this.GetAreaRoles(userId);
 
-            if(listUsers == null)
+            if (listUsers == null)
             {
                 return null;
             }
             //List<OM_Log> listCurrentUserLogs = new List<OM_Log>();
             List<OM_LogDataObject> listLogDataObject = new List<OM_LogDataObject>();
-            foreach(var item in listUsers)
+            foreach (var item in listUsers)
             {
                 listLogDataObject.AddRange(GetLogList(l => l.User_Guid == item.Guid).Select(c => c.DTO(item.Name)));
                 //listCurrentUserLogs.AddRange(GetLogList(l => l.User_Guid == item.Guid).ToList());
@@ -372,13 +372,13 @@ namespace OrderManager.Manager
         public List<OM_LogDataObject> GetCurrentUserLogs(string userId, string serVal)
         {
             List<OM_User> listUsers = this.GetAreaRoles(userId);
-            if(listUsers == null)
+            if (listUsers == null)
             {
                 return null;
             }
             //List<OM_Log> listCurrentUserLogs = new List<OM_Log>();
             List<OM_LogDataObject> listLogDataObject = new List<OM_LogDataObject>();
-            foreach(var item in listUsers)
+            foreach (var item in listUsers)
             {
                 listLogDataObject.AddRange(GetLogList(l => l.User_Guid == item.Guid && (l.Doc_View.Contains(serVal) || l.Doc_Name.Contains(serVal) || l.Operation.Contains(serVal) || l.CreateDatetime.ToString().Contains(serVal))).Select(c => c.DTO(item.Name)));
                 //listCurrentUserLogs.AddRange(GetLogList(l => l.User_Guid == item.Guid).ToList());
@@ -397,7 +397,7 @@ namespace OrderManager.Manager
             OM_UserRole userRole = GetUserRole(c => c.User_Guid == userGuid);
 
             OM_User currentUser = GetUser(u => u.Guid == userGuid && u.IsDel == false);
-            if(currentUser == null)
+            if (currentUser == null)
             {
                 return null;
             }
@@ -410,12 +410,12 @@ namespace OrderManager.Manager
             List<OM_AreaRoles> listRoles = new List<OM_AreaRoles>();
             GetRolesTree(role.ID, listRoles, roles);
             List<OM_User> listNewUsers = null;
-            if(listRoles != null)
+            if (listRoles != null)
             {
                 List<string> listUserGuid = new List<string>();
 
                 GetListUserGuid(listUserGuid, listRoles);
-                if(currentUser.Account == currentUser.ParentCode)
+                if (currentUser.Account == currentUser.ParentCode)
                 {
                     listUsers.AddRange(GetUserList(u => listUserGuid.Contains(u.Guid) && u.Area_Guid == currentUser.Area_Guid && u.IsDel == false).ToList());
                 }
@@ -425,13 +425,17 @@ namespace OrderManager.Manager
                 }
                 List<OM_UserRole> listUserRoles = GetUserRoleList(u => (u.Role_Guid == "AA196056-70EE-45BF-A56A-A90070DA1425" || u.Role_Guid == "57BE06DB-BA09-49B7-A1D8-795EFA25F392")).ToList();
                 listNewUsers = new List<OM_User>();
-                foreach(var item in listUsers)
+                foreach (var item in listUsers)
                 {
-                    foreach(var cardCode in listUserRoles)
+                    foreach (var cardCode in listUserRoles)
                     {
-                        if(item.Guid == cardCode.User_Guid)
+                        if (item.Guid == cardCode.User_Guid)
                         {
-                            listNewUsers.Add(item);
+                            if (!listNewUsers.Contains(item))
+                            {
+                                listNewUsers.Add(item);
+                            }
+
                         }
                     }
                 }
@@ -450,7 +454,7 @@ namespace OrderManager.Manager
             OM_UserRole userRole = GetUserRole(c => c.User_Guid == userId);
 
             OM_User currentUser = GetUser(u => u.Guid == userId && u.IsDel == false);
-            if(currentUser == null)
+            if (currentUser == null)
             {
                 return null;
             }
@@ -463,12 +467,12 @@ namespace OrderManager.Manager
             List<OM_AreaRoles> listRoles = new List<OM_AreaRoles>();
 
             GetRolesTree(role.ID, listRoles, roles);
-            if(listRoles != null)
+            if (listRoles != null)
             {
                 List<string> listUserGuid = new List<string>();
 
                 GetListUserGuid(listUserGuid, listRoles);
-                if(currentUser.Account == currentUser.ParentCode)
+                if (currentUser.Account == currentUser.ParentCode)
                 {
                     listUsers.AddRange(GetUserList(u => listUserGuid.Contains(u.Guid) && u.Area_Guid == currentUser.Area_Guid && u.IsDel == false).ToList());
                 }
@@ -484,10 +488,10 @@ namespace OrderManager.Manager
 
         private void GetListUserGuid(List<string> listUserGuid, List<OM_AreaRoles> listRoles)
         {
-            foreach(var role in listRoles)
+            foreach (var role in listRoles)
             {
                 listUserGuid.AddRange(GetUserRoleList(c => c.Role_Guid == role.Guid && c.IsDel == false).Select(r => r.User_Guid).ToList());
-                if(role.ChildRoles.Count > 0)
+                if (role.ChildRoles.Count > 0)
                 {
                     GetListUserGuid(listUserGuid, role.ChildRoles);
                 }
@@ -495,9 +499,9 @@ namespace OrderManager.Manager
         }
         private void GetRolesTree(int roleId, List<OM_AreaRoles> listRoles, List<OM_Role> roles)
         {
-            foreach(var role in roles)
+            foreach (var role in roles)
             {
-                if(role.ParentID == roleId)
+                if (role.ParentID == roleId)
                 {
                     OM_AreaRoles areaRoles = new OM_AreaRoles();
                     areaRoles.ID = role.ID;
@@ -524,12 +528,12 @@ namespace OrderManager.Manager
         {
             List<OM_User> listUsers = this.GetAreaRoles(userId);
 
-            if(listUsers == null)
+            if (listUsers == null)
             {
                 return null;
             }
             List<OM_MessageBoard> listMsgBoardDataObject = new List<OM_MessageBoard>();
-            foreach(var item in listUsers)
+            foreach (var item in listUsers)
             {
                 listMsgBoardDataObject.AddRange(GetMessageBoardList(m => m.User_Guid == item.Guid));
             }
@@ -539,7 +543,7 @@ namespace OrderManager.Manager
 
         private IList<OM_MessageBoard> GetMessageBoardList(Expression<Func<OM_MessageBoard, bool>> whereLambda)
         {
-            return DbRepository.GetList<OM_MessageBoard>(whereLambda);  
+            return DbRepository.GetList<OM_MessageBoard>(whereLambda);
         }
 
         /// <summary>
@@ -550,7 +554,7 @@ namespace OrderManager.Manager
         public bool SaveMessageBoard(OM_MessageBoard msgBoard)
         {
             msgBoard.CreateDatetime = DateTime.Now;
-            if(DbRepository.Add(msgBoard) > 0)
+            if (DbRepository.Add(msgBoard) > 0)
             {
                 return true;
             }

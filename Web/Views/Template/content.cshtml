@@ -10,6 +10,42 @@
 
 
 @section body{
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #lanrenzhijia {
+            width: 170px;
+            height: 280px;
+            position: fixed;
+            right: -130px;
+            top: 100px;
+            background: url(http://demo.lanrenzhijia.com/2014/service1022/images/lanrenzhijia.png) no-repeat 0 0;
+        }
+
+            #lanrenzhijia .lanren {
+                width: 130px;
+                height: 280px;
+                float: right;
+                overflow: hidden;
+                text-align: center;
+                font-size: 14px;
+                color: #013984;
+            }
+
+                #lanrenzhijia .lanren h2 a {
+                    color: #013984;
+                    font-size: 14px;
+                    text-decoration: none;
+                }
+
+                    #lanrenzhijia .lanren h2 a:hover {
+                        color: #FF3600;
+                    }
+    </style>
     <header class="main-header">
         <a href='@Url.Content("~/home/home")' class="logo">
             <!-- LOGO -->
@@ -126,7 +162,15 @@
         <section class="content">
             <div class="row">
                 <div class="col-xs-12">
-                        @RenderSection("content", true)
+                    @RenderSection("content", true)
+                    <div id="lanrenzhijia">
+                        <div class="lanren">
+                            <h2 style="margin-top:65px;"><a href="http://wpa.qq.com/msgrd?v=1&uin=361703739&site=240zt ">点击留言</a></h2>
+                            <p style="margin-top:20px;">QQ：123456789</p>
+                            <h2 style="margin-top:65px;"><a href="http://wpa.qq.com/msgrd?v=1&uin=361703739&site=240zt ">在线客服</a></h2>
+                            <p style="margin-top:15px; color:#fff;">QQ：123456789</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -147,9 +191,14 @@
 }
 
 @section script{
-@*<script src="~/Js/utility/jquery.min.js"></script>*@
+    @*<script src="~/Js/utility/jquery.min.js"></script>*@
     <script>
         $(function () {
+            $('#lanrenzhijia').hover(function () {
+                $('#lanrenzhijia').stop().animate({ right: '0px' }, 200);
+            }, function () {
+                $('#lanrenzhijia').stop().animate({ right: '-130px' }, 200);
+            });
             $('body').addClass('skin-blue fixed');
 
             $("#signOut").click(function () {
@@ -175,10 +224,20 @@
             })
 
         });
+        function picsize(obj, MaxWidth) {
+            img = new Image();
+            img.src = obj.src;
+            if (img.width > MaxWidth) {
+                return MaxWidth;
+            }
+            else {
+                return img.width;
+            }
+        }
     </script>
     <style>
         th {
-        min-width:100px;
+            min-width: 100px;
         }
     </style>
     @RenderSection("script", false)

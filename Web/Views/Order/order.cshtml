@@ -43,11 +43,11 @@
                     <div>
                         <br />
                         <button class="btn btn-default btn-sm disabled">&nbsp;客户名称</button>
-                        <label  id="CardName" class="form-control input-sm pull-right " style="width: 200px;" >@(Model == null ? "" : Model.CardName) </label>
+                        <label id="CardName" class="form-control input-sm pull-right " style="width: 200px;">@(Model == null ? "" : Model.CardName) </label>
                     </div>
 
-                        <input type="hidden" id="OrderGuid" value="@(Model==null ?"": Model.Guid)" />
-                    </div><!-- /.btn-group -->
+                    <input type="hidden" id="OrderGuid" value="@(Model==null ?"": Model.Guid)" />
+                </div><!-- /.btn-group -->
 
                 <div class="btn-group pull-right" style="margin:2%;">
                     <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;状态</button>
@@ -211,20 +211,20 @@
                 })
 
                 $("button[name='om-OrderLine-Edit']", $(this)).click(function () {
-                        if (isEdit) {
-                            return;
-                        }
-                        isEdit = true;
-                        var arrTds = $(this).parent().siblings('td');
-                    
-                        $(arrTds[0]).html("<input id='itemcode' type='text' value='" + $(arrTds[0]).html() + "'/> ")
-                        $(arrTds[1]).html("<input id='itemname' type='text' value='" + $(arrTds[1]).html() + "'/> ")
-                        $(arrTds[2]).html("<input id='itemprice' type='text' value='" + $(arrTds[2]).html() + "'/> ")
-                        $(arrTds[3]).html("<input id='itemquantity' type='text' value='" + $(arrTds[3]).html() + "'/> ")
+                    if (isEdit) {
+                        return;
+                    }
+                    isEdit = true;
+                    var arrTds = $(this).parent().siblings('td');
 
-                        itemProductEvent("itemcode");
-                        itemProductEvent("itemname");
-                        itemProductEvent("itemprice");
+                    $(arrTds[0]).html("<input id='itemcode' type='text' value='" + $(arrTds[0]).html() + "'/> ")
+                    $(arrTds[1]).html("<input id='itemname' type='text' value='" + $(arrTds[1]).html() + "'/> ")
+                    $(arrTds[2]).html("<input id='itemprice' type='text' value='" + $(arrTds[2]).html() + "'/> ")
+                    $(arrTds[3]).html("<input id='itemquantity' type='text' value='" + $(arrTds[3]).html() + "'/> ")
+
+                    itemProductEvent("itemcode");
+                    itemProductEvent("itemname");
+                    itemProductEvent("itemprice");
 
                 })
 
@@ -345,7 +345,7 @@
             $(tr).click(function () {
                 //是否当前行  currentrow ==old
                 if ($(currentRow).html() == $(tr).html()) {
-                    var editInput = $("td input", $(currentRow)).length; 
+                    var editInput = $("td input", $(currentRow)).length;
                     if (editInput > 0) {
                         if (saveClick) {  //b保存按钮，移除input框
                             RemoveEditInput(currentRow);
@@ -393,7 +393,7 @@
 
         function itemProductEvent(id) {
             $("#" + id).dblclick(function () {
-                createDialog('@(Url.Content("~/order/productlist"))');
+                createDialog('@(Url.Content("~/order/productlist"))', "cardCode=" + $("#UserCode").val());
             });
         }
 
