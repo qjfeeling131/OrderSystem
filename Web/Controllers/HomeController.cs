@@ -11,6 +11,7 @@ using System.Net;
 using System.Web;
 using Web.UserService;
 using OrderManager.Web.Models;
+using Web.Attribute;
 
 
 
@@ -25,7 +26,7 @@ namespace OrderManager.Web
         {
             UserService = new UserServiceClient();
         }
-
+        [SkipLogin]
         //js验证 和loading
         public ViewResult Login()
         {
@@ -45,11 +46,11 @@ namespace OrderManager.Web
             return View();
         }
 
-
+        [SkipLogin]
         [HttpPost]
         public JsonResult Login(string UserCode, string Password, bool? IsRememeber)  //json 不能传null
         {
-           var detail = UserService.Login(UserCode, Encryptor.MD5Encrypt(Password));
+            var detail = UserService.Login(UserCode, Encryptor.MD5Encrypt(Password));
             CurrentUser = detail;
 
             if (IsRememeber == true)
@@ -64,7 +65,7 @@ namespace OrderManager.Web
             return Json(new JsonModel { Code = 1, Type = JsonTypeEnym.Redirect.ToString(), Href = Url.Content("~/home/home") });
         }
 
-
+        [SkipLogin]
         [HttpPost]
         public JsonResult SignOut(string userGuid)
         {

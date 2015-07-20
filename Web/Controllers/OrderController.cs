@@ -54,7 +54,7 @@ namespace OrderManager.Web
             var status = Enum.Parse(typeof(OM_DocStatusEnum), detail.DocStatus);
 
             ViewBag.Status = status;
-
+            ViewBag.DocDate = Convert.ToDateTime(detail.DocDate).ToString("yyyy-MM-dd");
             return View("~/views/order/order.cshtml", detail);
 
         }

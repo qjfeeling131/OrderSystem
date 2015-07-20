@@ -12,6 +12,7 @@ using System.Web.Script.Serialization;
 using OrderManager.Model.DTO;
 using System.Net;
 using OrderManager.Common;
+using Web.Attribute;
 
 
 namespace OrderManager.Web
@@ -115,7 +116,24 @@ namespace OrderManager.Web
         protected override void OnAuthorization(AuthorizationContext filterContext)
         {
             //filterContext.
+            if (!DoesSkip<SkipLoginAttribute>(filterContext))
+            {
+                if (CurrentUser == null)
+                {
+                    filterContext.Result = new RedirectResult("/Home/login");
+                }
+            }
+
             base.OnAuthorization(filterContext);
+        }
+
+        private bool DoesSkip<T>(AuthorizationContext filterContext) where T : Attribute
+        {
+            if (!filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(T), false) && !filterContext.ActionDescriptor.IsDefined(typeof(T), false))
+            {
+                return false;
+            }
+            return true;
         }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

@@ -203,6 +203,7 @@ namespace OrderManager.Manager
             order.CardCode = salesOrder.CardCode;
             order.CardName = user.Name;
             order.Remarks = salesOrder.Remarks;
+            order.DocDate = salesOrder.DocDate;
 
             var salesOrderHead = DbRepository.Update(order);
             if (salesOrderHead <= 0)
@@ -284,19 +285,31 @@ namespace OrderManager.Manager
                 throw new GenericException("当前订单不存在,请检查数据");
             }
 
-            salesOrder.DocStatus = ((int)OM_DocStatusEnum.已对接).ToString();
-            if (DbRepository.Update(salesOrder) > 0)
+            OM_SalesOrderDataObject salesOrderDataObject = salesOrder.ToDTO();
+            salesOrderDataObject.SalesOrderLine = this.GetSalesOrderItemList(s => s.Order_Guid == orderGuid).ToList();
+            if (salesOrderDataObject.SalesOrderLine == null)
             {
-                return true;
+                throw new GenericException("当前订单行不存在,请检查数据");
             }
-            //SaveForSAP();   //对接SAP实现
+
+            //对接SAP实现
+            if (SaveForSAP(salesOrderDataObject))
+            {
+                salesOrder.DocStatus = ((int)OM_DocStatusEnum.已对接).ToString();
+                if (DbRepository.Update(salesOrder) > 0)
+                {
+                    return true;
+                }
+            }
+
+
             throw new GenericException("更新失败,请联系系统管理员");
         }
 
         private bool SaveForSAP(OM_SalesOrderDataObject salesOrder)
         {
+            return B1Company.SBOCompany.SaveSalesOrderDraft(salesOrder);
 
-            return false;
         }
         /// <summary>
         /// 获取当前单据对象的集合

@@ -7,7 +7,6 @@
 
 
 @section content_header{
-
     <h1>
         订单管理
     </h1>
@@ -49,11 +48,22 @@
                     <input type="hidden" id="OrderGuid" value="@(Model==null ?"": Model.Guid)" />
                 </div><!-- /.btn-group -->
 
-                <div class="btn-group pull-right" style="margin:2%;">
-                    <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;状态</button>
-                    <input id="status" value="未提交" disabled type="text" name="status" class="form-control  input-sm pull-right" style="width:180px;" />
-
-                </div><!-- /.btn-group -->
+                <div class="btn-group pull-right" style="margin:2%; ">
+                    <div>
+                        <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;单据状态</button>
+                        <input id="status" value="未提交" disabled type="text" name="status" class="form-control  input-sm pull-right" style="width:180px;" />
+                    </div>
+                    <div>
+                        <br />
+                        <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;单据日期</button>
+                        <div class="input-append date" id="dateteimepicker" style="float: right !important; ">
+                            <input style="width:180px; height:30px" type="text" id="datePicker" value="@(Model == null ? "" : Model.DocDate)" data-link-field="docDate" readonly />
+                            <span class=" add-on"><i class="icon-remove"></i></span>
+                            <span class="add-on"><i class="icon-th"></i></span>
+                            <input type="hidden" id="docDate" name="docDate" value="@(Model == null ? "" : Model.DocDate)" /><br />
+                        </div>
+                    </div><!-- /.btn-group -->
+                </div>
 
             </div>
             <div class="row" style="border-top:1px solid #ff6a00;margin:2%;">
@@ -141,10 +151,23 @@
             $("#orderManager .treeview-menu").attr("display", "block");
             $("#orderManager .treeview-menu>li").eq(1).addClass("active");
             $("#status").val('@(ViewBag.Status == null ? "未提交" : ViewBag.Status)');
+            $("#docDate").val('@(ViewBag.DocDate == null ? "" : ViewBag.DocDate)');
+            $("#datePicker").val('@(ViewBag.DocDate == null ? "" : ViewBag.DocDate)');
             //客户代码dialog
             $("#UserCode").dblclick(function () {
                 createDialog('@(Url.Content("~/order/usercodelist"))');
             })
+
+            $("#dateteimepicker").datetimepicker({
+                language: 'zh-CN',
+                format: "yyyy-MM-dd",
+                showMeridian: true,
+                autoclose: true,
+                todayBtn: true,
+                minView: 2,
+                forceParse: false,
+                pickerPosition: 'bottom-left'
+            });
 
             //添加行
             $("#addRow").click(function () {
@@ -310,6 +333,7 @@
                 CardCode: "",
                 DocStatus: "",
                 CardName: "",
+                DocDate: "",
                 SalesOrderLine: new Array(),//{ [],[],[] }
                 Remarks: ""
 
@@ -318,6 +342,7 @@
             result.Remarks = $("#remark").val();
             result.DocStatus = $("#status").val();
             result.CardName = $("#CardName").html();
+            result.DocDate = $("#docDate").val();
             $("#order_table tr").each(function () {
                 var tdArr = $('td', $(this));
                 if (tdArr.length == 0)
