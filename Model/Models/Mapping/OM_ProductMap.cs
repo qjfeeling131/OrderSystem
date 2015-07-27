@@ -17,6 +17,8 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.Guid)
                 .IsRequired()
                 .HasMaxLength(50);
+            this.Property(t => t.ParentId)
+                .HasMaxLength(50);
 
             this.Property(t => t.ItemCode)
                 .IsRequired()
@@ -47,6 +49,7 @@ namespace OrderManager.Model.Models.Mapping
             this.ToTable("OM_Product");
             this.Property(t => t.ID).HasColumnName("ID");
             this.Property(t => t.Guid).HasColumnName("Guid");
+            this.Property(t => t.ParentId).HasColumnName("ParentId");
             this.Property(t => t.ItemCode).HasColumnName("ItemCode");
             this.Property(t => t.ItemName).HasColumnName("ItemName");
             this.Property(t => t.FrgnName).HasColumnName("FrgnName");

@@ -7,6 +7,8 @@ namespace OrderManager.Model.Models
     {
         public int ID { get; set; }
         public string Guid { get; set; }
+
+        public string ParentId { get; set; }
         public string ItemCode { get; set; }
         public string ItemName { get; set; }
         public string FrgnName { get; set; }
