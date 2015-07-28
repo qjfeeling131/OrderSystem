@@ -23,7 +23,7 @@
             position: fixed;
             right: -130px;
             top: 100px;
-            background: url(/img/OnLineChat.png) no-repeat 0 0;
+            background: url('@Url.Content("~/img/OnLineChat.png")') no-repeat 0 0;
         }
 
             #onlineChat .chat {
@@ -64,7 +64,7 @@
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="~/img/me.svg" width="90" height="90" class="img-circle" alt="User Image" />
+                                <img src="@Url.Content("~/img/me.svg")" width="90" height="90" class="img-circle" alt="User Image" />
                                 <p>
                                     @ViewBag.UserName
                                     <small>上次登录：@ViewBag.LoginDate</small>

@@ -361,7 +361,6 @@
             })
 
             var data = JSON.stringify(result);
-            console.log(data);
             return data;
 
         }
@@ -416,22 +415,16 @@
             saveClick = false;
         }
 
-        function itemProductEvent(id) {
+        function itemProductEvent(id) {          
             $("#" + id).dblclick(function () {
+                if ($("#UserCode").val() == "") {
+                    alertInfo("提示", "添加订单项前，请先选择客户。");
+                    return;
+                }
                 createDialog('@(Url.Content("~/order/productlist"))', "cardCode=" + $("#UserCode").val());
             });
         }
 
-        function ItemPriceEvent(id) {
-            $("#" + id).dblclick(function () {
-                if (isNullorEmptyString($("#itemcode").val())) {
-                    alertInfo("提示", "请先选择物料");
-                    return;
-                }
-                createDialog('@(Url.Content("~/order/productprice"))', "productItemCode=" + $("#itemcode").val() + "&cardCode=" + $("#UserCode").val());
-            });
-        }
-
-
+   
     </script>
 }

@@ -231,57 +231,50 @@ namespace OrderManager.Service
         }
 
 
-        public IList<OM_ProductInfo> GetProductList(string cipher, string searchKey, int pageIndex)
+        public IList<OM_ProductInfo> GetProductList(string cipher, string CardCode,string searchKey, int pageIndex)
         {
             int count = 0;
             PageListParameter<OM_Product, string> parameter = new PageListParameter<OM_Product, string>();
-            parameter.whereLambda = s => s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey);
+            parameter.whereLambda = s => (s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey)) 
+                                            && s.CardCode==CardCode
+                                            && (s.ParentId == null || s.ParentId == s.ItemCode);
             parameter.pageIndex = pageIndex;
             parameter.orderByLambda = s => s.ItemCode;
-            parameter.pageSize = 10;
+            parameter.pageSize = 5;
 
             IList<OM_ProductInfo> result = new List<OM_ProductInfo>();
             var productList = orderManger.GetProductList(parameter, out count);
-            var user = userManager.GetUser(s => s.Account == cipher);
+
+
+            var user = userManager.GetUser(s => s.Account == CardCode);
+
+         
             foreach (var item in productList)
             {
                 var listPrice = orderManger.GetCurrentProducePriceList(item.ItemCode, user.Guid);
-                if (listPrice.Count <= 0)
-                {
-                    var price = orderManger.GetCurrentProducePriceList(item.ItemCode, user.Guid).FirstOrDefault();
-                    OM_ProductInfo product = new OM_ProductInfo()
-                    {
-                        ItemCode = item.ItemCode,
-                        ItemName = item.ItemName,
-                        Price = (price == null) ? "--" : price.Price.ToString("0.00")
-                    };
-                    result.Add(product);
-                }
-                else
-                {
-                    foreach (var priceItem in listPrice)
-                    {
-                        OM_ProductInfo product = new OM_ProductInfo()
-                        {
-                            ItemCode = item.ItemCode,
-                            ItemName = item.ItemName,
-                            Price = (priceItem == null) ? "--" : priceItem.Price.ToString("0.00")
-                        };
-                        result.Add(product);
-                    }
-                }
+                List<OM_ProductInfo> children = orderManger.GetChildProductRecursion(item.CardCode, item.ItemCode, user.Guid);
 
+                OM_ProductInfo product = new OM_ProductInfo();           
+                product.ItemName = item.ItemName;
+                product.ItemCode = item.ItemCode;
+                product.ChildNode = children;
+                product.Price =listPrice.Select(a => a.Price.ToString("0.00")).ToArray();
 
+                result.Add(product);
             }
             return result;
         }
 
+    
 
-        public int GetProductListCount(string cipher, string searchKey)
+
+        public int GetProductListCount(string cipher, string CardCode, string searchKey)
         {
             int count = 0;
             PageListParameter<OM_Product, string> parameter = new PageListParameter<OM_Product, string>();
-            parameter.whereLambda = s => s.ItemCode.Contains(searchKey) || s.ItemName.Contains(searchKey);
+            parameter.whereLambda = s => (s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey))
+                                          && s.CardCode == CardCode
+                                          && (s.ItemCode == null || s.ItemCode == s.ParentId);
             parameter.orderByLambda = s => s.ItemCode;
             orderManger.GetProductList(parameter, out count);
 

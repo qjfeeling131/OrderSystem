@@ -63,9 +63,9 @@ namespace OrderManager.Service
         List<OM_User> GetCurrentUserByCardCode(string cipher, string userGuid);
 
         [OperationContract]
-        IList<OM_ProductInfo> GetProductList(string cipher, string searchKey, int pageIndex);
+        IList<OM_ProductInfo> GetProductList(string cipher, string CardCode, string searchKey, int pageIndex);
         [OperationContract]
-        int GetProductListCount(string cipher, string searchKey);
+        int GetProductListCount(string cipher, string CardCode, string searchKey);
 
 
         [OperationContract]

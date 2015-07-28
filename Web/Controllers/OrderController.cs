@@ -99,14 +99,13 @@ namespace OrderManager.Web
 
         public ViewResult ProductList(string cardCode)
         {
-            //var list = UserService.GetProductList(Cipher, "", 0);
-            //var count = UserService.GetProductListCount(Cipher, "");
-            var list = UserService.GetProductList(cardCode, "", 0);
-            var count = UserService.GetProductListCount(Cipher, "");
+
+            var list = UserService.GetProductList(Cipher,cardCode, "", 0);
+            var count = UserService.GetProductListCount(Cipher,cardCode, "");
             CardCode = cardCode;
-            ViewBag.PageSize = 10;
+            ViewBag.PageSize = 5;
             ViewBag.PageIndex = 0;
-            ViewBag.TotalPages = Math.Ceiling(Convert.ToDouble(count) / Convert.ToDouble(10));
+            ViewBag.TotalPages = Math.Ceiling(Convert.ToDouble(count) / Convert.ToDouble(5));
             return View("~/views/order/ProductList.cshtml", list);
 
         }
@@ -114,8 +113,8 @@ namespace OrderManager.Web
         [HttpPost]
         public JsonResult ProductList(string key, int? pageindex)
         {
-            var list = UserService.GetProductList(CardCode, key, (int)pageindex);
-            var count = UserService.GetProductListCount(Cipher, key);
+            var list = UserService.GetProductList(Cipher, CardCode, key, (int)pageindex);
+            var count = UserService.GetProductListCount(Cipher, CardCode, key);
 
             return Json(new JsonModel { Data = list });
         }

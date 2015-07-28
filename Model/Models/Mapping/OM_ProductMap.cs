@@ -40,6 +40,9 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.Img)
                 .HasMaxLength(250);
 
+            this.Property(t => t.ParentId)
+                          .HasMaxLength(50);
+
             // Table & Column Mappings
             this.ToTable("OM_Product");
             this.Property(t => t.ID).HasColumnName("ID");
@@ -59,6 +62,7 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.CreateDatetime).HasColumnName("CreateDatetime");
             this.Property(t => t.UpdateDateTime).HasColumnName("UpdateDateTime");
             this.Property(t => t.Remarks).HasColumnName("Remarks");
+            this.Property(t => t.ParentId).HasColumnName("ParentId");
         }
     }
 }

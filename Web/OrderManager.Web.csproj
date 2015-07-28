@@ -15,7 +15,7 @@
     <AssemblyName>Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -146,9 +146,6 @@
     <Content Include="img\boxed-bg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\home_bg.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="img\icons.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -245,7 +242,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\UserService\UserService1.disco" />
+    <None Include="Service References\UserService\UserService.disco" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Template\exceptionPage.cshtml" />
     <Content Include="Views\User\userlist.cshtml" />
@@ -258,17 +255,17 @@
     <Content Include="Views\Order\usercodelist.cshtml" />
     <Content Include="Views\Order\productlist.cshtml" />
     <Content Include="Views\Order\productPrice.cshtml" />
-    <None Include="Service References\UserService\UserService1.wsdl" />
-    <None Include="Service References\UserService\UserService4.xsd">
+    <None Include="Service References\UserService\UserService.wsdl" />
+    <None Include="Service References\UserService\UserService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UserService\UserService41.xsd">
+    <None Include="Service References\UserService\UserService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UserService\UserService42.xsd">
+    <None Include="Service References\UserService\UserService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UserService\UserService43.xsd">
+    <None Include="Service References\UserService\UserService3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="web.Debug.config">
@@ -351,7 +348,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:6135/</IISUrl>
+          <IISUrl>http://localhost/OrderManager.Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

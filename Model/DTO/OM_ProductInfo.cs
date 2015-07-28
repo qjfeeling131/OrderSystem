@@ -12,6 +12,8 @@ namespace OrderManager.Model.DTO
     [DataContract]
     public class OM_ProductInfo
     {
+        [DataMember]
+        public List<OM_ProductInfo> ChildNode { get; set; }
 
         [DataMember]
         public string ItemCode { get; set; }
@@ -20,7 +22,7 @@ namespace OrderManager.Model.DTO
         public string ItemName { get; set; }
 
         [DataMember]
-        public string Price { get; set; }
+        public string[] Price { get; set; }
 
 
     }

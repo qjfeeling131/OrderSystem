@@ -120,7 +120,7 @@ namespace OrderManager.Web
             {
                 if (CurrentUser == null)
                 {
-                    filterContext.Result = new RedirectResult("/Home/login");
+                    filterContext.Result = new RedirectResult(Url.Content("~/Home/login"));
                 }
             }
 

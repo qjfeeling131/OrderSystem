@@ -385,6 +385,34 @@ namespace OrderManager.Manager
 
 
 
+        public List<OM_ProductInfo> GetChildProductRecursion(string cardCode, string itemCode, string userGuid)
+        {
+
+            var result = DbRepository.GetList<OM_Product>(a => a.CardCode == cardCode && a.ParentId == itemCode);
+
+            if (result == null || result.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                var infos = new List<OM_ProductInfo>();
+                foreach (var item in result)
+                {
+                    var listPrice = GetCurrentProducePriceList(item.ItemCode, userGuid);
+                    var nodes = GetChildProductRecursion(item.CardCode, item.ItemCode, userGuid);
+                    OM_ProductInfo product = new OM_ProductInfo();
+                    product.Price = listPrice.Select(a => a.Price.ToString("0.00")).ToArray();
+                    product.ItemCode = item.ItemCode;
+                    product.ItemName = item.ItemName;
+                    product.ChildNode = nodes;
+
+                }
+                return infos;
+            }
+        }
+
+
         #endregion
 
 

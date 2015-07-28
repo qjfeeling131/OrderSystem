@@ -22,5 +22,6 @@ namespace OrderManager.Model.Models
         public Nullable<System.DateTime> CreateDatetime { get; set; }
         public Nullable<System.DateTime> UpdateDateTime { get; set; }
         public string Remarks { get; set; }
+        public string ParentId { get; set; }
     }
 }
