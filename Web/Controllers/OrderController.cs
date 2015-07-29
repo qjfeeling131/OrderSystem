@@ -114,7 +114,7 @@ namespace OrderManager.Web
         public JsonResult ProductList(string key, int? pageindex)
         {
             var list = UserService.GetProductList(Cipher, CardCode, key, (int)pageindex);
-            var count = UserService.GetProductListCount(Cipher, CardCode, key);
+            //var count = UserService.GetProductListCount(Cipher, CardCode, key);
 
             return Json(new JsonModel { Data = list });
         }

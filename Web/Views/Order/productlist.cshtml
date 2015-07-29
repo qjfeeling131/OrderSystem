@@ -40,6 +40,7 @@
                                     <td>@item.Price</td>
                                 </tr>
                             }
+                           
                         </tbody>
 
                     </table>
@@ -92,7 +93,7 @@
 @section buttons{
     <button type="button" class="btn btn-primary" data-dismiss="modal" id="comfirm_code">确定</button>
     <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel_code">取消</button>
-@*<script src="~/Js/utility/jquery.min.js"></script>*@
+    @*<script src="~/Js/utility/jquery.min.js"></script>*@
     <script>
         var itemcode;
         var itemname;
@@ -133,7 +134,7 @@
             getAsynData("productList", key + "&" + pageindex, function (json) {
                 clearTableTr();
 
-                addProductRow(json.Data);   
+                addProductRow(json.Data);
             });
         }
 
@@ -142,14 +143,14 @@
             if (data.length == 0) {
                 $("#productlist_table tbody").append(row);
             } else {
-      
+
                 for (var i = 0; i < data.length; i++) {
                     row = "<tr role='row'>";
                     row += "<td>" + data[i].ItemCode + "</td><td>" + data[i].ItemName + "</td><td>" + data[i].Price + "</td>";
                     row += "</tr>";
                     $("#productlist_table tbody").append(row);
                 }
-         
+
             }
 
             $("#productlist_table tbody tr").each(function () {
@@ -172,14 +173,10 @@
                 itemcode = $(this).children('td').first().html();
                 itemname = $($(this).children('td')[1]).html();
                 itemprice = $(this).children('td').last().html();
-                console.log(itemcode);
-                console.log(itemname);
-                console.log(itemprice);
 
-                console.log(itemcode + "," + itemname);
                 $(this).css("background", "#f4f4f4");
                 $(this).siblings("tr").css("background", "");
-                $("#itemcode").val(itemcode); 
+                $("#itemcode").val(itemcode);
                 $("#itemname").val(itemname);
                 $("#itemprice").val(itemprice);
 

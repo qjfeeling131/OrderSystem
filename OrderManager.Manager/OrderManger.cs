@@ -387,8 +387,8 @@ namespace OrderManager.Manager
 
         public List<OM_ProductInfo> GetChildProductRecursion(string cardCode, string itemCode, string userGuid)
         {
-
-            var result = DbRepository.GetList<OM_Product>(a => a.CardCode == cardCode && a.ParentId == itemCode);
+            //&& a.ParentId!=a.ItemCode 把自己排除
+            var result = DbRepository.GetList<OM_Product>(a => a.CardCode == cardCode && a.ParentId == itemCode && a.ParentId!=a.ItemCode);
 
             if (result == null || result.Count == 0)
             {
@@ -406,6 +406,7 @@ namespace OrderManager.Manager
                     product.ItemCode = item.ItemCode;
                     product.ItemName = item.ItemName;
                     product.ChildNode = nodes;
+                    infos.Add(product);
 
                 }
                 return infos;
