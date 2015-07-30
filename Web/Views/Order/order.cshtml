@@ -141,6 +141,9 @@
 
 @section script{
     @*<script src="~/Js/utility/jquery.min.js"></script>*@
+<link href="~/Css/jquery.treegrid.css" rel="stylesheet" />
+<script src="~/Js/utility/jquery.treegrid.min.js"></script>
+<script src="~/Js/utility/jquery.treegrid.bootstrap3.js"></script>
     <script>
         var currentRow;
         var isEdit = false;
@@ -239,6 +242,9 @@
                     }
                     isEdit = true;
                     var arrTds = $(this).parent().siblings('td');
+
+                    if ($(arrTds[0]).html().indexOf("<") != -1 || $(arrTds[1]).html().indexOf("<") != -1 || $(arrTds[2]).html().indexOf("<") != -1 || $(arrTds[3]).html().indexOf("<") != -1)
+                        return;
 
                     $(arrTds[0]).html("<input id='itemcode' type='text' value='" + $(arrTds[0]).html() + "'/> ")
                     $(arrTds[1]).html("<input id='itemname' type='text' value='" + $(arrTds[1]).html() + "'/> ")
@@ -425,6 +431,6 @@
             });
         }
 
-   
+ 
     </script>
 }

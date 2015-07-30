@@ -40,6 +40,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\Libs\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -137,6 +140,7 @@
     <Content Include="Css\bootstrap\css\bootstrap.css" />
     <Content Include="Css\bootstrap\css\bootstrap.min.css" />
     <Content Include="Css\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Css\jquery.treegrid.css" />
     <Content Include="Css\fakeloader.css" />
     <Content Include="Css\skin-blue.min.css" />
     <Content Include="Global.asax" />
@@ -221,6 +225,8 @@
     <Content Include="Js\utility\fakeloader.min.js" />
     <Content Include="Js\utility\jqBootstrapValidation.js" />
     <Content Include="Js\utility\jquery.min.js" />
+    <Content Include="Js\utility\jquery.treegrid.bootstrap3.js" />
+    <Content Include="Js\utility\jquery.treegrid.min.js" />
     <Content Include="Js\utility\master.js" />
     <Content Include="Properties\DataSources\OrderManager.Model.DTO.OM_UserDetail.datasource" />
     <Content Include="Properties\DataSources\OrderManager.Model.Models.OM_Log.datasource" />
