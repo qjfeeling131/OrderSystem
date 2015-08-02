@@ -126,7 +126,7 @@
                 $("#curentPage").html(currentPage + 1);
             });
 
-            var model = @Html.Raw(ServiceStack.Text.JsonSerializer.SerializeToString(Model));
+            var model = @Html.Raw(ServiceStack.Text.JsonSerializer.SerializeToString(Model))
             addProductRow(model);
 
 
@@ -143,18 +143,33 @@
         }
 
         function addRecursionChild(root, parentNodeNum) {
-            if (root == null || root.length == 0) {
+            if (root == null || root == "undefined" || root.length == 0) {
                 return "";
             }
-            var nextNodenum = parentNodeNum + 1;
+            var nextNodenum = "";
+            var childRow = "";
+            var childNode = "";
             for (var i = 0; i < root.length; i++) {
-                var price=root[i].Price[0]==undefined?"":root[i].Price[0];
+                if (root[i].ChildNode == "undefined" || root[i].ChildNode == null || root.ChildNode == 0) {
+
+                    nextNodenum = parentNodeNum + 1;
+                }
+                else {
+                    nextNodenum = i;
+                }
+                var price = root[i].Price[0] == undefined ? "" : root[i].Price[0];
                 var row = "<tr class='treegrid-" + nextNodenum + " treegrid-parent-" + parentNodeNum + "'>";
                 row += "<td>" + root[i].ItemCode + "</td><td style='font-size:x-small;'style='width:60%'>" + root[i].ItemName + "</td><td>" + price + "</td>";
                 row += "</tr>";
-                return row + addRecursionChild(root[i].ChildNode, nextNodenum);
-
+                childRow += row;
+                if (root[i].ChildNode == "undefined" || root[i].ChildNode == null || root.ChildNode == 0) {
+                    continue;
+                }
+                else {
+                    return childRow + addRecursionChild(root[i].ChildNode, nextNodenum);
+                }
             }
+            return childRow;
         }
 
         function addProductRow(data) {
@@ -164,19 +179,19 @@
             } else {
 
                 for (var i = 0; i < data.length; i++) {
-                    var cls="";
-                    var istree="";
-                    if(data[i].ChildNode!=null && data[i].ChildNode.length>0){
-                        cls="treegrid-1";
-                        istree="tree";
+                    var cls = "";
+                    var istree = "";
+                    if (data[i].ChildNode != null && data[i].ChildNode.length > 0) {
+                        cls = "treegrid-1";
+                        istree = "tree";
                     }
-                    var price=data[i].Price[0]==undefined?"":data[i].Price[0];
-                    trs+="<tr><td colspan='3' style='padding:0;margin:0;'><table class='"+istree+" table-hover table' role='grid' style='margin-bottom: 0;padding:0;'>";
-                    trs+= "<tr class='"+cls+"' >";
-                    trs+= "<td>" + data[i].ItemCode + "</td><td style='font-size:x-small;width:60%'>" + data[i].ItemName + "</td><td>" + price + "</td>";
-                    trs+= "</tr>";
-                    trs+= addRecursionChild(data[i].ChildNode,1);
-                    trs+='</table></td></tr>';
+                    var price = data[i].Price[0] == undefined ? "" : data[i].Price[0];
+                    trs += "<tr><td colspan='3' style='padding:0;margin:0;'><table class='" + istree + " table-hover table' role='grid' style='margin-bottom: 0;padding:0;'>";
+                    trs += "<tr class='" + cls + "' >";
+                    trs += "<td>" + data[i].ItemCode + "</td><td style='font-size:x-small;width:60%'>" + data[i].ItemName + "</td><td>" + price + "</td>";
+                    trs += "</tr>";
+                    trs += addRecursionChild(data[i].ChildNode, 1);
+                    trs += '</table></td></tr>';
 
                 }
                 //加载完dom后再 变成tree,同一个table 只能有一个根节点treegrid-1
@@ -188,7 +203,7 @@
             $("tr").each(function () {
                 productListTrEvent($(this));
             });
-   
+
         }
 
         function clearTableTr() {
@@ -199,19 +214,24 @@
 
         function productListTrEvent(tr) {
             $(tr).click(function () {
-               
+
                 if (itemcode == $(this).children('td').html()) {
                     $(this).css("background", "");
                 }
-                itemcode = $(this).children('td').first().html();
+                //$('.treegrid-indent').remove();
+                //$('.treegrid-expander').remove();
+                itemcode = $(this).children('td').first().text();
                 itemname = $($(this).children('td')[1]).html();
                 itemprice = $(this).children('td').last().html();
+                //console.log(itemcode)
+                //console.log(itemname)
+                //console.log(itemprice)
                 //有价格才能选中，确定
-                if((itemcode.indexOf("<")!=-1||itemname.indexOf("<")!=-1||itemprice.indexOf("<")!=-1) || itemprice=="")
+                if ((itemcode == "" || itemname == "undefined" || itemprice.indexOf("<") != -1) || itemprice == "")
                     return;
-                console.log(itemcode)
-                console.log(itemname)
-                console.log(itemprice)
+                //console.log(itemcode)
+                //console.log(itemname)
+                //console.log(itemprice)
 
                 $("tr").css("background", "");
                 $(this).css("background", "#f4f4f4");
@@ -220,14 +240,17 @@
                 $("#itemprice").val(itemprice);
 
             }).dblclick(function () {
-                if((itemcode.indexOf("<")!=-1||itemname.indexOf("<")!=-1||itemprice.indexOf("<")!=-1) || itemprice=="")
+                var newItemCode = $("#itemcode").val();
+                var newItemname = $("#itemname").val();
+                var newItemprice = $("#itemprice").val();
+                console.log(newItemCode);
+                console.log(newItemname);
+                console.log(newItemprice);
+                if (newItemCode == "" || newItemname == "" || itemprice == "")
                     return;
-
-                $("#itemcode").val(itemcode);
-                $("#itemname").val(itemname);
-                $("#itemprice").val(itemprice);
-                if(!isNullorEmptyString( $("#itemprice").val()))
+                if (!isNullorEmptyString($("#itemprice").val())) {
                     $("#comfirm_code").click();
+                }
             });
 
         }

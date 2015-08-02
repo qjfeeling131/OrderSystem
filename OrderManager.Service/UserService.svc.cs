@@ -236,8 +236,7 @@ namespace OrderManager.Service
             int count = 0;
             PageListParameter<OM_Product, string> parameter = new PageListParameter<OM_Product, string>();
             parameter.whereLambda = s => (s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey)) 
-                                            && s.CardCode==CardCode
-                                            && (s.ParentId == null || s.ParentId == s.ItemCode); // randy
+                                            && (s.ParentId == null || s.ParentId == s.ItemCode) ; // randy
             parameter.pageIndex = pageIndex;
             parameter.orderByLambda = s => s.ItemCode;
             parameter.pageSize = 5;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" />
+  <xs:import schemaLocation="http://localhost:56280/UserService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" />
+  <xs:import schemaLocation="http://localhost:56280/UserService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="OM_UserDetail">
     <xs:sequence>
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="Role" nillable="true" type="q1:OM_Role" />
@@ -57,9 +58,10 @@
   <xs:element name="ArrayOfOM_ProductInfo" nillable="true" type="tns:ArrayOfOM_ProductInfo" />
   <xs:complexType name="OM_ProductInfo">
     <xs:sequence>
+      <xs:element minOccurs="0" name="ChildNode" nillable="true" type="tns:ArrayOfOM_ProductInfo" />
       <xs:element minOccurs="0" name="ItemCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Price" nillable="true" type="q4:ArrayOfstring" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OM_ProductInfo" nillable="true" type="tns:OM_ProductInfo" />
