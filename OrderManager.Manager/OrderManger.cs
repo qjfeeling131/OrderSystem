@@ -402,7 +402,7 @@ namespace OrderManager.Manager
                     var listPrice = GetCurrentProducePriceList(item.ItemCode, userGuid);
                     var nodes = GetChildProductRecursion(item.CardCode, item.ItemCode, userGuid);
                     OM_ProductInfo product = new OM_ProductInfo();
-                    product.Price = listPrice.Select(a => a.Price.ToString("0.00")).ToArray();
+                    product.Price = listPrice.Select(a => a.Price.ToString("0.00")).FirstOrDefault() == null ? "" : listPrice.Select(a => a.Price.ToString("0.00")).FirstOrDefault();
                     product.ItemCode = item.ItemCode;
                     product.ItemName = item.ItemName;
                     product.ChildNode = nodes;

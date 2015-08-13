@@ -56,10 +56,8 @@
                     <div>
                         <br />
                         <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;单据日期</button>
-                        <div class="input-append date" id="dateteimepicker" style="float: right !important; ">
-                            <input style="width:180px; height:30px" type="text" id="datePicker" value="@(Model == null ? "" : Model.DocDate)" data-link-field="docDate" readonly />
-                            <span class=" add-on"><i class="icon-remove"></i></span>
-                            <span class="add-on"><i class="icon-th"></i></span>
+                        <div class="input-append date" id="dateteimepicker" style="float: right !important;  ">
+                            <input style="width:180px; height:30px" type="text" id="datePicker" value="@(Model == null ? "" : Model.DocDate)" />
                             <input type="hidden" id="docDate" name="docDate" value="@(Model == null ? "" : Model.DocDate)" /><br />
                         </div>
                     </div><!-- /.btn-group -->
@@ -141,9 +139,9 @@
 
 @section script{
     @*<script src="~/Js/utility/jquery.min.js"></script>*@
-<link href="~/Css/jquery.treegrid.css" rel="stylesheet" />
-<script src="~/Js/utility/jquery.treegrid.min.js"></script>
-<script src="~/Js/utility/jquery.treegrid.bootstrap3.js"></script>
+    <link href="~/Css/jquery.treegrid.css" rel="stylesheet" />
+    <script src="~/Js/utility/jquery.treegrid.min.js"></script>
+    <script src="~/Js/utility/jquery.treegrid.bootstrap3.js"></script>
     <script>
         var currentRow;
         var isEdit = false;
@@ -161,15 +159,29 @@
                 createDialog('@(Url.Content("~/order/usercodelist"))');
             })
 
-            $("#dateteimepicker").datetimepicker({
-                language: 'zh-CN',
-                format: "yyyy-MM-dd",
-                showMeridian: true,
-                autoclose: true,
-                todayBtn: true,
-                minView: 2,
-                forceParse: false,
-                pickerPosition: 'bottom-left'
+            $("#datePicker").datetimepicker({
+                lang: 'zh',
+                i18n: {
+                    de: {
+                        months: [
+                         '一月', '二月', '三月', '四月',
+                         '五月', '六月', '七月', '八月',
+                         '九月', '十月', '十一月', '十二月',
+                        ],
+                        dayOfWeek: [
+                         "星期一", "星期二", "星期三", "星期四",
+                         "星期五", "星期六", "星期天.",
+                        ]
+                    }
+                },
+                timepicker: false,
+                format: 'Y.m.d',
+                style: 'table-layout:fixed;word-wrap:break-word;word-break;break-all;',
+                todayButton: true,
+                onSelectDate: function (dt, $i) {
+                    //alert(dt.dateFormat('Y.m.d'));
+                    $('#docDate').text(dt.dateFormat('Y.m.d'));
+                }
             });
 
             //添加行
@@ -421,7 +433,7 @@
             saveClick = false;
         }
 
-        function itemProductEvent(id) {          
+        function itemProductEvent(id) {
             $("#" + id).dblclick(function () {
                 if ($("#UserCode").val() == "") {
                     alertInfo("提示", "添加订单项前，请先选择客户。");
@@ -431,6 +443,6 @@
             });
         }
 
- 
+
     </script>
 }

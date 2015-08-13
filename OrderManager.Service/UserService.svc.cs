@@ -231,12 +231,12 @@ namespace OrderManager.Service
         }
 
 
-        public IList<OM_ProductInfo> GetProductList(string cipher, string CardCode,string searchKey, int pageIndex)
+        public IList<OM_ProductInfo> GetProductList(string cipher, string CardCode, string searchKey, int pageIndex)
         {
             int count = 0;
             PageListParameter<OM_Product, string> parameter = new PageListParameter<OM_Product, string>();
-            parameter.whereLambda = s => (s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey)) 
-                                            && (s.ParentId == null || s.ParentId == s.ItemCode) ; // randy
+            parameter.whereLambda = s => (s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey))
+                                            && (s.ParentId == null || s.ParentId == s.ItemCode); // randy
             parameter.pageIndex = pageIndex;
             parameter.orderByLambda = s => s.ItemCode;
             parameter.pageSize = 5;
@@ -247,24 +247,24 @@ namespace OrderManager.Service
 
             var user = userManager.GetUser(s => s.Account == CardCode);
 
-         
+
             foreach (var item in productList)
             {
                 var listPrice = orderManger.GetCurrentProducePriceList(item.ItemCode, user.Guid);
                 List<OM_ProductInfo> children = orderManger.GetChildProductRecursion(item.CardCode, item.ItemCode, user.Guid);
 
-                OM_ProductInfo product = new OM_ProductInfo();           
+                OM_ProductInfo product = new OM_ProductInfo();
                 product.ItemName = item.ItemName;
                 product.ItemCode = item.ItemCode;
                 product.ChildNode = children;
-                product.Price =listPrice.Select(a => a.Price.ToString("0.00")).ToArray();
+                product.Price = listPrice.Select(a => a.Price.ToString("0.00")).FirstOrDefault() == null ? "" : listPrice.Select(a => a.Price.ToString("0.00")).FirstOrDefault();
 
                 result.Add(product);
             }
             return result;
         }
 
-    
+
 
 
         public int GetProductListCount(string cipher, string CardCode, string searchKey)

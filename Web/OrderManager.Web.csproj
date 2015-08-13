@@ -172,6 +172,9 @@
     <Content Include="Js\plugins\datatables\dataTables.bootstrap.min.js" />
     <Content Include="Js\plugins\dateTimePicker\css\bootstrap-datetimepicker.css" />
     <Content Include="Js\plugins\dateTimePicker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Js\plugins\dateTimePicker\jquery.datetimepicker.css" />
+    <Content Include="Js\plugins\dateTimePicker\jquery.datetimepicker.js" />
+    <Content Include="Js\plugins\dateTimePicker\jquery.js" />
     <Content Include="Js\plugins\dateTimePicker\js\bootstrap-datetimepicker.js" />
     <Content Include="Js\plugins\dateTimePicker\js\bootstrap-datetimepicker.min.js" />
     <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.ar.js" />
