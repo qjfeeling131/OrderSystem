@@ -174,12 +174,12 @@
                 $(this).css("background", "#f4f4f4");
                 $(this).siblings("tr").css("background", "");
                 $("#UserCode").val(usercode);
-                $("#CardName").html(cardname);
+                $("#CardName").val(cardname);
 
             }).dblclick(function () {
                 usercode = $(this).children('td').html();
                 $("#UserCode").val(usercode);
-                $("#CardName").html(cardname);
+                $("#CardName").val(cardname);
                 $("#comfirm_code").click();
             });
 

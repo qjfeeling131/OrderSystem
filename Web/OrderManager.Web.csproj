@@ -280,6 +280,7 @@
     <None Include="Service References\UserService\UserService44.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Order\DateTimePickerIframe.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

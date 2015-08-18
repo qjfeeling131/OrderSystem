@@ -37,12 +37,12 @@
 
                     <div>
                         <button class="btn btn-default btn-sm disabled">&nbsp;客户代码</button>
-                        <input type="text" name="UserCode" id="UserCode" class="form-control input-sm pull-right" style="width: 200px;" value="@(Model==null ?"": Model.CardCode)" /> &nbsp;
+                        <input type="text" name="UserCode" id="UserCode" class="form-control input-sm pull-right" style="width: 250px;" value="@(Model==null ?"": Model.CardCode)" /> &nbsp;
                     </div>
                     <div>
                         <br />
                         <button class="btn btn-default btn-sm disabled">&nbsp;客户名称</button>
-                        <label id="CardName" class="form-control input-sm pull-right " style="width: 200px;">@(Model == null ? "" : Model.CardName) </label>
+                        <input type="text" name="CardName" id="CardName" class="form-control input-sm pull-right " style="width: 250px;" value="@(Model == null ? "" : Model.CardName)" readonly />
                     </div>
 
                     <input type="hidden" id="OrderGuid" value="@(Model==null ?"": Model.Guid)" />
@@ -55,84 +55,99 @@
                     </div>
                     <div>
                         <br />
-                        <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;单据日期</button>
-                        <div class="input-append date" id="dateteimepicker" style="float: right !important;  ">
-                            <input style="width:180px; height:30px" type="text" id="datePicker" value="@(Model == null ? "" : Model.DocDate)" />
-                            <input type="hidden" id="docDate" name="docDate" value="@(Model == null ? "" : Model.DocDate)" /><br />
+                        <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;下达日期</button>
+                        <input id="datetimepicker" type="text" class="form-control  input-sm pull-right" style="width:180px;" value="@(Model == null ? "" : Model.DocDate.ToString("yyyy.MM.dd"))" />
+                        <div class="iframeHtmlControlContainer" id="iframeHtmlControlContainer">
+                            <iframe width="245px" height="219px" frameborder="0" allowtransparency="true" id="iframeHtmlControl" src="" style="position: absolute; z-index: 999; display: none;"></iframe>
                         </div>
+                        <div>
+                            <br />
+                            <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;交货日期</button>
+                            <input id="docDueDateTimePicker" type="text" class="form-control  input-sm pull-right" style="width:180px;" value="" />
+                            <div class="iframeHtmlControlContainer" id="docDueDateiframeHtmlControlContainer">
+                                <iframe width="245px" height="219px" frameborder="0" allowtransparency="true" id="docDueDateiframeHtmlControl" src="" style="position: absolute; z-index: 999; display: none;"></iframe>
+                            </div>
+                            @*<div class="input-append date" id="dateteimepicker" style="float: right !important;  ">
+                                    <input style="width:180px; height:30px" type="text" id="datePicker" value="@(Model == null ? "" : Model.DocDate)" />
+                                    <input type="hidden" id="docDate" name="docDate" value="@(Model == null ? "" : Model.DocDate)" /><br />
+                                </div>*@
+                        </div><!-- /.btn-group -->
+                    </div>
+
+                </div>
+                <div class="row" style="border-top:1px solid #ff6a00;margin:2%;">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered table-hover dataTable" role="grid" id="order_table">
+                            <thead>
+                                <tr role="row">
+                                    <th tabindex="0">物料编号</th>
+                                    <th tabindex="0">物料名称</th>
+                                    <th tabindex="0">价格</th>
+                                    <th tabindex="0">数量</th>
+                                    <th tabindex="0">货币</th>
+                                    <th tabindex="0">总价</th>
+                                    <th tabindex="0">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+
+                                    foreach (var item in Model.SalesOrderLine)
+                                    {
+
+
+                                        <tr role="row">
+                                            <input type='hidden' name='item_guid' value="@item.Guid" />
+                                            <td>@item.ItemCode</td>
+                                            <td>@item.ItemName</td>
+                                            <td>@item.Price.ToString("0.00")</td>
+                                            <td>@item.Quantity.ToString("0")</td>
+                                            <td>@item.Currency</td>
+                                            <td>@item.TotalPrice.ToString("0.00")</td>
+                                            <td>
+                                                <button id="om-OrderLine-Save" name="om-OrderLine-Save" class="btn btn-info "><i class="glyphicon  fa-save "></i>保存</button>
+                                                <button id="om-OrderLine-Edit" name="om-OrderLine-Edit" class="btn btn-info "><i class="glyphicon  fa-save "></i>修改</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+
+                <div style="border-top:1px solid #ff6a00;margin:2%;">
+
+                    <div class="btn-group" style="padding-top:2%;">
+                        <button class="btn btn-default btn-sm disabled"><i class="glyphicon glyphicon-edit"></i>&nbsp;备注</button>
+                        <textarea id="remark" class="form-control input-sm pull-righ" rows="4" style="width:400px;" placeholder="输入备注 ..."> @(Model == null ? "" : Model.Remarks)</textarea>
+                    </div><!-- /.btn-group -->
+
+                    <div class="btn-group" style="padding-top:2%;left:200px;top:-30px">
+                        <button class="btn btn-default btn-sm disabled"><i class="glyphicon glyphicon-edit"></i>行总计</button>
+                        <label id="totalPrice" class="form-control input-sm pull-right" style="width:100px">@(Model == null ? "" : Model.TotalPrice)</label>
+                    </div>
+                    <div class="btn-group pull-right" style="padding-top:2%;">
+                        <button class="btn btn-info " id="addRow" style="margin-right:10px;"><i class="glyphicon glyphicon-plus"></i>&nbsp;添加行</button>
+                        <button class="btn btn-warning " id="removeRow"><i class="glyphicon glyphicon-remove"></i>&nbsp;删除行</button>
                     </div><!-- /.btn-group -->
                 </div>
 
-            </div>
-            <div class="row" style="border-top:1px solid #ff6a00;margin:2%;">
-                <div class="col-sm-12">
-                    <table class="table table-bordered table-hover dataTable" role="grid" id="order_table">
-                        <thead>
-                            <tr role="row">
-                                <th tabindex="0">物料编号</th>
-                                <th tabindex="0">物料名称</th>
-                                <th tabindex="0">价格</th>
-                                <th tabindex="0">数量</th>
-                                <th tabindex="0">货币</th>
-                                <th tabindex="0">总价</th>
-                                <th tabindex="0">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model != null)
-                            {
 
-                                foreach (var item in Model.SalesOrderLine)
-                                {
+                <div style="border-top:1px solid #ff6a00;margin:2%;">
 
-
-                                    <tr role="row">
-                                        <input type='hidden' name='item_guid' value="@item.Guid" />
-                                        <td>@item.ItemCode</td>
-                                        <td>@item.ItemName</td>
-                                        <td>@item.Price.ToString("0.00")</td>
-                                        <td>@item.Quantity.ToString("0")</td>
-                                        <td>@item.Currency</td>
-                                        <td>@item.TotalPrice.ToString("0.00")</td>
-                                        <td>
-                                            <button id="om-OrderLine-Save" name="om-OrderLine-Save" class="btn btn-info "><i class="glyphicon  fa-save "></i>保存</button>
-                                            <button id="om-OrderLine-Edit" name="om-OrderLine-Edit" class="btn btn-info "><i class="glyphicon  fa-save "></i>修改</button>
-                                        </td>
-                                    </tr>
-                                }
-                            }
-
-                        </tbody>
-
-                    </table>
-
+                    <div class="btn-group" style="padding-top:2%;">
+                        <button class="btn btn-primary" id="saveDraft" style="margin-right:10px;width:100px;"><i class="glyphicon glyphicon-edit"></i>&nbsp;保存草稿</button>
+                        <button class="btn btn-primary" id="sumbit" style="margin-right:10px;width:100px;"><i class="glyphicon glyphicon-ok"></i>&nbsp;提交</button>
+                        <button class="btn btn-primary" id="sumbit2SAP" style="margin-right:10px;width:100px;"><i class="glyphicon glyphicon-link"></i>&nbsp;对接SAP</button>
+                    </div><!-- /.btn-group -->
                 </div>
             </div>
-
-            <div style="border-top:1px solid #ff6a00;margin:2%;">
-
-                <div class="btn-group" style="padding-top:2%;">
-                    <button class="btn btn-default btn-sm disabled"><i class="glyphicon glyphicon-edit"></i>&nbsp;备注</button>
-                    <textarea id="remark" class="form-control input-sm pull-righ" rows="4" style="width:400px;" placeholder="输入备注 ..."> @(Model == null ? "" : Model.Remarks)</textarea>
-                </div><!-- /.btn-group -->
-
-                <div class="btn-group pull-right" style="padding-top:2%;">
-                    <button class="btn btn-info " id="addRow" style="margin-right:10px;"><i class="glyphicon glyphicon-plus"></i>&nbsp;添加行</button>
-                    <button class="btn btn-warning " id="removeRow"><i class="glyphicon glyphicon-remove"></i>&nbsp;删除行</button>
-                </div><!-- /.btn-group -->
-            </div>
-
-
-            <div style="border-top:1px solid #ff6a00;margin:2%;">
-
-                <div class="btn-group" style="padding-top:2%;">
-                    <button class="btn btn-primary" id="saveDraft" style="margin-right:10px;width:100px;"><i class="glyphicon glyphicon-edit"></i>&nbsp;保存草稿</button>
-                    <button class="btn btn-primary" id="sumbit" style="margin-right:10px;width:100px;"><i class="glyphicon glyphicon-ok"></i>&nbsp;提交</button>
-                    <button class="btn btn-primary" id="sumbit2SAP" style="margin-right:10px;width:100px;"><i class="glyphicon glyphicon-link"></i>&nbsp;对接SAP</button>
-                </div><!-- /.btn-group -->
-            </div>
         </div>
-    </div>
 
 }
 
@@ -147,42 +162,32 @@
         var isEdit = false;
         var saveClick = false;
         var rowNum = 0;
+        var docDateClick = false;
+        var docDueDateClick = false;
         $(function () {
             $("#orderManager").addClass("active");
             $("#orderManager .treeview-menu").attr("display", "block");
             $("#orderManager .treeview-menu>li").eq(1).addClass("active");
             $("#status").val('@(ViewBag.Status == null ? "未提交" : ViewBag.Status)');
-            $("#docDate").val('@(ViewBag.DocDate == null ? "" : ViewBag.DocDate)');
-            $("#datePicker").val('@(ViewBag.DocDate == null ? "" : ViewBag.DocDate)');
+            $("#docDueDateTimePicker").val('@(ViewBag.DocDueDate == null ? "" : ViewBag.DocDueDate)');
+            $("#datetimepicker").val('@(ViewBag.DocDate == null ? "" : ViewBag.DocDate)');
             //客户代码dialog
             $("#UserCode").dblclick(function () {
                 createDialog('@(Url.Content("~/order/usercodelist"))');
             })
 
-            $("#datePicker").datetimepicker({
-                lang: 'zh',
-                i18n: {
-                    de: {
-                        months: [
-                         '一月', '二月', '三月', '四月',
-                         '五月', '六月', '七月', '八月',
-                         '九月', '十月', '十一月', '十二月',
-                        ],
-                        dayOfWeek: [
-                         "星期一", "星期二", "星期三", "星期四",
-                         "星期五", "星期六", "星期天.",
-                        ]
-                    }
-                },
-                timepicker: false,
-                format: 'Y.m.d',
-                style: 'table-layout:fixed;word-wrap:break-word;word-break;break-all;',
-                todayButton: true,
-                onSelectDate: function (dt, $i) {
-                    //alert(dt.dateFormat('Y.m.d'));
-                    $('#docDate').text(dt.dateFormat('Y.m.d'));
-                }
-            });
+            $("#datetimepicker").click(function () {
+                docDateClick = true;
+                docDueDateClick = false;
+                $("#iframeHtmlControl").attr("src", "/Order/DateTimePickerIframe");
+                $("#iframeHtmlControl").show();
+            })
+            $("#docDueDateTimePicker").click(function () {
+                docDateClick = false;
+                docDueDateClick = true;
+                $("#docDueDateiframeHtmlControl").attr("src", "/Order/DateTimePickerIframe");
+                $("#docDueDateiframeHtmlControl").show();
+            })
 
             //添加行
             $("#addRow").click(function () {
@@ -207,13 +212,16 @@
                 if ($('th', currentRow).length != 0) {
                     return;
                 }
+                isEdit = false;
+                saveClick = false
                 $(currentRow).remove();
             })
             //行保存事件
             function itemSave(id) {
                 $("#" + id).click(function () {
                     saveClick = true;
-                    console.log($(this))
+                    //GetLineTotal();
+                    //console.log($(this))
                 })
             }
             //行编辑事件
@@ -245,6 +253,7 @@
                 RowClickEvent($(this));
 
                 $("button[name='om-OrderLine-Save']", $(this)).click(function () {
+                    //GetLineTotal();
                     saveClick = true;
                 })
 
@@ -301,6 +310,10 @@
                     alertInfo("提示", "当前状态不允许此操作");
                     return;
                 }
+                if ($("#docDueDateTimePicker").val() == "" || $("#docDueDateTimePicker").val() == " ") {
+                    alertInfo("提示", "请填写交货日期");
+                    return;
+                }
 
                 var data = $("#OrderGuid").val();
 
@@ -342,8 +355,49 @@
                 });
 
             });
-
         })
+
+        function setDateTimePikcerValue(date) {
+            if (docDateClick) {
+                $("#datetimepicker").val(date);
+                docDateClick = false;
+            }
+            else {
+                docDueDateClick = false;
+                $("#docDueDateTimePicker").val(date);
+
+            }
+
+        }
+        function dateTimePickerClose() {
+            if (docDateClick) {
+                $("#iframeHtmlControl").hide();
+                docDateClick = false;
+            }
+            else {
+                $("#docDueDateiframeHtmlControl").hide();
+                docDueDateClick = false;
+            }
+
+        }
+
+        function GetLineTotal() {
+            var totalPrice = 0;
+            $("#order_table tr").each(function () {
+                var tdArr = $('td', $(this));
+                if (tdArr == 0) {
+                    return;
+                }
+                if (parseInt($(tdArr[5]).html()) == "NaN" || typeof ($(tdArr[5]).html()) == "undefined") {
+
+                }
+                else {
+                    totalPrice = parseFloat($(tdArr[5]).html()) + totalPrice;
+                }
+            })
+
+            $("#totalPrice").html(totalPrice);
+        }
 
         function GetCurrentPageDate() {
             var result = {
@@ -352,6 +406,7 @@
                 DocStatus: "",
                 CardName: "",
                 DocDate: "",
+                DocDueDate:"",
                 SalesOrderLine: new Array(),//{ [],[],[] }
                 Remarks: ""
 
@@ -359,8 +414,9 @@
             result.CardCode = $("#UserCode").val();
             result.Remarks = $("#remark").val();
             result.DocStatus = $("#status").val();
-            result.CardName = $("#CardName").html();
-            result.DocDate = $("#docDate").val();
+            result.CardName = $("#CardName").val();
+            result.DocDate = $("#datetimepicker").val();
+            result.DocDueDate = $("#docDueDateTimePicker").val() == " " ? null : $("#docDueDateTimePicker").val();
             $("#order_table tr").each(function () {
                 var tdArr = $('td', $(this));
                 if (tdArr.length == 0)
@@ -406,14 +462,13 @@
             var arrInput = $("td input", $(tr));
 
             if (isNaN($(arrInput[2]).val())
-                || isNaN($(arrInput[3]).val())) {
+                || isNaN($(arrInput[3]).val()) || parseInt($(arrInput[3]).val()) == 0) {
                 $(tr).remove();
                 alertInfo("提示", "订单数据填写有误");
                 saveClick = false;
                 isEdit = false;
                 return;
             }
-
             for (var i = 0; i < arrInput.length; i++) {
                 if ($(arrInput[i]) == null || isNullorEmptyString($(arrInput[i]).val())) {
                     $(tr).remove();
@@ -426,9 +481,20 @@
                 $(parent).html(inputValue);
 
             }
-
             var total = parseFloat($(arrInput[2]).val()) * parseFloat($(arrInput[3]).val());
+            //console.log(parseFloat($("#totalPrice").html()));
+            //if ($("#totalPrice").html() == "") {
+            //    console.log("is NAN");
+            //    $("#totalPrice").html(total);
+            //}
+            //else {
+            //    console.log("Not NAN");
+            //    var lineTotal = total + parseFloat($("#totalPrice").html());
+            //    $("#totalPrice").html(lineTotal);
+
+            //}
             $("td", $(tr)).eq(-2).html(total);
+            GetLineTotal();
             isEdit = false;
             saveClick = false;
         }

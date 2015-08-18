@@ -1,0 +1,51 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DateTimePickerIframe</title>
+    <link href="~/Js/plugins/dateTimePicker/jquery.datetimepicker.css" rel="stylesheet" />
+    <script src="~/Js/plugins/dateTimePicker/jquery.js"></script>
+    <script src="~/Js/plugins/dateTimePicker/jquery.datetimepicker.js"></script>
+    <script>
+        //var test;
+        //var testJson = { "dis": "2015.08.12" };
+        $(function () {
+            $('#datetimepicker').datetimepicker({
+    //            minDate: '-1970/01/01',
+    //            maxDate: '+1970/03/01',
+    //            onGenerate: function (ct) {
+    //                $(this).find('.xdsoft_date.xdsoft_weekend')
+    //.addClass('xdsoft_disabled');
+                //            },
+                lang: 'zh',
+                timepicker: false,
+                todayButton: true,
+                //disabledDates: [testJson.dis],
+                formatDate: 'Y.m.d',
+                onSelectDate: function (ct, $i) {
+                    //alert(ct.dateFormat('d/m/Y'))
+                    $('#docDate').text(ct.dateFormat('Y.m.d'));
+                    var docDate = $("#docDate").val();
+                    parent.setDateTimePikcerValue(ct.dateFormat('Y.m.d'));
+                    parent.dateTimePickerClose();
+                    //parent.parent.setValue("test");
+
+                }
+
+            });
+
+            $("#datetimepicker").focus();
+            $("#datetimepicker").hide();
+        })
+    </script>
+</head>
+<body>
+    <input id="datetimepicker" type="text" value="2015.5.16" />
+    <input type="hidden" id="docDate" name="docDate" vlaue="" />
+</body>
+</html>

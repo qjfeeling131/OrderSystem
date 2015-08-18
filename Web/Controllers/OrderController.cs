@@ -14,6 +14,7 @@ using Web.UserService;
 using OrderManager.Web.Models;
 using OrderManager.Model.DTO;
 using System.Web.Script.Serialization;
+using Web.Attribute;
 
 
 
@@ -52,9 +53,9 @@ namespace OrderManager.Web
         {
             var detail = UserService.GetSalesOrderAndDetail(Cipher, orderItemGuid);
             var status = Enum.Parse(typeof(OM_DocStatusEnum), detail.DocStatus);
-
             ViewBag.Status = status;
-            ViewBag.DocDate = Convert.ToDateTime(detail.DocDate).ToString("yyyy-MM-dd");
+            ViewBag.DocDueDate = detail.DocDueDate == null ? " " : Convert.ToDateTime(detail.DocDueDate).ToString("yyyy.MM.dd");
+            ViewBag.DocDate = Convert.ToDateTime(detail.DocDate).ToString("yyyy.MM.dd");
             return View("~/views/order/order.cshtml", detail);
 
         }
@@ -62,6 +63,7 @@ namespace OrderManager.Web
 
         public ViewResult Order()
         {
+            ViewBag.DocDate = DateTime.Now.ToString("yyyy.MM.dd");
             return View();
         }
 
@@ -100,8 +102,8 @@ namespace OrderManager.Web
         public ViewResult ProductList(string cardCode)
         {
 
-            var list = UserService.GetProductList(Cipher,cardCode, "", 0);
-            var count = UserService.GetProductListCount(Cipher,cardCode, "");
+            var list = UserService.GetProductList(Cipher, cardCode, "", 0);
+            var count = UserService.GetProductListCount(Cipher, cardCode, "");
             CardCode = cardCode;
             ViewBag.PageSize = 5;
             ViewBag.PageIndex = 0;
@@ -163,6 +165,11 @@ namespace OrderManager.Web
         {
             UserService.UpdateSalesOrderStatusByToSAP(Cipher, orderGuid);
             return Json(new JsonModel { Data = "已对接" });
+        }
+        [SkipLogin]
+        public ActionResult DateTimePickerIframe()
+        {
+            return View();
         }
 
     }

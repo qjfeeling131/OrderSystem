@@ -32,11 +32,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*<tr><td colspan='3' style='padding:0;margin:0;'>
+                            @* <tr><td colspan='3' style='padding:0;margin:0;'>
                                 <table class='tree table-hover dataTable table' role='grid' style='margin-bottom: 0;padding:0;'>
-                                    <tr class='treegrid-1'><td>C.A.M.0070</td><td style='font-size:x-small;'>清热散（猪用5kg/包）</td><td>undefined</td></tr>
-                                    <tr class='treegrid-2 treegrid-parent-1'><td>C.A.M.0070-1</td><td style='font-size:x-small;'>清热散（猪用15kg/包）</td><td>undefined</td></tr>
-                                </table></td></tr>*@
+                                     <tr class='treegrid-1'><td>C.A.M.0070</td><td style='font-size:x-small;'>清热散（猪用5kg/包）</td><td>undefined</td></tr>
+                                     <tr class='treegrid-2 treegrid-parent-1'><td>C.A.M.0070-1</td><td style='font-size:x-small;'>清热散（猪用15kg/包）</td><td>undefined</td></tr>
+                                 </table></td></tr>*@
 
 
                         </tbody>
@@ -150,12 +150,13 @@
             var childRow = "";
             var childNode = "";
             for (var i = 0; i < root.length; i++) {
-                if (root[i].ChildNode == "undefined" || root[i].ChildNode == null || root.ChildNode == 0) {
+                if (root[i].ChildNode == "undefined" || root[i].ChildNode == null || root[i].ChildNode == 0) {
 
                     nextNodenum = parentNodeNum + 1;
                 }
                 else {
-                    nextNodenum = i;
+
+                    nextNodenum = parentNodeNum + 1 + i;
                 }
                 var price = root[i].Price[0] == undefined ? "" : root[i].Price[0];
                 var row = "<tr class='treegrid-" + nextNodenum + " treegrid-parent-" + parentNodeNum + "'>";

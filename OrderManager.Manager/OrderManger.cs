@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.Practices.Unity;
 using OrderManager.Common;
+using OrderManager.Model;
 using OrderManager.Model.DTO;
 using OrderManager.Model.Models;
 using OrderManager.Repository;
@@ -138,7 +139,6 @@ namespace OrderManager.Manager
         public bool SaveSalesOrder(OM_SalesOrderDataObject salesOrder)
         {
             OM_Order order = salesOrder.ToDTO();
-
             var user = DbRepository.GetModel<OM_User>(s => s.Account.ToUpper() == salesOrder.CardCode.ToUpper() && s.IsDel == false);
             if (user == null)
                 throw new GenericException("客户代码不存在，保持草稿失败");
@@ -204,7 +204,7 @@ namespace OrderManager.Manager
             order.CardName = user.Name;
             order.Remarks = salesOrder.Remarks;
             order.DocDate = salesOrder.DocDate;
-
+            order.DocDueDate = salesOrder.DocDueDate;
             var salesOrderHead = DbRepository.Update(order);
             if (salesOrderHead <= 0)
                 throw new GenericException("修改草稿失败");
@@ -267,6 +267,10 @@ namespace OrderManager.Manager
             {
                 throw new GenericException("当前订单不存在,请检查数据");
             }
+            if (salesOrder.DocDueDate == null)
+            {
+                throw new GenericException("当前订单未填写交货日期,请填写,保存为草稿后再提交单据");
+            }
 
             salesOrder.DocStatus = ((int)OM_DocStatusEnum.已提交).ToString();
             if (DbRepository.Update(salesOrder) > 0)
@@ -308,7 +312,31 @@ namespace OrderManager.Manager
 
         private bool SaveForSAP(OM_SalesOrderDataObject salesOrder)
         {
-            return B1Company.SBOCompany.SaveSalesOrderDraft(salesOrder);
+            OM_SalesOrderDataObject GSSalesOrder = new OM_SalesOrderDataObject();
+
+            GSSalesOrder.CardCode = salesOrder.CardCode;
+            GSSalesOrder.CardName = salesOrder.CardName;
+            GSSalesOrder.DocDate = salesOrder.DocDate;
+            GSSalesOrder.DocDueDate = salesOrder.DocDueDate;
+            OM_SalesOrderDataObject JFZSalesOrder = new OM_SalesOrderDataObject();
+            JFZSalesOrder.CardCode = salesOrder.CardCode;
+            JFZSalesOrder.CardName = salesOrder.CardName;
+            JFZSalesOrder.DocDate = salesOrder.DocDate;
+            JFZSalesOrder.DocDueDate = salesOrder.DocDueDate;
+            foreach (var item in salesOrder.SalesOrderLine)
+            {
+                var pruduct = GetProduct(c => c.ItemCode == item.ItemCode);
+                if (pruduct.GroupType == "0")
+                {
+                    GSSalesOrder.SalesOrderLine.Add(item);
+                }
+                else
+                {
+                    JFZSalesOrder.SalesOrderLine.Add(item);
+                }
+            }
+
+            return B1Company.SBOCompany.SaveSalesOrderDraft(salesOrder) && B1Company.SBOCompany.SaveSalesOrderDraftToJFZ(JFZSalesOrder);
 
         }
         /// <summary>
@@ -321,6 +349,10 @@ namespace OrderManager.Manager
             OM_SalesOrderDataObject salesOrderDataObject = this.GetSalesOrder(s => s.Guid == salesOrder_Guid).ToDTO();
             salesOrderDataObject.SalesOrderLine.AddRange(this.GetSalesOrderItemList(s => s.Order_Guid == salesOrder_Guid));
 
+            foreach (var item in salesOrderDataObject.SalesOrderLine)
+            {
+                salesOrderDataObject.TotalPrice += item.TotalPrice;
+            }
             return salesOrderDataObject;
         }
         private IList<OM_Order> GetSalesOrderList(Expression<Func<OM_Order, bool>> fuc)
@@ -388,7 +420,7 @@ namespace OrderManager.Manager
         public List<OM_ProductInfo> GetChildProductRecursion(string cardCode, string itemCode, string userGuid)
         {
             //&& a.ParentId!=a.ItemCode 把自己排除
-            var result = DbRepository.GetList<OM_Product>(a => a.CardCode == cardCode && a.ParentId == itemCode && a.ParentId!=a.ItemCode);
+            var result = DbRepository.GetList<OM_Product>(a => a.CardCode == cardCode && a.ParentId == itemCode && a.ParentId != a.ItemCode);
 
             if (result == null || result.Count == 0)
             {
@@ -402,7 +434,7 @@ namespace OrderManager.Manager
                     var listPrice = GetCurrentProducePriceList(item.ItemCode, userGuid);
                     var nodes = GetChildProductRecursion(item.CardCode, item.ItemCode, userGuid);
                     OM_ProductInfo product = new OM_ProductInfo();
-                    product.Price = listPrice.Select(a => a.Price.ToString("0.00")).FirstOrDefault() == null ? "" : listPrice.Select(a => a.Price.ToString("0.00")).FirstOrDefault();
+                    product.Price = listPrice.Select(a => a.Price.ToString("0.00")).ToArray();
                     product.ItemCode = item.ItemCode;
                     product.ItemName = item.ItemName;
                     product.ChildNode = nodes;

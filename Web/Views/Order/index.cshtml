@@ -44,17 +44,17 @@ z
                         <table class="table table-bordered table-hover dataTable" role="grid">
                             <thead>
                                 <tr role="row">
-                                    <th tabindex="0" style="min-width:10px">CardCode</th>
-                                    <th tabindex="0" style="min-width:10px">CardName</th>
-                                    <th tabindex="0" style="min-width:10px">DocEntry</th>
-                                    <th tabindex="0" style="min-width:10px">DocStatus</th>
-                                    <th tabindex="0" style="min-width:10px">DocDate</th>
-                                    <th tabindex="0" style="min-width:10px">DocDueDate</th>
-                                    <th tabindex="0" style="min-width:10px">TPLCompany</th>
-                                    <th tabindex="0" style="min-width:10px">TPLOrder</th>
-                                    <th tabindex="0" style="min-width:10px">TPLContact</th>
-                                    <th tabindex="0" style="min-width:10px">NumCard</th>
-                                    <th tabindex="0" style="min-width:10px">NoteNotice</th>
+                                    <th tabindex="0" style="min-width:10px">客户编号</th>
+                                    <th tabindex="0" style="min-width:10px">客户名称</th>
+                                    <th tabindex="0" style="min-width:10px">单据号</th>
+                                    <th tabindex="0" style="min-width:10px">单据状态</th>
+                                    <th tabindex="0" style="min-width:10px">下达日期</th>
+                                    <th tabindex="0" style="min-width:10px">交货日期</th>
+                                    <th tabindex="0" style="min-width: 10px; display: none">物流公司</th>
+                                    <th tabindex="0" style="min-width: 10px; display: none">物流单号</th>
+                                    <th tabindex="0" style="min-width: 10px; display: none">物流联系人</th>
+                                    <th tabindex="0" style="min-width: 10px; display: none">其它</th>
+                                    <th tabindex="0" style="min-width:10px">备注</th>
                                     <th tabindex="0" style="min-width:10px">操作</th>
                                 </tr>
                             </thead>
@@ -66,17 +66,39 @@ z
                                         <td>@item.CardCode</td>
                                         <td>@item.CardName</td>
                                         <td>@item.DocEntry</td>
-                                        <td>@item.DocStatus</td>
-                                        <td>@(item.DocDate==null?"":item.DocDate.Value.ToShortDateString())</td>
+                                        @switch (item.DocStatus)
+                                        {
+                                            case "0":
+                                                <td>未提交</td>
+                                                break;
+                                            case "1":
+                                            <td>已提交</td>
+                                                break;
+                                            case "2":
+                                            <td>已对接</td>
+                                                break;
+                                            case "3":
+                                            <td>审核中</td>
+                                                break;
+                                            case "4":
+                                            <td>已发货</td>
+                                                break;
+                                            default:
+                                            <td>未知状态</td>
+                                                break;
+                                        }
+
+                                        <td>@(item.DocDate == null ? "" : item.DocDate.Value.ToShortDateString())</td>
                                         <td>@(item.DocDueDate == null ? "" : item.DocDueDate.Value.ToShortDateString())</td>
-                                        <td>@item.TPLCompany</td>
-                                        <td>@item.TPLOrder</td>
-                                        <td>@item.TPLContact</td>
-                                        <td>@item.NumCard</td>
+                                        <td style="display: none">@item.TPLCompany</td>
+                                        <td style="display: none">@item.TPLOrder</td>
+                                        <td style="display: none">@item.TPLContact</td>
+                                        <td style="display: none">@item.NumCard</td>
                                         <td>@item.NoteNotice</td>
                                         <td>
                                             <input type="hidden" name="orderGuid" value="@item.Guid" />
-                                            <button name="btn-showMsg" class="btn btn-primary">查看</button>
+                                            <button name="btn-showMsg" class="btn btn-primary">查看订单</button>
+                                            <button name="btn-showLogistics" class="btn btn-primary">查看物流</button>
                                         </td>
                                     </tr>
                                 }
@@ -130,7 +152,37 @@ z
         </div>
     </div>
 
+    <div class="modal fade" id="Logistics" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">物流信息</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover dataTable" role="grid">
+                        <thead>
+                            <tr role="row">
+                                <th tabindex="0" style="min-width:10px">物流公司</th>
+                                <th tabindex="0" style="min-width:10px">物流单号</th>
+                                <th tabindex="0" style="min-width:10px">物流联系人</th>
+                                <th tabindex="0" style="min-width:10px">其它</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
+                            <tr role="row" id="LogisticsRow"></tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
 
@@ -142,13 +194,21 @@ z
             $("#orderManager .treeview-menu").attr("display", "block");
             $("#orderManager .treeview-menu>li").eq(0).addClass("active");
 
-
             $("button[name='btn-showMsg']").each(function () {
                 $(this).click(function () {
                     $(this).addClass("disabled");
                     var guid = $(this).siblings("input[name='orderGuid']").val();
                     location.href = '@(Url.Content("~/order/orderitem"))?orderItemGuid=' + guid;
                 });
+            })
+            $("button[name='btn-showLogistics']").each(function () {
+                $(this).click(function () {
+                    $("#LogisticsRow").empty();
+                    var arrTds = $("td", $(this).parent().parent());
+                    var row = "<td>" + $(arrTds[6]).html() + "</td><td>" + $(arrTds[7]).html() + "</td><td>" + $(arrTds[8]).html() + "</td><td>" + $(arrTds[9]).html() + "</td>";
+                    $("#LogisticsRow").append(row);
+                    $("#Logistics").modal('show');
+                })
             })
 
         })

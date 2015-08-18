@@ -25,6 +25,7 @@ namespace OrderManager.Model.DTO
         public string NoteNotice { get; set; }
         public string Remarks { get; set; }
 
+        public decimal TotalPrice { get; set; }
         List<OM_OrderItem> _SalesOrderLine;
 
         public OM_Order ToDTO()
@@ -33,7 +34,7 @@ namespace OrderManager.Model.DTO
             {
                 DocEntry = this.DocEntry,
                 Guid = this.Guid,
-                DocDate = this.DocDate,
+                DocDate = this.DocDate == null ? DateTime.Now : this.DocDate,
                 DocDueDate = this.DocDueDate,
                 DocStatus = this.DocStatus,
                 CardCode = this.CardCode,

@@ -1,13 +1,5 @@
 
-记录时间：2015-08-02 19:08:50,669   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【2015/8/2 19:08:50】------------------
-【Source】：mscorlib
-【Message】：请求通道在等待 00:01:00 以后答复时超时。增加传递给请求调用的超时值，或者增加绑定上的 SendTimeout 值。分配给此操作的时间可能已经是更长超时的一部分。
-【StackTrace】：请求通道在等待 00:01:00 以后答复时超时。增加传递给请求调用的超时值，或者增加绑定上的 SendTimeout 值。分配给此操作的时间可能已经是更长超时的一部分。
-
- 
-记录时间：2015-08-02 19:15:45,220   
+记录时间：2015-08-18 00:01:27,438   
  日志级别：ERROR 
  出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
  System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
@@ -25,19 +17,46 @@
    在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
    在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
 
-记录时间：2015-08-02 19:21:34,333   
+记录时间：2015-08-18 00:07:17,303   
  日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【2015/8/2 19:21:34】------------------
-【Source】：mscorlib
-【Message】：请求通道在等待 00:01:00 以后答复时超时。增加传递给请求调用的超时值，或者增加绑定上的 SendTimeout 值。分配给此操作的时间可能已经是更长超时的一部分。
-【StackTrace】：请求通道在等待 00:01:00 以后答复时超时。增加传递给请求调用的超时值，或者增加绑定上的 SendTimeout 值。分配给此操作的时间可能已经是更长超时的一部分。
-
- 
-记录时间：2015-08-02 23:11:51,985   
- 日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【2015/8/2 23:11:51】------------------
+ 出错类：Logger property:[(null)]  错误描述：------------------【2015/8/18 0:07:17】------------------
 【Source】：mscorlib
 【Message】：Bad Request
 【StackTrace】：Bad Request
 
  
+记录时间：2015-08-18 00:08:05,170   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
+   在 System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   在 System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   在 System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   在 System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   在 System.Xml.XmlTextReaderImpl.Read()
+   在 System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   在 System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
+   在 System.Xml.XmlDocument.Load(XmlReader reader)
+   在 System.Xml.XmlDocument.LoadXml(String xml)
+   在 CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   在 CommonHelper.FileLogger..ctor()
+   在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-08-18 00:10:52,309   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
+   在 System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   在 System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   在 System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   在 System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   在 System.Xml.XmlTextReaderImpl.Read()
+   在 System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   在 System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
+   在 System.Xml.XmlDocument.Load(XmlReader reader)
+   在 System.Xml.XmlDocument.LoadXml(String xml)
+   在 CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   在 CommonHelper.FileLogger..ctor()
+   在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)

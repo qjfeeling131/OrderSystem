@@ -257,7 +257,7 @@ namespace OrderManager.Service
                 product.ItemName = item.ItemName;
                 product.ItemCode = item.ItemCode;
                 product.ChildNode = children;
-                product.Price = listPrice.Select(a => a.Price.ToString("0.00")).FirstOrDefault() == null ? "" : listPrice.Select(a => a.Price.ToString("0.00")).FirstOrDefault();
+                product.Price = listPrice.Select(a => a.Price.ToString("0.00")).ToArray();
 
                 result.Add(product);
             }
@@ -272,7 +272,7 @@ namespace OrderManager.Service
             int count = 0;
             PageListParameter<OM_Product, string> parameter = new PageListParameter<OM_Product, string>();
             parameter.whereLambda = s => (s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey))
-                                            && s.CardCode == CardCode
+                                            //&& s.CardCode == CardCode
                                             && (s.ParentId == null || s.ParentId == s.ItemCode);
             parameter.orderByLambda = s => s.ItemCode;
             parameter.pageSize = int.MaxValue;

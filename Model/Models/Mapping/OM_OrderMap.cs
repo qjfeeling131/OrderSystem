@@ -10,6 +10,9 @@ namespace OrderManager.Model.Models.Mapping
             // Primary Key
             this.HasKey(t => t.Guid);
 
+            this.Property(t=>t.DocEntry)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
             // Properties
             this.Property(t => t.Guid)
                 .IsRequired()
