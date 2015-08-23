@@ -283,35 +283,47 @@ namespace OrderManager.Manager
         }
         public bool UpdateSalesOrderStatusByToSAP(string orderGuid)
         {
-            var salesOrder = this.GetSalesOrder(s => s.Guid == orderGuid);
-            if (salesOrder == null)
+            try
             {
-                throw new GenericException("当前订单不存在,请检查数据");
-            }
-
-            OM_SalesOrderDataObject salesOrderDataObject = salesOrder.ToDTO();
-            salesOrderDataObject.SalesOrderLine = this.GetSalesOrderItemList(s => s.Order_Guid == orderGuid).ToList();
-            if (salesOrderDataObject.SalesOrderLine == null)
-            {
-                throw new GenericException("当前订单行不存在,请检查数据");
-            }
-
-            //对接SAP实现
-            if (SaveForSAP(salesOrderDataObject))
-            {
-                salesOrder.DocStatus = ((int)OM_DocStatusEnum.已对接).ToString();
-                if (DbRepository.Update(salesOrder) > 0)
+                var salesOrder = this.GetSalesOrder(s => s.Guid == orderGuid);
+                if (salesOrder == null)
                 {
-                    return true;
+                    throw new GenericException("当前订单不存在,请检查数据");
+                }
+
+                OM_SalesOrderDataObject salesOrderDataObject = salesOrder.ToDTO();
+                salesOrderDataObject.SalesOrderLine = this.GetSalesOrderItemList(s => s.Order_Guid == orderGuid).ToList();
+                if (salesOrderDataObject.SalesOrderLine == null)
+                {
+                    throw new GenericException("当前订单行不存在,请检查数据");
+                }
+
+                //对接SAP实现
+
+                if (SaveForSAP(salesOrderDataObject))
+                {
+                    salesOrder.DocStatus = ((int)OM_DocStatusEnum.已对接).ToString();
+                    if (DbRepository.Update(salesOrder) > 0)
+                    {
+                        return true;
+                    }
                 }
             }
+            catch (Exception ex)
+            {
 
+                ExceptionLog.Write(ex.ToString());
+                return false;
+            }
 
-            throw new GenericException("更新失败,请联系系统管理员");
+            return false;
+
         }
 
         private bool SaveForSAP(OM_SalesOrderDataObject salesOrder)
         {
+            bool gsResult = false;
+            bool jfzResult = false;
             OM_SalesOrderDataObject GSSalesOrder = new OM_SalesOrderDataObject();
 
             GSSalesOrder.CardCode = salesOrder.CardCode;
@@ -335,8 +347,29 @@ namespace OrderManager.Manager
                     JFZSalesOrder.SalesOrderLine.Add(item);
                 }
             }
+            if (GSSalesOrder.SalesOrderLine.Count <= 0)
+            {
+                ExceptionLog.Write("GSCompany's salesline is zero");
 
-            return B1Company.SBOCompany.SaveSalesOrderDraft(salesOrder) && B1Company.SBOCompany.SaveSalesOrderDraftToJFZ(JFZSalesOrder);
+            }
+            else
+            {
+                gsResult = B1Company.SBOCompany.SaveSalesOrderDraft(salesOrder);
+            }
+            if (GSSalesOrder.SalesOrderLine.Count <= 0)
+            {
+                ExceptionLog.Write("JFZCompany's salesline is zero");
+
+            }
+            else
+            {
+                jfzResult = B1Company.SBOCompany.SaveSalesOrderDraftToJFZ(JFZSalesOrder);
+            }
+            if (gsResult || jfzResult)
+            {
+                return true;
+            }
+            return false;
 
         }
         /// <summary>

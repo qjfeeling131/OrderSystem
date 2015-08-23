@@ -191,21 +191,21 @@ namespace OrderManager.Manager
                 ExceptionLog.Write("Server is Null");
                 return false;
             }
-            CurrentCompany.CompanyDB = companyDB;
-            CurrentCompany.DbServerType = (SAPbobsCOM.BoDataServerTypes)int.Parse(dbServerType);
-            CurrentCompany.LicenseServer = licenseAddress;
-            CurrentCompany.DbUserName = dbUser;
-            CurrentCompany.DbPassword = dbPwd;
-            CurrentCompany.language = (SAPbobsCOM.BoSuppLangs)int.Parse(language);
-            CurrentCompany.UserName = b1User;
-            CurrentCompany.Password = b1Pwd;
-            CurrentCompany.Server = serverAddress;
+            JFZCompany.CompanyDB = companyDB;
+            JFZCompany.DbServerType = (SAPbobsCOM.BoDataServerTypes)int.Parse(dbServerType);
+            JFZCompany.LicenseServer = licenseAddress;
+            JFZCompany.DbUserName = dbUser;
+            JFZCompany.DbPassword = dbPwd;
+            JFZCompany.language = (SAPbobsCOM.BoSuppLangs)int.Parse(language);
+            JFZCompany.UserName = b1User;
+            JFZCompany.Password = b1Pwd;
+            JFZCompany.Server = serverAddress;
 
-            if (CurrentCompany.Connect() == 0)
+            if (JFZCompany.Connect() == 0)
             {
                 return true;
             }
-            ExceptionLog.Write(string.Format("Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
+            ExceptionLog.Write(string.Format("Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), JFZCompany.GetLastErrorDescription()));
             return false;
         }
 
@@ -215,48 +215,62 @@ namespace OrderManager.Manager
             {
                 return false;
             }
-            SAPbobsCOM.Documents oSaleOrder = JFZCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oDrafts);
-            try
+            SAPbobsCOM.Recordset oRs = jFZCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+
+            oRs.DoQuery(string.Format("select top 1 CardCode from ORDR where CardName='{0}'", salesOrder.CardName));
+            if (oRs.RecordCount > 0)
             {
-                oSaleOrder.CardCode = salesOrder.CardCode;
-                oSaleOrder.CardName = salesOrder.CardName;
-                oSaleOrder.Comments = "经销商平台对接生成";
-                if (salesOrder.DocDate == null)
+                SAPbobsCOM.Documents oSaleOrder = JFZCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oDrafts);
+                try
                 {
-                    oSaleOrder.DocDate = DateTime.Now;
-                    oSaleOrder.DocDueDate = DateTime.Now;
+                    oSaleOrder.CardCode = oRs.Fields.Item("CardCode").Value;
+                    oSaleOrder.CardName = salesOrder.CardName;
+                    oSaleOrder.Comments = "经销商平台对接生成";
+                    if (salesOrder.DocDate == null)
+                    {
+                        oSaleOrder.DocDate = DateTime.Now;
+                    }
+                    else if (salesOrder.DocDueDate == null)
+                    {
+                        oSaleOrder.DocDueDate = DateTime.Now;
+                    }
+                    else
+                    {
+                        oSaleOrder.DocDate = (DateTime)salesOrder.DocDate;
+                        oSaleOrder.DocDueDate = (DateTime)salesOrder.DocDueDate;
+                    }
+                    oSaleOrder.DocObjectCode = SAPbobsCOM.BoObjectTypes.oOrders;
+                    foreach (var item in salesOrder.SalesOrderLine)
+                    {
+                        oSaleOrder.Lines.ItemCode = item.ItemCode;
+                        oSaleOrder.Lines.ItemDescription = item.ItemName;
+                        oSaleOrder.Lines.Quantity = Convert.ToDouble(item.Quantity);
+                        oSaleOrder.Lines.Price = Convert.ToDouble(item.Price);
+                        oSaleOrder.Lines.Add();
+                    }
+                    if (oSaleOrder.Add() == 0)
+                    {
+                        ExceptionLog.Write(string.Format("金方子:{0},订单号:{1}对接成功", salesOrder.CardCode, salesOrder.DocEntry));
+                        return true;
+                    }
+                    ExceptionLog.Write(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
+                    return false;
                 }
-                else
+                catch (Exception ex)
                 {
-                    oSaleOrder.DocDate = (DateTime)salesOrder.DocDate;
-                    oSaleOrder.DocDueDate = (DateTime)salesOrder.DocDate;
+                    ExceptionLog.Write(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
+                    return false;
                 }
-                oSaleOrder.DocObjectCode = SAPbobsCOM.BoObjectTypes.oOrders;
-                foreach (var item in salesOrder.SalesOrderLine)
+                finally
                 {
-                    oSaleOrder.Lines.ItemCode = item.ItemCode;
-                    oSaleOrder.Lines.ItemDescription = item.ItemName;
-                    oSaleOrder.Lines.Quantity = Convert.ToDouble(item.Quantity);
-                    oSaleOrder.Lines.Price = Convert.ToDouble(item.Price);
-                    oSaleOrder.Lines.Add();
+                    JFZDisConnect();
+                    //System.Runtime.InteropServices.Marshal.ReleaseComObject(oSaleOrder);
                 }
-                if (oSaleOrder.Add() == 0)
-                {
-                    return true;
-                }
-                ExceptionLog.Write(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
-                return false;
             }
-            catch (Exception ex)
+            else
             {
-                ExceptionLog.Write(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
-                return false;
-            }
-            finally
-            {
-                DisConnect();
-                Dispose();
-                //System.Runtime.InteropServices.Marshal.ReleaseComObject(oSaleOrder);
+                ExceptionLog.Write("金方子客户代码为空");
+                throw new GenericException("金方子客户代码为空");
             }
 
         }
@@ -278,10 +292,14 @@ namespace OrderManager.Manager
                     oSaleOrder.DocDate = DateTime.Now;
                     oSaleOrder.DocDueDate = DateTime.Now;
                 }
+                else if (salesOrder.DocDueDate == null)
+                {
+                    oSaleOrder.DocDueDate = DateTime.Now;
+                }
                 else
                 {
                     oSaleOrder.DocDate = (DateTime)salesOrder.DocDate;
-                    oSaleOrder.DocDueDate = (DateTime)salesOrder.DocDate;
+                    oSaleOrder.DocDueDate = (DateTime)salesOrder.DocDueDate;
                 }
                 oSaleOrder.DocObjectCode = SAPbobsCOM.BoObjectTypes.oOrders;
                 foreach (var item in salesOrder.SalesOrderLine)
@@ -294,6 +312,7 @@ namespace OrderManager.Manager
                 }
                 if (oSaleOrder.Add() == 0)
                 {
+                    ExceptionLog.Write(string.Format("高山药业:{0},订单号:{1}对接成功", salesOrder.CardCode, salesOrder.DocEntry));
                     return true;
                 }
                 ExceptionLog.Write(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
@@ -315,6 +334,10 @@ namespace OrderManager.Manager
         public void DisConnect()
         {
             CurrentCompany.Disconnect();
+        }
+
+        public void JFZDisConnect()
+        {
             JFZCompany.Disconnect();
         }
 
