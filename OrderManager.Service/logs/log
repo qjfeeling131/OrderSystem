@@ -1,49 +1,13 @@
 
-记录时间：2015-08-18 00:01:24,515   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
-   在 System.Xml.XmlTextReaderImpl.Throw(Exception e)
-   在 System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   在 System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   在 System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   在 System.Xml.XmlTextReaderImpl.Read()
-   在 System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   在 System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
-   在 System.Xml.XmlDocument.Load(XmlReader reader)
-   在 System.Xml.XmlDocument.LoadXml(String xml)
-   在 CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   在 CommonHelper.FileLogger..ctor()
-   在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-08-18 00:04:02,798   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
-   在 System.Xml.XmlTextReaderImpl.Throw(Exception e)
-   在 System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   在 System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   在 System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   在 System.Xml.XmlTextReaderImpl.Read()
-   在 System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   在 System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
-   在 System.Xml.XmlDocument.Load(XmlReader reader)
-   在 System.Xml.XmlDocument.LoadXml(String xml)
-   在 CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   在 CommonHelper.FileLogger..ctor()
-   在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-08-18 00:07:15,044   
+记录时间：2015-08-24 19:35:39,853   
  日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【2015/8/18 0:07:12】------------------
+ 出错类：Logger property:[(null)]  错误描述：------------------【2015/8/24 19:35:39】------------------
 【Source】：
 【Message】：Bad Request
 【StackTrace】：Bad Request
 
  
-记录时间：2015-08-18 00:08:01,326   
+记录时间：2015-08-24 19:38:24,872   
  日志级别：ERROR 
  出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
  System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
@@ -61,7 +25,15 @@
    在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
    在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
 
-记录时间：2015-08-18 00:10:50,059   
+记录时间：2015-08-24 19:40:33,041   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【2015/8/24 19:40:32】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-08-24 19:41:26,594   
  日志级别：ERROR 
  出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
  System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
@@ -79,7 +51,15 @@
    在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
    在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
 
-记录时间：2015-08-18 00:11:51,018   
+记录时间：2015-08-24 19:59:06,521   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【2015/8/24 19:59:06】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-08-24 19:59:54,924   
  日志级别：ERROR 
  出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
  System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
@@ -96,3 +76,170 @@
    在 CommonHelper.FileLogger..ctor()
    在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
    在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-08-24 20:01:54,162   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【2015/8/24 20:01:53】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-08-24 20:04:27,954   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
+   在 System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   在 System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   在 System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   在 System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   在 System.Xml.XmlTextReaderImpl.Read()
+   在 System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   在 System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
+   在 System.Xml.XmlDocument.Load(XmlReader reader)
+   在 System.Xml.XmlDocument.LoadXml(String xml)
+   在 CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   在 CommonHelper.FileLogger..ctor()
+   在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-08-24 20:06:35,474   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
+   在 System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   在 System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   在 System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   在 System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   在 System.Xml.XmlTextReaderImpl.Read()
+   在 System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   在 System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
+   在 System.Xml.XmlDocument.Load(XmlReader reader)
+   在 System.Xml.XmlDocument.LoadXml(String xml)
+   在 CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   在 CommonHelper.FileLogger..ctor()
+   在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-08-24 20:10:00,791   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【2015/8/24 20:10:00】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-08-24 20:10:27,511   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
+   在 System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   在 System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   在 System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   在 System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   在 System.Xml.XmlTextReaderImpl.Read()
+   在 System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   在 System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
+   在 System.Xml.XmlDocument.Load(XmlReader reader)
+   在 System.Xml.XmlDocument.LoadXml(String xml)
+   在 CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   在 CommonHelper.FileLogger..ctor()
+   在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-08-24 23:06:24,451   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【2015/8/24 23:06:23】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-08-24 23:09:26,772   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
+   在 System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   在 System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   在 System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   在 System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   在 System.Xml.XmlTextReaderImpl.Read()
+   在 System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   在 System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
+   在 System.Xml.XmlDocument.Load(XmlReader reader)
+   在 System.Xml.XmlDocument.LoadXml(String xml)
+   在 CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   在 CommonHelper.FileLogger..ctor()
+   在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-08-24 23:10:40,482   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
+   在 System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   在 System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   在 System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   在 System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   在 System.Xml.XmlTextReaderImpl.Read()
+   在 System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   在 System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
+   在 System.Xml.XmlDocument.Load(XmlReader reader)
+   在 System.Xml.XmlDocument.LoadXml(String xml)
+   在 CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   在 CommonHelper.FileLogger..ctor()
+   在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-08-24 23:16:45,259   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
+   在 System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   在 System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   在 System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   在 System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   在 System.Xml.XmlTextReaderImpl.Read()
+   在 System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   在 System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
+   在 System.Xml.XmlDocument.Load(XmlReader reader)
+   在 System.Xml.XmlDocument.LoadXml(String xml)
+   在 CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   在 CommonHelper.FileLogger..ctor()
+   在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-08-24 23:17:20,836   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: 意外的 XML 声明。XML 声明必须是文档中的第一个节点并且在它之前不允许出现空白字符。 第 1 行，位置 580。
+   在 System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   在 System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
+   在 System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   在 System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   在 System.Xml.XmlTextReaderImpl.Read()
+   在 System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   在 System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
+   在 System.Xml.XmlDocument.Load(XmlReader reader)
+   在 System.Xml.XmlDocument.LoadXml(String xml)
+   在 CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   在 CommonHelper.FileLogger..ctor()
+   在 CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   在 CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-08-24 23:44:49,276   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【2015/8/24 23:44:48】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 
+记录时间：2015-08-24 23:47:48,981   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【2015/8/24 23:47:48】------------------
+【Source】：
+【Message】：Bad Request
+【StackTrace】：Bad Request
+
+ 

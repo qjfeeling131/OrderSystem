@@ -66,38 +66,37 @@
 @section script{
 
     <script>
-        $(function () {
-            $('#IsRememeber').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
-                increaseArea: '20%' // optional,
-            });
+    $(function () {
+        $('#IsRememeber').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional,
+        });
 
-            $('body').addClass('bg');
+        $('body').addClass('bg');
 
-            //fakeLoading();
+        //fakeLoading();
 
-            $('#IsRememeber').on('ifChecked', function (event) {
-                $('#IsRememeber').val(true);
-            });
+        $('#IsRememeber').on('ifChecked', function (event) {
+            $('#IsRememeber').val(true);
+        });
 
-            $('#submit').click(function () {
+        $('#submit').click(function () {
 
-                if ($("#account").val() == '' || $("#password").val() == '') {
-                    var model = { 'Title': '提示', 'Message': '账户或密码不能为空' };
-                    createDialog('base/exception', model);
+            if ($("#account").val() == '' || $("#password").val() == '') {
+                var model = { 'Title': '提示', 'Message': '账户或密码不能为空' };
+                createDialog('@Url.Content("~/base/exception")', model);
                     return;
                 }
 
                 $(this).addClass("disabled");
                 var data = $("#form_login").serialize();
-
                 getAsynData('@Url.Content("~/home/login")', data, function (json) {
-                    location.href = json.Href;
-                });
+                location.href = json.Href;
             });
-
         });
+
+    });
     </script>
 }
 

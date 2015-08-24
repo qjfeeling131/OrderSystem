@@ -18,6 +18,7 @@
 
     <script>
         $(function () {
+       
             $("#modal_dialog").on('hidden.bs.modal', function (e) {
                 $(this).remove();
                 $('button').removeClass("disabled");
@@ -27,7 +28,7 @@
                     window.top.location = '@Url.Content("~/home/login")';
                 }
             })
-            closeLoading()
+      
 
         })
     </script>
