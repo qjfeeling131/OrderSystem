@@ -164,13 +164,13 @@ namespace OrderManager.Web
             {
                 errormodel.Message = GetWcfExceptionDetail(wcfException.Detail);
                 errormodel.Type = wcfException.Detail.HelpLink;
-                string notepad = FormmatException(wcfException.StackTrace, wcfException.Message, wcfException.Source);
+                string notepad = FormmatException(wcfException.StackTrace, wcfException.Message);
                 ExceptionLog.Write(notepad);
             }
             else
             {
                 errormodel.Message = GetExceptionDetail(filterContext.Exception);
-                string notepad = FormmatException(filterContext.Exception.StackTrace, filterContext.Exception.Message, filterContext.Exception.Source);
+                string notepad = FormmatException(filterContext.Exception.StackTrace, filterContext.Exception.Message);
                 ExceptionLog.Write(notepad);
             }
 
@@ -206,14 +206,14 @@ namespace OrderManager.Web
             return str;
         }
 
-        private string FormmatException(string StackTrace, string Message, string Source)
+        private string FormmatException(string StackTrace, string Message)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(string.Format("------------------【{0}】------------------", DateTime.Now));
             sb.Append("\r\n");
-            sb.Append("【Source】：" + Source); sb.Append("\r\n");
+            //sb.Append("【Source】：" + Source); sb.Append("\r\n");
             sb.Append("【Message】：" + Message); sb.Append("\r\n");
-            sb.Append("【StackTrace】：" + Message); sb.Append("\r\n");
+            sb.Append("【StackTrace】：" + StackTrace); sb.Append("\r\n");
             return sb.ToString();
         }
 
