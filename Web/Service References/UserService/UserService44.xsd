@@ -46,6 +46,7 @@
       <xs:element minOccurs="0" name="TPLContact" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TPLOrder" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TPLPhone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalPrice" type="xs:decimal" />
       <xs:element minOccurs="0" name="User_Guid" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

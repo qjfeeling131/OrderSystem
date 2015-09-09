@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.Practices.Unity;
 using OrderManager.Common;
+using OrderManager.Manager.Common;
 using OrderManager.Model;
 using OrderManager.Model.DTO;
 using OrderManager.Model.Models;
@@ -305,6 +306,7 @@ namespace OrderManager.Manager
                     salesOrder.DocStatus = ((int)OM_DocStatusEnum.已对接).ToString();
                     if (DbRepository.Update(salesOrder) > 0)
                     {
+                        LogHelper.Info("Start Update SalesOrder scuess");
                         return true;
                     }
                 }
@@ -312,8 +314,8 @@ namespace OrderManager.Manager
             catch (Exception ex)
             {
 
-                ExceptionLog.Write(ex.ToString());
-                return false;
+                LogHelper.Error(ex.ToString());
+                throw new GenericException(ex.ToString());
             }
 
             return false;
@@ -325,12 +327,13 @@ namespace OrderManager.Manager
             bool gsResult = false;
             bool jfzResult = false;
             OM_SalesOrderDataObject GSSalesOrder = new OM_SalesOrderDataObject();
-
+            GSSalesOrder.Guid = salesOrder.Guid;
             GSSalesOrder.CardCode = salesOrder.CardCode;
             GSSalesOrder.CardName = salesOrder.CardName;
             GSSalesOrder.DocDate = salesOrder.DocDate;
             GSSalesOrder.DocDueDate = salesOrder.DocDueDate;
             OM_SalesOrderDataObject JFZSalesOrder = new OM_SalesOrderDataObject();
+            JFZSalesOrder.Guid = salesOrder.Guid;
             JFZSalesOrder.CardCode = salesOrder.CardCode;
             JFZSalesOrder.CardName = salesOrder.CardName;
             JFZSalesOrder.DocDate = salesOrder.DocDate;
@@ -349,25 +352,29 @@ namespace OrderManager.Manager
             }
             if (GSSalesOrder.SalesOrderLine.Count <= 0)
             {
-                ExceptionLog.Write("GSCompany's salesline is zero");
+                LogHelper.Error("GSCompany's salesline is zero");
 
             }
             else
             {
-                gsResult = B1Company.SBOCompany.SaveSalesOrderDraft(salesOrder);
+                gsResult = B1Company.SBOCompany.SaveSalesOrderDraft(GSSalesOrder);
             }
             if (GSSalesOrder.SalesOrderLine.Count <= 0)
             {
-                ExceptionLog.Write("JFZCompany's salesline is zero");
+                LogHelper.Error("JFZCompany's salesline is zero");
 
             }
             else
             {
+                LogHelper.Info("JFZCompany' has Start");
+                LogHelper.Info(string.Format("JFZSalesOrder.SalesOrderLine.Count is :" + JFZSalesOrder.SalesOrderLine.Count.ToString()));
                 jfzResult = B1Company.SBOCompany.SaveSalesOrderDraftToJFZ(JFZSalesOrder);
             }
-            if (gsResult || jfzResult)
+            if (gsResult & jfzResult)
             {
+                B1Company.SBOCompany.Dispose();
                 return true;
+
             }
             return false;
 
@@ -453,7 +460,7 @@ namespace OrderManager.Manager
         public List<OM_ProductInfo> GetChildProductRecursion(string cardCode, string itemCode, string userGuid)
         {
             //&& a.ParentId!=a.ItemCode 把自己排除
-            var result = DbRepository.GetList<OM_Product>(a => a.CardCode == cardCode && a.ParentId == itemCode && a.ParentId != a.ItemCode);
+            var result = DbRepository.GetList<OM_Product>(a => a.CardCode == cardCode && a.ParentId == itemCode && a.ParentId != a.ItemCode && a.IsDel == false);
 
             if (result == null || result.Count == 0)
             {

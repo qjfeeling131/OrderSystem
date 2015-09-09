@@ -135,17 +135,25 @@ namespace OrderManager.Web
         {
             JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
             var orderDetail = jsonSerializer.Deserialize<OM_SalesOrderDataObject>(obj);
-            orderDetail.User_Guid = CurrentUser.User.Guid;
+            try
+            {
+                orderDetail.User_Guid = CurrentUser.User.Guid;
 
-            if (!string.IsNullOrWhiteSpace(orderDetail.Guid))
-            {
-                UserService.UpdateSalesOrder(Cipher, orderDetail);
+                if (!string.IsNullOrWhiteSpace(orderDetail.Guid))
+                {
+                    UserService.UpdateSalesOrder(Cipher, orderDetail);
+                }
+                else
+                {
+                    orderDetail.Guid = Guid.NewGuid().ToString().ToUpper();
+                    //orderDetail.Guid = UserService.SaveSalesOrder(Cipher, orderDetail);  // return order guid
+                    UserService.SaveSalesOrder(Cipher, orderDetail);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                orderDetail.Guid = Guid.NewGuid().ToString().ToUpper();
-                //orderDetail.Guid = UserService.SaveSalesOrder(Cipher, orderDetail);  // return order guid
-                UserService.SaveSalesOrder(Cipher, orderDetail);
+
+                return Json(GetException(ex));
             }
 
             return Json(new JsonModel { Data = orderDetail.Guid });
@@ -156,15 +164,26 @@ namespace OrderManager.Web
         [HttpPost]
         public JsonResult SubmitOrder(string orderGuid)
         {
-            UserService.UpdateSalesOrderStatusByCommit(Cipher, orderGuid);
+            try
+            {
+                UserService.UpdateSalesOrderStatusByCommit(Cipher, orderGuid);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(GetException(ex));
+            }
             return Json(new JsonModel { Data = "已提交" });
         }
 
         [HttpPost]
         public JsonResult SubmitOrder2SAp(string orderGuid)
         {
-            UserService.UpdateSalesOrderStatusByToSAP(Cipher, orderGuid);
-            return Json(new JsonModel { Data = "已对接" });
+            if (UserService.UpdateSalesOrderStatusByToSAP(Cipher, orderGuid))
+            {
+                return Json(new JsonModel { Data = "已对接", Code = 0 });
+            }
+            return Json(new JsonModel { Code = -2 });
         }
         [SkipLogin]
         public ActionResult DateTimePickerIframe()

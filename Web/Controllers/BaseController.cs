@@ -144,6 +144,7 @@ namespace OrderManager.Web
             {
                 ViewBag.UserName = CurrentUser.User.Name;
                 ViewBag.LoginDate = CurrentUser.User.UpdateDatetime;
+                ViewBag.Role = CurrentUser.Role.Guid;
             }
             base.OnActionExecuting(filterContext);
         }
@@ -180,10 +181,40 @@ namespace OrderManager.Web
                 JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
                 resultModel.Data = "createDialog('" + Url.Content("~/base/exception") + "'," + jsonSerializer.Serialize(errormodel) + ")";
                 filterContext.Result = Json(resultModel);
+                //filterContext.Result = Content("createDialog('" + Url.Content("~/base/exception") + "'," + jsonSerializer.Serialize(errormodel) + ")", "application/javascript");
+                //base.OnException(filterContext);
             }
             else
+            {
                 filterContext.Result = View("~/Views/Template/ExceptionPage.cshtml", errormodel);
+            }
+            base.OnException(filterContext);
 
+        }
+
+        protected JsonModel GetException(Exception ex)
+        {
+            JsonModel resultModel = new JsonModel() { Code = -1 };
+            InfoModel errormodel = new InfoModel() { Title = "错误", Code = -1 };
+            var wcfException = ex as FaultException<ExceptionDetail>;
+            if (wcfException != null)
+            {
+                errormodel.Message = GetWcfExceptionDetail(wcfException.Detail);
+                errormodel.Type = wcfException.Detail.HelpLink;
+                string notepad = FormmatException(wcfException.StackTrace, wcfException.Message);
+            }
+            if (HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+
+                JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+                resultModel.Data = "createDialog('" + Url.Content("~/base/exception") + "'," + jsonSerializer.Serialize(errormodel) + ")";
+            }
+            else
+            {
+                JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+                resultModel.Data = "redirected('" + Url.Content("~/Views/Template/ExceptionPage.cshtml") + "'," + jsonSerializer.Serialize(errormodel) + ")";
+            }
+            return resultModel;
         }
 
         private string GetWcfExceptionDetail(ExceptionDetail ex)

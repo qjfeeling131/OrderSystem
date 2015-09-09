@@ -7,9 +7,9 @@ function createDialog(url, parameters) {
         closeLoading();
         for (i = 0; i < $(data).length; i++) {
             var item = $(data)[i];
-            console.log(data);
+            //console.log(data);
             if ($(item).hasClass("modal")) {
-                console.log("get dialog");
+                //console.log("get dialog");
 
                 modal = $(item);
                 $(modal).appendTo('#dialog_content');
@@ -19,7 +19,7 @@ function createDialog(url, parameters) {
                     backdrop: 'static'
                 });
 
-                $(modal).on('hidden.bs.modal', function (e) {      
+                $(modal).on('hidden.bs.modal', function (e) {
                     $(this).remove();
                     $('button').removeClass("disabled");
                 })
@@ -28,10 +28,14 @@ function createDialog(url, parameters) {
     }, "html");
 }
 
+function redirected(url, parameters) {
+    window.location = url;
+}
 
-function alertInfo(title,msg) {
-    var model = { 'Title':  title , 'Message': msg };
-    createDialog('../base/exception', model); 
+
+function alertInfo(title, msg) {
+    var model = { 'Title': title, 'Message': msg };
+    createDialog('../base/exception', model);
 }
 
 //exception wrapper
@@ -46,7 +50,7 @@ function getAsynData(path, data, func) {
     }, "json");
 }
 
-function isNullorEmptyString(str){
+function isNullorEmptyString(str) {
     return str.replace(/(^s*)|(s*$)/g, "").length == 0;
 }
 

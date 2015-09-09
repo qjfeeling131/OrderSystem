@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="B1Company.cs" />
+    <Compile Include="Common\LogHelper.cs" />
     <Compile Include="Interface\ILogManager.cs" />
     <Compile Include="Interface\IOrderManger.cs" />
     <Compile Include="Interface\IUserManager.cs" />
@@ -95,6 +96,11 @@
     <Content Include="Libs\Interop.SAPbobsCOM.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LogConfig\Log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

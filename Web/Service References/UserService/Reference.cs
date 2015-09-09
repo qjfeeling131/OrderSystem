@@ -130,10 +130,10 @@ namespace Web.UserService {
         System.Threading.Tasks.Task UpdateSalesOrderStatusByCommitAsync(string cipher, string orderGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAP", ReplyAction="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAPResponse")]
-        void UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid);
+        bool UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAP", ReplyAction="http://tempuri.org/IUserService/UpdateSalesOrderStatusByToSAPResponse")]
-        System.Threading.Tasks.Task UpdateSalesOrderStatusByToSAPAsync(string cipher, string orderGuid);
+        System.Threading.Tasks.Task<bool> UpdateSalesOrderStatusByToSAPAsync(string cipher, string orderGuid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -315,11 +315,11 @@ namespace Web.UserService {
             return base.Channel.UpdateSalesOrderStatusByCommitAsync(cipher, orderGuid);
         }
         
-        public void UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid) {
-            base.Channel.UpdateSalesOrderStatusByToSAP(cipher, orderGuid);
+        public bool UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid) {
+            return base.Channel.UpdateSalesOrderStatusByToSAP(cipher, orderGuid);
         }
         
-        public System.Threading.Tasks.Task UpdateSalesOrderStatusByToSAPAsync(string cipher, string orderGuid) {
+        public System.Threading.Tasks.Task<bool> UpdateSalesOrderStatusByToSAPAsync(string cipher, string orderGuid) {
             return base.Channel.UpdateSalesOrderStatusByToSAPAsync(cipher, orderGuid);
         }
     }

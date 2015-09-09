@@ -235,8 +235,8 @@ namespace OrderManager.Service
         {
             int count = 0;
             PageListParameter<OM_Product, string> parameter = new PageListParameter<OM_Product, string>();
-            parameter.whereLambda = s => (s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey))
-                                            && (s.ParentId == null || s.ParentId == s.ItemCode); // randy
+            parameter.whereLambda = s => ((s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey))
+                                            && (s.ParentId == null || s.ParentId == s.ItemCode) & s.IsDel == false); // randy
             parameter.pageIndex = pageIndex;
             parameter.orderByLambda = s => s.ItemCode;
             parameter.pageSize = 5;
@@ -272,7 +272,7 @@ namespace OrderManager.Service
             int count = 0;
             PageListParameter<OM_Product, string> parameter = new PageListParameter<OM_Product, string>();
             parameter.whereLambda = s => (s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey))
-                                            //&& s.CardCode == CardCode
+                //&& s.CardCode == CardCode
                                             && (s.ParentId == null || s.ParentId == s.ItemCode);
             parameter.orderByLambda = s => s.ItemCode;
             parameter.pageSize = int.MaxValue;
@@ -303,22 +303,25 @@ namespace OrderManager.Service
         }
 
 
-        public void UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid)
+        public bool UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid)
         {
-            orderManger.UpdateSalesOrderStatusByToSAP(orderGuid);
-
-            var user = userManager.GetUser(s => s.Guid == cipher);
-            var order = orderManger.GetSalesOrder(s => s.Guid == orderGuid);
-            var log = new OM_Log
+            if (orderManger.UpdateSalesOrderStatusByToSAP(orderGuid))
             {
-                CreateDatetime = DateTime.Now,
-                Doc_View = "Order/UpdateStatus",
-                Guid = Guid.NewGuid().ToString(),
-                Operation = "对接订单到SAP",
-                User_Guid = user.Guid,
-                Message = string.Format("用户[{0}] : '{1}' 对接订单【{2}】到SAP.", user.Name, DateTime.Now, order.DocEntry)
-            };
-            logManager.WriteLog(log);
+                var user = userManager.GetUser(s => s.Guid == cipher);
+                var order = orderManger.GetSalesOrder(s => s.Guid == orderGuid);
+                var log = new OM_Log
+                {
+                    CreateDatetime = DateTime.Now,
+                    Doc_View = "Order/UpdateStatus",
+                    Guid = Guid.NewGuid().ToString(),
+                    Operation = "对接订单到SAP",
+                    User_Guid = user.Guid,
+                    Message = string.Format("用户[{0}] : '{1}' 对接订单【{2}】到SAP.", user.Name, DateTime.Now, order.DocEntry)
+                };
+                logManager.WriteLog(log);
+                return true;
+            }
+            return false;
         }
 
         #endregion

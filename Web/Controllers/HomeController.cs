@@ -50,17 +50,26 @@ namespace OrderManager.Web
         [HttpPost]
         public JsonResult Login(string UserCode, string Password, bool? IsRememeber)  //json 不能传null
         {
-            var detail = UserService.Login(UserCode, Encryptor.MD5Encrypt(Password));
-            CurrentUser = detail;
+            try
+            {
+                var detail = UserService.Login(UserCode, Encryptor.MD5Encrypt(Password));
+                CurrentUser = detail;
 
-            if (IsRememeber == true)
-            {
-                SetCookie("UserAccount", UserCode + CookieSplitStr + Password, DateTime.Now.AddDays(7));
+                if (IsRememeber == true)
+                {
+                    SetCookie("UserAccount", UserCode + CookieSplitStr + Password, DateTime.Now.AddDays(7));
+                }
+                else
+                {
+                    UpdateCookiePassword("UserAccount", Password);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                UpdateCookiePassword("UserAccount", Password);
+                return Json(base.GetException(ex));
+
             }
+
 
             return Json(new JsonModel { Code = 1, Type = JsonTypeEnym.Redirect.ToString(), Href = Url.Content("~/home/home") });
         }

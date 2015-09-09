@@ -82,7 +82,7 @@
                                 <tr role="row">
                                     <th tabindex="0">物料编号</th>
                                     <th tabindex="0">物料名称</th>
-                                    <th tabindex="0">价格</th>
+                                    <th id="price" tabindex="0">价格</th>
                                     <th tabindex="0">数量</th>
                                     <th tabindex="0">货币</th>
                                     <th tabindex="0">总价</th>
@@ -175,6 +175,18 @@
             $("#UserCode").dblclick(function () {
                 createDialog('@(Url.Content("~/order/usercodelist"))');
             })
+            var role = $("#Uniquerole").val();
+            if (role == "D3BEB5F5-DFCE-4AAB-A3BE-BB44007FFDD2") {
+                $("#sumbit2SAP").hide();
+                $("#sysPrice").attr("disabled", "true")
+            }
+
+            if ($("#status").val() != "未提交") {
+                $("#addRow").hide();
+                $("#removeRow").hide();
+                $("button[name = 'om-OrderLine-Save']").hide();
+                $("button[name='om-OrderLine-Edit']").hide();
+            }
 
             $("#datetimepicker").click(function () {
                 docDateClick = true;
@@ -203,6 +215,7 @@
                 itemProductEvent("itemcode");
                 itemProductEvent("itemname");
                 itemProductEvent("itemprice");
+                $("#itemprice").attr("disabled", "true");
                 itemSave("om-OrderLine-Save" + rowNum);
                 itemEdit("om-OrderLine-Edit" + rowNum);
                 rowNum++;
@@ -239,7 +252,7 @@
                     $(arrTds[1]).html("<input id='itemname' type='text' value='" + $(arrTds[1]).html() + "'/> ")
                     $(arrTds[2]).html("<input id='itemprice' type='text' value='" + $(arrTds[2]).html() + "'/> ")
                     $(arrTds[3]).html("<input id='itemquantity' type='text' value='" + $(arrTds[3]).html() + "'/> ")
-
+                    $("#itemprice").attr("disabled", "true");
                     RowClickEvent($(this).parent().parent());
                     itemProductEvent("itemcode");
                     itemProductEvent("itemname");
@@ -271,7 +284,7 @@
                     $(arrTds[1]).html("<input id='itemname' type='text' value='" + $(arrTds[1]).html() + "'/> ")
                     $(arrTds[2]).html("<input id='itemprice' type='text' value='" + $(arrTds[2]).html() + "'/> ")
                     $(arrTds[3]).html("<input id='itemquantity' type='text' value='" + $(arrTds[3]).html() + "'/> ")
-
+                    $("#itemprice").attr("disabled", "true");
                     itemProductEvent("itemcode");
                     itemProductEvent("itemname");
                     itemProductEvent("itemprice");
@@ -349,9 +362,14 @@
                 }
                 $(this).addClass("disabled");
                 getAsynData("SubmitOrder2SAp", "orderGuid=" + data, function (json) {
-                    $("#status").val(json.Data);
-                    alertInfo("提示", "对接成功");
-
+                    console.log(json.Code);
+                    if (json.Code == "0") {
+                        $("#status").val(json.Data);
+                        alertInfo("提示", "对接成功");
+                    } else {
+                        console.log("error");
+                        alertInfo("提示", "对接失败");
+                    }
                 });
 
             });
@@ -406,7 +424,7 @@
                 DocStatus: "",
                 CardName: "",
                 DocDate: "",
-                DocDueDate:"",
+                DocDueDate: "",
                 SalesOrderLine: new Array(),//{ [],[],[] }
                 Remarks: ""
 

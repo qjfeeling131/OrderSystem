@@ -1,4 +1,5 @@
 ﻿using OrderManager.Common;
+using OrderManager.Manager.Common;
 using OrderManager.Model.DTO;
 using System;
 using System.Collections.Generic;
@@ -66,55 +67,55 @@ namespace OrderManager.Manager
             string licenseAddress = ConfigurationManager.AppSettings["LicenseServer"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("licenseAddress is Null");
+                LogHelper.Error("GSCompany licenseAddress is Null");
                 return false;
             }
             string companyDB = ConfigurationManager.AppSettings["CompanyDB"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("CompanyDB is Null");
+                LogHelper.Error("GSCompany CompanyDB is Null");
                 return false;
             }
             string dbUser = ConfigurationManager.AppSettings["DbUserName"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("DbUserName is Null");
+                LogHelper.Error("GSCompany DbUserName is Null");
                 return false;
             }
             string dbPwd = ConfigurationManager.AppSettings["DbPassword"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("DbPassword is Null");
+                LogHelper.Error("GSCompany DbPassword is Null");
                 return false;
             }
             string language = ConfigurationManager.AppSettings["Language"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("Language is Null");
+                LogHelper.Error("GSCompany Language is Null");
                 return false;
             }
             string b1User = ConfigurationManager.AppSettings["UserName"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("UserName is Null");
+                LogHelper.Error("GSCompany UserName is Null");
                 return false;
             }
             string b1Pwd = ConfigurationManager.AppSettings["Password"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("Password is Null");
+                LogHelper.Error("GSCompany Password is Null");
                 return false;
             }
             string dbServerType = ConfigurationManager.AppSettings["DbServerType"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("DbServerType is Null");
+                LogHelper.Error("GSCompany DbServerType is Null");
                 return false;
             }
             string serverAddress = ConfigurationManager.AppSettings["Server"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("Server is Null");
+                LogHelper.Error("GSCompany Server is Null");
                 return false;
             }
             CurrentCompany.CompanyDB = companyDB;
@@ -131,7 +132,7 @@ namespace OrderManager.Manager
             {
                 return true;
             }
-            ExceptionLog.Write(string.Format("Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
+            LogHelper.Error(string.Format("Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
             return false;
         }
 
@@ -140,55 +141,55 @@ namespace OrderManager.Manager
             string licenseAddress = ConfigurationManager.AppSettings["LicenseServer"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("licenseAddress is Null");
+                LogHelper.Error("licenseAddress is Null");
                 return false;
             }
             string companyDB = ConfigurationManager.AppSettings["JFZCompanyDB"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("CompanyDB is Null");
+                LogHelper.Error("CompanyDB is Null");
                 return false;
             }
             string dbUser = ConfigurationManager.AppSettings["DbUserName"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("DbUserName is Null");
+                LogHelper.Error("DbUserName is Null");
                 return false;
             }
             string dbPwd = ConfigurationManager.AppSettings["DbPassword"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("DbPassword is Null");
+                LogHelper.Error("DbPassword is Null");
                 return false;
             }
             string language = ConfigurationManager.AppSettings["Language"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("Language is Null");
+                LogHelper.Error("Language is Null");
                 return false;
             }
             string b1User = ConfigurationManager.AppSettings["UserName"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("UserName is Null");
+                LogHelper.Error("UserName is Null");
                 return false;
             }
             string b1Pwd = ConfigurationManager.AppSettings["Password"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("Password is Null");
+                LogHelper.Error("Password is Null");
                 return false;
             }
             string dbServerType = ConfigurationManager.AppSettings["DbServerType"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("DbServerType is Null");
+                LogHelper.Error("DbServerType is Null");
                 return false;
             }
             string serverAddress = ConfigurationManager.AppSettings["Server"];
             if (string.IsNullOrEmpty(licenseAddress))
             {
-                ExceptionLog.Write("Server is Null");
+                LogHelper.Error("Server is Null");
                 return false;
             }
             JFZCompany.CompanyDB = companyDB;
@@ -205,7 +206,7 @@ namespace OrderManager.Manager
             {
                 return true;
             }
-            ExceptionLog.Write(string.Format("Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), JFZCompany.GetLastErrorDescription()));
+            LogHelper.Error(string.Format("Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), JFZCompany.GetLastErrorDescription()));
             return false;
         }
 
@@ -216,13 +217,20 @@ namespace OrderManager.Manager
                 return false;
             }
             SAPbobsCOM.Recordset oRs = jFZCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-
+            LogHelper.Info(string.Format("JFZCompany via script is: select * from ODRF where ObjType='17' and Address2='{0}'", salesOrder.Guid));
+            oRs.DoQuery(string.Format("select * from ODRF where ObjType='17' and Address2='{0}'", salesOrder.Guid));
+            if (oRs.RecordCount > 0)
+            {
+                LogHelper.Info(string.Format("JFZCompnay Document has exist, and the DocEntry={0},DocNum={1}", oRs.Fields.Item("DocEntry").Value, oRs.Fields.Item("DocNum").Value));
+                return true;
+            }
             oRs.DoQuery(string.Format("select top 1 CardCode from ORDR where CardName='{0}'", salesOrder.CardName));
             if (oRs.RecordCount > 0)
             {
                 SAPbobsCOM.Documents oSaleOrder = JFZCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oDrafts);
                 try
                 {
+                    oSaleOrder.Address = salesOrder.Guid;
                     oSaleOrder.CardCode = oRs.Fields.Item("CardCode").Value;
                     oSaleOrder.CardName = salesOrder.CardName;
                     oSaleOrder.Comments = "经销商平台对接生成";
@@ -247,29 +255,30 @@ namespace OrderManager.Manager
                         oSaleOrder.Lines.Quantity = Convert.ToDouble(item.Quantity);
                         oSaleOrder.Lines.Price = Convert.ToDouble(item.Price);
                         oSaleOrder.Lines.Add();
+                        LogHelper.Info(string.Format("the OsaleOrderLine Detail ItemCode={0},ItemName={1},Quantity={2},Price={3}", item.ItemCode.ToString(), item.ItemName, item.Quantity, item.Price));
                     }
+                    LogHelper.Info(string.Format("the OsaleOrder Detail CardeCode={0},CardName={1},DocDate={2},DocDueDate={3}", oSaleOrder.CardCode.ToString(), oSaleOrder.CardName, oSaleOrder.DocDate.ToString("yyyyMMdd"), oSaleOrder.DocDueDate.ToString("yyyyMMdd")));
                     if (oSaleOrder.Add() == 0)
                     {
-                        ExceptionLog.Write(string.Format("金方子:{0},订单号:{1}对接成功", salesOrder.CardCode, salesOrder.DocEntry));
+                        LogHelper.Error(string.Format("金方子:{0},订单号:{1}对接成功", salesOrder.CardCode, salesOrder.DocEntry));
                         return true;
                     }
-                    ExceptionLog.Write(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
+                    LogHelper.Error(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), JFZCompany.GetLastErrorDescription()));
                     return false;
                 }
                 catch (Exception ex)
                 {
-                    ExceptionLog.Write(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
+                    LogHelper.Error(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), JFZCompany.GetLastErrorDescription()));
                     return false;
                 }
                 finally
                 {
                     JFZDisConnect();
-                    //System.Runtime.InteropServices.Marshal.ReleaseComObject(oSaleOrder);
                 }
             }
             else
             {
-                ExceptionLog.Write("金方子客户代码为空");
+                LogHelper.Error("金方子客户代码为空");
                 throw new GenericException("金方子客户代码为空");
             }
 
@@ -280,10 +289,18 @@ namespace OrderManager.Manager
             {
                 return false;
             }
+            SAPbobsCOM.Recordset oRs = CurrentCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+            LogHelper.Info(string.Format("GSCompany via script is: select * from ODRF where ObjType='17' and Address2='{0}'", salesOrder.Guid));
+            oRs.DoQuery(string.Format("select * from ODRF where ObjType='17' and Address2='{0}'", salesOrder.Guid));
+            if (oRs.RecordCount > 0)
+            {
+                LogHelper.Info(string.Format("JFZCompnay Document has exist, and the DocEntry={0},DocNum={1}", oRs.Fields.Item("DocEntry").Value, oRs.Fields.Item("DocNum").Value));
+                return true;
+            }
             SAPbobsCOM.Documents oSaleOrder = CurrentCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oDrafts);
             try
             {
-
+                oSaleOrder.Address2 = salesOrder.Guid;
                 oSaleOrder.CardCode = salesOrder.CardCode;
                 oSaleOrder.CardName = salesOrder.CardName;
                 oSaleOrder.Comments = "经销商平台对接生成";
@@ -312,22 +329,20 @@ namespace OrderManager.Manager
                 }
                 if (oSaleOrder.Add() == 0)
                 {
-                    ExceptionLog.Write(string.Format("高山药业:{0},订单号:{1}对接成功", salesOrder.CardCode, salesOrder.DocEntry));
+                    LogHelper.Info(string.Format("高山药业:{0},订单号:{1}对接成功,update ", salesOrder.CardCode, salesOrder.DocEntry));
                     return true;
                 }
-                ExceptionLog.Write(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
+                LogHelper.Error(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
                 return false;
             }
             catch (Exception ex)
             {
-                ExceptionLog.Write(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
+                LogHelper.Error(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
                 return false;
             }
             finally
             {
                 DisConnect();
-                Dispose();
-                //System.Runtime.InteropServices.Marshal.ReleaseComObject(oSaleOrder);
             }
 
         }
@@ -346,10 +361,22 @@ namespace OrderManager.Manager
             if (_Company != null)
             {
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(_Company);
+                LogHelper.Info("_Company is release");
             }
             if (CurrentCompany != null)
             {
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(CurrentCompany);
+                LogHelper.Info("CurrentCompany is release");
+            }
+            if (jFZCompany != null)
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(jFZCompany);
+                LogHelper.Info("jFZCompany is release");
+            }
+            if (JFZCompany != null)
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(JFZCompany);
+                LogHelper.Info("JFZCompany is release");
             }
         }
     }
