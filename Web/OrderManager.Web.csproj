@@ -40,6 +40,26 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\CrystalDecisions.ReportSource.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\CrystalDecisions.Shared.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.Web, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\CrystalDecisions.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ServiceStack.Text">
       <HintPath>..\Libs\ServiceStack.Text.dll</HintPath>
@@ -232,6 +252,30 @@
     <Content Include="Js\utility\jquery.treegrid.bootstrap3.js" />
     <Content Include="Js\utility\jquery.treegrid.min.js" />
     <Content Include="Js\utility\master.js" />
+    <Content Include="Libs\CrystalDecisions.CrystalReports.Engine.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libs\CrystalDecisions.CrystalReports.Engine.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libs\CrystalDecisions.ReportSource.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libs\CrystalDecisions.ReportSource.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libs\CrystalDecisions.Shared.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libs\CrystalDecisions.Shared.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libs\CrystalDecisions.Web.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libs\CrystalDecisions.Web.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Properties\DataSources\OrderManager.Model.DTO.OM_UserDetail.datasource" />
     <Content Include="Properties\DataSources\OrderManager.Model.Models.OM_Log.datasource" />
     <Content Include="Properties\DataSources\OrderManager.Model.DTO.OM_LogDataObject.datasource" />
@@ -246,6 +290,9 @@
     <Content Include="Js\plugins\dateTimePicker\less\datetimepicker.less" />
     <Content Include="Js\plugins\dateTimePicker\build\build.less" />
     <Content Include="Js\plugins\dateTimePicker\build\build_standalone.less" />
+    <Content Include="Report\01 经销商对账报表.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Service References\UserService\configuration91.svcinfo" />
     <None Include="Service References\UserService\configuration.svcinfo" />
     <None Include="Service References\UserService\Reference.svcmap">
@@ -282,6 +329,8 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Order\DateTimePickerIframe.cshtml" />
+    <Content Include="Views\Order\search.cshtml" />
+    <Content Include="Views\Order\ShowRptData.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

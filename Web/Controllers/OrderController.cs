@@ -15,6 +15,8 @@ using OrderManager.Web.Models;
 using OrderManager.Model.DTO;
 using System.Web.Script.Serialization;
 using Web.Attribute;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 
 
 
@@ -97,8 +99,59 @@ namespace OrderManager.Web
             return Json(new JsonModel { Data = result });
         }
 
+        public ViewResult Search()
+        {
+            return this.View();
+        }
 
+        [HttpPost]
+        public JsonResult GetCrystalData(string cardCode, string cardName, string startDate, string endDate)
+        {
+            this.HttpContext.Session["ReportName"] = "01 经销商对账报表.rpt";
+            this.HttpContext.Session["CardCode"] = cardCode;
+            this.HttpContext.Session["CardName"] = cardName;
+            this.HttpContext.Session["StartDate"] = startDate;
+            this.HttpContext.Session["EndDate"] = endDate;
+            return Json(new JsonModel { Data = "success" });
+        }
 
+        public void ShowRptData()
+        {
+            try
+            {
+                string strReportName = System.Web.HttpContext.Current.Session["ReportName"].ToString();
+                string cardCode = System.Web.HttpContext.Current.Session["CardCode"].ToString();
+                string cardName = System.Web.HttpContext.Current.Session["CardName"].ToString();
+                string startDate = System.Web.HttpContext.Current.Session["StartDate"].ToString();
+                string endDate = System.Web.HttpContext.Current.Session["EndDate"].ToString();
+                ReportDocument rd = new ReportDocument();
+                string strRptPath = System.Web.HttpContext.Current.Server.MapPath("~/") + "Report//" + strReportName;
+                rd.Load(strRptPath);
+                TableLogOnInfo logInfo = new TableLogOnInfo();
+                logInfo.ConnectionInfo.ServerName = ".";
+                logInfo.ConnectionInfo.DatabaseName = "SBO_GS_TEST";
+                logInfo.ConnectionInfo.UserID = "sa";
+                logInfo.ConnectionInfo.Password = "avatech";
+                rd.Database.Tables[0].ApplyLogOnInfo(logInfo);
+                if (!string.IsNullOrEmpty(cardName))
+                    rd.SetParameterValue("cardname", cardName);
+                if (!string.IsNullOrEmpty(startDate))
+                    rd.SetParameterValue("Sdate", Convert.ToDateTime(startDate));
+                if (!string.IsNullOrEmpty(startDate))
+                    rd.SetParameterValue("Edate", Convert.ToDateTime(endDate));
+                rd.ExportToHttpResponse(ExportFormatType.PortableDocFormat, System.Web.HttpContext.Current.Response, false, "crReport");
+
+                Session["ReportName"] = null;
+                Session["CardCode"] = null;
+                Session["CardName"] = null;
+                Session["StartDate"] = null;
+                Session["EndDate"] = null;
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.ToString());
+            }
+        }
         public ViewResult ProductList(string cardCode)
         {
 
