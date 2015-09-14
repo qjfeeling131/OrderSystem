@@ -9,9 +9,10 @@ using System.Xml;
 using System.Net.NetworkInformation;
 using System.Net;
 using System.Web;
-using Web.UserService;
 using OrderManager.Web.Models;
 using Web.Attribute;
+using Web.Services.UserService;
+using OrderManager.Model.DTO;
 
 
 
@@ -24,7 +25,7 @@ namespace OrderManager.Web
 
         public HomeController()
         {
-            UserService = new UserServiceClient();
+            UserService = new UserServiceClient(); 
         }
         [SkipLogin]
         //js验证 和loading
@@ -52,7 +53,7 @@ namespace OrderManager.Web
         {
             try
             {
-                var detail = UserService.Login(UserCode, Encryptor.MD5Encrypt(Password));
+                OM_UserDetail detail = UserService.Login(UserCode, Encryptor.MD5Encrypt(Password));
                 CurrentUser = detail;
 
                 if (IsRememeber == true)

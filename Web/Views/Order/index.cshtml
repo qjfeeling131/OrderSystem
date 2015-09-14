@@ -20,17 +20,87 @@
 }
 
 @model List<OrderManager.Model.Models.OM_Order>
-z
+
 @section content{
+
     <div class="box box-primary">
         <div class="box-header">
             <h3 class="box-title"><label>订单列表</label></h3>
-            <div class="box-tools">
-                <div class="input-group">
-                    <input type="text" name="key" class="form-control input-sm pull-right" style="width: 150px;" placeholder="搜索" value="@ViewBag.Key ">
-                    <div class="input-group-btn">
-                        <button class="btn btn-sm btn-default" id="search"><i class="glyphicon glyphicon-search"></i></button>
-                    </div>
+        <h6></h6>
+            <div class="box box-info">
+                <div class="box-header">
+                    <h5 class="box-title"><label>查询条件</label></h5>
+                </div>
+                <div class="box-body">
+                    <form id="orderSearchForm" class="form-horizontal" role="form">
+                        <input  name="Id" value="platform_senssion" type="hidden"/>
+                        <div class="form-group form-inline">
+                            <div class="col-md-4">
+                                <span>客户编号: </span>
+                                <div class="input-group">
+                                    <input type="text" class="form-control pull-right active" name="UserCode" value="@ViewBag.Condition.UserCode">
+                                </div><!-- /.input group -->
+                            </div>
+                            <div class="col-md-4">
+                                <span>客户名称: </span>
+                                <div class="input-group">
+                                    <input type="text" class="form-control pull-right" name="UserName" value="@ViewBag.Condition.UserName">
+                                </div><!-- /.input group -->
+                            </div>
+                            <div class="col-md-4">
+                                <span>单据状态: </span>
+                                <select class="form-control" style="width:159px;" name="OrderStatus" id="OrderStatus">
+                                    <option value="0">未提交</option>
+                                    <option value="1">已提交</option>
+                                    <option value="2">已对接</option>
+                                    <option value="3">审核中</option>
+                                    <option value="4">已发货</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-inline">
+                            <div class="col-md-4">
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;单据号: </span>
+                                <div class="input-group">
+                                    <input type="text" class="form-control pull-right " name="OrderEntry" value="@ViewBag.Condition.OrderEntry">
+                                </div><!-- /.input group -->
+                            </div>
+                            <div class="col-md-4">
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;备注: </span>
+                                <div class="input-group">
+                                    <input type="text" class="form-control pull-right " name="Remarks" value="@ViewBag.Condition.Remarks">
+                                </div><!-- /.input group -->
+                            </div>
+                        </div>
+                        <div class="form-group form-horizontal">                     
+                                <div class="col-md-6">
+                                    <p>下达日期:</p>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right rangepicks" id="reservation" name="OrderDate" value="@ViewBag.Condition.OrderDate">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>交货日期:</p>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right rangepicks" name="DeliverDate" value="@ViewBag.Condition.DeliverDate">
+                                    </div>
+                                </div>                       
+                        </div>
+
+                            <div class="form-group form-inline">
+                                <div class="col-md-6">
+                                    <button name="btn-search" class="btn btn-info" id="search"><i class="glyphicon glyphicon-search"></i> 搜索 </button>
+                                </div>       
+                            </div>
+
+                     </form>
                 </div>
             </div>
         </div><!-- /.box-header -->
@@ -130,18 +200,18 @@ z
                                     }
 
                                     <li class="paginate_button  @(ViewBag.PageIndex==0?"disabled":"") ">
-                                        <a href="@(ViewBag.PageIndex == 0 ? "#" : Url.Content("~/order/index?key=" + ViewBag.Key + "&&pageIndex=" + (currentPage - 2)))">上一页</a>
+                                        <a href="@(ViewBag.PageIndex == 0 ? "#" : Url.Content("~/order/index?Condition=" + ViewBag.Condition + "&&pageIndex=" + (currentPage - 2)))">上一页</a>
                                     </li>
 
                                     @for (int i = beginIndex; i <= count; i++)
                                     {
                                         <li class="paginate_button @(i == currentPage ? "active" : "") ">
-                                            <a href="@Url.Content("~/order/index?key=" + ViewBag.Key + "&&pageIndex=" + (i - 1))">@i</a>
+                                            <a href="@Url.Content("~/order/index?Condition=" + ViewBag.Condition + "&&pageIndex=" + (i - 1))">@i</a>
                                         </li>
                                     }
 
                                     <li class="paginate_button @(ViewBag.TotalPages == (ViewBag.PageIndex+1) ? "disabled" : "") ">
-                                        <a href="@(ViewBag.TotalPages == (ViewBag.PageIndex + 1) ? "#" : Url.Content("~/order/index?key=" + ViewBag.Key + "&&pageIndex=" + currentPage))">下一页</a>
+                                        <a href="@(ViewBag.TotalPages == (ViewBag.PageIndex + 1) ? "#" : Url.Content("~/order/index?Condition=" + ViewBag.Condition + "&&pageIndex=" + currentPage))">下一页</a>
                                     </li>
                                 </ul>
                             </div>
@@ -194,6 +264,25 @@ z
             $("#orderManager .treeview-menu").attr("display", "block");
             $("#orderManager .treeview-menu>li").eq(0).addClass("active");
 
+            $('.rangepicks').daterangepicker({
+              //  "singleDatePicker": true,
+                "showDropdowns": true
+             //   "autoApply": true,
+            });
+
+
+            $('#OrderStatus').children("option").each(function () {
+                if ($(this).val() == '@(ViewBag.Condition.OrderStatus)')
+                {
+                    $(this).attr("selected", "selected");
+                }
+            });
+
+            $("#search").click(function () {
+                var data = $("#orderSearchForm").serialize();
+                location.href = 'index?condition=' + data;
+            });
+            
             $("button[name='btn-showMsg']").each(function () {
                 $(this).click(function () {
                     $(this).addClass("disabled");

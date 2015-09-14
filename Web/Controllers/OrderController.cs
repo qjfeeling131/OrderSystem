@@ -9,14 +9,14 @@ using System.Xml;
 using System.Net.NetworkInformation;
 using System.Net;
 using System.Web;
-using OrderManager.Model.Models;
-using Web.UserService;
-using OrderManager.Web.Models;
-using OrderManager.Model.DTO;
+using Web.Services.UserService;
 using System.Web.Script.Serialization;
 using Web.Attribute;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using OrderManager.Model.Models;
+using OrderManager.Model.DTO;
+using OrderManager.Web.Models;
 
 
 
@@ -33,14 +33,33 @@ namespace OrderManager.Web
             UserService = new UserServiceClient();
         }
 
-        public ViewResult Index(string key, int? pageIndex = 0, int? pageSize = 10)
+        public ViewResult Index(OderConditionModel condition, int? pageIndex = 0, int? pageSize = 10)
         {
-            //List<OM_Order> list = UserService.GetOrderList(Cipher, CurrentUser.User.Guid);
             List<OM_Order> list = UserService.GetCurrentSalesOrderList(Cipher, CurrentUser.User.Guid);
-            if (!string.IsNullOrWhiteSpace(key))
+            if (!string.IsNullOrWhiteSpace(condition.Id))
             {
-                list = list.Where(s => s.CardName.Contains(key)).ToList();
-                ViewBag.Key = key;
+
+                list = list.Where(s => s.CardName.Contains(condition.UserName ?? "") && s.CardCode.Contains(condition.UserCode ?? "")
+                                        && s.DocStatus == condition.OrderStatus && s.Remarks.Contains(condition.Remarks ?? "")
+                                        && s.DocEntry.ToString().Contains(condition.OrderEntry ?? "")).ToList();
+
+                if (!string.IsNullOrWhiteSpace(condition.OrderDate))
+                {
+                    var dateRange = SplitDate(condition.OrderDate);
+                    list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
+                }
+
+                if (!string.IsNullOrWhiteSpace(condition.DeliverDate))
+                {
+                    var dateRange = SplitDate(condition.DeliverDate);
+                    list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
+                }
+
+                ViewBag.Condition = condition;
+            }
+            else
+            {
+                ViewBag.Condition = new OderConditionModel();
             }
 
             ViewBag.PageSize = pageSize;
@@ -50,16 +69,22 @@ namespace OrderManager.Web
             return View("~/views/order/index.cshtml", result);
         }
 
+        private DateRange SplitDate(string dateStr)
+        {
+            var array = dateStr.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+            var result = new DateRange { From = Convert.ToDateTime(array[0]), To = Convert.ToDateTime(array[1]) };
+            return result;
+        }
+
 
         public ViewResult OrderItem(string orderItemGuid)
         {
             var detail = UserService.GetSalesOrderAndDetail(Cipher, orderItemGuid);
-            var status = Enum.Parse(typeof(OM_DocStatusEnum), detail.DocStatus);
+            var status = Enum.Parse(typeof(OrderManager.Model.Models.OM_DocStatusEnum), detail.DocStatus);
             ViewBag.Status = status;
             ViewBag.DocDueDate = detail.DocDueDate == null ? " " : Convert.ToDateTime(detail.DocDueDate).ToString("yyyy.MM.dd");
             ViewBag.DocDate = Convert.ToDateTime(detail.DocDate).ToString("yyyy.MM.dd");
             return View("~/views/order/order.cshtml", detail);
-
         }
 
 
@@ -96,7 +121,7 @@ namespace OrderManager.Web
             }
 
             var result = list.Skip(Convert.ToInt32(pageindex)).Take(10).ToList();
-            return Json(new JsonModel { Data = result });
+            return Json(new OrderManager.Web.Models.JsonModel { Data = result });
         }
 
         public ViewResult Search()
@@ -112,7 +137,7 @@ namespace OrderManager.Web
             this.HttpContext.Session["CardName"] = cardName;
             this.HttpContext.Session["StartDate"] = startDate;
             this.HttpContext.Session["EndDate"] = endDate;
-            return Json(new JsonModel { Data = "success" });
+            return Json(new OrderManager.Web.Models.JsonModel { Data = "success" });
         }
 
         public void ShowRptData()
@@ -171,7 +196,7 @@ namespace OrderManager.Web
             var list = UserService.GetProductList(Cipher, CardCode, key, (int)pageindex);
             //var count = UserService.GetProductListCount(Cipher, CardCode, key);
 
-            return Json(new JsonModel { Data = list });
+            return Json(new OrderManager.Web.Models.JsonModel { Data = list });
         }
 
 
@@ -209,7 +234,7 @@ namespace OrderManager.Web
                 return Json(GetException(ex));
             }
 
-            return Json(new JsonModel { Data = orderDetail.Guid });
+            return Json(new OrderManager.Web.Models.JsonModel { Data = orderDetail.Guid });
 
         }
 
@@ -226,7 +251,7 @@ namespace OrderManager.Web
 
                 return Json(GetException(ex));
             }
-            return Json(new JsonModel { Data = "已提交" });
+            return Json(new OrderManager.Web.Models.JsonModel { Data = "已提交" });
         }
 
         [HttpPost]
@@ -234,9 +259,9 @@ namespace OrderManager.Web
         {
             if (UserService.UpdateSalesOrderStatusByToSAP(Cipher, orderGuid))
             {
-                return Json(new JsonModel { Data = "已对接", Code = 0 });
+                return Json(new OrderManager.Web.Models.JsonModel { Data = "已对接", Code = 0 });
             }
-            return Json(new JsonModel { Code = -2 });
+            return Json(new OrderManager.Web.Models.JsonModel { Code = -2 });
         }
         [SkipLogin]
         public ActionResult DateTimePickerIframe()

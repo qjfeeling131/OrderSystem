@@ -48,7 +48,7 @@
                     <input type="hidden" id="OrderGuid" value="@(Model==null ?"": Model.Guid)" />
                 </div><!-- /.btn-group -->
 
-                <div class="btn-group pull-right" style="margin:2%; ">
+                <div class="btn-group pull-right" style="margin-right:8%;" >
                     <div>
                         <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;单据状态</button>
                         <input id="status" value="未提交" disabled type="text" name="status" class="form-control  input-sm pull-right" style="width:180px;" />
@@ -56,21 +56,18 @@
                     <div>
                         <br />
                         <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;下达日期</button>
-                        <input id="datetimepicker" type="text" class="form-control  input-sm pull-right" style="width:180px;" value="@(Model == null ? "" : Model.DocDate.ToString("yyyy.MM.dd"))" />
+                        <input id="datetimepicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="@(Model == null ? "" : Model.DocDate.ToString("yyyy.MM.dd"))" />
                         <div class="iframeHtmlControlContainer" id="iframeHtmlControlContainer">
                             <iframe width="245px" height="219px" frameborder="0" allowtransparency="true" id="iframeHtmlControl" src="" style="position: absolute; z-index: 999; display: none;"></iframe>
                         </div>
                         <div>
                             <br />
                             <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;交货日期</button>
-                            <input id="docDueDateTimePicker" type="text" class="form-control  input-sm pull-right" style="width:180px;" value="" />
+                            <input id="docDueDateTimePicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="" />
                             <div class="iframeHtmlControlContainer" id="docDueDateiframeHtmlControlContainer">
                                 <iframe width="245px" height="219px" frameborder="0" allowtransparency="true" id="docDueDateiframeHtmlControl" src="" style="position: absolute; z-index: 999; display: none;"></iframe>
-                            </div>
-                            @*<div class="input-append date" id="dateteimepicker" style="float: right !important;  ">
-                                    <input style="width:180px; height:30px" type="text" id="datePicker" value="@(Model == null ? "" : Model.DocDate)" />
-                                    <input type="hidden" id="docDate" name="docDate" value="@(Model == null ? "" : Model.DocDate)" /><br />
-                                </div>*@
+                            </div><br />
+                      <div></div>
                         </div><!-- /.btn-group -->
                     </div>
 
@@ -171,6 +168,14 @@
             $("#status").val('@(ViewBag.Status == null ? "未提交" : ViewBag.Status)');
             $("#docDueDateTimePicker").val('@(ViewBag.DocDueDate == null ? "" : ViewBag.DocDueDate)');
             $("#datetimepicker").val('@(ViewBag.DocDate == null ? "" : ViewBag.DocDate)');
+
+            $('.rangepicks').daterangepicker({
+                "singleDatePicker": true,
+                "showDropdowns": true
+                //   "autoApply": true,
+            });
+
+
             //客户代码dialog
             $("#UserCode").dblclick(function () {
                 createDialog('@(Url.Content("~/order/usercodelist"))');
@@ -187,19 +192,6 @@
                 $("button[name = 'om-OrderLine-Save']").hide();
                 $("button[name='om-OrderLine-Edit']").hide();
             }
-
-            $("#datetimepicker").click(function () {
-                docDateClick = true;
-                docDueDateClick = false;
-                $("#iframeHtmlControl").attr("src", "/Order/DateTimePickerIframe");
-                $("#iframeHtmlControl").show();
-            })
-            $("#docDueDateTimePicker").click(function () {
-                docDateClick = false;
-                docDueDateClick = true;
-                $("#docDueDateiframeHtmlControl").attr("src", "/Order/DateTimePickerIframe");
-                $("#docDueDateiframeHtmlControl").show();
-            })
 
             //添加行
             $("#addRow").click(function () {
@@ -375,31 +367,6 @@
             });
         })
 
-        function setDateTimePikcerValue(date) {
-            if (docDateClick) {
-                $("#datetimepicker").val(date);
-                docDateClick = false;
-            }
-            else {
-                docDueDateClick = false;
-                $("#docDueDateTimePicker").val(date);
-
-            }
-
-        }
-        function dateTimePickerClose() {
-            ////if (docDateClick) {
-            ////    $("#iframeHtmlControl").hide();
-            ////    docDateClick = false;
-            ////}
-            ////else {
-            ////    $("#docDueDateiframeHtmlControl").hide();
-            ////    docDueDateClick = false;
-            ////}
-            $("#iframeHtmlControl").hide();
-            $("#docDueDateiframeHtmlControl").hide();
-        }
-
         function GetLineTotal() {
             var totalPrice = 0;
             $("#order_table tr").each(function () {
@@ -501,17 +468,7 @@
 
             }
             var total = parseFloat($(arrInput[2]).val()) * parseFloat($(arrInput[3]).val());
-            //console.log(parseFloat($("#totalPrice").html()));
-            //if ($("#totalPrice").html() == "") {
-            //    console.log("is NAN");
-            //    $("#totalPrice").html(total);
-            //}
-            //else {
-            //    console.log("Not NAN");
-            //    var lineTotal = total + parseFloat($("#totalPrice").html());
-            //    $("#totalPrice").html(lineTotal);
 
-            //}
             $("td", $(tr)).eq(-2).html(total);
             GetLineTotal();
             isEdit = false;

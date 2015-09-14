@@ -9,11 +9,12 @@ using System.Xml;
 using System.Net.NetworkInformation;
 using System.Net;
 using System.Web;
-using OrderManager.Model.Models;
-using Web.UserService;
+using Web.Services.UserService;
 using OrderManager.Common;
 using OrderManager.Model.DTO;
-using OrderManager.Web.Models;
+using OrderManager.Model.Models;
+
+
 
 
 
@@ -86,7 +87,7 @@ namespace OrderManager.Web
         [HttpPost]
         public ActionResult SubmitMessageBoard()
         {
-                Model.Models.OM_MessageBoard msgBoard = new OM_MessageBoard()
+             OM_MessageBoard msgBoard = new OM_MessageBoard()
                 {
                     User_Guid = CurrentUser.User.Guid,
                     CreateDatetime = DateTime.Now,
@@ -103,7 +104,7 @@ namespace OrderManager.Web
                     client.SaveMessageBoard(Cipher, msgBoard);
                 }
  
-            return Json(new JsonModel { Code = 1, Type = JsonTypeEnym.AsynData.ToString(), Data = msgBoard });
+            return Json(new OrderManager.Web.Models.JsonModel { Code = 1, Type = OrderManager.Web.Models.JsonTypeEnym.AsynData.ToString(), Data = msgBoard });
         }
 
     }

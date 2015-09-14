@@ -14,10 +14,7 @@
     <link href="~/Js/plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
     <link href="~/Css/skin-blue.min.css" rel="stylesheet" />
     <link href="~/Js/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" />
-    @*<link href="~/Js/plugins/dateTimePicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-        <link href="~/Js/plugins/dateTimePicker/build/build_standalone.less" type="text/css" rel="stylesheet/less" />*@
-    <link href="~/Js/plugins/dateTimePicker/jquery.datetimepicker.css" rel="stylesheet" />
-
+    <link href="~/Js/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" />
     @RenderSection("head", false)
 </head>
 
@@ -34,9 +31,9 @@
     <script src="~/Js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
     <script src="~/Js/utility/fakeloader.min.js"></script>
     <script src="~/Js/utility/master.js"></script>
-    @*<script src="~/Js/plugins/dateTimePicker/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="~/Js/plugins/dateTimePicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="utf-8"></script>*@
-    <script src="~/Js/plugins/dateTimePicker/jquery.datetimepicker.js"></script>
+    <script src="~/Js/plugins/daterangepicker/moment.js"></script>
+    <script src="~/Js/plugins/daterangepicker/daterangepicker.js"></script>
+
     @RenderSection("script", false)
     <script>
         $("#fakeloader").fakeLoader({

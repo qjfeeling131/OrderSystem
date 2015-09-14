@@ -68,6 +68,11 @@
         var docDateClick = false;
         var docDueDateClick = false;
         $(function () {
+
+            $("#orderManager").addClass("active");
+            $("#orderManager .treeview-menu").attr("display", "block");
+            $("#orderManager .treeview-menu>li").eq(2).addClass("active");
+
             $("#docDueDateTimePicker").click(function () {
                 docDateClick = false;
                 docDueDateClick = true;

@@ -15,11 +15,18 @@
     <AssemblyName>Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>12.0</OldToolsVersion>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -144,10 +151,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DateRange.cs" />
+    <Compile Include="Models\OderConditionModel.cs" />
     <Compile Include="Models\JsonModel.cs" />
-    <Compile Include="Models\ErrorModel.cs" />
+    <Compile Include="Models\InfoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\UserService\Reference.cs">
+    <Compile Include="Service References\Services.UserService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -191,55 +200,12 @@
     <Content Include="Js\bootstrap\npm.js" />
     <Content Include="Js\plugins\datatables\dataTables.bootstrap.css" />
     <Content Include="Js\plugins\datatables\dataTables.bootstrap.min.js" />
-    <Content Include="Js\plugins\dateTimePicker\css\bootstrap-datetimepicker.css" />
-    <Content Include="Js\plugins\dateTimePicker\css\bootstrap-datetimepicker.min.css" />
-    <Content Include="Js\plugins\dateTimePicker\jquery.datetimepicker.css" />
-    <Content Include="Js\plugins\dateTimePicker\jquery.datetimepicker.js" />
-    <Content Include="Js\plugins\dateTimePicker\jquery.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\bootstrap-datetimepicker.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\bootstrap-datetimepicker.min.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.ar.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.bg.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.ca.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.cs.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.da.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.de.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.ee.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.el.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.es.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.fi.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.fr.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.he.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.hr.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.hu.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.id.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.is.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.it.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.ja.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.ko.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.lt.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.lv.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.ms.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.nb.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.nl.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.no.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.pl.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.pt-BR.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.pt.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.ro.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.rs-latin.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.rs.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.ru.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.sk.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.sl.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.sv.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.sw.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.th.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.tr.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.ua.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.uk.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.zh-CN.js" />
-    <Content Include="Js\plugins\dateTimePicker\js\locales\bootstrap-datetimepicker.zh-TW.js" />
+    <Content Include="Js\plugins\daterangepicker\daterangepicker.css" />
+    <Content Include="Js\plugins\daterangepicker\daterangepicker.js" />
+    <Content Include="Js\plugins\daterangepicker\moment.js" />
+    <Content Include="Js\plugins\dateTimePicker\bootstrap-datetimepicker.css" />
+    <Content Include="Js\plugins\dateTimePicker\bootstrap-datetimepicker.js" />
+    <Content Include="Js\plugins\dateTimePicker\bootstrap-datetimepicker.zh-CN.js" />
     <Content Include="Js\plugins\iCheck\all.css" />
     <Content Include="Js\plugins\iCheck\icheck.js" />
     <Content Include="Js\plugins\iCheck\icheck.min.js" />
@@ -287,19 +253,16 @@
     <Content Include="Properties\DataSources\OrderManager.Model.Models.OM_Product.datasource" />
     <Content Include="Properties\DataSources\OrderManager.Model.Models.OM_ProductPrice.datasource" />
     <Content Include="Properties\DataSources\OrderManager.Model.DTO.OM_ProductInfo.datasource" />
-    <Content Include="Js\plugins\dateTimePicker\less\datetimepicker.less" />
-    <Content Include="Js\plugins\dateTimePicker\build\build.less" />
-    <Content Include="Js\plugins\dateTimePicker\build\build_standalone.less" />
     <Content Include="Report\01 经销商对账报表.rpt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Service References\UserService\configuration91.svcinfo" />
-    <None Include="Service References\UserService\configuration.svcinfo" />
-    <None Include="Service References\UserService\Reference.svcmap">
+    <None Include="Service References\Services.UserService\UserService.disco" />
+    <None Include="Service References\Services.UserService\configuration91.svcinfo" />
+    <None Include="Service References\Services.UserService\configuration.svcinfo" />
+    <None Include="Service References\Services.UserService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\UserService\UserService1.disco" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Template\exceptionPage.cshtml" />
     <Content Include="Views\User\userlist.cshtml" />
@@ -312,25 +275,24 @@
     <Content Include="Views\Order\usercodelist.cshtml" />
     <Content Include="Views\Order\productlist.cshtml" />
     <Content Include="Views\Order\productPrice.cshtml" />
-    <None Include="Service References\UserService\UserService1.wsdl" />
-    <None Include="Service References\UserService\UserService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UserService\UserService41.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UserService\UserService42.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UserService\UserService43.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UserService\UserService44.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Views\Order\DateTimePickerIframe.cshtml" />
     <Content Include="Views\Order\search.cshtml" />
     <Content Include="Views\Order\ShowRptData.cshtml" />
+    <None Include="Service References\Services.UserService\UserService.wsdl" />
+    <None Include="Service References\Services.UserService\UserService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.UserService\UserService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.UserService\UserService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.UserService\UserService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Services.UserService\UserService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -340,7 +302,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Js\plugins\ATEDateTimePicker\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -391,7 +352,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\UserService\" />
+    <WCFMetadataStorage Include="Service References\Services.UserService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -411,7 +372,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:56286/</IISUrl>
+          <IISUrl>http://localhost/OrderManager.Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

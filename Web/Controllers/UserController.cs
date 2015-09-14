@@ -11,7 +11,7 @@ using System.Net;
 using System.Web;
 using OrderManager.Web.Models;
 using OrderManager.Model.Models;
-using Web.UserService;
+using Web.Services.UserService;
 using OrderManager.Common;
 
 
