@@ -144,10 +144,10 @@ namespace OrderManager.Manager
             if (user == null)
                 throw new GenericException("客户代码不存在，保持草稿失败");
 
-            //order.Guid = Guid.NewGuid().ToString();
-            //order.CardName = user.Name;
             order.DocStatus = ((int)OM_DocStatusEnum.未提交).ToString();
-
+            order.TotalPrice = salesOrder.TotalPrice;
+            order.DocEntry = GetLastDocEntry();
+            order.NoteNotice = GetShortRemarks(order.Remarks,5);
             var salesOrderHead = DbRepository.Add(order);
             if (salesOrderHead <= 0)
                 throw new GenericException("保存草稿失败");
@@ -166,11 +166,12 @@ namespace OrderManager.Manager
                     ItemName = item.ItemName,
                     Price = item.Price,
                     Quantity = item.Quantity,
-                    TotalPrice = item.Price * item.Quantity,
+                    TotalPrice = (item.CustomerPrice ?? item.Price) * item.Quantity,
                     Remarks = item.Remarks,
                     Order_Guid = orderResult.Guid,
-                    DocEntry = orderResult.DocEntry
-
+                    DocEntry = orderResult.DocEntry,
+                    InnerPrice = item.InnerPrice,
+                    CustomerPrice = item.CustomerPrice
                 };
                 items.Add(oi);
             }
@@ -183,6 +184,21 @@ namespace OrderManager.Manager
             return true;
         }
 
+
+        public int GetLastDocEntry()
+        {
+            var count = DbRepository.ExecuteQuery<int>("select COUNT(Guid) FROM [OrderManagement].[dbo].[OM_Order]");
+            int result = count.FirstOrDefault() + 1;
+            return result;
+        }
+
+        public string GetShortRemarks(string remark,int length)
+        {
+            if (remark.Length <= 5)
+                return remark;
+            else
+                return remark.Substring(0, length) + "...";
+        }
 
         /// <summary>
         /// 更新
@@ -206,6 +222,7 @@ namespace OrderManager.Manager
             order.Remarks = salesOrder.Remarks;
             order.DocDate = salesOrder.DocDate;
             order.DocDueDate = salesOrder.DocDueDate;
+            order.NoteNotice = GetShortRemarks(order.Remarks, 5);
             var salesOrderHead = DbRepository.Update(order);
             if (salesOrderHead <= 0)
                 throw new GenericException("修改草稿失败");
@@ -237,6 +254,8 @@ namespace OrderManager.Manager
                         i.ItemCode = item.ItemCode;
                         i.ItemName = item.ItemName;
                         i.Remarks = item.Remarks;
+                        i.InnerPrice = item.InnerPrice;
+                        i.CustomerPrice = item.CustomerPrice;
                         i.Price = item.Price;
                         i.Quantity = item.Quantity;
                         i.TotalPrice = item.Price * item.Quantity;
@@ -437,10 +456,6 @@ namespace OrderManager.Manager
             {
                 throw new GenericException("客户代码不能为空");
             }
-            //if (string.IsNullOrEmpty(itemCode) || itemCode == null)
-            //{
-            //    throw new GenericException("物料代码不能为空");
-            //}
 
             var user = userManager.GetUser(u => u.Guid == cardCode);
 
@@ -448,10 +463,6 @@ namespace OrderManager.Manager
             {
                 throw new GenericException("当前客户不存在");
             }
-            //List<string> listUserGuids = new List<string>();
-
-            //var temp1 = GetProducePriceList(p => p.Product_ItemCode == "PI00012" & p.User_Guid == "317122F3-0C0E-4626-883C-4F0D4669A89D");
-            //var temp = GetProducePriceList(p => p.Product_ItemCode == itemCode & p.User_Guid == user.Guid);
             return this.GetProducePriceList(p => p.Product_ItemCode.Trim() == itemCode.Trim() & user.Guid.Trim().ToLower() == p.User_Guid.Trim().ToLower()).ToList();
         }
 
@@ -474,7 +485,7 @@ namespace OrderManager.Manager
                     var listPrice = GetCurrentProducePriceList(item.ItemCode, userGuid);
                     var nodes = GetChildProductRecursion(item.CardCode, item.ItemCode, userGuid);
                     OM_ProductInfo product = new OM_ProductInfo();
-                    product.Price = listPrice.Select(a => a.Price.ToString("0.00")).ToArray();
+                    product.Price = listPrice.Select(a => a.Price.ToString("0.00")).FirstOrDefault();
                     product.ItemCode = item.ItemCode;
                     product.ItemName = item.ItemName;
                     product.ChildNode = nodes;

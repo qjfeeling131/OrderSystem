@@ -244,9 +244,7 @@ namespace OrderManager.Service
             IList<OM_ProductInfo> result = new List<OM_ProductInfo>();
             var productList = orderManger.GetProductList(parameter, out count);
 
-
             var user = userManager.GetUser(s => s.Account == CardCode);
-
 
             foreach (var item in productList)
             {
@@ -256,9 +254,9 @@ namespace OrderManager.Service
                 OM_ProductInfo product = new OM_ProductInfo();
                 product.ItemName = item.ItemName;
                 product.ItemCode = item.ItemCode;
-                product.ChildNode = children;
-                product.Price = listPrice.Select(a => a.Price.ToString("0.00")).ToArray();
+                product.Price = listPrice.Select(a => a.Price.ToString("0.00")).FirstOrDefault();
 
+                product.ChildNode = children;             
                 result.Add(product);
             }
             return result;

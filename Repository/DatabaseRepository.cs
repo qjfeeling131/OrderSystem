@@ -108,6 +108,11 @@ namespace OrderManager.Repository
             return _dbContext.Database.ExecuteSqlCommand(strSql, paras);
         }
 
+        public virtual IEnumerable<T> ExecuteQuery<T>(string sql)
+        {
+            return _dbContext.Database.SqlQuery<T>(sql).ToList();
+        }
+
 
         public virtual T GetModel<T>(Expression<Func<T, bool>> lambda) where T : class
         {
@@ -119,5 +124,7 @@ namespace OrderManager.Repository
         {
             return _dbContext.Set<T>().Where(whereLambda).ToList();
         }
+
+
     }
 }

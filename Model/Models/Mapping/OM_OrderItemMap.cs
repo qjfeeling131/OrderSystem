@@ -63,6 +63,8 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.Currency).HasColumnName("Currency");
             this.Property(t => t.Img).HasColumnName("Img");
             this.Property(t => t.Remarks).HasColumnName("Remarks");
+            this.Property(t => t.CustomerPrice).HasColumnName("CustomerPrice");
+            this.Property(t => t.InnerPrice).HasColumnName("InnerPrice");
         }
     }
 }

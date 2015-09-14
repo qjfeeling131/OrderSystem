@@ -20,5 +20,6 @@ namespace OrderManager.Model.Models
         public string NumCard { get; set; }
         public string NoteNotice { get; set; }
         public string Remarks { get; set; }
+        public Nullable<decimal> TotalPrice { get; set; }
     }
 }

@@ -151,6 +151,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderMangerEnumType.cs" />
     <Compile Include="Models\DateRange.cs" />
     <Compile Include="Models\OderConditionModel.cs" />
     <Compile Include="Models\JsonModel.cs" />
@@ -285,9 +286,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\Services.UserService\UserService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Services.UserService\UserService3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\Services.UserService\UserService4.xsd">

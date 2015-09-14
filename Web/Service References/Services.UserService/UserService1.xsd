@@ -96,10 +96,12 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="CloseQty" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomerPrice" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="DocEntry" type="xs:int" />
       <xs:element minOccurs="0" name="Flag" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Img" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InnerPrice" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="ItemCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ItemFName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />

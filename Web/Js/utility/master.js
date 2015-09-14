@@ -1,16 +1,12 @@
 ﻿/// <reference path="jquery.min.js" />
 
 function createDialog(url, parameters) {
-    //closeLoading();
-    //fakeLoading();
+    fakeLoading();
     $.get(url, parameters, function (data) {
         closeLoading();
         for (i = 0; i < $(data).length; i++) {
             var item = $(data)[i];
-            //console.log(data);
             if ($(item).hasClass("modal")) {
-                //console.log("get dialog");
-
                 modal = $(item);
                 $(modal).appendTo('#dialog_content');
                 $(modal).modal({

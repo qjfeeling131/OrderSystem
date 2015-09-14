@@ -29,7 +29,6 @@
     <MetadataFile FileName="UserService2.xsd" MetadataType="Schema" ID="c8a1f638-7c5d-4b6a-b177-0c45a452c77f" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd2" />
     <MetadataFile FileName="UserService.disco" MetadataType="Disco" ID="3d037c63-44cf-4869-9d27-3d48c0a82cd1" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?disco" />
     <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="83804cff-732d-498b-8335-c984903c564f" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?wsdl" />
-    <MetadataFile FileName="UserService3.xsd" MetadataType="Schema" ID="77111a6e-0a9c-4fd0-b590-ff84a668447a" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd4" />
     <MetadataFile FileName="UserService4.xsd" MetadataType="Schema" ID="a2e9deb3-0b9a-47ce-8f55-b5368efd23a7" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>

@@ -22,8 +22,7 @@ namespace OrderManager.Model.DTO
         public string ItemName { get; set; }
 
         [DataMember]
-        public string[] Price { get; set; }
-
+        public string Price { get; set; }
 
     }
 

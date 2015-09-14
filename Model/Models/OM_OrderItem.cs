@@ -23,5 +23,7 @@ namespace OrderManager.Model.Models
         public string Currency { get; set; }
         public string Img { get; set; }
         public string Remarks { get; set; }
+        public Nullable<decimal> CustomerPrice { get; set; }
+        public Nullable<decimal> InnerPrice { get; set; }
     }
 }

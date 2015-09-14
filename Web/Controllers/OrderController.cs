@@ -82,15 +82,14 @@ namespace OrderManager.Web
             var detail = UserService.GetSalesOrderAndDetail(Cipher, orderItemGuid);
             var status = Enum.Parse(typeof(OrderManager.Model.Models.OM_DocStatusEnum), detail.DocStatus);
             ViewBag.Status = status;
-            ViewBag.DocDueDate = detail.DocDueDate == null ? " " : Convert.ToDateTime(detail.DocDueDate).ToString("yyyy.MM.dd");
-            ViewBag.DocDate = Convert.ToDateTime(detail.DocDate).ToString("yyyy.MM.dd");
+            ViewBag.RoldId = CurrentUser.Role.Guid;
             return View("~/views/order/order.cshtml", detail);
         }
 
 
         public ViewResult Order()
         {
-            ViewBag.DocDate = DateTime.Now.ToString("yyyy.MM.dd");
+            ViewBag.RoldId = CurrentUser.Role.Guid;
             return View();
         }
 
@@ -180,7 +179,7 @@ namespace OrderManager.Web
         public ViewResult ProductList(string cardCode)
         {
 
-            var list = UserService.GetProductList(Cipher, cardCode, "", 0);
+            var list = UserService.GetProductList(Cipher, cardCode, "", 0); 
             var count = UserService.GetProductListCount(Cipher, cardCode, "");
             CardCode = cardCode;
             ViewBag.PageSize = 5;
@@ -224,7 +223,6 @@ namespace OrderManager.Web
                 else
                 {
                     orderDetail.Guid = Guid.NewGuid().ToString().ToUpper();
-                    //orderDetail.Guid = UserService.SaveSalesOrder(Cipher, orderDetail);  // return order guid
                     UserService.SaveSalesOrder(Cipher, orderDetail);
                 }
             }

@@ -26,5 +26,6 @@ namespace OrderManager.Repository
         List<T> GetList<T>(Expression<Func<T, bool>> whereLambda) where T : class;
 
         int ExcuteSql(string strSql, params object[] paras);
+        IEnumerable<T> ExecuteQuery<T>(string sql);
     }
 }

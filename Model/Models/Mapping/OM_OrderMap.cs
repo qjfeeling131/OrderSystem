@@ -10,9 +10,6 @@ namespace OrderManager.Model.Models.Mapping
             // Primary Key
             this.HasKey(t => t.Guid);
 
-            this.Property(t=>t.DocEntry)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
             // Properties
             this.Property(t => t.Guid)
                 .IsRequired()
@@ -64,6 +61,7 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.NumCard).HasColumnName("NumCard");
             this.Property(t => t.NoteNotice).HasColumnName("NoteNotice");
             this.Property(t => t.Remarks).HasColumnName("Remarks");
+            this.Property(t => t.TotalPrice).HasColumnName("TotalPrice");
         }
     }
 }

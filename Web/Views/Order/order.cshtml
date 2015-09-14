@@ -26,7 +26,7 @@
                 <label>订单下达</label>
                 @if (Model != null)
                 {
-                    <small>&nbsp;【订单号：  @Model.DocEntry】</small>
+                    <small><label style="color:red"> &nbsp; &nbsp;【订单号： &nbsp;  @Model.DocEntry】</label> </small>
                 }
 
             </h3>
@@ -48,7 +48,7 @@
                     <input type="hidden" id="OrderGuid" value="@(Model==null ?"": Model.Guid)" />
                 </div><!-- /.btn-group -->
 
-                <div class="btn-group pull-right" style="margin-right:8%;" >
+                <div class="btn-group pull-right" style="margin-right:8%;">
                     <div>
                         <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;单据状态</button>
                         <input id="status" value="未提交" disabled type="text" name="status" class="form-control  input-sm pull-right" style="width:180px;" />
@@ -56,18 +56,11 @@
                     <div>
                         <br />
                         <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;下达日期</button>
-                        <input id="datetimepicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="@(Model == null ? "" : Model.DocDate.ToString("yyyy.MM.dd"))" />
-                        <div class="iframeHtmlControlContainer" id="iframeHtmlControlContainer">
-                            <iframe width="245px" height="219px" frameborder="0" allowtransparency="true" id="iframeHtmlControl" src="" style="position: absolute; z-index: 999; display: none;"></iframe>
-                        </div>
+                        <input id="datetimepicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="@(Model == null ? "" : Model.DocDate.ToString("yyyy/MM/dd"))" />
                         <div>
-                            <br />
+                            <br /> 
                             <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;交货日期</button>
-                            <input id="docDueDateTimePicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="" />
-                            <div class="iframeHtmlControlContainer" id="docDueDateiframeHtmlControlContainer">
-                                <iframe width="245px" height="219px" frameborder="0" allowtransparency="true" id="docDueDateiframeHtmlControl" src="" style="position: absolute; z-index: 999; display: none;"></iframe>
-                            </div><br />
-                      <div></div>
+                            <input id="docDueDateTimePicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="@(Model == null ? "" : Model.DocDueDate.ToString("yyyy/MM/dd"))" />                     
                         </div><!-- /.btn-group -->
                     </div>
 
@@ -79,9 +72,10 @@
                                 <tr role="row">
                                     <th tabindex="0">物料编号</th>
                                     <th tabindex="0">物料名称</th>
-                                    <th id="price" tabindex="0">价格</th>
+                                    <th id="price" tabindex="0">默认价格</th>
+                                    <th id="customerPrice" tabindex="0">客户维护价格</th>
+                                    <th id="innerPrice" tabindex="0">内勤确认价格</th>
                                     <th tabindex="0">数量</th>
-                                    <th tabindex="0">货币</th>
                                     <th tabindex="0">总价</th>
                                     <th tabindex="0">操作</th>
                                 </tr>
@@ -99,8 +93,9 @@
                                             <td>@item.ItemCode</td>
                                             <td>@item.ItemName</td>
                                             <td>@item.Price.ToString("0.00")</td>
+                                            <td>@item.CustomerPrice.ToString("0.00")</td>
+                                            <td>@item.InnerPrice.ToString("0.00")</td>
                                             <td>@item.Quantity.ToString("0")</td>
-                                            <td>@item.Currency</td>
                                             <td>@item.TotalPrice.ToString("0.00")</td>
                                             <td>
                                                 <button id="om-OrderLine-Save" name="om-OrderLine-Save" class="btn btn-info "><i class="glyphicon  fa-save "></i>保存</button>
@@ -126,7 +121,7 @@
 
                     <div class="btn-group" style="padding-top:2%;left:200px;top:-30px">
                         <button class="btn btn-default btn-sm disabled"><i class="glyphicon glyphicon-edit"></i>行总计</button>
-                        <label id="totalPrice" class="form-control input-sm pull-right" style="width:100px">@(Model == null ? "" : Model.TotalPrice)</label>
+                        <label id="totalPrice" class="form-control input-sm pull-right" style="width:100px">@(Model == null ? "" : Model.TotalPrice.ToString("0.00"))</label>
                     </div>
                     <div class="btn-group pull-right" style="padding-top:2%;">
                         <button class="btn btn-info " id="addRow" style="margin-right:10px;"><i class="glyphicon glyphicon-plus"></i>&nbsp;添加行</button>
@@ -159,15 +154,17 @@
         var isEdit = false;
         var saveClick = false;
         var rowNum = 0;
-        var docDateClick = false;
-        var docDueDateClick = false;
+        var role ;
         $(function () {
             $("#orderManager").addClass("active");
             $("#orderManager .treeview-menu").attr("display", "block");
             $("#orderManager .treeview-menu>li").eq(1).addClass("active");
             $("#status").val('@(ViewBag.Status == null ? "未提交" : ViewBag.Status)');
-            $("#docDueDateTimePicker").val('@(ViewBag.DocDueDate == null ? "" : ViewBag.DocDueDate)');
-            $("#datetimepicker").val('@(ViewBag.DocDate == null ? "" : ViewBag.DocDate)');
+            role = '@ViewBag.RoldId';
+
+            if (role == "D3BEB5F5-DFCE-4AAB-A3BE-BB44007FFDD2") {
+                $("#sumbit2SAP").hide();    
+            }
 
             $('.rangepicks').daterangepicker({
                 "singleDatePicker": true,
@@ -175,16 +172,11 @@
                 //   "autoApply": true,
             });
 
-
             //客户代码dialog
             $("#UserCode").dblclick(function () {
                 createDialog('@(Url.Content("~/order/usercodelist"))');
             })
-            var role = $("#Uniquerole").val();
-            if (role == "D3BEB5F5-DFCE-4AAB-A3BE-BB44007FFDD2") {
-                $("#sumbit2SAP").hide();
-                $("#sysPrice").attr("disabled", "true")
-            }
+
 
             if ($("#status").val() != "未提交") {
                 $("#addRow").hide();
@@ -195,19 +187,21 @@
 
             //添加行
             $("#addRow").click(function () {
-                //$('#addRow').removeClass("disabled");
+             
                 if (isEdit == true)
                     return;
 
                 isEdit = true;
-                var row = "  <tr role='row'>   <input type='hidden' name='item_guid'/> <td><input id='itemcode' type='text'/></td> <td><input id='itemname' type='text'/></td> <td><input id='itemprice' type='text'/></td> <td><input id='itemquantity' type='text'/></td> <td>RMB</td> <td>--</td><td><button id='om-OrderLine-Save" + rowNum + "' name='om-OrderLine-Save" + rowNum + "' class='btn btn-info '><i class='glyphicon  fa-save '></i>保存</button> &nbsp;  <button id='om-OrderLine-Edit" + rowNum + "' name='om-OrderLine-Edit" + rowNum + "' class='btn btn-info '><i class='glyphicon  fa-save '></i>修改</button></td>   </tr>  ";
+                var row = "  <tr role='row'><input type='hidden' name='item_guid'/> <td><input id='itemcode' type='text'/></td> <td><input id='itemname' type='text'/></td> <td><input id='itemprice' type='text'/></td> <td><input id='itemcustomerprice' type='text'/></td> <td><input id='iteminnerprice' type='text'/></td> <td><input id='itemquantity' type='text'/></td> <td>--</td><td><button id='om-OrderLine-Save" + rowNum + "' name='om-OrderLine-Save" + rowNum + "' class='btn btn-info '><i class='glyphicon  fa-save '></i>保存</button> &nbsp;  <button id='om-OrderLine-Edit" + rowNum + "' name='om-OrderLine-Edit" + rowNum + "' class='btn btn-info '><i class='glyphicon  fa-save '></i>修改</button></td>   </tr>  ";
                 $("#order_table tbody").append(row);
                 var newrow = $("#order_table tr").last("tr");
                 RowClickEvent($(newrow));
                 itemProductEvent("itemcode");
                 itemProductEvent("itemname");
                 itemProductEvent("itemprice");
-                $("#itemprice").attr("disabled", "true");
+
+                SetRolePermission(role);
+
                 itemSave("om-OrderLine-Save" + rowNum);
                 itemEdit("om-OrderLine-Edit" + rowNum);
                 rowNum++;
@@ -221,37 +215,6 @@
                 saveClick = false
                 $(currentRow).remove();
             })
-            //行保存事件
-            function itemSave(id) {
-                $("#" + id).click(function () {
-                    saveClick = true;
-                    //GetLineTotal();
-                    //console.log($(this))
-                })
-            }
-            //行编辑事件
-            function itemEdit(id) {
-                $("#" + id).click(function () {
-
-                    if (isEdit) {
-                        return;
-                    }
-                    isEdit = true;
-                    //Change tr  row to edit row
-                    var arrTds = $("td", $(this).parent().parent());
-
-                    $(arrTds[0]).html("<input id='itemcode' type='text' value='" + $(arrTds[0]).html() + "'/> ")
-                    $(arrTds[1]).html("<input id='itemname' type='text' value='" + $(arrTds[1]).html() + "'/> ")
-                    $(arrTds[2]).html("<input id='itemprice' type='text' value='" + $(arrTds[2]).html() + "'/> ")
-                    $(arrTds[3]).html("<input id='itemquantity' type='text' value='" + $(arrTds[3]).html() + "'/> ")
-                    $("#itemprice").attr("disabled", "true");
-                    RowClickEvent($(this).parent().parent());
-                    itemProductEvent("itemcode");
-                    itemProductEvent("itemname");
-                    itemProductEvent("itemprice");
-
-                });
-            }
 
             //行事件
             $("#order_table tr").each(function () {
@@ -275,8 +238,11 @@
                     $(arrTds[0]).html("<input id='itemcode' type='text' value='" + $(arrTds[0]).html() + "'/> ")
                     $(arrTds[1]).html("<input id='itemname' type='text' value='" + $(arrTds[1]).html() + "'/> ")
                     $(arrTds[2]).html("<input id='itemprice' type='text' value='" + $(arrTds[2]).html() + "'/> ")
-                    $(arrTds[3]).html("<input id='itemquantity' type='text' value='" + $(arrTds[3]).html() + "'/> ")
-                    $("#itemprice").attr("disabled", "true");
+                    $(arrTds[3]).html("<input id='itemcustomerprice' type='text' value='" + $(arrTds[3]).html() + "'/> ")
+                    $(arrTds[4]).html("<input id='iteminnerprice' type='text' value='" + $(arrTds[4]).html() + "'/> ")
+                    $(arrTds[5]).html("<input id='itemquantity' type='text' value='" + $(arrTds[5]).html() + "'/> ")
+             
+                    SetRolePermission(role);
                     itemProductEvent("itemcode");
                     itemProductEvent("itemname");
                     itemProductEvent("itemprice");
@@ -367,6 +333,51 @@
             });
         })
 
+        function SetRolePermission(role)
+        {
+            $("#itemprice").attr("disabled", "true");
+            if (role != "AA196056-70EE-45BF-A56A-A90070DA1425" && role != "D3BEB5F5-DFCE-4AAB-A3BE-BB44007FFDD2")
+                $("#itemcustomerprice").attr("disabled", "true");
+
+            if (role != "A0DBEF93-F1AA-4C3A-828B-6DE0C99DA0D8")
+                $("#iteminnerprice").attr("disabled", "true");
+        }
+
+        //行保存事件
+        function itemSave(id) {
+            $("#" + id).click(function () {
+                saveClick = true;
+            })
+        }
+        //行编辑事件
+        function itemEdit(id) {
+            $("#" + id).click(function () {
+
+                if (isEdit) {
+                    return;
+                }
+                isEdit = true;
+                //Change tr  row to edit row
+                var arrTds = $("td", $(this).parent().parent());
+
+                $(arrTds[0]).html("<input id='itemcode' type='text' value='" + $(arrTds[0]).html() + "'/> ")
+                $(arrTds[1]).html("<input id='itemname' type='text' value='" + $(arrTds[1]).html() + "'/> ")
+                $(arrTds[2]).html("<input id='itemprice' type='text' value='" + $(arrTds[2]).html() + "'/> ")
+                $(arrTds[3]).html("<input id='itemcustomerprice' type='text' value='" + $(arrTds[3]).html() + "'/> ")
+                $(arrTds[4]).html("<input id='iteminnerprice' type='text' value='" + $(arrTds[4]).html() + "'/> ")
+                $(arrTds[5]).html("<input id='itemquantity' type='text' value='" + $(arrTds[5]).html() + "'/> ")
+           
+                //其他价格是否可编辑
+                SetRolePermission(role);
+
+                RowClickEvent($(this).parent().parent());
+                itemProductEvent("itemcode");
+                itemProductEvent("itemname");
+                itemProductEvent("itemprice");
+
+            });
+        }
+
         function GetLineTotal() {
             var totalPrice = 0;
             $("#order_table tr").each(function () {
@@ -374,11 +385,11 @@
                 if (tdArr == 0) {
                     return;
                 }
-                if (parseInt($(tdArr[5]).html()) == "NaN" || typeof ($(tdArr[5]).html()) == "undefined") {
+                if (parseInt($(tdArr[5]).html()) == "NaN" || typeof ($(tdArr[6]).html()) == "undefined") {
 
                 }
                 else {
-                    totalPrice = parseFloat($(tdArr[5]).html()) + totalPrice;
+                    totalPrice = parseFloat($(tdArr[6]).html()) + totalPrice;
                 }
             })
 
@@ -412,9 +423,12 @@
                     ItemCode: $(tdArr[0]).html(),
                     ItemName: $(tdArr[1]).html(),
                     Price: $(tdArr[2]).html(),
-                    Quantity: $(tdArr[3]).html(),
-                    Currency: $(tdArr[4]).html(),
-                    TotalPrice: $(tdArr[5]).html(),
+                    CustomerPrice: $(tdArr[3]).html(),
+                    InnerPrice: $(tdArr[4]).html(),
+                    Quantity: $(tdArr[5]).html(),
+                    Currency: "RMB",
+                    TotalPrice: $(tdArr[6]).html(),
+
                 };
 
                 result.SalesOrderLine[result.SalesOrderLine.length] = row;
@@ -431,7 +445,7 @@
                 if ($(currentRow).html() == $(tr).html()) {
                     var editInput = $("td input", $(currentRow)).length;
                     if (editInput > 0) {
-                        if (saveClick) {  //b保存按钮，移除input框
+                        if (saveClick) {
                             RemoveEditInput(currentRow);
                         }
 
@@ -463,11 +477,12 @@
                 }
 
                 var inputValue = $(arrInput[i]).val();
-                var parent = $(arrInput[i]).parent();  //td
+                var parent = $(arrInput[i]).parent();
                 $(parent).html(inputValue);
 
             }
-            var total = parseFloat($(arrInput[2]).val()) * parseFloat($(arrInput[3]).val());
+            //总价
+            var total = parseFloat($(arrInput[4]).val()) * parseFloat($(arrInput[5]).val());
 
             $("td", $(tr)).eq(-2).html(total);
             GetLineTotal();

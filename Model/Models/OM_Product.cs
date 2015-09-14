@@ -7,8 +7,7 @@ namespace OrderManager.Model.Models
     {
         public int ID { get; set; }
         public string Guid { get; set; }
-
-        //public string ParentId { get; set; }
+        public string ParentId { get; set; }
         public string ItemCode { get; set; }
         public string ItemName { get; set; }
         public string FrgnName { get; set; }
@@ -24,6 +23,5 @@ namespace OrderManager.Model.Models
         public Nullable<System.DateTime> CreateDatetime { get; set; }
         public Nullable<System.DateTime> UpdateDateTime { get; set; }
         public string Remarks { get; set; }
-        public string ParentId { get; set; }
     }
 }

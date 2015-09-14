@@ -1,7 +1,36 @@
 
-记录时间：2015-09-14 11:33:00,099   
+记录时间：2015-09-15 00:57:54,229   
  日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【9/14/2015 11:33:00 AM】------------------
+ 出错类：Logger property:[(null)]  错误描述：------------------【9/15/2015 12:57:54 AM】------------------
+【Message】：
+【StackTrace】：
+
+ 
+记录时间：2015-09-15 01:00:08,215   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【9/15/2015 1:00:06 AM】------------------
+【Message】：
+【StackTrace】：
+
+ 
+记录时间：2015-09-15 01:01:07,825   
+ 日志级别：ERROR 
+ 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
+ System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
+   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
+   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
+   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
+   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
+   at System.Xml.XmlDocument.Load(XmlReader reader)
+   at System.Xml.XmlDocument.LoadXml(String xml)
+   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
+   at CommonHelper.FileLogger..ctor()
+   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
+   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
+
+记录时间：2015-09-15 01:05:32,043   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【9/15/2015 1:05:29 AM】------------------
 【Message】：
 【StackTrace】：
 
