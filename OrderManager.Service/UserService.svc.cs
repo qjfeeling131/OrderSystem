@@ -256,7 +256,7 @@ namespace OrderManager.Service
                 product.ItemCode = item.ItemCode;
                 product.Price = listPrice.Select(a => a.Price.ToString("0.00")).FirstOrDefault();
 
-                product.ChildNode = children;             
+                product.ChildNode = children;
                 result.Add(product);
             }
             return result;
@@ -301,9 +301,10 @@ namespace OrderManager.Service
         }
 
 
-        public bool UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid)
+        public OM_B1InfomationDTO UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid)
         {
-            if (orderManger.UpdateSalesOrderStatusByToSAP(orderGuid))
+            OM_B1InfomationDTO b1Information = orderManger.UpdateSalesOrderStatusByToSAP(orderGuid);
+            if (b1Information.GSCode == 0 && b1Information.JFZCode == 0)
             {
                 var user = userManager.GetUser(s => s.Guid == cipher);
                 var order = orderManger.GetSalesOrder(s => s.Guid == orderGuid);
@@ -317,9 +318,9 @@ namespace OrderManager.Service
                     Message = string.Format("用户[{0}] : '{1}' 对接订单【{2}】到SAP.", user.Name, DateTime.Now, order.DocEntry)
                 };
                 logManager.WriteLog(log);
-                return true;
+                return b1Information;
             }
-            return false;
+            return b1Information;
         }
 
         #endregion

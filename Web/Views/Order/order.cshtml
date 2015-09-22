@@ -58,9 +58,9 @@
                         <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;下达日期</button>
                         <input id="datetimepicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="@(Model == null ? "" : Model.DocDate.ToString("yyyy/MM/dd"))" />
                         <div>
-                            <br /> 
+                            <br />
                             <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;交货日期</button>
-                            <input id="docDueDateTimePicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="@(Model == null ? "" : Model.DocDueDate.ToString("yyyy/MM/dd"))" />                     
+                            <input id="docDueDateTimePicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="@(Model == null ? "" : Model.DocDueDate.ToString("yyyy/MM/dd"))" />
                         </div><!-- /.btn-group -->
                     </div>
 
@@ -154,7 +154,7 @@
         var isEdit = false;
         var saveClick = false;
         var rowNum = 0;
-        var role ;
+        var role;
         $(function () {
             $("#orderManager").addClass("active");
             $("#orderManager .treeview-menu").attr("display", "block");
@@ -163,7 +163,7 @@
             role = '@ViewBag.RoldId';
 
             if (role == "D3BEB5F5-DFCE-4AAB-A3BE-BB44007FFDD2") {
-                $("#sumbit2SAP").hide();    
+                $("#sumbit2SAP").hide();
             }
 
             $('.rangepicks').daterangepicker({
@@ -187,7 +187,7 @@
 
             //添加行
             $("#addRow").click(function () {
-             
+
                 if (isEdit == true)
                     return;
 
@@ -241,7 +241,7 @@
                     $(arrTds[3]).html("<input id='itemcustomerprice' type='text' value='" + $(arrTds[3]).html() + "'/> ")
                     $(arrTds[4]).html("<input id='iteminnerprice' type='text' value='" + $(arrTds[4]).html() + "'/> ")
                     $(arrTds[5]).html("<input id='itemquantity' type='text' value='" + $(arrTds[5]).html() + "'/> ")
-             
+
                     SetRolePermission(role);
                     itemProductEvent("itemcode");
                     itemProductEvent("itemname");
@@ -322,19 +322,18 @@
                 getAsynData("SubmitOrder2SAp", "orderGuid=" + data, function (json) {
                     console.log(json.Code);
                     if (json.Code == "0") {
-                        $("#status").val(json.Data);
-                        alertInfo("提示", "对接成功");
+                        $("#status").val(json.Type);
+                        alertInfo("提示", json.Data);
                     } else {
                         console.log("error");
-                        alertInfo("提示", "对接失败");
+                        alertInfo("提示", json.Data);
                     }
                 });
 
             });
         })
 
-        function SetRolePermission(role)
-        {
+        function SetRolePermission(role) {
             $("#itemprice").attr("disabled", "true");
             if (role != "AA196056-70EE-45BF-A56A-A90070DA1425" && role != "D3BEB5F5-DFCE-4AAB-A3BE-BB44007FFDD2")
                 $("#itemcustomerprice").attr("disabled", "true");
@@ -366,7 +365,7 @@
                 $(arrTds[3]).html("<input id='itemcustomerprice' type='text' value='" + $(arrTds[3]).html() + "'/> ")
                 $(arrTds[4]).html("<input id='iteminnerprice' type='text' value='" + $(arrTds[4]).html() + "'/> ")
                 $(arrTds[5]).html("<input id='itemquantity' type='text' value='" + $(arrTds[5]).html() + "'/> ")
-           
+
                 //其他价格是否可编辑
                 SetRolePermission(role);
 

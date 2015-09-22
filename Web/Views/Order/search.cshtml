@@ -42,17 +42,11 @@
                 <div>
                     <br />
                     <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;开始日期</button>
-                    <input id="datetimepicker" type="text" class="form-control  input-sm pull-right" style="width:180px;" value="" />
-                    <div class="iframeHtmlControlContainer" id="iframeHtmlControlContainer">
-                        <iframe width="245px" height="219px" frameborder="0" allowtransparency="true" id="iframeHtmlControl" src="" style="position: absolute; z-index: 1001; display: none;"></iframe>
-                    </div>
+                    <input id="datetimepicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="" />
                     <div>
                         <br />
                         <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;结束日期</button>
-                        <input id="docDueDateTimePicker" type="text" class="form-control  input-sm pull-right" style="width:180px;" value="" />
-                        <div class="iframeHtmlControlContainer" id="docDueDateiframeHtmlControlContainer">
-                            <iframe width="245px" height="219px" frameborder="0" allowtransparency="true" id="docDueDateiframeHtmlControl" src="" style="position: absolute; z-index: 1000; display: none;"></iframe>
-                        </div>
+                        <input id="docDueDateTimePicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="" />
                     </div><!-- /.btn-group -->
                 </div>
             </div>
@@ -68,23 +62,27 @@
         var docDateClick = false;
         var docDueDateClick = false;
         $(function () {
-
+            $('.rangepicks').daterangepicker({
+                "singleDatePicker": true,
+                "showDropdowns": true
+                //   "autoApply": true,
+            });
             $("#orderManager").addClass("active");
             $("#orderManager .treeview-menu").attr("display", "block");
             $("#orderManager .treeview-menu>li").eq(2).addClass("active");
 
-            $("#docDueDateTimePicker").click(function () {
-                docDateClick = false;
-                docDueDateClick = true;
-                $("#docDueDateiframeHtmlControl").attr("src", "/Order/DateTimePickerIframe");
-                $("#docDueDateiframeHtmlControl").show();
-            })
-            $("#datetimepicker").click(function () {
-                docDateClick = true;
-                docDueDateClick = false;
-                $("#iframeHtmlControl").attr("src", "/Order/DateTimePickerIframe");
-                $("#iframeHtmlControl").show();
-            })
+            //$("#docDueDateTimePicker").click(function () {
+            //    docDateClick = false;
+            //    docDueDateClick = true;
+            //    $("#docDueDateiframeHtmlControl").attr("src", "/Order/DateTimePickerIframe");
+            //    $("#docDueDateiframeHtmlControl").show();
+            //})
+            //$("#datetimepicker").click(function () {
+            //    docDateClick = true;
+            //    docDueDateClick = false;
+            //    $("#iframeHtmlControl").attr("src", "/Order/DateTimePickerIframe");
+            //    $("#iframeHtmlControl").show();
+            //})
 
             $("#search").click(function () {
                 var searchData = { "cardCode": "", "cardName": "", "startDate": "", "endDate": "" };

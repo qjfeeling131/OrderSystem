@@ -17,6 +17,7 @@ using CrystalDecisions.Shared;
 using OrderManager.Model.Models;
 using OrderManager.Model.DTO;
 using OrderManager.Web.Models;
+using OrderManager.Common;
 
 
 
@@ -150,6 +151,7 @@ namespace OrderManager.Web
                 string endDate = System.Web.HttpContext.Current.Session["EndDate"].ToString();
                 ReportDocument rd = new ReportDocument();
                 string strRptPath = System.Web.HttpContext.Current.Server.MapPath("~/") + "Report//" + strReportName;
+                ExceptionLog.Write(string.Format("the report path is {0}", strRptPath));
                 rd.Load(strRptPath);
                 TableLogOnInfo logInfo = new TableLogOnInfo();
                 logInfo.ConnectionInfo.ServerName = ".";
@@ -179,7 +181,7 @@ namespace OrderManager.Web
         public ViewResult ProductList(string cardCode)
         {
 
-            var list = UserService.GetProductList(Cipher, cardCode, "", 0); 
+            var list = UserService.GetProductList(Cipher, cardCode, "", 0);
             var count = UserService.GetProductListCount(Cipher, cardCode, "");
             CardCode = cardCode;
             ViewBag.PageSize = 5;
@@ -255,11 +257,16 @@ namespace OrderManager.Web
         [HttpPost]
         public JsonResult SubmitOrder2SAp(string orderGuid)
         {
-            if (UserService.UpdateSalesOrderStatusByToSAP(Cipher, orderGuid))
+            OM_B1InfomationDTO b1Information = UserService.UpdateSalesOrderStatusByToSAP(Cipher, orderGuid);
+            if (b1Information.GSCode == 0 && b1Information.JFZCode == 0)
             {
-                return Json(new OrderManager.Web.Models.JsonModel { Data = "已对接", Code = 0 });
+                return Json(new OrderManager.Web.Models.JsonModel { Data = string.Format("{0},{1}", b1Information.GSMessage, b1Information.JFZMessage), Code = 0, Type = "对接成功" });
             }
-            return Json(new OrderManager.Web.Models.JsonModel { Code = -2 });
+            else
+            {
+                return Json(new OrderManager.Web.Models.JsonModel { Data = string.Format("{0},{1}", b1Information.GSMessage, b1Information.JFZMessage), Code = -2 });
+            }
+
         }
         [SkipLogin]
         public ActionResult DateTimePickerIframe()

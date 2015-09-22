@@ -35,3 +35,11 @@
 【StackTrace】：
 
  
+记录时间：2015-09-15 23:21:47,418   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：F:\MyProject\OrderManagement\OrderSystem\OrderManager.Service\LogConfig\Log4net.xml
+ 
+记录时间：2015-09-15 23:32:41,963   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：F:\MyProject\OrderManagement\OrderSystem\OrderManager.Service\LogConfig\Log4net.xml
+ 

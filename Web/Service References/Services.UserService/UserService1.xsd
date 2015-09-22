@@ -1,137 +1,304 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="OM_Role">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CreateDatetiime" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Department_Guid" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="IsDel" nillable="true" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ParentID" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="UpdateDateTime" nillable="true" type="xs:dateTime" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OM_Role" nillable="true" type="tns:OM_Role" />
-  <xs:complexType name="OM_User">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Account" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Area_Guid" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CreateDatetime" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="Img" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IsDel" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ParentCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Post" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Pwd" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="UpdateDatetime" nillable="true" type="xs:dateTime" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OM_User" nillable="true" type="tns:OM_User" />
-  <xs:complexType name="ArrayOfOM_User">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_User" nillable="true" type="tns:OM_User" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfOM_User" nillable="true" type="tns:ArrayOfOM_User" />
-  <xs:complexType name="OM_MessageBoard">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CreateDatetime" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="User_Guid" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OM_MessageBoard" nillable="true" type="tns:OM_MessageBoard" />
-  <xs:complexType name="ArrayOfOM_MessageBoard">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_MessageBoard" nillable="true" type="tns:OM_MessageBoard" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfOM_MessageBoard" nillable="true" type="tns:ArrayOfOM_MessageBoard" />
-  <xs:complexType name="ArrayOfOM_Order">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_Order" nillable="true" type="tns:OM_Order" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfOM_Order" nillable="true" type="tns:ArrayOfOM_Order" />
-  <xs:complexType name="OM_Order">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CardCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CardName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="DocDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="DocDueDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="DocEntry" type="xs:int" />
-      <xs:element minOccurs="0" name="DocStatus" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NoteNotice" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NumCard" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Remarks" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TPLCompany" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TPLContact" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TPLOrder" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TPLPhone" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="User_Guid" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OM_Order" nillable="true" type="tns:OM_Order" />
-  <xs:complexType name="ArrayOfOM_OrderItem">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_OrderItem" nillable="true" type="tns:OM_OrderItem" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfOM_OrderItem" nillable="true" type="tns:ArrayOfOM_OrderItem" />
-  <xs:complexType name="OM_OrderItem">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CloseQty" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CustomerPrice" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="DocEntry" type="xs:int" />
-      <xs:element minOccurs="0" name="Flag" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Img" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="InnerPrice" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="ItemCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ItemFName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="LineNum" type="xs:int" />
-      <xs:element minOccurs="0" name="OpenQty" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Order_Guid" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Remarks" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TotalPrice" type="xs:decimal" />
-      <xs:element minOccurs="0" name="VisualOrder" type="xs:int" />
-      <xs:element minOccurs="0" name="WhsCode" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OM_OrderItem" nillable="true" type="tns:OM_OrderItem" />
-  <xs:complexType name="ArrayOfOM_ProductPrice">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="OM_ProductPrice" nillable="true" type="tns:OM_ProductPrice" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfOM_ProductPrice" nillable="true" type="tns:ArrayOfOM_ProductPrice" />
-  <xs:complexType name="OM_ProductPrice">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Area_Guid" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Product_ItemCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="User_Guid" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="OM_ProductPrice" nillable="true" type="tns:OM_ProductPrice" />
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" />
+  <xs:import schemaLocation="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" />
+  <xs:element name="Login">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userAccount" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="LoginResult" nillable="true" type="q1:OM_UserDetail" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserLogs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserLogsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="GetCurrentUserLogsResult" nillable="true" type="q2:ArrayOfOM_LogDataObject" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResetPassword">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newPwd" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResetPasswordResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePassword">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="oldPwd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newPwd" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePasswordResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetCurrentUserListResult" nillable="true" type="q3:ArrayOfOM_User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetUserResult" nillable="true" type="q4:OM_User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveMessageBoard">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="msgBoard" nillable="true" type="q5:OM_MessageBoard" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveMessageBoardResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveMessageBoardResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserMessageBoard">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserMessageBoardResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetCurrentUserMessageBoardResult" nillable="true" type="q6:ArrayOfOM_MessageBoard" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMessageBoardModel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMessageBoardModelResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetMessageBoardModelResult" nillable="true" type="q7:OM_MessageBoard" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrderListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetOrderListResult" nillable="true" type="q8:ArrayOfOM_Order" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveSalesOrder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="obj" nillable="true" type="q9:OM_SalesOrderDataObject" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveSalesOrderResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveSalesOrderResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSalesOrder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="obj" nillable="true" type="q10:OM_SalesOrderDataObject" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSalesOrderResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSalesOrderAndDetail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="salesOrder_Guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSalesOrderAndDetailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="GetSalesOrderAndDetailResult" nillable="true" type="q11:OM_SalesOrderDataObject" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentSalesOrderList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentSalesOrderListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetCurrentSalesOrderListResult" nillable="true" type="q12:ArrayOfOM_Order" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentProducePriceList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="itemCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentProducePriceListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetCurrentProducePriceListResult" nillable="true" type="q13:ArrayOfOM_ProductPrice" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserByCardCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserByCardCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetCurrentUserByCardCodeResult" nillable="true" type="q14:ArrayOfOM_User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CardCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="searchKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="GetProductListResult" nillable="true" type="q15:ArrayOfOM_ProductInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductListCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CardCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="searchKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductListCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetProductListCountResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSalesOrderStatusByCommit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="orderGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSalesOrderStatusByCommitResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSalesOrderStatusByToSAP">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cipher" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="orderGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSalesOrderStatusByToSAPResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="UpdateSalesOrderStatusByToSAPResult" nillable="true" type="q16:OM_B1InfomationDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

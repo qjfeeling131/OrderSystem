@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\OM_B1InfomationDTO.cs" />
     <Compile Include="Enum\OM_CompanyType.cs" />
     <Compile Include="DTO\OM_Log_Partial.cs" />
     <Compile Include="DTO\OM_LogDataObject.cs" />

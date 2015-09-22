@@ -72,7 +72,7 @@ namespace OrderManager.Service
         void UpdateSalesOrderStatusByCommit(string cipher, string orderGuid);
 
         [OperationContract]
-        bool UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid);
+        OM_B1InfomationDTO UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid);
     }
 }
 

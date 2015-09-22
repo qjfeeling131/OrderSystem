@@ -147,7 +147,7 @@ namespace OrderManager.Manager
             order.DocStatus = ((int)OM_DocStatusEnum.未提交).ToString();
             order.TotalPrice = salesOrder.TotalPrice;
             order.DocEntry = GetLastDocEntry();
-            order.NoteNotice = GetShortRemarks(order.Remarks,5);
+            order.NoteNotice = GetShortRemarks(order.Remarks, 5);
             var salesOrderHead = DbRepository.Add(order);
             if (salesOrderHead <= 0)
                 throw new GenericException("保存草稿失败");
@@ -192,7 +192,7 @@ namespace OrderManager.Manager
             return result;
         }
 
-        public string GetShortRemarks(string remark,int length)
+        public string GetShortRemarks(string remark, int length)
         {
             if (remark.Length <= 5)
                 return remark;
@@ -301,8 +301,9 @@ namespace OrderManager.Manager
 
             throw new GenericException("更新失败,请联系系统管理员");
         }
-        public bool UpdateSalesOrderStatusByToSAP(string orderGuid)
+        public OM_B1InfomationDTO UpdateSalesOrderStatusByToSAP(string orderGuid)
         {
+            OM_B1InfomationDTO b1Infomation = null;
             try
             {
                 var salesOrder = this.GetSalesOrder(s => s.Guid == orderGuid);
@@ -319,32 +320,35 @@ namespace OrderManager.Manager
                 }
 
                 //对接SAP实现
-
-                if (SaveForSAP(salesOrderDataObject))
+                b1Infomation = SaveForSAP(salesOrderDataObject);
+                if (b1Infomation.GSCode == 200 && b1Infomation.JFZCode == 200)
                 {
                     salesOrder.DocStatus = ((int)OM_DocStatusEnum.已对接).ToString();
                     if (DbRepository.Update(salesOrder) > 0)
                     {
                         LogHelper.Info("Start Update SalesOrder scuess");
-                        return true;
+                        return b1Infomation;
                     }
                 }
             }
             catch (Exception ex)
             {
-
+                b1Infomation = new OM_B1InfomationDTO();
+                b1Infomation.IsException = true;
+                b1Infomation.ExceptionMessage = ex.ToString();
                 LogHelper.Error(ex.ToString());
                 throw new GenericException(ex.ToString());
             }
 
-            return false;
+            return b1Infomation;
 
         }
 
-        private bool SaveForSAP(OM_SalesOrderDataObject salesOrder)
+        private OM_B1InfomationDTO SaveForSAP(OM_SalesOrderDataObject salesOrder)
         {
             bool gsResult = false;
             bool jfzResult = false;
+            OM_B1InfomationDTO b1Informaion = new OM_B1InfomationDTO();
             OM_SalesOrderDataObject GSSalesOrder = new OM_SalesOrderDataObject();
             GSSalesOrder.Guid = salesOrder.Guid;
             GSSalesOrder.CardCode = salesOrder.CardCode;
@@ -371,15 +375,19 @@ namespace OrderManager.Manager
             }
             if (GSSalesOrder.SalesOrderLine.Count <= 0)
             {
+                b1Informaion.GSCode = -1;
+                b1Informaion.GSMessage = "高山药业行数据为0，不允许添加";
                 LogHelper.Error("GSCompany's salesline is zero");
 
             }
             else
             {
-                gsResult = B1Company.SBOCompany.SaveSalesOrderDraft(GSSalesOrder);
+                gsResult = B1Company.SBOCompany.SaveSalesOrderDraft(GSSalesOrder, b1Informaion);
             }
             if (GSSalesOrder.SalesOrderLine.Count <= 0)
             {
+                b1Informaion.JFZCode = -1;
+                b1Informaion.JFZMessage = "金方子行数据为0，不允许添加";
                 LogHelper.Error("JFZCompany's salesline is zero");
 
             }
@@ -387,15 +395,15 @@ namespace OrderManager.Manager
             {
                 LogHelper.Info("JFZCompany' has Start");
                 LogHelper.Info(string.Format("JFZSalesOrder.SalesOrderLine.Count is :" + JFZSalesOrder.SalesOrderLine.Count.ToString()));
-                jfzResult = B1Company.SBOCompany.SaveSalesOrderDraftToJFZ(JFZSalesOrder);
+                jfzResult = B1Company.SBOCompany.SaveSalesOrderDraftToJFZ(JFZSalesOrder, b1Informaion);
             }
             if (gsResult & jfzResult)
             {
                 B1Company.SBOCompany.Dispose();
-                return true;
+                return b1Informaion;
 
             }
-            return false;
+            return b1Informaion;
 
         }
         /// <summary>

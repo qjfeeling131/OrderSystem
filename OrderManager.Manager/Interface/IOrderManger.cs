@@ -91,9 +91,9 @@ namespace OrderManager.Manager
         /// </summary>
         /// <param name="orderGuid"></param>
         /// <returns></returns>
-        bool UpdateSalesOrderStatusByToSAP(string orderGuid);
+        OM_B1InfomationDTO UpdateSalesOrderStatusByToSAP(string orderGuid);
 
-       List<OM_ProductInfo> GetChildProductRecursion(string cardCode, string itemCode,string userGuid);
+        List<OM_ProductInfo> GetChildProductRecursion(string cardCode, string itemCode, string userGuid);
         #endregion
 
     }

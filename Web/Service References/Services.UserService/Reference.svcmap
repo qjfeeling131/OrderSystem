@@ -21,15 +21,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/OrderManager.Service/UserService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://gaoshanjfz.gnway.org:8082/service/userservice.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="UserService.xsd" MetadataType="Schema" ID="819d8658-4542-48f0-a7c0-59fc12f78dfd" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd0" />
-    <MetadataFile FileName="UserService1.xsd" MetadataType="Schema" ID="00014136-8aa6-4a60-a17b-16d39c51ef99" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd3" />
-    <MetadataFile FileName="UserService2.xsd" MetadataType="Schema" ID="c8a1f638-7c5d-4b6a-b177-0c45a452c77f" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd2" />
-    <MetadataFile FileName="UserService.disco" MetadataType="Disco" ID="3d037c63-44cf-4869-9d27-3d48c0a82cd1" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?disco" />
-    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="83804cff-732d-498b-8335-c984903c564f" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?wsdl" />
-    <MetadataFile FileName="UserService4.xsd" MetadataType="Schema" ID="a2e9deb3-0b9a-47ce-8f55-b5368efd23a7" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd1" />
+    <MetadataFile FileName="UserService.disco" MetadataType="Disco" ID="64736d53-5993-4e33-a0d2-07a3b3a9db51" SourceId="1" SourceUrl="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?disco" />
+    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="7d7ac694-360b-4b42-88be-c02fb1a1c913" SourceId="1" SourceUrl="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?wsdl" />
+    <MetadataFile FileName="UserService.xsd" MetadataType="Schema" ID="c5b02a86-2b75-41a2-86ba-eea2d59c40f9" SourceId="1" SourceUrl="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?xsd=xsd1" />
+    <MetadataFile FileName="UserService1.xsd" MetadataType="Schema" ID="6aa36ef9-5630-410b-a2ef-c3e5120e8686" SourceId="1" SourceUrl="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?xsd=xsd0" />
+    <MetadataFile FileName="UserService2.xsd" MetadataType="Schema" ID="978da04a-dbd0-444d-a045-cd0b41b4b5ab" SourceId="1" SourceUrl="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?xsd=xsd3" />
+    <MetadataFile FileName="UserService3.xsd" MetadataType="Schema" ID="915971fa-e83f-4448-a128-35651af67cd1" SourceId="1" SourceUrl="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

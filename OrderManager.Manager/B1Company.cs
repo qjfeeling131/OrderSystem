@@ -210,17 +210,18 @@ namespace OrderManager.Manager
             return false;
         }
 
-        public bool SaveSalesOrderDraftToJFZ(OM_SalesOrderDataObject salesOrder)
+        public bool SaveSalesOrderDraftToJFZ(OM_SalesOrderDataObject salesOrder, OM_B1InfomationDTO b1Informaion)
         {
             if (!this.JFZConnect())
             {
                 return false;
             }
             SAPbobsCOM.Recordset oRs = jFZCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-            LogHelper.Info(string.Format("JFZCompany via script is: select * from ODRF where ObjType='17' and Address2='{0}'", salesOrder.Guid));
             oRs.DoQuery(string.Format("select * from ODRF where ObjType='17' and Address2='{0}'", salesOrder.Guid));
             if (oRs.RecordCount > 0)
             {
+                b1Informaion.JFZCode = -1;
+                b1Informaion.JFZMessage = string.Format("JFZCompnay Document has exist, and the DocEntry={0},DocNum={1}", oRs.Fields.Item("DocEntry").Value, oRs.Fields.Item("DocNum").Value);
                 LogHelper.Info(string.Format("JFZCompnay Document has exist, and the DocEntry={0},DocNum={1}", oRs.Fields.Item("DocEntry").Value, oRs.Fields.Item("DocNum").Value));
                 return true;
             }
@@ -255,19 +256,25 @@ namespace OrderManager.Manager
                         oSaleOrder.Lines.Quantity = Convert.ToDouble(item.Quantity);
                         oSaleOrder.Lines.Price = Convert.ToDouble(item.Price);
                         oSaleOrder.Lines.Add();
-                        LogHelper.Info(string.Format("the OsaleOrderLine Detail ItemCode={0},ItemName={1},Quantity={2},Price={3}", item.ItemCode.ToString(), item.ItemName, item.Quantity, item.Price));
+                        //LogHelper.Info(string.Format("the OsaleOrderLine Detail ItemCode={0},ItemName={1},Quantity={2},Price={3}", item.ItemCode.ToString(), item.ItemName, item.Quantity, item.Price));
                     }
-                    LogHelper.Info(string.Format("the OsaleOrder Detail CardeCode={0},CardName={1},DocDate={2},DocDueDate={3}", oSaleOrder.CardCode.ToString(), oSaleOrder.CardName, oSaleOrder.DocDate.ToString("yyyyMMdd"), oSaleOrder.DocDueDate.ToString("yyyyMMdd")));
+                    //LogHelper.Info(string.Format("the OsaleOrder Detail CardeCode={0},CardName={1},DocDate={2},DocDueDate={3}", oSaleOrder.CardCode.ToString(), oSaleOrder.CardName, oSaleOrder.DocDate.ToString("yyyyMMdd"), oSaleOrder.DocDueDate.ToString("yyyyMMdd")));
                     if (oSaleOrder.Add() == 0)
                     {
-                        LogHelper.Error(string.Format("金方子:{0},订单号:{1}对接成功", salesOrder.CardCode, salesOrder.DocEntry));
+                        b1Informaion.JFZCode = 200;
+                        b1Informaion.JFZMessage = string.Format("金方子:{0},订单号:{1}对接成功", salesOrder.CardCode, salesOrder.DocEntry);
+                        LogHelper.Info(string.Format("金方子:{0},订单号:{1}对接成功", salesOrder.CardCode, salesOrder.DocEntry));
                         return true;
                     }
+                    b1Informaion.JFZCode = -1;
+                    b1Informaion.JFZMessage = string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), JFZCompany.GetLastErrorDescription());
                     LogHelper.Error(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), JFZCompany.GetLastErrorDescription()));
                     return false;
                 }
                 catch (Exception ex)
                 {
+                    b1Informaion.JFZCode = -1;
+                    b1Informaion.JFZMessage = string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), JFZCompany.GetLastErrorDescription());
                     LogHelper.Error(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), JFZCompany.GetLastErrorDescription()));
                     return false;
                 }
@@ -283,7 +290,7 @@ namespace OrderManager.Manager
             }
 
         }
-        public bool SaveSalesOrderDraft(OM_SalesOrderDataObject salesOrder)
+        public bool SaveSalesOrderDraft(OM_SalesOrderDataObject salesOrder, OM_B1InfomationDTO b1Informaion)
         {
             if (!this.Connect())
             {
@@ -329,14 +336,20 @@ namespace OrderManager.Manager
                 }
                 if (oSaleOrder.Add() == 0)
                 {
+                    b1Informaion.GSCode = 200;
+                    b1Informaion.GSMessage = (string.Format("高山药业:{0},订单号:{1}对接成功,update ", salesOrder.CardCode, salesOrder.DocEntry));
                     LogHelper.Info(string.Format("高山药业:{0},订单号:{1}对接成功,update ", salesOrder.CardCode, salesOrder.DocEntry));
                     return true;
                 }
+                b1Informaion.GSCode = -1;
+                b1Informaion.GSMessage=string.Format("GSSalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription());
                 LogHelper.Error(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
                 return false;
             }
             catch (Exception ex)
             {
+                   b1Informaion.GSCode = -1;
+                b1Informaion.GSMessage=  string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription());
                 LogHelper.Error(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
                 return false;
             }

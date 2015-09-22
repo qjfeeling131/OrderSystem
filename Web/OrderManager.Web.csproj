@@ -15,7 +15,7 @@
     <AssemblyName>Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -257,13 +257,14 @@
     <Content Include="Report\01 经销商对账报表.rpt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Service References\Services.UserService\UserService.disco" />
+    <Content Include="Properties\DataSources\OrderManager.Model.DTO.OM_B1InfomationDTO.datasource" />
     <None Include="Service References\Services.UserService\configuration91.svcinfo" />
     <None Include="Service References\Services.UserService\configuration.svcinfo" />
     <None Include="Service References\Services.UserService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\Services.UserService\UserService.disco" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Template\exceptionPage.cshtml" />
     <Content Include="Views\User\userlist.cshtml" />
@@ -288,7 +289,7 @@
     <None Include="Service References\Services.UserService\UserService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Services.UserService\UserService4.xsd">
+    <None Include="Service References\Services.UserService\UserService3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="web.Debug.config">
@@ -370,7 +371,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/OrderManager.Web</IISUrl>
+          <IISUrl>http://localhost:54749/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
