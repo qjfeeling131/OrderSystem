@@ -46,7 +46,7 @@ namespace OrderManager.Web
 
                 if (!string.IsNullOrWhiteSpace(condition.OrderDate))
                 {
-                    var dateRange = SplitDate(condition.OrderDate);
+                    var dateRange = SplitDate(condition.OrderDate); 
                     list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
                 }
 
