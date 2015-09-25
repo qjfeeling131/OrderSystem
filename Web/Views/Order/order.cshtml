@@ -460,15 +460,23 @@
         function RemoveEditInput(tr) {
             var arrInput = $("td input", $(tr));
 
-            if (isNaN($(arrInput[2]).val())
-                || isNaN($(arrInput[3]).val()) || parseInt($(arrInput[3]).val()) == 0) {
-                $(tr).remove();
-                alertInfo("提示", "订单数据填写有误");
-                saveClick = false;
-                isEdit = false;
-                return;
-            }
+            //if (isNaN($(arrInput[2]).val())
+            //    || isNaN($(arrInput[3]).val()) || parseInt($(arrInput[3]).val()) == 0) {
+            //    $(tr).remove();
+            //    alertInfo("提示", "订单数据填写有误");
+            //    saveClick = false;
+            //    isEdit = false;
+            //    return;
+            //}
             for (var i = 0; i < arrInput.length; i++) {
+                //if (role != "A0DBEF93-F1AA-4C3A-828B-6DE0C99DA0D8") {
+                //    if (arrInput[i].id == "iteminnerprice") {
+                //        var inputValue = 0;
+                //        var parent = $(arrInput[i]).parent();
+                //        $(parent).html(inputValue);
+                //        continue;
+                //    }
+                //}
                 if ($(arrInput[i]) == null || isNullorEmptyString($(arrInput[i]).val())) {
                     $(tr).remove();
                     alertInfo("提示", "订单数据填写有误");

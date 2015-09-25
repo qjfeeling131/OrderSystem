@@ -1,0 +1,6 @@
+[Header]
+记录时间：2015-09-15 23:21:53,856 线程ID:[20] 日志级别：INFO   - 描述：Start Update SalesOrder scuess
+记录时间：2015-09-15 23:26:58,442 线程ID:[34] 日志级别：INFO   - 描述：Start Update SalesOrder scuess
+[Footer]
+[Header]
+[Footer]

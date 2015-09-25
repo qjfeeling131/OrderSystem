@@ -239,7 +239,7 @@ namespace OrderManager.Service
                                             && (s.ParentId == null || s.ParentId == s.ItemCode) & s.IsDel == false); // randy
             parameter.pageIndex = pageIndex;
             parameter.orderByLambda = s => s.ItemCode;
-            parameter.pageSize = 5;
+            parameter.pageSize = 100;
 
             IList<OM_ProductInfo> result = new List<OM_ProductInfo>();
             var productList = orderManger.GetProductList(parameter, out count);

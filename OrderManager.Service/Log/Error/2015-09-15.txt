@@ -1,0 +1,12 @@
+[Header]
+记录时间：2015-09-15 23:21:47,420 线程ID:[20] 日志级别：ERROR  - 错误描述：GSCompany's salesline is zero
+记录时间：2015-09-15 23:21:47,433 线程ID:[20] 日志级别：ERROR  - 错误描述：JFZCompany's salesline is zero
+记录时间：2015-09-15 23:26:10,973 线程ID:[34] 日志级别：ERROR  - 错误描述：GSCompany's salesline is zero
+记录时间：2015-09-15 23:26:21,387 线程ID:[34] 日志级别：ERROR  - 错误描述：JFZCompany's salesline is zero
+[Footer]
+[Header]
+记录时间：2015-09-15 23:32:41,964 线程ID:[16] 日志级别：ERROR  - 错误描述：GSCompany's salesline is zero
+记录时间：2015-09-15 23:32:41,976 线程ID:[16] 日志级别：ERROR  - 错误描述：JFZCompany's salesline is zero
+记录时间：2015-09-15 23:33:01,508 线程ID:[16] 日志级别：ERROR  - 错误描述：GSCompany's salesline is zero
+记录时间：2015-09-15 23:33:01,509 线程ID:[16] 日志级别：ERROR  - 错误描述：JFZCompany's salesline is zero
+[Footer]
