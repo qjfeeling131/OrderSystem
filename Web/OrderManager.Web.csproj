@@ -15,7 +15,7 @@
     <AssemblyName>Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -264,7 +264,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\Services.UserService\UserService.disco" />
+    <None Include="Service References\Services.UserService\UserService1.disco" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Template\exceptionPage.cshtml" />
     <Content Include="Views\User\userlist.cshtml" />
@@ -279,17 +279,17 @@
     <Content Include="Views\Order\productPrice.cshtml" />
     <Content Include="Views\Order\search.cshtml" />
     <Content Include="Views\Order\ShowRptData.cshtml" />
-    <None Include="Service References\Services.UserService\UserService.wsdl" />
-    <None Include="Service References\Services.UserService\UserService.xsd">
+    <None Include="Service References\Services.UserService\UserService1.wsdl" />
+    <None Include="Service References\Services.UserService\UserService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Services.UserService\UserService1.xsd">
+    <None Include="Service References\Services.UserService\UserService41.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Services.UserService\UserService2.xsd">
+    <None Include="Service References\Services.UserService\UserService42.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Services.UserService\UserService3.xsd">
+    <None Include="Service References\Services.UserService\UserService43.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="web.Debug.config">
@@ -369,9 +369,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>42642</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:54749/</IISUrl>
+          <IISUrl>http://localhost/OrderManager.Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

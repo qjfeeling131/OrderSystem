@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="B1Company.cs" />
     <Compile Include="Common\LogHelper.cs" />
+    <Compile Include="Common\StaticResource.cs" />
     <Compile Include="Interface\ILogManager.cs" />
     <Compile Include="Interface\IOrderManger.cs" />
     <Compile Include="Interface\IUserManager.cs" />

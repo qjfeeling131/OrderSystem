@@ -43,3 +43,31 @@
  日志级别：INFO  
  出错类：Logger property:[(null)]  错误描述：F:\MyProject\OrderManagement\OrderSystem\OrderManager.Service\LogConfig\Log4net.xml
  
+记录时间：2015-09-26 12:45:33,796   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【9/26/2015 12:45:33 PM】------------------
+【Message】：
+【StackTrace】：
+
+ 
+记录时间：2015-09-26 12:49:08,500   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【9/26/2015 12:49:08 PM】------------------
+【Message】：
+【StackTrace】：
+
+ 
+记录时间：2015-09-26 13:46:29,865   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【9/26/2015 1:46:28 PM】------------------
+【Message】：
+【StackTrace】：
+
+ 
+记录时间：2015-09-26 17:23:35,760   
+ 日志级别：INFO  
+ 出错类：Logger property:[(null)]  错误描述：------------------【9/26/2015 5:23:35 PM】------------------
+【Message】：
+【StackTrace】：
+
+ 

@@ -18,6 +18,7 @@ using OrderManager.Model.Models;
 using OrderManager.Model.DTO;
 using OrderManager.Web.Models;
 using OrderManager.Common;
+using System.Diagnostics;
 
 
 
@@ -46,7 +47,7 @@ namespace OrderManager.Web
 
                 if (!string.IsNullOrWhiteSpace(condition.OrderDate))
                 {
-                    var dateRange = SplitDate(condition.OrderDate); 
+                    var dateRange = SplitDate(condition.OrderDate);
                     list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
                 }
 
@@ -180,7 +181,6 @@ namespace OrderManager.Web
         }
         public ViewResult ProductList(string cardCode)
         {
-
             var list = UserService.GetProductList(Cipher, cardCode, "", 0);
             var count = UserService.GetProductListCount(Cipher, cardCode, "");
             CardCode = cardCode;
@@ -194,8 +194,8 @@ namespace OrderManager.Web
         [HttpPost]
         public JsonResult ProductList(string key, int? pageindex)
         {
+
             var list = UserService.GetProductList(Cipher, CardCode, key, (int)pageindex);
-            //var count = UserService.GetProductListCount(Cipher, CardCode, key);
 
             return Json(new OrderManager.Web.Models.JsonModel { Data = list });
         }

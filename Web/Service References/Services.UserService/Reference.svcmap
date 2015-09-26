@@ -21,15 +21,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://gaoshanjfz.gnway.org:8082/service/userservice.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/OrderManager.Service/UserService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="UserService.disco" MetadataType="Disco" ID="64736d53-5993-4e33-a0d2-07a3b3a9db51" SourceId="1" SourceUrl="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?disco" />
-    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="7d7ac694-360b-4b42-88be-c02fb1a1c913" SourceId="1" SourceUrl="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?wsdl" />
-    <MetadataFile FileName="UserService.xsd" MetadataType="Schema" ID="c5b02a86-2b75-41a2-86ba-eea2d59c40f9" SourceId="1" SourceUrl="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?xsd=xsd1" />
-    <MetadataFile FileName="UserService1.xsd" MetadataType="Schema" ID="6aa36ef9-5630-410b-a2ef-c3e5120e8686" SourceId="1" SourceUrl="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?xsd=xsd0" />
-    <MetadataFile FileName="UserService2.xsd" MetadataType="Schema" ID="978da04a-dbd0-444d-a045-cd0b41b4b5ab" SourceId="1" SourceUrl="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?xsd=xsd3" />
-    <MetadataFile FileName="UserService3.xsd" MetadataType="Schema" ID="915971fa-e83f-4448-a128-35651af67cd1" SourceId="1" SourceUrl="http://gaoshanjfz.gnway.org:8082/Service/UserService.svc?xsd=xsd2" />
+    <MetadataFile FileName="UserService4.xsd" MetadataType="Schema" ID="e0d1bc9c-5ea4-40d7-90a9-2fe68dd9c09c" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd0" />
+    <MetadataFile FileName="UserService41.xsd" MetadataType="Schema" ID="e295ade9-8ca4-4f36-9b65-6fc9559b6a62" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd3" />
+    <MetadataFile FileName="UserService42.xsd" MetadataType="Schema" ID="47ce95f1-d661-42d2-9c9d-ca15664f0794" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd2" />
+    <MetadataFile FileName="UserService1.disco" MetadataType="Disco" ID="f13f43cc-2a1b-41b6-b909-e9529da6119e" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?disco" />
+    <MetadataFile FileName="UserService1.wsdl" MetadataType="Wsdl" ID="03127267-807e-444b-97df-d162ff927594" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?wsdl" />
+    <MetadataFile FileName="UserService43.xsd" MetadataType="Schema" ID="11c6d0d5-3215-4b63-b7b1-9ba82313f87e" SourceId="1" SourceUrl="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

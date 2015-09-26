@@ -5,6 +5,7 @@ using OrderManager.Model.DTO;
 using OrderManager.Model.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
@@ -16,6 +17,7 @@ namespace OrderManager.Service
 {
 
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     [Aop.VerifyAuthority]
     [Aop.CatchWcfException]
     [Aop.WCFTransaction]
@@ -231,9 +233,10 @@ namespace OrderManager.Service
         }
 
 
+      
         public IList<OM_ProductInfo> GetProductList(string cipher, string CardCode, string searchKey, int pageIndex)
         {
-            int count = 0;
+            int _currentProductListCount = 0;
             PageListParameter<OM_Product, string> parameter = new PageListParameter<OM_Product, string>();
             parameter.whereLambda = s => ((s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey))
                                             && (s.ParentId == null || s.ParentId == s.ItemCode) & s.IsDel == false); // randy
@@ -242,23 +245,37 @@ namespace OrderManager.Service
             parameter.pageSize = 100;
 
             IList<OM_ProductInfo> result = new List<OM_ProductInfo>();
-            var productList = orderManger.GetProductList(parameter, out count);
-
+            var productList = orderManger.GetProductList(parameter, out _currentProductListCount);
+            
             var user = userManager.GetUser(s => s.Account == CardCode);
+
+            //减少递归读取数据库次数 
+            if(productList!=null || productList.Count>0)
+                StaticResource.UserProductPrices = orderManger.GetProducePricetList(s => user.Guid.Trim().ToLower() == s.User_Guid.Trim().ToLower());
 
             foreach (var item in productList)
             {
-                var listPrice = orderManger.GetCurrentProducePriceList(item.ItemCode, user.Guid);
+                string price = null;
+
                 List<OM_ProductInfo> children = orderManger.GetChildProductRecursion(item.CardCode, item.ItemCode, user.Guid);
 
+                // 说明是最终产品节点
+                if (children == null || children.Count == 0)
+                {
+                    // orderManger.GetCurrentProducePriceList(item.ItemCode, user.Guid).Select(a => a.Price.ToString("0.00")).FirstOrDefault();
+                   var exist= StaticResource.UserProductPrices.Find(s => s.Product_ItemCode == item.ItemCode);
+                   if (exist != null)
+                       price = exist.Price.ToString("0.00");
+                }
                 OM_ProductInfo product = new OM_ProductInfo();
                 product.ItemName = item.ItemName;
                 product.ItemCode = item.ItemCode;
-                product.Price = listPrice.Select(a => a.Price.ToString("0.00")).FirstOrDefault();
+                product.Price = price;
 
                 product.ChildNode = children;
                 result.Add(product);
             }
+
             return result;
         }
 
@@ -278,6 +295,7 @@ namespace OrderManager.Service
             orderManger.GetProductList(parameter, out count);
 
             return count;
+            //return _currentProductListCount;
         }
 
 

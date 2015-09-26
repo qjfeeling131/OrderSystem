@@ -127,8 +127,8 @@
             var model = @Html.Raw(ServiceStack.Text.JsonSerializer.SerializeToString(Model))
             addProductRow(model);
 
-
         })
+    
 
         function getdata(pageIndex) {
             var key = "key=" + $("#searchKey").val();
@@ -209,6 +209,14 @@
                 productListTrEvent($(this));
             });
 
+            //收缩tree node
+            shrinkNodes();
+        }
+
+        function shrinkNodes() {
+            $(".treegrid-1 td span").each(function () {
+                $(this).click();
+            });
         }
 
         function clearTableTr() {

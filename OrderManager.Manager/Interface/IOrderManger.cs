@@ -44,6 +44,8 @@ namespace OrderManager.Manager
 
         #region Fuction
 
+        List<OM_ProductPrice> GetProducePricetList(Expression<Func<OM_ProductPrice, bool>> fuc);
+
         IList<OM_Product> GetProductList<Tkey>(PageListParameter<OM_Product, Tkey> parameter, out int count);
         /// <summary>
         /// 保存销售订单

@@ -125,10 +125,15 @@ namespace OrderManager.Manager
         #endregion
 
         #region Function
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="Tkey">sort 的排序字段类型</typeparam>
+        /// <param name="parameter"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         public IList<OM_Product> GetProductList<Tkey>(PageListParameter<OM_Product, Tkey> parameter, out int count)
         {
-            //return DbRepository.GetList(fuc);
             return DbRepository.GetPagedList(parameter, out count);
 
         }
@@ -445,7 +450,7 @@ namespace OrderManager.Manager
         }
 
 
-        private List<OM_ProductPrice> GetProducePriceList(Expression<Func<OM_ProductPrice, bool>> fuc)
+        public List<OM_ProductPrice> GetProducePricetList(Expression<Func<OM_ProductPrice, bool>> fuc)
         {
             return DbRepository.GetList(fuc);
 
@@ -471,10 +476,11 @@ namespace OrderManager.Manager
             {
                 throw new GenericException("当前客户不存在");
             }
-            return this.GetProducePriceList(p => p.Product_ItemCode.Trim() == itemCode.Trim() & user.Guid.Trim().ToLower() == p.User_Guid.Trim().ToLower()).ToList();
+            return this.GetProducePricetList(p => p.Product_ItemCode.Trim() == itemCode.Trim() & user.Guid.Trim().ToLower() == p.User_Guid.Trim().ToLower()).ToList();
         }
 
 
+  
 
         public List<OM_ProductInfo> GetChildProductRecursion(string cardCode, string itemCode, string userGuid)
         {
@@ -487,13 +493,22 @@ namespace OrderManager.Manager
             }
             else
             {
-                var infos = new List<OM_ProductInfo>();
+                var infos = new List<OM_ProductInfo>();          
                 foreach (var item in result)
                 {
-                    var listPrice = GetCurrentProducePriceList(item.ItemCode, userGuid);
+
+                    string price = null;
                     var nodes = GetChildProductRecursion(item.CardCode, item.ItemCode, userGuid);
+
+                    if (nodes == null || nodes.Count == 0)
+                    {
+                      var exist=StaticResource.UserProductPrices.Find(s => s.Product_ItemCode == item.ItemCode);  //GetCurrentProducePriceList(item.ItemCode, userGuid).Select(a => a.Price.ToString("0.00")).FirstOrDefault();
+                      if (exist != null)
+                          price = exist.Price.ToString("0.00");
+                    }
+
                     OM_ProductInfo product = new OM_ProductInfo();
-                    product.Price = listPrice.Select(a => a.Price.ToString("0.00")).FirstOrDefault();
+                    product.Price = price;
                     product.ItemCode = item.ItemCode;
                     product.ItemName = item.ItemName;
                     product.ChildNode = nodes;
