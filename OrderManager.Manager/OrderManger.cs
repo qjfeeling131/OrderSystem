@@ -326,13 +326,16 @@ namespace OrderManager.Manager
 
                 //对接SAP实现
                 b1Infomation = SaveForSAP(salesOrderDataObject);
-                if (b1Infomation.GSCode == 200 && b1Infomation.JFZCode == 200)
+                if (b1Infomation.JFZStatus == OMDocStatus.Commit || b1Infomation.GSStatus == OMDocStatus.Commit)
                 {
-                    salesOrder.DocStatus = ((int)OM_DocStatusEnum.已对接).ToString();
-                    if (DbRepository.Update(salesOrder) > 0)
+                    if (b1Infomation.GSCode == 200 && b1Infomation.JFZCode == 200)
                     {
-                        LogHelper.Info("Start Update SalesOrder scuess");
-                        return b1Infomation;
+                        salesOrder.DocStatus = ((int)OM_DocStatusEnum.已对接).ToString();
+                        if (DbRepository.Update(salesOrder) > 0)
+                        {
+                            LogHelper.Info("Start Update SalesOrder scuess");
+                            return b1Infomation;
+                        }
                     }
                 }
             }
@@ -356,12 +359,14 @@ namespace OrderManager.Manager
             OM_B1InfomationDTO b1Informaion = new OM_B1InfomationDTO();
             OM_SalesOrderDataObject GSSalesOrder = new OM_SalesOrderDataObject();
             GSSalesOrder.Guid = salesOrder.Guid;
+            GSSalesOrder.DocEntry = salesOrder.DocEntry;
             GSSalesOrder.CardCode = salesOrder.CardCode;
             GSSalesOrder.CardName = salesOrder.CardName;
             GSSalesOrder.DocDate = salesOrder.DocDate;
             GSSalesOrder.DocDueDate = salesOrder.DocDueDate;
             OM_SalesOrderDataObject JFZSalesOrder = new OM_SalesOrderDataObject();
             JFZSalesOrder.Guid = salesOrder.Guid;
+            JFZSalesOrder.DocEntry = salesOrder.DocEntry;
             JFZSalesOrder.CardCode = salesOrder.CardCode;
             JFZSalesOrder.CardName = salesOrder.CardName;
             JFZSalesOrder.DocDate = salesOrder.DocDate;
@@ -380,21 +385,23 @@ namespace OrderManager.Manager
             }
             if (GSSalesOrder.SalesOrderLine.Count <= 0)
             {
-                b1Informaion.GSCode = -1;
+                b1Informaion.GSCode = 200;
+                b1Informaion.GSStatus = OMDocStatus.Unchange;
                 b1Informaion.GSMessage = "高山药业行数据为0，不允许添加";
                 LogHelper.Error("GSCompany's salesline is zero");
-
+                gsResult = true;
             }
             else
             {
                 gsResult = B1Company.SBOCompany.SaveSalesOrderDraft(GSSalesOrder, b1Informaion);
             }
-            if (GSSalesOrder.SalesOrderLine.Count <= 0)
+            if (JFZSalesOrder.SalesOrderLine.Count <= 0)
             {
-                b1Informaion.JFZCode = -1;
+                b1Informaion.JFZCode = 200;
+                b1Informaion.JFZStatus = OMDocStatus.Unchange;
                 b1Informaion.JFZMessage = "金方子行数据为0，不允许添加";
                 LogHelper.Error("JFZCompany's salesline is zero");
-
+                jfzResult = true;
             }
             else
             {
@@ -439,11 +446,20 @@ namespace OrderManager.Manager
         /// <returns></returns>
         public List<OM_Order> GetCurrentSalesOrderList(string userGuid)
         {
-            List<OM_User> listUser = userManager.GetAreaRoles(userGuid);
+            OM_UserRole currentRole = userManager.GetUserRole(c => c.User_Guid.ToLower().Equals(userGuid.ToLower()));
             List<OM_Order> listSalesOrder = new List<OM_Order>();
-            foreach (var user in listUser)
+            if (currentRole.Role_Guid.ToUpper().Equals("A0DBEF93-F1AA-4C3A-828B-6DE0C99DA0D8"))
             {
-                listSalesOrder.AddRange(this.GetSalesOrderList(s => s.User_Guid == user.Guid));
+                listSalesOrder.AddRange(this.GetSalesOrderList(u => u.DocEntry >= 0).ToList());
+            }
+            else
+            {
+                List<OM_User> listUser = userManager.GetAreaRoles(userGuid);
+
+                foreach (var user in listUser)
+                {
+                    listSalesOrder.AddRange(this.GetSalesOrderList(s => s.User_Guid == user.Guid));
+                }
             }
 
             return listSalesOrder;
@@ -480,7 +496,7 @@ namespace OrderManager.Manager
         }
 
 
-  
+
 
         public List<OM_ProductInfo> GetChildProductRecursion(string cardCode, string itemCode, string userGuid)
         {
@@ -493,7 +509,7 @@ namespace OrderManager.Manager
             }
             else
             {
-                var infos = new List<OM_ProductInfo>();          
+                var infos = new List<OM_ProductInfo>();
                 foreach (var item in result)
                 {
 
@@ -502,9 +518,9 @@ namespace OrderManager.Manager
 
                     if (nodes == null || nodes.Count == 0)
                     {
-                      var exist=StaticResource.UserProductPrices.Find(s => s.Product_ItemCode == item.ItemCode);  //GetCurrentProducePriceList(item.ItemCode, userGuid).Select(a => a.Price.ToString("0.00")).FirstOrDefault();
-                      if (exist != null)
-                          price = exist.Price.ToString("0.00");
+                        var exist = StaticResource.UserProductPrices.Find(s => s.Product_ItemCode == item.ItemCode);  //GetCurrentProducePriceList(item.ItemCode, userGuid).Select(a => a.Price.ToString("0.00")).FirstOrDefault();
+                        if (exist != null)
+                            price = exist.Price.ToString("0.00");
                     }
 
                     OM_ProductInfo product = new OM_ProductInfo();

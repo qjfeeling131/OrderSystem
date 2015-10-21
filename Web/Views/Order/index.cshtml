@@ -26,14 +26,14 @@
     <div class="box box-primary">
         <div class="box-header">
             <h3 class="box-title"><label>订单列表</label></h3>
-        <h6></h6>
+            <h6></h6>
             <div class="box box-info">
                 <div class="box-header">
                     <h5 class="box-title"><label>查询条件</label></h5>
                 </div>
                 <div class="box-body">
                     <form id="orderSearchForm" class="form-horizontal" role="form">
-                        <input  name="Id" value="platform_senssion" type="hidden"/>
+                        <input name="Id" value="platform_senssion" type="hidden" />
                         <div class="form-group form-inline">
                             <div class="col-md-4">
                                 <span>客户编号: </span>
@@ -55,6 +55,7 @@
                                     <option value="2">已对接</option>
                                     <option value="3">审核中</option>
                                     <option value="4">已发货</option>
+                                    <option value="100">全部</option>
                                 </select>
                             </div>
                         </div>
@@ -73,34 +74,34 @@
                                 </div><!-- /.input group -->
                             </div>
                         </div>
-                        <div class="form-group form-horizontal">                     
-                                <div class="col-md-6">
-                                    <p>下达日期:</p>
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="glyphicon glyphicon-calendar"></i>
-                                        </div>
-                                        <input type="text" class="form-control pull-right rangepicks" id="reservation" name="OrderDate" value="@ViewBag.Condition.OrderDate">
+                        <div class="form-group form-horizontal">
+                            <div class="col-md-6">
+                                <p>下达日期:</p>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-calendar"></i>
                                     </div>
+                                    <input type="text" class="form-control pull-right rangepicks" id="reservation" name="OrderDate" value="@ViewBag.Condition.OrderDate">
                                 </div>
-                                <div class="col-md-6">
-                                    <p>交货日期:</p>
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="glyphicon glyphicon-calendar"></i>
-                                        </div>
-                                        <input type="text" class="form-control pull-right rangepicks" name="DeliverDate" value="@ViewBag.Condition.DeliverDate">
+                            </div>
+                            <div class="col-md-6">
+                                <p>交货日期:</p>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-calendar"></i>
                                     </div>
-                                </div>                       
+                                    <input type="text" class="form-control pull-right rangepicks" name="DeliverDate" value="@ViewBag.Condition.DeliverDate">
+                                </div>
+                            </div>
                         </div>
 
-                            <div class="form-group form-inline">
-                                <div class="col-md-6">
-                                    <button name="btn-search" class="btn btn-info" id="search"><i class="glyphicon glyphicon-search"></i> 搜索 </button>
-                                </div>       
+                        <div class="form-group form-inline">
+                            <div class="col-md-6">
+                                <button name="btn-search" class="btn btn-info" id="search"><i class="glyphicon glyphicon-search"></i> 搜索 </button>
                             </div>
+                        </div>
 
-                     </form>
+                    </form>
                 </div>
             </div>
         </div><!-- /.box-header -->
@@ -265,15 +266,14 @@
             $("#orderManager .treeview-menu>li").eq(0).addClass("active");
 
             $('.rangepicks').daterangepicker({
-              //  "singleDatePicker": true,
+                //  "singleDatePicker": true,
                 "showDropdowns": true
-             //   "autoApply": true,
+                //   "autoApply": true,
             });
 
 
             $('#OrderStatus').children("option").each(function () {
-                if ($(this).val() == '@(ViewBag.Condition.OrderStatus)')
-                {
+                if ($(this).val() == '@(ViewBag.Condition.OrderStatus)') {
                     $(this).attr("selected", "selected");
                 }
             });
@@ -282,7 +282,7 @@
                 var data = $("#orderSearchForm").serialize();
                 location.href = 'index?condition=' + data;
             });
-            
+
             $("button[name='btn-showMsg']").each(function () {
                 $(this).click(function () {
                     $(this).addClass("disabled");

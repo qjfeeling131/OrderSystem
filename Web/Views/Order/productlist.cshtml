@@ -125,17 +125,18 @@
             });
 
             var model = @Html.Raw(ServiceStack.Text.JsonSerializer.SerializeToString(Model))
+            //debugger;
+            //console.log(model);
             addProductRow(model);
 
         })
-    
+
 
         function getdata(pageIndex) {
             var key = "key=" + $("#searchKey").val();
             var pageindex = "pageIndex=" + pageIndex;
             getAsynData("productList", key + "&" + pageindex, function (json) {
                 clearTableTr();
-
                 addProductRow(json.Data);
             });
         }
@@ -146,11 +147,12 @@
             }
             var nextNodenum = "";
             var childRow = "";
+            var nodesResult="";
             var childNode = "";
             for (var i = 0; i < root.length; i++) {
                 if (root[i].ChildNode == "undefined" || root[i].ChildNode == null || root[i].ChildNode == 0) {
 
-                    nextNodenum = parentNodeNum + 1;
+                    nextNodenum = parentNodeNum + 100;
                 }
                 else {
 
@@ -168,7 +170,7 @@
                     continue;
                 }
                 else {
-                    return childRow + addRecursionChild(root[i].ChildNode, nextNodenum);
+                    childRow+=addRecursionChild(root[i].ChildNode, nextNodenum);
                 }
             }
             return childRow;
@@ -204,7 +206,7 @@
                 $('.tree').treegrid();
 
             }
-            
+
             $("tr").each(function () {
                 productListTrEvent($(this));
             });
@@ -235,8 +237,8 @@
                 itemcode = $(this).children('td').first().text();
                 itemname = $($(this).children('td')[1]).html();
                 itemprice = $(this).children('td').last().html();
-                  
-      
+
+
                 //有价格才能选中，确定
                 if ((itemcode == "" || itemname == "undefined" || itemprice.indexOf("<") != -1) || itemprice == "")
                     return;
@@ -247,6 +249,7 @@
                 $("#itemcode").val(itemcode);
                 $("#itemname").val(itemname);
                 $("#itemprice").val(itemprice);
+                $("#itemquantity").val(1);
                 $("#itemcustomerprice").val(itemprice);
                 $("#iteminnerprice").val(itemprice);
 

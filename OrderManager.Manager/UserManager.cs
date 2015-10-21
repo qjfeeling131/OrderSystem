@@ -443,6 +443,7 @@ namespace OrderManager.Manager
             return listNewUsers;
 
         }
+
         /// <summary>
         /// 获取当前用户登陆信息以及其管理的其它用户
         /// </summary>

@@ -25,6 +25,10 @@ using System.Diagnostics;
 
 namespace OrderManager.Web
 {
+    /// <summary>
+    /// OrderManager
+    ///<param name="brief">OrderManager</param>
+    /// </summary>
     public class OrderController : BaseController
     {
 
@@ -34,16 +38,21 @@ namespace OrderManager.Web
         {
             UserService = new UserServiceClient();
         }
-
+        /// <summary>
+        /// Index Method
+        /// </summary>
+        /// <param name="condition">This condition is Web DTO</param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns>View Result</returns>
         public ViewResult Index(OderConditionModel condition, int? pageIndex = 0, int? pageSize = 10)
         {
             List<OM_Order> list = UserService.GetCurrentSalesOrderList(Cipher, CurrentUser.User.Guid);
-            if (!string.IsNullOrWhiteSpace(condition.Id))
+            if (condition.OrderStatus == "100")
             {
-
                 list = list.Where(s => s.CardName.Contains(condition.UserName ?? "") && s.CardCode.Contains(condition.UserCode ?? "")
-                                        && s.DocStatus == condition.OrderStatus && s.Remarks.Contains(condition.Remarks ?? "")
-                                        && s.DocEntry.ToString().Contains(condition.OrderEntry ?? "")).ToList();
+                                           && s.Remarks.Contains(condition.Remarks ?? "")
+                                           && s.DocEntry.ToString().Contains(condition.OrderEntry ?? "")).ToList();
 
                 if (!string.IsNullOrWhiteSpace(condition.OrderDate))
                 {
@@ -61,14 +70,47 @@ namespace OrderManager.Web
             }
             else
             {
-                ViewBag.Condition = new OderConditionModel();
+                if (!string.IsNullOrWhiteSpace(condition.Id))
+                {
+
+                    list = list.Where(s => s.CardName.Contains(condition.UserName ?? "") && s.CardCode.Contains(condition.UserCode ?? "")
+                                            && s.DocStatus == condition.OrderStatus && s.Remarks.Contains(condition.Remarks ?? "")
+                                            && s.DocEntry.ToString().Contains(condition.OrderEntry ?? "")).ToList();
+
+                    if (!string.IsNullOrWhiteSpace(condition.OrderDate))
+                    {
+                        var dateRange = SplitDate(condition.OrderDate);
+                        list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(condition.DeliverDate))
+                    {
+                        var dateRange = SplitDate(condition.DeliverDate);
+                        list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
+                    }
+
+                    ViewBag.Condition = condition;
+                }
+                else
+                {
+                    ViewBag.Condition = new OderConditionModel();
+                }
             }
 
             ViewBag.PageSize = pageSize;
             ViewBag.PageIndex = pageIndex;
             ViewBag.TotalPages = Math.Ceiling(Convert.ToDouble(list.Count) / Convert.ToDouble(pageSize));
-            var result = list.Skip(Convert.ToInt32(pageIndex * pageSize)).Take((int)pageSize).ToList();
-            return View("~/views/order/index.cshtml", result);
+            if (list.Count > 0)
+            {
+                var result = list.Skip(Convert.ToInt32(pageIndex * pageSize)).Take((int)pageSize).ToList().OrderByDescending(c => c.DocDueDate).ToList();
+                return View("~/views/order/index.cshtml", result);
+            }
+            else
+            {
+                var result = list.Skip(Convert.ToInt32(pageIndex * pageSize)).Take((int)pageSize).ToList();
+                return View("~/views/order/index.cshtml", result);
+            }
+
         }
 
         private DateRange SplitDate(string dateStr)
@@ -258,7 +300,7 @@ namespace OrderManager.Web
         public JsonResult SubmitOrder2SAp(string orderGuid)
         {
             OM_B1InfomationDTO b1Information = UserService.UpdateSalesOrderStatusByToSAP(Cipher, orderGuid);
-            if (b1Information.GSCode == 0 && b1Information.JFZCode == 0)
+            if (b1Information.GSCode == 200 && b1Information.JFZCode == 200)
             {
                 return Json(new OrderManager.Web.Models.JsonModel { Data = string.Format("{0},{1}", b1Information.GSMessage, b1Information.JFZMessage), Code = 0, Type = "对接成功" });
             }

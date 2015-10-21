@@ -220,8 +220,9 @@ namespace OrderManager.Manager
             oRs.DoQuery(string.Format("select * from ODRF where ObjType='17' and Address2='{0}'", salesOrder.Guid));
             if (oRs.RecordCount > 0)
             {
-                b1Informaion.JFZCode = -1;
-                b1Informaion.JFZMessage = string.Format("JFZCompnay Document has exist, and the DocEntry={0},DocNum={1}", oRs.Fields.Item("DocEntry").Value, oRs.Fields.Item("DocNum").Value);
+                b1Informaion.JFZCode = 200;
+                b1Informaion.JFZStatus = OMDocStatus.Commit;
+                b1Informaion.JFZMessage = string.Format("This order hac commit to SAP");
                 LogHelper.Info(string.Format("JFZCompnay Document has exist, and the DocEntry={0},DocNum={1}", oRs.Fields.Item("DocEntry").Value, oRs.Fields.Item("DocNum").Value));
                 return true;
             }
@@ -262,11 +263,13 @@ namespace OrderManager.Manager
                     if (oSaleOrder.Add() == 0)
                     {
                         b1Informaion.JFZCode = 200;
+                        b1Informaion.JFZStatus = OMDocStatus.Commit;
                         b1Informaion.JFZMessage = string.Format("金方子:{0},订单号:{1}对接成功", salesOrder.CardCode, salesOrder.DocEntry);
                         LogHelper.Info(string.Format("金方子:{0},订单号:{1}对接成功", salesOrder.CardCode, salesOrder.DocEntry));
                         return true;
                     }
                     b1Informaion.JFZCode = -1;
+                    b1Informaion.JFZStatus = OMDocStatus.Unchange;
                     b1Informaion.JFZMessage = string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), JFZCompany.GetLastErrorDescription());
                     LogHelper.Error(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), JFZCompany.GetLastErrorDescription()));
                     return false;
@@ -274,6 +277,7 @@ namespace OrderManager.Manager
                 catch (Exception ex)
                 {
                     b1Informaion.JFZCode = -1;
+                    b1Informaion.JFZStatus = OMDocStatus.Unchange;
                     b1Informaion.JFZMessage = string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), JFZCompany.GetLastErrorDescription());
                     LogHelper.Error(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", JFZCompany.GetLastErrorCode().ToString(), JFZCompany.GetLastErrorDescription()));
                     return false;
@@ -301,6 +305,9 @@ namespace OrderManager.Manager
             oRs.DoQuery(string.Format("select * from ODRF where ObjType='17' and Address2='{0}'", salesOrder.Guid));
             if (oRs.RecordCount > 0)
             {
+                b1Informaion.GSCode = 200;
+                b1Informaion.GSStatus = OMDocStatus.Commit;
+                b1Informaion.JFZMessage = string.Format("This Order-{0}-{1} has commit to SAP", salesOrder.Guid, oRs.Fields.Item("DocEntry").Value);
                 LogHelper.Info(string.Format("JFZCompnay Document has exist, and the DocEntry={0},DocNum={1}", oRs.Fields.Item("DocEntry").Value, oRs.Fields.Item("DocNum").Value));
                 return true;
             }
@@ -337,19 +344,22 @@ namespace OrderManager.Manager
                 if (oSaleOrder.Add() == 0)
                 {
                     b1Informaion.GSCode = 200;
+                    b1Informaion.GSStatus = OMDocStatus.Commit;
                     b1Informaion.GSMessage = (string.Format("高山药业:{0},订单号:{1}对接成功,update ", salesOrder.CardCode, salesOrder.DocEntry));
                     LogHelper.Info(string.Format("高山药业:{0},订单号:{1}对接成功,update ", salesOrder.CardCode, salesOrder.DocEntry));
                     return true;
                 }
                 b1Informaion.GSCode = -1;
-                b1Informaion.GSMessage=string.Format("GSSalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription());
+                b1Informaion.GSStatus = OMDocStatus.Unchange;
+                b1Informaion.GSMessage = string.Format("GSSalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription());
                 LogHelper.Error(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
                 return false;
             }
             catch (Exception ex)
             {
-                   b1Informaion.GSCode = -1;
-                b1Informaion.GSMessage=  string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription());
+                b1Informaion.GSCode = -1;
+                b1Informaion.GSStatus = OMDocStatus.Unchange;
+                b1Informaion.GSMessage = string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription());
                 LogHelper.Error(string.Format("SalseOrderAdd----Error Code:{0}----Error Descride:{1}", _Company.GetLastErrorCode().ToString(), _Company.GetLastErrorDescription()));
                 return false;
             }

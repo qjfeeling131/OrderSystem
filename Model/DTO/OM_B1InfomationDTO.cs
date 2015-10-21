@@ -15,7 +15,13 @@ namespace OrderManager.Model.DTO
             get { return _GSCode; }
             set { _GSCode = value; }
         }
+        OMDocStatus _GSStatus;
 
+        public OMDocStatus GSStatus
+        {
+            get { return _GSStatus; }
+            set { _GSStatus = value; }
+        }
         string _GSMessage;
 
         public string GSMessage
@@ -30,6 +36,13 @@ namespace OrderManager.Model.DTO
         {
             get { return _JFZCode; }
             set { _JFZCode = value; }
+        }
+        OMDocStatus _JFZStatus;
+
+        public OMDocStatus JFZStatus
+        {
+            get { return _JFZStatus; }
+            set { _JFZStatus = value; }
         }
         string _JFZMessage;
 
@@ -54,5 +67,12 @@ namespace OrderManager.Model.DTO
             get { return _ExceptionMessage; }
             set { _ExceptionMessage = value; }
         }
+    }
+
+
+    public enum OMDocStatus
+    {
+        Commit = 0,
+        Unchange = 1
     }
 }

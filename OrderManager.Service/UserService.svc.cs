@@ -32,7 +32,6 @@ namespace OrderManager.Service
         [Dependency]
         public IOrderManger orderManger { get; set; }
 
-
         public OM_UserDetail Login(string userAccount, string password)
         {
             var result = userManager.Login(userAccount, password);
@@ -233,7 +232,7 @@ namespace OrderManager.Service
         }
 
 
-      
+
         public IList<OM_ProductInfo> GetProductList(string cipher, string CardCode, string searchKey, int pageIndex)
         {
             int _currentProductListCount = 0;
@@ -246,11 +245,11 @@ namespace OrderManager.Service
 
             IList<OM_ProductInfo> result = new List<OM_ProductInfo>();
             var productList = orderManger.GetProductList(parameter, out _currentProductListCount);
-            
+
             var user = userManager.GetUser(s => s.Account == CardCode);
 
             //减少递归读取数据库次数 
-            if(productList!=null || productList.Count>0)
+            if (productList != null || productList.Count > 0)
                 StaticResource.UserProductPrices = orderManger.GetProducePricetList(s => user.Guid.Trim().ToLower() == s.User_Guid.Trim().ToLower());
 
             foreach (var item in productList)
@@ -263,9 +262,9 @@ namespace OrderManager.Service
                 if (children == null || children.Count == 0)
                 {
                     // orderManger.GetCurrentProducePriceList(item.ItemCode, user.Guid).Select(a => a.Price.ToString("0.00")).FirstOrDefault();
-                   var exist= StaticResource.UserProductPrices.Find(s => s.Product_ItemCode == item.ItemCode);
-                   if (exist != null)
-                       price = exist.Price.ToString("0.00");
+                    var exist = StaticResource.UserProductPrices.Find(s => s.Product_ItemCode == item.ItemCode);
+                    if (exist != null)
+                        price = exist.Price.ToString("0.00");
                 }
                 OM_ProductInfo product = new OM_ProductInfo();
                 product.ItemName = item.ItemName;
@@ -322,7 +321,7 @@ namespace OrderManager.Service
         public OM_B1InfomationDTO UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid)
         {
             OM_B1InfomationDTO b1Information = orderManger.UpdateSalesOrderStatusByToSAP(orderGuid);
-            if (b1Information.GSCode == 0 && b1Information.JFZCode == 0)
+            if (b1Information.GSCode == 200 && b1Information.JFZCode == 200)
             {
                 var user = userManager.GetUser(s => s.Guid == cipher);
                 var order = orderManger.GetSalesOrder(s => s.Guid == orderGuid);

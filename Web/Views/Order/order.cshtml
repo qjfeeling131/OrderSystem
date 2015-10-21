@@ -181,10 +181,16 @@
             if ($("#status").val() != "未提交") {
                 $("#addRow").hide();
                 $("#removeRow").hide();
-                $("button[name = 'om-OrderLine-Save']").hide();
-                $("button[name='om-OrderLine-Edit']").hide();
+                if (role != "A0DBEF93-F1AA-4C3A-828B-6DE0C99DA0D8") {
+                    $("button[name = 'om-OrderLine-Save']").hide();
+                    $("button[name='om-OrderLine-Edit']").hide();
+                }
+                else {
+                    $("button[name = 'om-OrderLine-Save']").show();
+                    $("button[name='om-OrderLine-Edit']").show();
+                }
+              
             }
-
             //添加行
             $("#addRow").click(function () {
 
@@ -258,8 +264,10 @@
                     return;
                 }
                 if ($("#status").val() != "未提交") {
-                    alertInfo("提示", "当前状态不允许此操作");
-                    return;
+                    if (role != "A0DBEF93-F1AA-4C3A-828B-6DE0C99DA0D8") {
+                        alertInfo("提示", "当前状态不允许此操作");
+                        return;
+                    }
                 }
                 var data = GetCurrentPageDate();
                 $(this).addClass("disabled");
@@ -278,8 +286,10 @@
                 }
 
                 if ($("#status").val() != "未提交") {
-                    alertInfo("提示", "当前状态不允许此操作");
-                    return;
+                    if (role != "A0DBEF93-F1AA-4C3A-828B-6DE0C99DA0D8") {
+                        alertInfo("提示", "当前状态不允许此操作");
+                        return;
+                    }
                 }
                 if ($("#docDueDateTimePicker").val() == "" || $("#docDueDateTimePicker").val() == " ") {
                     alertInfo("提示", "请填写交货日期");
@@ -338,8 +348,11 @@
             if (role != "AA196056-70EE-45BF-A56A-A90070DA1425" && role != "D3BEB5F5-DFCE-4AAB-A3BE-BB44007FFDD2")
                 $("#itemcustomerprice").attr("disabled", "true");
 
-            if (role != "A0DBEF93-F1AA-4C3A-828B-6DE0C99DA0D8")
+            if (role != "A0DBEF93-F1AA-4C3A-828B-6DE0C99DA0D8") {
                 $("#iteminnerprice").attr("disabled", "true");
+                $("button[name = 'om-OrderLine-Save']").show();
+                $("button[name='om-OrderLine-Edit']").show();
+            }
         }
 
         //行保存事件
