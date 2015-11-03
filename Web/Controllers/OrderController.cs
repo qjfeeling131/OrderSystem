@@ -48,34 +48,13 @@ namespace OrderManager.Web
         public ViewResult Index(OderConditionModel condition, int? pageIndex = 0, int? pageSize = 10)
         {
             List<OM_Order> list = UserService.GetCurrentSalesOrderList(Cipher, CurrentUser.User.Guid);
-            if (condition.OrderStatus == "100")
+            if (condition != null)
             {
-                list = list.Where(s => s.CardName.Contains(condition.UserName ?? "") && s.CardCode.Contains(condition.UserCode ?? "")
-                                           && s.Remarks.Contains(condition.Remarks ?? "")
-                                           && s.DocEntry.ToString().Contains(condition.OrderEntry ?? "")).ToList();
-
-                if (!string.IsNullOrWhiteSpace(condition.OrderDate))
+                if (condition.OrderStatus == "100")
                 {
-                    var dateRange = SplitDate(condition.OrderDate);
-                    list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
-                }
-
-                if (!string.IsNullOrWhiteSpace(condition.DeliverDate))
-                {
-                    var dateRange = SplitDate(condition.DeliverDate);
-                    list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
-                }
-
-                ViewBag.Condition = condition;
-            }
-            else
-            {
-                if (!string.IsNullOrWhiteSpace(condition.Id))
-                {
-
                     list = list.Where(s => s.CardName.Contains(condition.UserName ?? "") && s.CardCode.Contains(condition.UserCode ?? "")
-                                            && s.DocStatus == condition.OrderStatus && s.Remarks.Contains(condition.Remarks ?? "")
-                                            && s.DocEntry.ToString().Contains(condition.OrderEntry ?? "")).ToList();
+                                               && s.Remarks.Contains(condition.Remarks ?? "")
+                                               && s.DocEntry.ToString().Contains(condition.OrderEntry ?? "")).ToList();
 
                     if (!string.IsNullOrWhiteSpace(condition.OrderDate))
                     {
@@ -93,10 +72,37 @@ namespace OrderManager.Web
                 }
                 else
                 {
-                    ViewBag.Condition = new OderConditionModel();
+                    if (!string.IsNullOrWhiteSpace(condition.Id))
+                    {
+
+                        list = list.Where(s => s.CardName.Contains(condition.UserName ?? "") && s.CardCode.Contains(condition.UserCode ?? "")
+                                                && s.DocStatus == condition.OrderStatus && s.Remarks.Contains(condition.Remarks ?? "")
+                                                && s.DocEntry.ToString().Contains(condition.OrderEntry ?? "")).ToList();
+
+                        if (!string.IsNullOrWhiteSpace(condition.OrderDate))
+                        {
+                            var dateRange = SplitDate(condition.OrderDate);
+                            list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(condition.DeliverDate))
+                        {
+                            var dateRange = SplitDate(condition.DeliverDate);
+                            list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
+                        }
+
+                        ViewBag.Condition = condition;
+                    }
+                    else
+                    {
+                        ViewBag.Condition = new OderConditionModel();
+                    }
                 }
             }
-
+            else
+            {
+                ViewBag.Condition = new OderConditionModel();
+            }
             ViewBag.PageSize = pageSize;
             ViewBag.PageIndex = pageIndex;
             ViewBag.TotalPages = Math.Ceiling(Convert.ToDouble(list.Count) / Convert.ToDouble(pageSize));

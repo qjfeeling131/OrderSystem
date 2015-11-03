@@ -57,12 +57,13 @@
                         <br />
                         <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;下达日期</button>
                         <input id="datetimepicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="@(Model == null ? "" : Model.DocDate.ToString("yyyy/MM/dd"))" />
-                        <div>
-                            <br />
-                            <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;交货日期</button>
-                            <input id="docDueDateTimePicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="@(Model == null ? "" : Model.DocDueDate.ToString("yyyy/MM/dd"))" />
-                        </div><!-- /.btn-group -->
+                       
                     </div>
+                    <div>
+                        <br />
+                        <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;交货日期</button>
+                        <input id="docDueDateTimePicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="@(Model == null ? "" : Model.DocDueDate.ToString("yyyy/MM/dd"))" />
+                    </div><!-- /.btn-group -->
 
                 </div>
                 <div class="row" style="border-top:1px solid #ff6a00;margin:2%;">
