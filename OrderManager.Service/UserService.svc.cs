@@ -232,13 +232,18 @@ namespace OrderManager.Service
         }
 
 
-
         public IList<OM_ProductInfo> GetProductList(string cipher, string CardCode, string searchKey, int pageIndex)
         {
             int _currentProductListCount = 0;
             PageListParameter<OM_Product, string> parameter = new PageListParameter<OM_Product, string>();
             parameter.whereLambda = s => ((s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey))
-                                            && (s.ParentId == null || s.ParentId == s.ItemCode) & s.IsDel == false); // randy
+                                            && (s.ParentId == null || s.ParentId == s.ItemCode) & s.IsDel == false);
+
+            if (!string.IsNullOrWhiteSpace(searchKey))
+            {
+                parameter.whereLambda = s => ((s.ItemCode.Contains(searchKey.ToUpper()) || s.ItemName.Contains(searchKey)) & s.IsDel == false);
+            }
+
             parameter.pageIndex = pageIndex;
             parameter.orderByLambda = s => s.ItemCode;
             parameter.pageSize = 100;
