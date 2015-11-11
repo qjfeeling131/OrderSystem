@@ -226,7 +226,7 @@ namespace OrderManager.Manager
                 LogHelper.Info(string.Format("JFZCompnay Document has exist, and the DocEntry={0},DocNum={1}", oRs.Fields.Item("DocEntry").Value, oRs.Fields.Item("DocNum").Value));
                 return true;
             }
-            oRs.DoQuery(string.Format("select top 1 CardCode from ORDR where CardName='{0}'", salesOrder.CardName));
+            oRs.DoQuery(string.Format("select top 1 CardCode from OCRD where CardName='{0}'", salesOrder.CardName.Trim()));
             if (oRs.RecordCount > 0)
             {
                 SAPbobsCOM.Documents oSaleOrder = JFZCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oDrafts);
@@ -255,7 +255,7 @@ namespace OrderManager.Manager
                         oSaleOrder.Lines.ItemCode = item.ItemCode;
                         oSaleOrder.Lines.ItemDescription = item.ItemName;
                         oSaleOrder.Lines.Quantity = Convert.ToDouble(item.Quantity);
-                        oSaleOrder.Lines.Price = Convert.ToDouble(item.Price);
+                        oSaleOrder.Lines.Price = Convert.ToDouble(item.InnerPrice);
                         oSaleOrder.Lines.Add();
                         //LogHelper.Info(string.Format("the OsaleOrderLine Detail ItemCode={0},ItemName={1},Quantity={2},Price={3}", item.ItemCode.ToString(), item.ItemName, item.Quantity, item.Price));
                     }
@@ -338,7 +338,7 @@ namespace OrderManager.Manager
                     oSaleOrder.Lines.ItemCode = item.ItemCode;
                     oSaleOrder.Lines.ItemDescription = item.ItemName;
                     oSaleOrder.Lines.Quantity = Convert.ToDouble(item.Quantity);
-                    oSaleOrder.Lines.Price = Convert.ToDouble(item.Price);
+                    oSaleOrder.Lines.Price = Convert.ToDouble(item.InnerPrice);
                     oSaleOrder.Lines.Add();
                 }
                 if (oSaleOrder.Add() == 0)
