@@ -97,6 +97,7 @@
         var currentPage;
         $(function () {
             $('.tree').treegrid();
+            var cache = $("#cache");
             //tr click
             $("#productlist_table tr").each(function () {
                 productListTrEvent($(this));
@@ -124,11 +125,19 @@
                 $("#curentPage").html(currentPage + 1);
             });
 
-            var model = @Html.Raw(ServiceStack.Text.JsonSerializer.SerializeToString(Model))
-            //debugger;
-            //console.log(model);
-            addProductRow(model);
-
+            var model = @Html.Raw(ServiceStack.Text.JsonSerializer.SerializeToString(Model));
+            var productList = $(cache).data("product");
+            if (productList == null || productList == "undefined") {
+                console.log("haven't cache");
+                addProductRow(model);
+            }
+            else {
+                $("#productlist_table tbody").append(productList);
+                $('.tree').treegrid();
+                $("tr").each(function () {
+                    productListTrEvent($(this));
+                });
+            }
         })
 
 
@@ -138,6 +147,7 @@
             getAsynData("productList", key + "&" + pageindex, function (json) {
                 clearTableTr();
                 addProductRow(json.Data);
+
             });
         }
 
@@ -147,7 +157,7 @@
             }
             var nextNodenum = "";
             var childRow = "";
-            var nodesResult="";
+            var nodesResult = "";
             var childNode = "";
             for (var i = 0; i < root.length; i++) {
                 if (root[i].ChildNode == "undefined" || root[i].ChildNode == null || root[i].ChildNode == 0) {
@@ -170,7 +180,7 @@
                     continue;
                 }
                 else {
-                    childRow+=addRecursionChild(root[i].ChildNode, nextNodenum);
+                    childRow += addRecursionChild(root[i].ChildNode, nextNodenum);
                 }
             }
             return childRow;
@@ -202,8 +212,12 @@
 
                 }
                 //加载完dom后再 变成tree,同一个table 只能有一个根节点treegrid-1
+                $(cache).data("product",trs);
                 $("#productlist_table tbody").append(trs);
                 $('.tree').treegrid();
+                //Cookie
+                //$.cookie("product",$('.tree'));
+
 
             }
 

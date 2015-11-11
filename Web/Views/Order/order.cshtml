@@ -51,13 +51,13 @@
                 <div class="btn-group pull-right" style="margin-right:8%;">
                     <div>
                         <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;单据状态</button>
-                        <input id="status" value="未提交" disabled type="text" name="status" class="form-control  input-sm pull-right" style="width:180px;" />
+                        <input id="status" value="未提交" disabled type="text" name="status" style="width:180px;" />
                     </div>
                     <div>
                         <br />
                         <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;下达日期</button>
                         <input id="datetimepicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="@(Model == null ? "" : Model.DocDate.ToString("yyyy/MM/dd"))" />
-                       
+
                     </div>
                     <div>
                         <br />
@@ -141,6 +141,7 @@
                 </div>
             </div>
         </div>
+        <div hidden="hidden" id="cache"></div>
 
 }
 
@@ -190,7 +191,7 @@
                     $("button[name = 'om-OrderLine-Save']").show();
                     $("button[name='om-OrderLine-Edit']").show();
                 }
-              
+
             }
             //添加行
             $("#addRow").click(function () {

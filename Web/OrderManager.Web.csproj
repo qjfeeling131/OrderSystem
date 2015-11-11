@@ -213,6 +213,7 @@
     <Content Include="Js\plugins\iCheck\square\blue%402x.png" />
     <Content Include="Js\plugins\iCheck\square\blue.css" />
     <Content Include="Js\plugins\iCheck\square\blue.png" />
+    <Content Include="Js\plugins\jqueryCookie\jquery.cookie.js" />
     <Content Include="Js\utility\fakeloader.min.js" />
     <Content Include="Js\utility\jqBootstrapValidation.js" />
     <Content Include="Js\utility\jquery.min.js" />
@@ -373,7 +374,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:24407/</IISUrl>
+          <IISUrl>http://localhost:12908/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

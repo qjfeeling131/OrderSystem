@@ -19,7 +19,7 @@ using OrderManager.Model.DTO;
 using OrderManager.Web.Models;
 using OrderManager.Common;
 using System.Diagnostics;
-
+using System.Web.Caching;
 
 
 
@@ -229,7 +229,17 @@ namespace OrderManager.Web
         }
         public ViewResult ProductList(string cardCode)
         {
-            var list = UserService.GetProductList(Cipher, cardCode, "", 0);
+            var productCacheList = HttpRuntime.Cache.Get(System.Configuration.ConfigurationManager.AppSettings["ProductCache"]);
+            List<OM_ProductInfo> list = null;
+            if (productCacheList == null)
+            {
+                list = UserService.GetProductList(Cipher, cardCode, "", 0);
+                HttpRuntime.Cache.Add(System.Configuration.ConfigurationManager.AppSettings["ProductCache"], list, null, Cache.NoAbsoluteExpiration, TimeSpan.FromDays(1), System.Web.Caching.CacheItemPriority.High, null);
+            }
+            else
+            {
+                list = (List<OM_ProductInfo>)productCacheList;
+            }
             var count = UserService.GetProductListCount(Cipher, cardCode, "");
             CardCode = cardCode;
             ViewBag.PageSize = 5;
