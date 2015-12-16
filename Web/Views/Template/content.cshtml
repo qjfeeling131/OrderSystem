@@ -130,7 +130,7 @@
                     <ul class="treeview-menu">
                         <li><a href="~/order/index"><i class="glyphicon glyphicon-chevron-right"></i> 销售订单</a></li>
                         <li><a href="~/order/order"><i class="glyphicon glyphicon-chevron-right"></i> 订单下达</a></li>
-                        <li><a href="~/order/search"><i class="glyphicon glyphicon-chevron-right"></i>对账单</a></li>
+                        <li><a href="~/order/search"><i class="glyphicon glyphicon-chevron-right"></i> 对账单</a></li>
                     </ul>
                 </li>
 
@@ -238,9 +238,36 @@
         }
     </script>
     <style>
-        th {
+        .itemStandar {
+           min-width:80px;
+        }
+        .itemUnit {
+            min-width: 80px;
+        }
+        .customerPrice {
+            min-width: 80px;
+        }
+        .price {
+            min-width: 80px;
+        }
+        .innerPrice {
+            min-width: 80px;
+        }
+        .quantity {
+            min-width: 80px;
+        }
+        .totalPrice {
+            min-width: 80px;
+        }
+        .operate {
             min-width: 100px;
         }
+        /*th {
+            min-width: 100px;
+        }*/
+        /*#order_table input {
+            width:50px;
+        }*/
     </style>
     @RenderSection("script", false)
 }

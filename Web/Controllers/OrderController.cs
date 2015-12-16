@@ -255,7 +255,7 @@ namespace OrderManager.Web
 
             var list = UserService.GetProductList(Cipher, CardCode, key, (int)pageindex);
 
-            return Json(new OrderManager.Web.Models.JsonModel { Data = list });
+            return Json(new OrderManager.Web.Models.JsonModel { Data = list }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -272,6 +272,7 @@ namespace OrderManager.Web
         {
             JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
             var orderDetail = jsonSerializer.Deserialize<OM_SalesOrderDataObject>(obj);
+            string orderDocenty = string.Empty;
             try
             {
                 orderDetail.User_Guid = CurrentUser.User.Guid;
@@ -283,7 +284,7 @@ namespace OrderManager.Web
                 else
                 {
                     orderDetail.Guid = Guid.NewGuid().ToString().ToUpper();
-                    UserService.SaveSalesOrder(Cipher, orderDetail);
+                    orderDocenty = UserService.SaveSalesOrder(Cipher, orderDetail);
                 }
             }
             catch (Exception ex)
@@ -292,7 +293,7 @@ namespace OrderManager.Web
                 return Json(GetException(ex));
             }
 
-            return Json(new OrderManager.Web.Models.JsonModel { Data = orderDetail.Guid });
+            return Json(new OrderManager.Web.Models.JsonModel { Data = orderDocenty, Href = orderDetail.Guid });
 
         }
 

@@ -13,6 +13,8 @@ namespace OrderManager.Model.Models
         public string ItemCode { get; set; }
         public string ItemName { get; set; }
         public string ItemFName { get; set; }
+        public string ItemStandard { get; set; }
+        public string ItemUnit { get; set; }
         public string Flag { get; set; }
         public string WhsCode { get; set; }
         public decimal Price { get; set; }

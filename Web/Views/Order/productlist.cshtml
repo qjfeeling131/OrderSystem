@@ -94,6 +94,8 @@
         var itemcode;
         var itemname;
         var itemprice;
+        var ItemStandard;
+        var ItemUnit;
         var currentPage;
         $(function () {
             $('.tree').treegrid();
@@ -171,9 +173,10 @@
                 var price = root[i].Price == undefined ? "" : root[i].Price;
                 var price1 = root[i].CustomerPrice == undefined ? "" : root[i].CustomerPrice;
                 var price2 = root[i].InnerPrice == undefined ? "" : root[i].InnerPrice;
-
+                var itemStandard=root[i].ItemStandar;
+                var itemUnit=root[i].ItemUnit;
                 var row = "<tr class='treegrid-" + nextNodenum + " treegrid-parent-" + parentNodeNum + "'>";
-                row += "<td>" + root[i].ItemCode + "</td><td style='font-size:small;'style='width:60%'>" + root[i].ItemName + "</td><td>" + price + "</td>";
+                row += "<td>" + root[i].ItemCode + "</td><td style='font-size:small;'style='width:60%'>" + root[i].ItemName + "</td><td style='display: none;'>" + root[i].ItemStandar + "</td><td style='display: none;'>" + root[i].ItemUnit + "</td><td>" + price + "</td>";
                 row += "</tr>";
                 childRow += row;
                 if (root[i].ChildNode == "undefined" || root[i].ChildNode == null || root.ChildNode == 0) {
@@ -191,7 +194,6 @@
             if (data.length == 0) {
                 $("#productlist_table tbody").append(trs);
             } else {
-
                 for (var i = 0; i < data.length; i++) {
                     var cls = "";
                     var istree = "";
@@ -205,7 +207,7 @@
 
                     trs += "<tr><td colspan='3' style='padding:0;margin:0;'><table class='" + istree + " table-hover table' role='grid' style='margin-bottom: 0;padding:0;'>";
                     trs += "<tr class='" + cls + "' >";
-                    trs += "<td>" + data[i].ItemCode + "</td><td style='font-size:small;width:60%'>" + data[i].ItemName + "</td><td>" + price + "</td>";
+                    trs += "<td>" + data[i].ItemCode + "</td><td style='font-size:small;width:60%'>" + data[i].ItemName + "</td><td style='display: none;'>" + data[i].ItemStandar + "</td><td style='display: none;'>" + data[i].ItemUnit + "</td><td>" + price + "</td>";
                     trs += "</tr>";
                     trs += addRecursionChild(data[i].ChildNode, 1);
                     trs += '</table></td></tr>';
@@ -248,9 +250,13 @@
                 if (itemcode == $(this).children('td').html()) {
                     $(this).css("background", "");
                 }
-
+                //debugger;
                 itemcode = $(this).children('td').first().text();
                 itemname = $($(this).children('td')[1]).html();
+                ItemStandard= $($(this).children('td')[2]).html();
+                ItemUnit= $($(this).children('td')[3]).html()
+                //ItemUnit= $(this).children('td').last().html();
+                //itemprice=$($(this).children('td')[2]).html();
                 itemprice = $(this).children('td').last().html();
 
 
@@ -264,6 +270,8 @@
                 $("#itemcode").val(itemcode);
                 $("#itemname").val(itemname);
                 $("#itemprice").val(itemprice);
+                $("#itemStandard").val(ItemStandard);
+                $("#itemUnit").val(ItemUnit);
                 $("#itemquantity").val(1);
                 $("#itemcustomerprice").val(itemprice);
                 $("#iteminnerprice").val(itemprice);

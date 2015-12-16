@@ -31,6 +31,12 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.FrgnName)
                 .HasMaxLength(100);
 
+            this.Property(t => t.ItemStandard)
+                .HasMaxLength(100);
+
+            this.Property(t => t.ItemUnit)
+                .HasMaxLength(100);
+
             this.Property(t => t.GroupType)
                 .HasMaxLength(10);
 
@@ -51,6 +57,8 @@ namespace OrderManager.Model.Models.Mapping
             this.Property(t => t.ItemCode).HasColumnName("ItemCode");
             this.Property(t => t.ItemName).HasColumnName("ItemName");
             this.Property(t => t.FrgnName).HasColumnName("FrgnName");
+            this.Property(t => t.ItemStandard).HasColumnName("ItemStandard");
+            this.Property(t => t.ItemUnit).HasColumnName("ItemUnit");
             this.Property(t => t.OnHand).HasColumnName("OnHand");
             this.Property(t => t.GroupType).HasColumnName("GroupType");
             this.Property(t => t.GroupAPrice).HasColumnName("GroupAPrice");

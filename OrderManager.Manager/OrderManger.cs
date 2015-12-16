@@ -176,7 +176,9 @@ namespace OrderManager.Manager
                     Order_Guid = orderResult.Guid,
                     DocEntry = orderResult.DocEntry,
                     InnerPrice = item.InnerPrice,
-                    CustomerPrice = item.CustomerPrice
+                    CustomerPrice = item.CustomerPrice,
+                    ItemStandard = item.ItemStandard,
+                    ItemUnit = item.ItemUnit
                 };
                 items.Add(oi);
             }
@@ -264,6 +266,8 @@ namespace OrderManager.Manager
                         i.Price = item.Price;
                         i.Quantity = item.Quantity;
                         i.TotalPrice = item.Price * item.Quantity;
+                        i.ItemUnit = item.ItemUnit;
+                        i.ItemStandard = item.ItemStandard;
                     }
                 }
             }
@@ -527,6 +531,8 @@ namespace OrderManager.Manager
                     product.Price = price;
                     product.ItemCode = item.ItemCode;
                     product.ItemName = item.ItemName;
+                    product.ItemStandar = item.ItemStandard;
+                    product.ItemUnit = item.ItemUnit;
                     product.ChildNode = nodes;
                     infos.Add(product);
 

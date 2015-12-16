@@ -24,6 +24,11 @@ namespace OrderManager.Model.DTO
         [DataMember]
         public string Price { get; set; }
 
+        [DataMember]
+        public string ItemStandar { get; set; }
+        [DataMember]
+        public string ItemUnit { get; set; }
+
     }
 
 

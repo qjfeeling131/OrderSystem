@@ -185,7 +185,7 @@ namespace OrderManager.Service
                 Message = string.Format("用户[{0}] : '{1}' 保存草稿【{2}】.", user.Name, DateTime.Now, order.DocEntry)
             };
             logManager.WriteLog(log);
-            return order.Guid;
+            return order.DocEntry.ToString();
         }
 
 
@@ -275,7 +275,8 @@ namespace OrderManager.Service
                 product.ItemName = item.ItemName;
                 product.ItemCode = item.ItemCode;
                 product.Price = price;
-
+                product.ItemStandar = item.ItemStandard == null ? "Empty" : item.ItemStandard;
+                product.ItemUnit = item.ItemUnit == null ? "Empty" : item.ItemUnit;
                 product.ChildNode = children;
                 result.Add(product);
             }
