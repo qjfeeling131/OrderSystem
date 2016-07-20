@@ -40,12 +40,20 @@ namespace OrderManager.Manager
         IList<OM_Order> GetSalesOrderList<Tkey>(PageListParameter<OM_Order, Tkey> parameter, out int count);
 
         OM_OrderItem GetSalesOrderItem(Expression<Func<OM_OrderItem, bool>> fuc);
+
+        OM_Catalog GetCatalog(Expression<Func<OM_Catalog, bool>> fuc);
+
+        IList<OM_Catalog> GetCatalogList(Expression<Func<OM_Catalog, bool>> fuc);
+
+        IList<OM_Product> GetProductList(Expression<Func<OM_Product, bool>> fuc);
+
         #endregion
 
         #region Fuction
 
         List<OM_ProductPrice> GetProducePricetList(Expression<Func<OM_ProductPrice, bool>> fuc);
 
+        IList<OM_Statement> GetStatementList(string cardCode, string cardName, string itemName, string userId, DateTime startDate, DateTime endDate);
         IList<OM_Product> GetProductList<Tkey>(PageListParameter<OM_Product, Tkey> parameter, out int count);
         /// <summary>
         /// 保存销售订单

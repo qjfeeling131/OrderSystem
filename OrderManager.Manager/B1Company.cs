@@ -235,7 +235,7 @@ namespace OrderManager.Manager
                     oSaleOrder.Address = salesOrder.Guid;
                     oSaleOrder.CardCode = oRs.Fields.Item("CardCode").Value;
                     oSaleOrder.CardName = salesOrder.CardName;
-                    oSaleOrder.Comments = "经销商平台对接生成";
+                    oSaleOrder.Comments = "营销远程平台对接生成";
                     if (salesOrder.DocDate == null)
                     {
                         oSaleOrder.DocDate = DateTime.Now;
@@ -317,7 +317,7 @@ namespace OrderManager.Manager
                 oSaleOrder.Address2 = salesOrder.Guid;
                 oSaleOrder.CardCode = salesOrder.CardCode;
                 oSaleOrder.CardName = salesOrder.CardName;
-                oSaleOrder.Comments = "经销商平台对接生成";
+                oSaleOrder.Comments = "营销远程平台对接生成";
                 if (salesOrder.DocDate == null)
                 {
                     oSaleOrder.DocDate = DateTime.Now;

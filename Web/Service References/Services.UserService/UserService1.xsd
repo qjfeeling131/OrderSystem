@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" />
+  <xs:import schemaLocation="http://localhost:24401/UserService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" />
   <xs:complexType name="OM_UserDetail">
     <xs:sequence>
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="Role" nillable="true" type="q1:OM_Role" />
@@ -61,6 +61,8 @@
       <xs:element minOccurs="0" name="ChildNode" nillable="true" type="tns:ArrayOfOM_ProductInfo" />
       <xs:element minOccurs="0" name="ItemCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemStandar" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemUnit" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -70,10 +72,19 @@
       <xs:element minOccurs="0" name="ExceptionMessage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="GSCode" type="xs:int" />
       <xs:element minOccurs="0" name="GSMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GSStatus" type="tns:OMDocStatus" />
       <xs:element minOccurs="0" name="IsException" type="xs:boolean" />
       <xs:element minOccurs="0" name="JFZCode" type="xs:int" />
       <xs:element minOccurs="0" name="JFZMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="JFZStatus" type="tns:OMDocStatus" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OM_B1InfomationDTO" nillable="true" type="tns:OM_B1InfomationDTO" />
+  <xs:simpleType name="OMDocStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Commit" />
+      <xs:enumeration value="Unchange" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OMDocStatus" nillable="true" type="tns:OMDocStatus" />
 </xs:schema>

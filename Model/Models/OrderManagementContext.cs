@@ -31,6 +31,8 @@ namespace OrderManager.Model.Models
         public DbSet<OM_User> OM_User { get; set; }
         public DbSet<OM_UserRole> OM_UserRole { get; set; }
 
+        public DbSet<OM_Catalog> OM_Catalog { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new OM_AreaMap());
@@ -47,6 +49,7 @@ namespace OrderManager.Model.Models
             modelBuilder.Configurations.Add(new OM_RolePermissionMap());
             modelBuilder.Configurations.Add(new OM_UserMap());
             modelBuilder.Configurations.Add(new OM_UserRoleMap());
+            modelBuilder.Configurations.Add(new OM_CatalogMap());
         }
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" />
-  <xs:import schemaLocation="http://localhost/OrderManager.Service/UserService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" />
+  <xs:import schemaLocation="http://localhost:24401/UserService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" />
+  <xs:import schemaLocation="http://localhost:24401/UserService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" />
   <xs:element name="Login">
     <xs:complexType>
       <xs:sequence>
@@ -298,6 +298,70 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/OrderManager.Model.DTO" minOccurs="0" name="UpdateSalesOrderStatusByToSAPResult" nillable="true" type="q16:OM_B1InfomationDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCatalogList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="catalogStatus" type="xs:int" />
+        <xs:element minOccurs="0" name="parentId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCatalogListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetCatalogListResult" nillable="true" type="q17:ArrayOfOM_Catalog" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProducts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parentId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cardCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetProductsResult" nillable="true" type="q18:ArrayOfOM_Product" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FuzzySearchProduct">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="key" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cardCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FuzzySearchProductResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="FuzzySearchProductResult" nillable="true" type="q19:ArrayOfOM_Product" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStatementList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cardCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cardName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="itemName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="startDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStatementListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/OrderManager.Model.Models" minOccurs="0" name="GetStatementListResult" nillable="true" type="q20:ArrayOfOM_Statement" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

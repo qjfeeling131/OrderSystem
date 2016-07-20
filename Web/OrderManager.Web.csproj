@@ -184,6 +184,7 @@
     <Content Include="img\icons.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="img\Logo.png" />
     <Content Include="img\mail.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -199,6 +200,8 @@
     </Content>
     <Content Include="Js\bootstrap\bootstrap.min.js" />
     <Content Include="Js\bootstrap\npm.js" />
+    <Content Include="Js\Order\productSearch.js" />
+    <Content Include="Js\Order\statement.js" />
     <Content Include="Js\plugins\datatables\dataTables.bootstrap.css" />
     <Content Include="Js\plugins\datatables\dataTables.bootstrap.min.js" />
     <Content Include="Js\plugins\daterangepicker\daterangepicker.css" />
@@ -214,6 +217,18 @@
     <Content Include="Js\plugins\iCheck\square\blue.css" />
     <Content Include="Js\plugins\iCheck\square\blue.png" />
     <Content Include="Js\plugins\jqueryCookie\jquery.cookie.js" />
+    <Content Include="Js\plugins\jqueryDataTable\css\jquery.dataTables.css" />
+    <Content Include="Js\plugins\jqueryDataTable\css\jquery.dataTables.min.css" />
+    <Content Include="Js\plugins\jqueryDataTable\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Js\plugins\jqueryDataTable\images\favicon.ico" />
+    <Content Include="Js\plugins\jqueryDataTable\images\sort_asc.png" />
+    <Content Include="Js\plugins\jqueryDataTable\images\sort_asc_disabled.png" />
+    <Content Include="Js\plugins\jqueryDataTable\images\sort_both.png" />
+    <Content Include="Js\plugins\jqueryDataTable\images\sort_desc.png" />
+    <Content Include="Js\plugins\jqueryDataTable\images\sort_desc_disabled.png" />
+    <Content Include="Js\plugins\jqueryDataTable\js\jquery.dataTables.js" />
+    <Content Include="Js\plugins\jqueryDataTable\js\jquery.dataTables.min.js" />
+    <Content Include="Js\plugins\jqueryDataTable\js\jquery.js" />
     <Content Include="Js\utility\fakeloader.min.js" />
     <Content Include="Js\utility\jqBootstrapValidation.js" />
     <Content Include="Js\utility\jquery.min.js" />
@@ -259,13 +274,17 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Properties\DataSources\OrderManager.Model.DTO.OM_B1InfomationDTO.datasource" />
+    <Content Include="Properties\DataSources\OrderManager.Model.Models.OM_Catalog.datasource" />
+    <Content Include="Js\plugins\jqueryDataTable\images\Sorting icons.psd" />
+    <Content Include="Js\plugins\jqueryDataTable\css\Chinese.json" />
+    <Content Include="Properties\DataSources\OrderManager.Model.Models.OM_Statement.datasource" />
     <None Include="Service References\Services.UserService\configuration91.svcinfo" />
     <None Include="Service References\Services.UserService\configuration.svcinfo" />
     <None Include="Service References\Services.UserService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\Services.UserService\UserService1.disco" />
+    <None Include="Service References\Services.UserService\UserService.disco" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Template\exceptionPage.cshtml" />
     <Content Include="Views\User\userlist.cshtml" />
@@ -280,19 +299,20 @@
     <Content Include="Views\Order\usercodelist.cshtml" />
     <Content Include="Views\Order\productlist.cshtml" />
     <Content Include="Views\Order\productPrice.cshtml" />
-    <Content Include="Views\Order\search.cshtml" />
+    <Content Include="Views\Order\statement.cshtml" />
     <Content Include="Views\Order\ShowRptData.cshtml" />
-    <None Include="Service References\Services.UserService\UserService1.wsdl" />
-    <None Include="Service References\Services.UserService\UserService4.xsd">
+    <Content Include="Views\Order\productSearch.cshtml" />
+    <None Include="Service References\Services.UserService\UserService.wsdl" />
+    <None Include="Service References\Services.UserService\UserService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Services.UserService\UserService41.xsd">
+    <None Include="Service References\Services.UserService\UserService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Services.UserService\UserService42.xsd">
+    <None Include="Service References\Services.UserService\UserService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Services.UserService\UserService43.xsd">
+    <None Include="Service References\Services.UserService\UserService3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="web.Debug.config">

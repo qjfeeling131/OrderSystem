@@ -125,7 +125,6 @@ namespace OrderManager.Service
             return userManager.GetCurrentUserMessageBoard(userId);
         }
 
-
         public bool SaveMessageBoard(string cipher, OM_MessageBoard msgBoard)
         {
             var result = userManager.SaveMessageBoard(msgBoard);
@@ -286,7 +285,6 @@ namespace OrderManager.Service
 
 
 
-
         public int GetProductListCount(string cipher, string CardCode, string searchKey)
         {
             int count = 0;
@@ -346,7 +344,49 @@ namespace OrderManager.Service
             return b1Information;
         }
 
+        IList<OM_Catalog> IUserService.GetCatalogList(int catalogStatus, string parentId)
+        {
+            var status = (CatalogStatus)catalogStatus;
+            if (status == CatalogStatus.MainCatalog)
+            {
+                return orderManger.GetCatalogList(c => c.ParentId.Equals(c.CatalogCode));
+            }
+            return orderManger.GetCatalogList(c => c.ParentId.Equals(parentId) && c.CatalogCode != parentId);
+        }
+
+        public IList<OM_Product> GetProducts(string parentId, string cardCode)
+        {
+            var result = orderManger.GetProductList(c => c.ParentId.Equals(parentId));
+            var tempUser = userManager.GetUser(c => c.Account.Equals(cardCode));
+            var productPrice = orderManger.GetProducePricetList(c => c.User_Guid.Equals(tempUser.Guid));
+            for (int rowIndex = 0; rowIndex < productPrice.Count; rowIndex++)
+            {
+                for (int columnIndex = 0; columnIndex < result.Count; columnIndex++)
+                {
+                    if (productPrice[rowIndex].Product_ItemCode == result[columnIndex].ItemCode)
+                    {
+                        result[columnIndex].GroupAPrice = productPrice[rowIndex].Price;
+                    }
+                }
+            }
+            return result;
+        }
+
+        public IList<OM_Product> FuzzySearchProduct(string key, string cardCode)
+        {
+            return orderManger.GetProductList(c => c.ItemCode.Contains(key) || c.ItemName.Contains(key) || c.ItemStandard.Contains(key));
+        }
+
+        public IList<OM_Statement> GetStatementList(string cardCode, string cardName, string itemName, string userId, DateTime startDate, DateTime endDate)
+        {
+            return orderManger.GetStatementList(cardCode, cardName, itemName, userId, startDate, endDate);
+        }
         #endregion
+
+
+
+
+
 
     }
 }

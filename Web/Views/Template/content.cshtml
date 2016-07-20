@@ -49,9 +49,9 @@
     <header class="main-header">
         <a href='@Url.Content("~/home/home")' class="logo">
             <!-- LOGO -->
-            <b>经销商平台</b>
+            <img src="~/img/Logo.png" width="45" height="45" />
+            <b style="color:#000079">营销远程平台</b>
         </a>
-
         <nav class="navbar navbar-static-top" role="navigation">
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
@@ -105,12 +105,12 @@
             <ul class="sidebar-menu">
                 <li class="header">目录菜单</li>
 
-                <li class="treeview" id="productManager">
-                    <a href="#">
-                        <i class="glyphicon glyphicon-home"></i> <span>产品列表</span>
-                    </a>
+                @*<li class="treeview" id="productManager">
+                        <a href="#">
+                            <i class="glyphicon glyphicon-home"></i> <span>产品列表</span>
+                        </a>
 
-                </li>
+                    </li>*@
                 <li class="treeview" id="userManager">
                     <a href="#">
                         <i class="glyphicon glyphicon-user"></i> <span>用户管理</span>
@@ -130,7 +130,7 @@
                     <ul class="treeview-menu">
                         <li><a href="~/order/index"><i class="glyphicon glyphicon-chevron-right"></i> 销售订单</a></li>
                         <li><a href="~/order/order"><i class="glyphicon glyphicon-chevron-right"></i> 订单下达</a></li>
-                        <li><a href="~/order/search"><i class="glyphicon glyphicon-chevron-right"></i> 对账单</a></li>
+                        <li><a href="~/order/statement"><i class="glyphicon glyphicon-chevron-right"></i>  对账单</a></li>
                     </ul>
                 </li>
 
@@ -187,7 +187,7 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> 1.0
         </div>
-        <strong>Copyright © 2015 <a href="#">高山药业经销商平台 </a>.</strong> All rights reserved.
+        <strong>Copyright © 2015 <a href="#">高山药业营销远程平台 </a>.</strong> All rights reserved.
     </footer>
 
 }
@@ -239,26 +239,33 @@
     </script>
     <style>
         .itemStandar {
-           min-width:80px;
+            min-width: 80px;
         }
+
         .itemUnit {
             min-width: 80px;
         }
+
         .customerPrice {
             min-width: 80px;
         }
+
         .price {
             min-width: 80px;
         }
+
         .innerPrice {
             min-width: 80px;
         }
+
         .quantity {
             min-width: 80px;
         }
+
         .totalPrice {
             min-width: 80px;
         }
+
         .operate {
             min-width: 100px;
         }

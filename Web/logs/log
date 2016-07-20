@@ -1,81 +1,17 @@
 
-记录时间：2015-11-28 12:48:26,602   
+记录时间：2016-05-31 10:13:41,266   
  日志级别：INFO  
- 出错类：Logger property:[(null)]  错误描述：------------------【11/28/2015 12:48:25 PM】------------------
-【Message】：A potentially dangerous Request.Form value was detected from the client (obj="...tandard":"<label id=\"itemStan...").
-【StackTrace】：   at System.Web.HttpRequest.ValidateString(String value, String collectionKey, RequestValidationSource requestCollection)
-   at System.Web.HttpRequest.<>c__DisplayClass280_0.<ValidateHttpValueCollection>b__0(String key, String value)
-   at System.Web.HttpValueCollection.EnsureKeyValidated(String key)
-   at System.Web.HttpValueCollection.GetValues(String name)
-   at System.Web.Mvc.NameValueCollectionValueProvider.ValueProviderResultPlaceholder.GetResultFromCollection(String key, NameValueCollection collection, CultureInfo culture)
-   at System.Web.Mvc.NameValueCollectionValueProvider.ValueProviderResultPlaceholder.<>c__DisplayClass8.<.ctor>b__4()
-   at System.Lazy`1.CreateValue()
-   at System.Lazy`1.LazyInitValue()
-   at System.Lazy`1.get_Value()
-   at System.Web.Mvc.NameValueCollectionValueProvider.ValueProviderResultPlaceholder.get_ValidatedResult()
-   at System.Web.Mvc.NameValueCollectionValueProvider.GetValue(String key, Boolean skipValidation)
-   at System.Web.Mvc.ValueProviderCollection.GetValueFromProvider(IValueProvider provider, String key, Boolean skipValidation)
-   at System.Web.Mvc.ValueProviderCollection.<>c__DisplayClass9.<GetValue>b__4(IValueProvider provider)
-   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
-   at System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
-   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
-   at System.Web.Mvc.ValueProviderCollection.GetValue(String key, Boolean skipValidation)
-   at System.Web.Mvc.DefaultModelBinder.BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
-   at System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
-   at System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+ 出错类：Logger property:[(null)]  错误描述：------------------【5/31/2016 10:13:40 AM】------------------
+【Message】：Object reference not set to an instance of an object.
+【StackTrace】：   at OrderManager.Web.BaseController.OnActionExecuting(ActionExecutingContext filterContext) in e:\MyProject\OrderManagement\OrderSystem_Git\OrderSystem\Web\Controllers\BaseController.cs:line 147
+   at System.Web.Mvc.Controller.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.InvokeActionMethodFilterAsynchronously(IActionFilter filter, ActionExecutingContext preContext, Func`1 nextInChain)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<>c__DisplayClass3b.<BeginInvokeActionMethodWithFilters>b__35()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   at System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   at System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
    at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__1e(AsyncCallback asyncCallback, Object asyncState)
 
  
-记录时间：2015-11-28 12:51:06,380   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlTextReaderImpl.Read()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-11-28 12:51:06,608   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlTextReaderImpl.Read()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)
-
-记录时间：2015-11-28 12:51:06,659   
- 日志级别：ERROR 
- 出错类：Logger property:[(null)]  错误描述：LogWrap inserts access log failed.
- System.Xml.XmlException: Unexpected XML declaration. The XML declaration must be the first node in the document, and no white space characters are allowed to appear before it. Line 1, position 580.
-   at System.Xml.XmlTextReaderImpl.Throw(Exception e)
-   at System.Xml.XmlTextReaderImpl.Throw(String res, String arg)
-   at System.Xml.XmlTextReaderImpl.ParsePI(StringBuilder piInDtdStringBuilder)
-   at System.Xml.XmlTextReaderImpl.ParseDocumentContent()
-   at System.Xml.XmlTextReaderImpl.Read()
-   at System.Xml.XmlLoader.LoadDocSequence(XmlDocument parentDoc)
-   at System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.LoadXml(String xml)
-   at CommonHelper.Log4netBuilder.GetLog(LogMediaEnum type)
-   at CommonHelper.FileLogger..ctor()
-   at CommonHelper.LoggerFactory.GetLogger(LogMediaEnum media)
-   at CommonHelper.LogWrap.DoWrite(String message, LogMediaEnum[] mediaArray, Object obj)

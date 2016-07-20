@@ -3,7 +3,7 @@
 }
 
 
-@section title{ 经销商平台 | 下订单  }
+@section title{ 营销远程平台 | 下订单  }
 
 
 @section content_header{
@@ -56,7 +56,7 @@
                     </div>
                     <div>
                         <br />
-                        <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;下达日期</button>
+                        <button class="btn btn-default btn-sm disabled"><i class="glyphicon"></i>&nbsp;订单日期</button>
                         <input id="datetimepicker" type="text" class="form-control  input-sm pull-right rangepicks" style="width:180px;" value="@(Model == null ? "" : Model.DocDate.ToString("yyyy/MM/dd"))" />
 
                     </div>
@@ -530,7 +530,8 @@
                     alertInfo("提示", "添加订单项前，请先选择客户。");
                     return;
                 }
-                createDialog('@(Url.Content("~/order/productlist"))', "cardCode=" + $("#UserCode").val());
+                //createDialog('@(Url.Content("~/order/productlist"))', "cardCode=" + $("#UserCode").val());
+                createDialog('@(Url.Content("~/order/ProductSearch"))');
             });
         }
 

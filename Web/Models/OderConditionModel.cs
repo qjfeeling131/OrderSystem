@@ -22,7 +22,11 @@ namespace OrderManager.Web.Models
 
         public string OrderDate { get; set; }
 
-        public string DeliverDate { get; set; } 
+        public bool IsOrderDate { get; set; }
+
+        public string DeliverDate { get; set; }
+
+        public bool IsDeliverDate { get; set; }
 
     }
 }

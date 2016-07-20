@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CatalogStatus.cs" />
     <Compile Include="Encryptor.cs" />
     <Compile Include="GenericException.cs" />
     <Compile Include="ExceptionLog.cs" />

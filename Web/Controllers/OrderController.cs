@@ -56,13 +56,13 @@ namespace OrderManager.Web
                                                && s.Remarks.Contains(condition.Remarks ?? "")
                                                && s.DocEntry.ToString().Contains(condition.OrderEntry ?? "")).ToList();
 
-                    if (!string.IsNullOrWhiteSpace(condition.OrderDate))
+                    if (condition.IsOrderDate)
                     {
                         var dateRange = SplitDate(condition.OrderDate);
                         list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
                     }
 
-                    if (!string.IsNullOrWhiteSpace(condition.DeliverDate))
+                    if (condition.IsDeliverDate)
                     {
                         var dateRange = SplitDate(condition.DeliverDate);
                         list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
@@ -79,13 +79,13 @@ namespace OrderManager.Web
                                                 && s.DocStatus == condition.OrderStatus && s.Remarks.Contains(condition.Remarks ?? "")
                                                 && s.DocEntry.ToString().Contains(condition.OrderEntry ?? "")).ToList();
 
-                        if (!string.IsNullOrWhiteSpace(condition.OrderDate))
+                        if (condition.IsOrderDate)
                         {
                             var dateRange = SplitDate(condition.OrderDate);
                             list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
                         }
 
-                        if (!string.IsNullOrWhiteSpace(condition.DeliverDate))
+                        if (condition.IsDeliverDate)
                         {
                             var dateRange = SplitDate(condition.DeliverDate);
                             list = list.Where(s => s.DocDate >= dateRange.From && s.DocDate <= dateRange.To).ToList();
@@ -108,7 +108,7 @@ namespace OrderManager.Web
             ViewBag.TotalPages = Math.Ceiling(Convert.ToDouble(list.Count) / Convert.ToDouble(pageSize));
             if (list.Count > 0)
             {
-                var result = list.Skip(Convert.ToInt32(pageIndex * pageSize)).Take((int)pageSize).ToList().OrderByDescending(c => c.DocDueDate).ToList();
+                var result = list.Skip(Convert.ToInt32(pageIndex * pageSize)).Take((int)pageSize).ToList().OrderByDescending(c => c.DocEntry).ToList();
                 return View("~/views/order/index.cshtml", result);
             }
             else
@@ -173,10 +173,13 @@ namespace OrderManager.Web
             return Json(new OrderManager.Web.Models.JsonModel { Data = result });
         }
 
-        public ViewResult Search()
+        [HttpGet]
+        public ViewResult Statement()
         {
             return this.View();
         }
+
+
 
         [HttpPost]
         public JsonResult GetCrystalData(string cardCode, string cardName, string startDate, string endDate)
@@ -258,14 +261,52 @@ namespace OrderManager.Web
             return Json(new OrderManager.Web.Models.JsonModel { Data = list }, JsonRequestBehavior.AllowGet);
         }
 
-
-        public ViewResult ProductPrice(string productItemCode, string cardCode)
+        [HttpGet]
+        public ViewResult ProductSearch()
         {
-            var list = UserService.GetCurrentProducePriceList(Cipher, productItemCode, cardCode);
-            return View("~/views/order/productPrice.cshtml", list);
-
+            return View("~/views/order/productSearch.cshtml");
+        }
+        [HttpPost]
+        public JsonResult ProductSearch(string key, int? flag)
+        {
+            var list = UserService.GetCatalogList(Convert.ToInt32(flag), key);
+            return Json(new OrderManager.Web.Models.JsonModel { Data = list }, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetProducts(string key, string cardCode)
+        {
+            var list = UserService.GetProducts(key, cardCode);
+            return Json(new OrderManager.Web.Models.JsonModel { Data = list }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetProductList(string searchKey, string cardCode)
+        {
+            var list = UserService.FuzzySearchProduct(searchKey, cardCode);
+            return Json(new OrderManager.Web.Models.JsonModel { Data = list }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetStatementList(string cardCode, string cardName, string itemName, string startDate, string endDate)
+        {
+            DateTime sDate = Convert.ToDateTime("1990.01.01");
+            DateTime eDate = Convert.ToDateTime("1990.01.01");
+            if (!string.IsNullOrEmpty(startDate))
+            {
+                sDate = Convert.ToDateTime(startDate);
+            }
+            if (!string.IsNullOrEmpty(endDate))
+            {
+                eDate = Convert.ToDateTime(endDate);
+            }
+            if (string.IsNullOrEmpty(cardCode) && string.IsNullOrEmpty(cardName) && string.IsNullOrEmpty(itemName) && string.IsNullOrEmpty(startDate) && string.IsNullOrEmpty(endDate))
+            {
+                sDate = DateTime.Now;
+                eDate = DateTime.Now;
+            }
+            var list = UserService.GetStatementList(cardCode, cardName, itemName, this.CurrentUser.User.Account, sDate, eDate);
+            return Json(new OrderManager.Web.Models.JsonModel { Data = list }, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public JsonResult SaveDraft(string obj)

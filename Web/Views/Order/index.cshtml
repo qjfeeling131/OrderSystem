@@ -3,7 +3,7 @@
 }
 
 
-@section title{ 经销商平台 | 销售订单  }
+@section title{ 营销远程平台 | 销售订单  }
 
 
 @section content_header{
@@ -77,6 +77,8 @@
                         <div class="form-group form-horizontal">
                             <div class="col-md-6">
                                 <p>下达日期:</p>
+                                <label>根据下达日期查询</label>
+                                <input type="checkbox" id="cb_orderDate" name="IsOrderDate" value="@ViewBag.Condition.IsOrderDate" />
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="glyphicon glyphicon-calendar"></i>
@@ -86,6 +88,8 @@
                             </div>
                             <div class="col-md-6">
                                 <p>交货日期:</p>
+                                <label>根据交货日期查询</label>
+                                <input type="checkbox" id="cb_deliveDate" name="IsDeliverDate" value="@ViewBag.Condition.IsDeliverDate" />
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="glyphicon glyphicon-calendar"></i>
@@ -271,7 +275,6 @@
                 //   "autoApply": true,
             });
 
-
             $('#OrderStatus').children("option").each(function () {
                 if ($(this).val() == '@(ViewBag.Condition.OrderStatus)') {
                     $(this).attr("selected", "selected");
@@ -279,6 +282,18 @@
             });
 
             $("#search").click(function () {
+                if (document.getElementById("cb_orderDate").checked) {
+                    document.getElementById("cb_orderDate").value = "true";
+                }
+                else {
+                    document.getElementById("cb_orderDate").value = "false";
+                }
+                if (document.getElementById("cb_deliveDate").checked) {
+                    document.getElementById("cb_deliveDate").value = "true";
+                }
+                else {
+                    document.getElementById("cb_deliveDate").value = "false";
+                }
                 var data = $("#orderSearchForm").serialize();
                 location.href = 'index?condition=' + data;
             });

@@ -73,6 +73,16 @@ namespace OrderManager.Service
 
         [OperationContract]
         OM_B1InfomationDTO UpdateSalesOrderStatusByToSAP(string cipher, string orderGuid);
+
+        [OperationContract]
+        IList<OM_Catalog> GetCatalogList(int catalogStatus, string parentId);
+        [OperationContract]
+        IList<OM_Product> GetProducts(string parentId, string cardCode);
+        [OperationContract]
+        IList<OM_Product> FuzzySearchProduct(string key, string cardCode);
+
+        [OperationContract]
+        IList<OM_Statement> GetStatementList(string cardCode, string cardName, string itemName, string userId, DateTime startDate, DateTime endDate);
     }
 }
 

@@ -69,6 +69,7 @@
     <Compile Include="Enum\OM_ExceptionCodeEnum.cs" />
     <Compile Include="Models\Mapping\OM_AreaDepatmentMap.cs" />
     <Compile Include="Models\Mapping\OM_AreaMap.cs" />
+    <Compile Include="Models\Mapping\OM_CatalogMap.cs" />
     <Compile Include="Models\Mapping\OM_DepartmentMap.cs" />
     <Compile Include="Models\Mapping\OM_LogMap.cs" />
     <Compile Include="Models\Mapping\OM_MessageBoardMap.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Models\Mapping\OM_UserRoleMap.cs" />
     <Compile Include="Models\OM_Area.cs" />
     <Compile Include="Models\OM_AreaDepatment.cs" />
+    <Compile Include="Models\OM_Catalog.cs" />
     <Compile Include="Models\OM_Department.cs" />
     <Compile Include="Models\OM_Log.cs" />
     <Compile Include="Models\OM_MessageBoard.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="Models\OM_User.cs" />
     <Compile Include="Models\OM_UserRole.cs" />
     <Compile Include="Models\OrderManagementContext.cs" />
+    <Compile Include="Models\OM_Statement.cs" />
     <Compile Include="PageListParameter.cs" />
     <Compile Include="OM_ExceptionMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

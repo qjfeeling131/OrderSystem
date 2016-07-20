@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/Views/Template/dialog.cshtml";
+}
+
+@section title {
+    <h4 style="font-weight:bold"><label>物料选择列表</label></h4>
+}
+
+@section Message{
+<link href="~/Js/plugins/jqueryDataTable/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <div class="box-header">
+        <div class="input-group">
+            <input type="text" name="key" id="searchKey" class="form-control input-sm pull-right" style="width: 150px;" placeholder="搜索物料" value="@ViewBag.Key ">
+            <div class="input-group-btn">
+                <button class="btn btn-sm btn-default" id="search"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+        </div>
+    </div><!-- /.box-header -->
+
+    <div class="form-group" style="
+    float: inherit;
+">
+        <label>公司</label>
+        <select class="form-control" id="company"></select>
+        <label>产品类别</label>
+        <select class="form-control" id="category"></select>
+        <label>产品子类别</label>
+        <select class="form-control" id="sub-category"></select>
+        <div>
+            <table id="productList" class="table table-bordered table-hover dataTable">
+                <thead>
+                    <tr>
+                        <th>产品编码</th>
+                        <th>产品描述</th>
+                        <th>产品规格</th>
+                        <th>产品单位</th>
+                        <th>参考价格</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        @*<label>产品选择</label>
+            <select class="form-control" id="product"></select>*@
+    </div>
+}
+
+@section buttons{
+    <button type="button" class="btn btn-primary" data-dismiss="modal" id="comfirm_code">确定</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel_code">取消</button>
+    <script src="~/Js/Order/productSearch.js"></script>
+}

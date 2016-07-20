@@ -15,11 +15,14 @@ namespace OrderManager.Repository
     {
         private DbContext _dbContext;
 
+        public OrderManagementContext CurrentContext
+        {
+            get { return _dbContext as OrderManagementContext; }
+        }
         public DatabaseRepository()
         {
             _dbContext = new OrderManagementContext();//can extension -> reflection
         }
-
         public virtual int Add<T>(T model)
             where T : class
         {
@@ -27,16 +30,15 @@ namespace OrderManager.Repository
             try
             {
                 _dbContext.Set<T>().Add(model);
-                 result = _dbContext.SaveChanges();
-            
+                result = _dbContext.SaveChanges();
+
             }
             catch (DbEntityValidationException dbEx)
             {
-             
+
             }
             return result;
         }
-
         public virtual int AddRange<T>(List<T> listModel) where T : class
         {
             _dbContext.Set<T>().AddRange(listModel);
@@ -124,6 +126,7 @@ namespace OrderManager.Repository
         {
             return _dbContext.Set<T>().Where(whereLambda).ToList();
         }
+
 
 
     }

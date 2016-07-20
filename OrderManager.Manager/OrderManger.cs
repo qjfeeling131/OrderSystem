@@ -122,6 +122,21 @@ namespace OrderManager.Manager
             return DbRepository.GetModel(fuc);
 
         }
+
+        public OM_Catalog GetCatalog(Expression<Func<OM_Catalog, bool>> fuc)
+        {
+            return DbRepository.GetModel(fuc);
+        }
+
+        public IList<OM_Catalog> GetCatalogList(Expression<Func<OM_Catalog, bool>> fuc)
+        {
+            return DbRepository.GetList(fuc);
+        }
+
+        IList<OM_Product> IOrderManger.GetProductList(Expression<Func<OM_Product, bool>> fuc)
+        {
+            return DbRepository.GetList(fuc);
+        }
         #endregion
 
         #region Function
@@ -134,8 +149,38 @@ namespace OrderManager.Manager
         /// <returns></returns>
         public IList<OM_Product> GetProductList<Tkey>(PageListParameter<OM_Product, Tkey> parameter, out int count)
         {
+            //DbRepository.CurrentContext.OM_Order.SqlQuery("");
             return DbRepository.GetPagedList(parameter, out count);
 
+        }
+
+
+        public IList<OM_Statement> GetStatementList(string cardCode, string cardName, string itemName, string userId, DateTime startDate, DateTime endDate)
+        {
+            var sqlQuery = string.Format("exec AVA_Reconciliation  '{0}','{1}','{2}','{3}','{4}','{5}'", cardCode, cardName, itemName, userId, startDate.ToString("yyyy.MM.dd"), endDate.ToString("yyyy.MM.dd"));
+            if (startDate.Year.Equals(1990))
+            {
+                sqlQuery = string.Format("exec AVA_Reconciliation  '{0}','{1}','{2}','{3}','{4}','{5}'", cardCode, cardName, itemName, userId, string.Empty, endDate.ToString("yyyy.MM.dd"));
+            }
+            if (endDate.Year.Equals(1990))
+            {
+                sqlQuery = string.Format("exec AVA_Reconciliation  '{0}','{1}','{2}','{3}','{4}','{5}'", cardCode, cardName, itemName, userId, startDate.ToString("yyyy.MM.dd"), string.Empty);
+            }
+            if (startDate.Year.Equals(1990) && endDate.Year.Equals(1990))
+            {
+                sqlQuery = string.Format("exec AVA_Reconciliation  '{0}','{1}','{2}','{3}','{4}','{5}'", cardCode, cardName, itemName, userId, string.Empty, string.Empty);
+            }
+            List<OM_Statement> result = null;
+            try
+            {
+                result = DbRepository.ExecuteQuery<OM_Statement>(sqlQuery).ToList();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(ex.ToString());
+            }
+
+            return result;
         }
         /// <summary>
         /// 保存
@@ -349,7 +394,7 @@ namespace OrderManager.Manager
                 b1Infomation.IsException = true;
                 b1Infomation.ExceptionMessage = ex.ToString();
                 LogHelper.Error(ex.ToString());
-                throw new GenericException(ex.ToString());
+                //throw new GenericException(ex.ToString());
             }
 
             return b1Infomation;
@@ -543,7 +588,6 @@ namespace OrderManager.Manager
 
 
         #endregion
-
 
     }
 }
